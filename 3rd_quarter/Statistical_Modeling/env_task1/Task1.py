@@ -3,74 +3,74 @@ CarNames = []
 CarData = []
 
 # Función para agregar un coche a la lista
-def agregar_coche(nombre, precio, velocidad, ventanas, puertas):
-    coche = {
-        'Nombre': nombre,
-        'Precio': precio,
-        'Velocidad': velocidad,
-        'Ventanas': ventanas,
-        'Puertas': puertas
+def add_car(Name, Price, Speed, Windows, Doors):
+    Car = {
+        'Name': Name,
+        'Price': Price,
+        'Speed': Speed,
+        'Windows': Windows,
+        'Doors': Doors
     }
-    CarNames.append(nombre)
-    CarData.append(coche)
+    CarNames.append(Name)
+    CarData.append(Car)
 
 # Función para editar los datos de un coche existente
-def editar_coche(nombre, nuevo_nombre, nuevo_precio, nueva_velocidad, nuevas_ventanas, nuevas_puertas):
-    if nombre in CarNames:
-        index = CarNames.index(nombre)
-        CarData[index]['Nombre'] = nuevo_nombre
-        CarData[index]['Precio'] = nuevo_precio
-        CarData[index]['Velocidad'] = nueva_velocidad
-        CarData[index]['Ventanas'] = nuevas_ventanas
-        CarData[index]['Puertas'] = nuevas_puertas
-        CarNames[index] = nuevo_nombre
+def edit_car(Name, NewName, NewPrice, NewSpeed, NewWindows, NewDoors):
+    if Name in CarNames:
+        Index = CarNames.index(Name)
+        CarData[Index]['Name'] = NewName
+        CarData[Index]['Price'] = NewPrice
+        CarData[Index]['Speed'] = NewSpeed
+        CarData[Index]['Windows'] = NewWindows
+        CarData[Index]['Doors'] = NewDoors
+        CarNames[Index] = NewName
     else:
-        print("El coche no existe en la lista.")
+        print("Car's not on the list.")
 
 # Función para eliminar un coche de la lista
-def eliminar_coche(nombre):
-    if nombre in CarNames:
-        index = CarNames.index(nombre)
-        CarNames.pop(index)
-        CarData.pop(index)
+def delete_car(Name):
+    if Name in CarNames:
+        Index = CarNames.index(Name)
+        CarNames.pop(Index)
+        CarData.pop(Index)
     else:
-        print("El coche no existe en la lista.")
+        print("Car's not on the list.")
 
 # Función para consultar coches e imprimir datos de una posición
-def consultar_coche(posicion):
-    if posicion >= 0 and posicion < len(CarData):
-        coche = CarData[posicion]
-        print("Nombre:", coche['Nombre'])
-        print("Precio:", coche['Precio'])
-        print("Velocidad:", coche['Velocidad'])
-        print("Ventanas:", coche['Ventanas'])
-        print("Puertas:", coche['Puertas'])
+def search_car(Index):
+    if Index >= 0 and Index < len(CarData):
+        Car = CarData[Index]
+        print("Name:", Car['Name'])
+        print("Price:", Car['Price'])
+        print("Speed:", Car['Speed'])
+        print("Windows:", Car['Windows'])
+        print("Doors:", Car['Doors'])
     else:
-        print("Posición fuera de rango.")
+        print("Index out of range.")
 
 # Función para agregar un nuevo elemento a la lista
-def agregar_nuevo_elemento():
-    nombre = input("Ingrese el nombre del nuevo coche: ")
-    precio = float(input("Ingrese el precio del nuevo coche: "))
-    velocidad = int(input("Ingrese la velocidad del nuevo coche: "))
-    ventanas = int(input("Ingrese el número de ventanas del nuevo coche: "))
-    puertas = int(input("Ingrese el número de puertas del nuevo coche: "))
+def add_new_element():
+    Name = input("Enter the name of the new car: ")
+    Price = float(input("Enter the price of the new car: "))
+    Speed = int(input("Enter the speed of the new car: "))
+    Windows = int(input("Enter the number of windows of the new car: "))
+    Doors = int(input("Enter the number of doors of the new car: "))
 
-    agregar_coche(nombre, precio, velocidad, ventanas, puertas)
-    print(f"El coche '{nombre}' ha sido agregado a la lista.")
+    add_car(Name, Price, Speed, Windows, Doors)
+    print(f"Car '{Name}' added succesfully.")
 
 # Función para mostrar el menú y recibir la opción del usuario
-def mostrar_menu():
+def show_menu():
     print("\n--- Menú ---")
-    print("1. Consultar coche")
-    print("2. Editar coche")
-    print("3. Eliminar coche")
-    print("4. Agregar nuevo coche")
-    print("5. Salir")
-    return input("Seleccione una opción: ")
+    print("1. Search a car")
+    print("2. Edit a car")
+    print("3. Delete a car")
+    print("4. Add new car")
+    print("5. Exit")
+    return input("Enter your option: ")
 
 # Agregar los 15 coches especificados
-autos = [
+dfCars = [
     ("Rolls-Royce Phantom", 450000, 150, 4, 4),
     ("Bentley Continental GT", 250000, 200, 2, 2),
     ("Mercedes-Benz S-Class", 100000, 155, 4, 4),
@@ -88,32 +88,32 @@ autos = [
     ("Lamborghini Urus (SUV de lujo)", 200000, 190, 4, 4)
 ]
 
-for auto in autos:
-    agregar_coche(*auto)
+for Car in dfCars:
+    add_car(*Car)
 
 # Bucle principal del programa
 while True:
-    opcion = mostrar_menu()
+    UserChoice = show_menu()
 
-    if opcion == "1":
-        posicion = int(input("Ingrese la posición del coche a consultar: "))
-        consultar_coche(posicion)
-    elif opcion == "2":
+    if UserChoice == "1":
+        Index = int(input("Ingrese la posición del coche a consultar: "))
+        search_car(Index)
+    elif UserChoice == "2":
         nombre = input("Ingrese el nombre del coche a editar: ")
         nuevo_nombre = input("Ingrese el nuevo nombre: ")
         nuevo_precio = float(input("Ingrese el nuevo precio: "))
         nueva_velocidad = int(input("Ingrese la nueva velocidad: "))
         nuevas_ventanas = int(input("Ingrese el número de nuevas ventanas: "))
         nuevas_puertas = int(input("Ingrese el número de nuevas puertas: "))
-        editar_coche(nombre, nuevo_nombre, nuevo_precio, nueva_velocidad, nuevas_ventanas, nuevas_puertas)
+        edit_car(nombre, nuevo_nombre, nuevo_precio, nueva_velocidad, nuevas_ventanas, nuevas_puertas)
         print("Coche editado con éxito.")
-    elif opcion == "3":
+    elif UserChoice == "3":
         nombre = input("Ingrese el nombre del coche a eliminar: ")
-        eliminar_coche(nombre)
+        delete_car(nombre)
         print("Coche eliminado con éxito.")
-    elif opcion == "4":
-        agregar_nuevo_elemento()
-    elif opcion == "5":
+    elif UserChoice == "4":
+        add_new_element()
+    elif UserChoice == "5":
         print("¡Hasta luego!")
         break
     else:

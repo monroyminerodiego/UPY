@@ -19,8 +19,6 @@ Note: If you have any questions or need clarification, please do not hesitate to
 Thank you for your dedication and enthusiasm.
 """
 
+------- Pseudocode of the script -------
 
-
-In the code we have 6 functions.
-
-- agregar_coche(nombre, precio, velocidad, ventanas, puertas): 
+- Declaration of 

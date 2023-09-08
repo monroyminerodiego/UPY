@@ -1,3 +1,6 @@
+THE PURPOSE OF THIS FILE IS TO KEEP TRACK OF ALL THE CHANGES MADE IN THIS REPOSITORY, CONSIDERING THE COMMENT OF THE COMMIT AS TITTLE FOR EVERY SECTION.
+IN EVERY SECTION, THERE WILL BE A SHORT DESCRIPTION OF THE CHANGES MADE IN EVERY COMMIT.
+
 ------------------------- 2023-09-07 -------------------------
 - Added folders from 2nd and 3rd quarters; also added a .txt to keep track of the changes in this portfolio.
 - 2nd_quarter: In folder "D2B_2023" is stored all the exercises made in programming subject during the 4 Units of the quarter.
@@ -5,3 +8,7 @@
 
 ------------------------- 2023-09-07 (2) -------------------------
 - Rename "Documentation.txt" to "ReadMe.txt"
+
+------------------------- 2023-09-08 -------------------------
+- Added a short description for the description of this file
+- Modification of documentation: 3rd_quarter/Statistical_Modeling/env_task1/
