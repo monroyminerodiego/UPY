@@ -12,3 +12,6 @@ IN EVERY SECTION, THERE WILL BE A SHORT DESCRIPTION OF THE CHANGES MADE IN EVERY
 ------------------------- 2023-09-08 -------------------------
 - Added a short description for the description of this file
 - Modification of documentation: 3rd_quarter/Statistical_Modeling/env_task1/
+
+------------------------- 2023-09-08 (2) -------------------------
+- 3rd_quarter/Statistical_Modeling/env_task1/Task1.py: All prints that were displaying info in spanish were translated to english

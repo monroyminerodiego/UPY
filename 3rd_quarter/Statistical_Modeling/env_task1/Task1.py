@@ -96,25 +96,25 @@ while True:
     UserChoice = show_menu()
 
     if UserChoice == "1":
-        Index = int(input("Ingrese la posición del coche a consultar: "))
+        Index = int(input("Insert the position of the car you want to search: "))
         search_car(Index)
     elif UserChoice == "2":
-        nombre = input("Ingrese el nombre del coche a editar: ")
-        nuevo_nombre = input("Ingrese el nuevo nombre: ")
-        nuevo_precio = float(input("Ingrese el nuevo precio: "))
-        nueva_velocidad = int(input("Ingrese la nueva velocidad: "))
-        nuevas_ventanas = int(input("Ingrese el número de nuevas ventanas: "))
-        nuevas_puertas = int(input("Ingrese el número de nuevas puertas: "))
+        nombre = input("Enter the name of the car to edit: ")
+        nuevo_nombre = input("Enter the new name: ")
+        nuevo_precio = float(input("Enter the new price: "))
+        nueva_velocidad = int(input("Enter the new speed: "))
+        nuevas_ventanas = int(input("Enter the number of new windows: "))
+        nuevas_puertas = int(input("Enter the number of new doors: "))
         edit_car(nombre, nuevo_nombre, nuevo_precio, nueva_velocidad, nuevas_ventanas, nuevas_puertas)
-        print("Coche editado con éxito.")
+        print("Car edited succesfully.")
     elif UserChoice == "3":
-        nombre = input("Ingrese el nombre del coche a eliminar: ")
+        nombre = input("Enter the name of the car to delete: ")
         delete_car(nombre)
-        print("Coche eliminado con éxito.")
+        print("Car deleted succesfully.")
     elif UserChoice == "4":
         add_new_element()
     elif UserChoice == "5":
-        print("¡Hasta luego!")
+        print("Good bye!")
         break
     else:
-        print("Opción no válida. Por favor, seleccione una opción válida del menú.")
+        print("No valid option. Please, select a valid option from menu.")
