@@ -15,3 +15,7 @@ IN EVERY SECTION, THERE WILL BE A SHORT DESCRIPTION OF THE CHANGES MADE IN EVERY
 
 ------------------------- 2023-09-08 (2) -------------------------
 - 3rd_quarter/Statistical_Modeling/env_task1/Task1.py: All prints that were displaying info in spanish were translated to english
+
+------------------------- 2023-09-09 -------------------------
+- 3rd_quarter/Data_Preprocesing/Bank_DataFrame/*: Folder with a data set, a documentation of that data set and a simple approach to pandas library
+- 3rd_quarter/Statistical_Modeling/env_task1/*: Completed documentation of functions and ReadMe.txt file. Changes on programming logic and printing format.
