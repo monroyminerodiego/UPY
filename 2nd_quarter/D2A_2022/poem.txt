@@ -1,0 +1,4 @@
+Hello, this is the first line of the '.txt' :)
+The second line will have a different porpouse but, instead of understanding it at this line,
+The third line will have all sence of the world because this '.txt' is
+only four lines!!!! :0

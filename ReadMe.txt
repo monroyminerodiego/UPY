@@ -11,7 +11,7 @@ IN EVERY SECTION, THERE WILL BE A SHORT DESCRIPTION OF THE CHANGES MADE IN EVERY
 
 ------------------------- 2023-09-08 -------------------------
 - Added a short description for the description of this file
-- Modification of documentation: 3rd_quarter/Statistical_Modeling/env_task1/
+- 3rd_quarter/Statistical_Modeling/env_task1: Modification of documentation
 
 ------------------------- 2023-09-08 (2) -------------------------
 - 3rd_quarter/Statistical_Modeling/env_task1/Task1.py: All prints that were displaying info in spanish were translated to english
@@ -19,3 +19,7 @@ IN EVERY SECTION, THERE WILL BE A SHORT DESCRIPTION OF THE CHANGES MADE IN EVERY
 ------------------------- 2023-09-09 -------------------------
 - 3rd_quarter/Data_Preprocesing/Bank_DataFrame/*: Folder with a data set, a documentation of that data set and a simple approach to pandas library
 - 3rd_quarter/Statistical_Modeling/env_task1/*: Completed documentation of functions and ReadMe.txt file. Changes on programming logic and printing format.
+
+------------------------- 2023-09-10 -------------------------
+- 2nd_quarter: 'D2A_2022' folder added with few files of python programming
+- .gitignore: Deleted path '2nd_quarter/D2A_2022'
