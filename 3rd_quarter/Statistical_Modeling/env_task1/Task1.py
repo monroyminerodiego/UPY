@@ -1,9 +1,24 @@
-# Crear listas para mantener un seguimiento de los datos de los coches
+import os
+
 CarNames = []
 CarData = []
 
-# Función para agregar un coche a la lista
-def add_car(Name, Price, Speed, Windows, Doors):
+def add_car(Name = str(), Price = float(), Speed = int(), Windows = int(), Doors = int()):
+    """
+    ---------- Arguments ----------
+    * Name: <class 'str'>
+    * Price: <class 'float'>
+    * Speed: <class 'int'>
+    * Windows: <class 'int'>
+    * Doors: <class 'int'>
+
+    ---------- Explanation ----------
+    - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.
+    - '.append()' method used on list 'CarNames' to add 'Name' as a new element.
+    - '.append()' method used on list 'CarData' to add 'Car' dictionary as a new element.
+
+    - Returns a string giving positive feedback
+    """
     Car = {
         'Name': Name,
         'Price': Price,
@@ -14,8 +29,48 @@ def add_car(Name, Price, Speed, Windows, Doors):
     CarNames.append(Name)
     CarData.append(Car)
 
-# Función para editar los datos de un coche existente
-def edit_car(Name, NewName, NewPrice, NewSpeed, NewWindows, NewDoors):
+    return "Car added succesfully!"
+def ask_new_car():
+    """
+    ---------- Arguments ----------
+    * Expects 0 arguments
+
+    ---------- Explanation ----------
+    - 'Name' variable is declared asking for the input to user.
+    - 'Price' variable is declared asking for the input to user, but automatically converting the input to <class 'float'>
+    - 'Speed' variable is declared asking for the input to user, but automatically converting the input to <class 'int'>
+    - 'Windows' variable is declared asking for the input to user, but automatically converting the input to <class 'int'>
+    - 'Doors' variable is declared asking for the input to user, but automatically converting the input to <class 'int'>
+    
+    - 'add_car()' function is called, passing by arguments the previous declared variables and the output of that function will be returned
+    """
+
+    Name = input("\nEnter the name of the new car: ")
+    Price = float(input("Enter the price of the new car: "))
+    Speed = int(input("Enter the speed of the new car: "))
+    Windows = int(input("Enter the number of windows of the new car: "))
+    Doors = int(input("Enter the number of doors of the new car: "))
+
+    return add_car(Name, Price, Speed, Windows, Doors)
+def edit_car(Name = str(), NewName = str(), NewPricen = float(), NewSpeed = int(), NewWindows = int(), NewDoors = int()):
+    """
+    ---------- Arguments ----------
+    * Name: <class 'str'> 
+    * NewName: <class 'str'>
+    * NewPrice: <class 'float'>
+    * NewSpeed: <class 'int'>
+    * NewWindows: <class 'int'>
+    * NewDoors: <class 'int'>
+
+    ---------- Explanation ----------
+    If 'Name' makes a match in list 'CarNames', then:
+        - Variable 'Index' is declared with the index of 'Name' in list 'CarNames'.
+        - 'NewName', 'NewPrice', 'NewSpeed', 'NewWindows' and 'NewDoors' will be the replacement for the old values of the dictionary.
+        - It returns a string giving positive feedback
+
+    Every other scenario:
+        - It returns a string giving negative feedback
+    """
     if Name in CarNames:
         Index = CarNames.index(Name)
         CarData[Index]['Name'] = NewName
@@ -24,52 +79,61 @@ def edit_car(Name, NewName, NewPrice, NewSpeed, NewWindows, NewDoors):
         CarData[Index]['Windows'] = NewWindows
         CarData[Index]['Doors'] = NewDoors
         CarNames[Index] = NewName
+        return "Car edited succesfully."
     else:
-        print("Car's not on the list.")
+        return "Car's not on the list."
+def delete_car(Name = str()):
+    """
+    ---------- Arguments ----------
+    * Name: <class 'str'>
 
-# Función para eliminar un coche de la lista
-def delete_car(Name):
+    ---------- Explanation ----------
+    If 'Name' makes a match in list 'CarNames', then:
+        - 'Index' variable is declared, with the index of 'Name' in 'CarNames' list, as value.
+        - With that index variable, '.pop()' method is called on both 'CarNames' and 'CarData' lists.
+        - It returns a string giving positive feedback
+
+    Every other scenario:
+        - It returns a string giving negative feedback
+    """
     if Name in CarNames:
         Index = CarNames.index(Name)
         CarNames.pop(Index)
         CarData.pop(Index)
+        return "Car deleted succesfully"
     else:
-        print("Car's not on the list.")
+        return "Car's not on the list."
+def search_car(Index = int()):
+    """
+    ---------- Arguments ----------
+    * Index: <class 'int'>
 
-# Función para consultar coches e imprimir datos de una posición
-def search_car(Index):
+    ---------- Explanation ----------
+    If 'Index' is between 0 and the lenth of list 'CarData', then:
+        - 'Car' variable is declared with the corresponding dictionary stored in list 'CarData' looked up by 'Index' variable
+        - A string with all the information of the dictionary will be returned
+    
+    Every other scenario:
+        - A string giving negative feedback will be returned.
+    """    
     if Index >= 0 and Index < len(CarData):
         Car = CarData[Index]
-        print("Name:", Car['Name'])
-        print("Price:", Car['Price'])
-        print("Speed:", Car['Speed'])
-        print("Windows:", Car['Windows'])
-        print("Doors:", Car['Doors'])
+        return f"Name: {Car['Name']}\nPrice: {Car['Price']}\nSpeed: {Car['Speed']}\nWindows: {Car['Windows']}\nDoors: {Car['Doors']}"
     else:
-        print("Index out of range.")
-
-# Función para agregar un nuevo elemento a la lista
-def add_new_element():
-    Name = input("Enter the name of the new car: ")
-    Price = float(input("Enter the price of the new car: "))
-    Speed = int(input("Enter the speed of the new car: "))
-    Windows = int(input("Enter the number of windows of the new car: "))
-    Doors = int(input("Enter the number of doors of the new car: "))
-
-    add_car(Name, Price, Speed, Windows, Doors)
-    print(f"Car '{Name}' added succesfully.")
-
-# Función para mostrar el menú y recibir la opción del usuario
+        return "Index out of range"
 def show_menu():
-    print("\n--- Menú ---")
-    print("1. Search a car")
-    print("2. Edit a car")
-    print("3. Delete a car")
-    print("4. Add new car")
-    print("5. Exit")
+    """
+    ---------- Arguments ----------
+    * Expects 0 arguments.
+
+    ---------- Explanation ----------
+    - Funtion that will only print the menu of the script
+
+    - Returns the option entered by user via input.
+    """
+    print("\n--- Menu ---\n1. Search a car\n2. Edit a car\n3. Delete a car\n4. Add new car\n5. Exit")
     return input("Enter your option: ")
 
-# Agregar los 15 coches especificados
 dfCars = [
     ("Rolls-Royce Phantom", 450000, 150, 4, 4),
     ("Bentley Continental GT", 250000, 200, 2, 2),
@@ -88,33 +152,44 @@ dfCars = [
     ("Lamborghini Urus (SUV de lujo)", 200000, 190, 4, 4)
 ]
 
+
+
 for Car in dfCars:
     add_car(*Car)
 
-# Bucle principal del programa
 while True:
+    os.system('cls')
+
     UserChoice = show_menu()
 
     if UserChoice == "1":
-        Index = int(input("Insert the position of the car you want to search: "))
-        search_car(Index)
+        Index = int(input("\nInsert the position of the car you want to search: "))
+        print(f'\n{search_car(Index)}')
+        input("\n\n\nPress 'Enter' to continue...")
+
     elif UserChoice == "2":
-        nombre = input("Enter the name of the car to edit: ")
-        nuevo_nombre = input("Enter the new name: ")
-        nuevo_precio = float(input("Enter the new price: "))
-        nueva_velocidad = int(input("Enter the new speed: "))
-        nuevas_ventanas = int(input("Enter the number of new windows: "))
-        nuevas_puertas = int(input("Enter the number of new doors: "))
-        edit_car(nombre, nuevo_nombre, nuevo_precio, nueva_velocidad, nuevas_ventanas, nuevas_puertas)
-        print("Car edited succesfully.")
+        Name = input("\nEnter the name of the car to edit: ")
+        NewName = input("Enter the new name: ")
+        NewPrice = float(input("Enter the new price: "))
+        NewSpeed = int(input("Enter the new speed: "))
+        NewWindows = int(input("Enter the number of new windows: "))
+        NewDoors = int(input("Enter the number of new doors: "))
+        print(f'\n{edit_car(Name, NewName, NewPrice, NewSpeed, NewWindows, NewDoors)}')
+        input("\n\n\nPress 'Enter' to continue...")
+    
     elif UserChoice == "3":
-        nombre = input("Enter the name of the car to delete: ")
-        delete_car(nombre)
-        print("Car deleted succesfully.")
+        Name = input("\nEnter the name of the car to delete: ")
+        print(f'\n{delete_car(Name)}')
+        input("\n\n\nPress 'Enter' to continue...")
+    
     elif UserChoice == "4":
-        add_new_element()
+        print(f'\n{ask_new_car()}')
+        input("\n\n\nPress 'Enter' to continue...")
+    
     elif UserChoice == "5":
-        print("Good bye!")
+        print('\nGood bye!')
+        input("\n\n\nPress 'Enter' to continue...")
         break
+    
     else:
         print("No valid option. Please, select a valid option from menu.")
