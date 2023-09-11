@@ -57,19 +57,19 @@ Our goal is to make this task an example of excellence in data management. Let's
     <tbody>
         <tr>
             <td align="center">add_car()</td>
-            <td align="center"><p>
-                * Name: <class 'str'>
-                * Price: <class 'float'>
-                * Speed: <class 'int'>
-                * Windows: <class 'int'>
-                * Doors: <class 'int'>
-            </p></td>
-            <td align="center"><p>
-                - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.
-                - '.append()' method used on list 'CarNames' to add 'Name' as a new element.
-                - '.append()' method used on list 'CarData' to add 'Car' dictionary as a new element.
-                - Returns a string giving positive feedback
-            </p></td>
+            <td align="center"><label>
+                * Name: <class 'str'><br>
+                * Price: <class 'float'><br>
+                * Speed: <class 'int'><br>
+                * Windows: <class 'int'><br>
+                * Doors: <class 'int'><br>
+            </label></td>
+            <td align="center">
+                - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.<br>
+                - '.append()' method used on list 'CarNames' to add 'Name' as a new element.<br>
+                - '.append()' method used on list 'CarData' to add 'Car' dictionary as a new element.<br>
+                - Returns a string giving positive feedback<br>
+            </td>
         </tr>
     </tbody>
 </table>
