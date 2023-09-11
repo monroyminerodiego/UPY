@@ -1,6 +1,5 @@
 # Car Data Managment (script)
-
-## -------------- Instructions given by teacher --------------
+## Instructions given by teacher 
 Hello everyone!
 
 We have an exciting task ahead of us: efficient car data management. 
@@ -16,7 +15,7 @@ Our goal is to make this task an example of excellence in data management. Let's
 
 --- 
 
-## -------------- Pseudocode of the script --------------
+## Pseudocode of the script
 
 - Declaration of
     - Libraries: 
@@ -44,7 +43,7 @@ Our goal is to make this task an example of excellence in data management. Let's
         
 --- 
 
-## -------------- Explanation of functions --------------
+## Explanation of functions 
 
 <table>
     <thead>
@@ -57,13 +56,13 @@ Our goal is to make this task an example of excellence in data management. Let's
     <tbody>
         <tr>
             <td align="center">add_car()</td>
-            <td align="center"><label>
+            <td align="center">
                 * Name: class 'str'<br>
                 * Price: class 'float'<br>
                 * Speed: class 'int'<br>
                 * Windows: class 'int'<br>
                 * Doors: class 'int'<br>
-            </label></td>
+            </td>
             <td align="center">
                 - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.<br>
                 - '.append()' method used on list 'CarNames' to add 'Name' as a new element.<br>
@@ -71,92 +70,81 @@ Our goal is to make this task an example of excellence in data management. Let's
                 - Returns a string giving positive feedback<br>
             </td>
         </tr>
+        <tr>
+            <td align="center">edit_car()</td>
+            <td align="center">
+                * Name: class 'str' <br>
+                * NewName: class 'str'<br>
+                * NewPrice: class 'float'<br>
+                * NewSpeed: class 'int'<br>
+                * NewWindows: class 'int'<br>
+                * NewDoors: class 'int'<br>
+            </td>
+            <td align="center">
+                If 'Name' makes a match in list 'CarNames', then:<br>
+                    - Variable 'Index' is declared with the index of 'Name' in list 'CarNames'.<br>
+                    - 'NewName', 'NewPrice', 'NewSpeed', 'NewWindows' and 'NewDoors' will be the replacement for the old values of the dictionary.<br>
+                    - It returns a string giving positive feedback<br>
+                <br>
+                Every other scenario:<br>
+                    - It returns a string giving negative feedback<br>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">delete_car()</td>
+            <td align="center">
+                * Name: class 'str'
+            </td>
+            <td align="center">
+            If 'Name' makes a match in list 'CarNames', then:<br>
+                - 'Index' variable is declared, with the index of 'Name' in 'CarNames' list, as value.<br>
+                - With that index variable, '.pop()' method is called on both 'CarNames' and 'CarData' lists.<br>
+                - It returns a string giving positive feedback<br>
+            <br>
+            Every other scenario:<br>
+                - It returns a string giving negative feedback<br>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">search_car()</td>
+            <td align="center">* Index: class 'int'</td>
+            <td align="center">
+            If 'Index' is between 0 and the lenth of list 'CarData', then:<br>
+                - 'Car' variable is declared with the corresponding dictionary stored in list 'CarData' looked up by 'Index' variable<br>
+                - A string with all the information of the dictionary will be returned<br>
+            <br>
+            Every other scenario:<br>
+                - A string giving negative feedback will be returned.<br>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">ask_new_car()</td>
+            <td align="center">* Expects 0 inputs</td>
+            <td align="center">
+            - 'Name' variable is declared asking for the input to user.<br>
+            - 'Price' variable is declared asking for the input to user, but automatically converting the input to class 'float'<br>
+            - 'Speed' variable is declared asking for the input to user, but automatically converting the input to class 'int'<br>
+            - 'Windows' variable is declared asking for the input to user, but automatically converting the input to class 'int'<br>
+            - 'Doors' variable is declared asking for the input to user, but automatically converting the input to class 'int'<br>
+            <br>
+            - 'add_car()' function is called, passing by arguments the previous declared variables and the output of that function will be returned<br>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">show_menu</td>
+            <td align="center">Expects 0 arguments.</td>
+            <td align="center">
+            - Funtion that will only print the menu of the script<br>
+            <br>
+            - Returns the option entered by user via input.<br>
+            </td>
+        </tr>
     </tbody>
-</table>
-
-### add_car(Name = str(), Price = float(), Speed = int(), Windows = int(), Doors = int()):
-    ---------- Inputs ----------
-    * Name: <class 'str'>
-    * Price: <class 'float'>
-    * Speed: <class 'int'>
-    * Windows: <class 'int'>
-    * Doors: <class 'int'>
-
-    ---------- Explanation ----------
-    - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.
-    - '.append()' method used on list 'CarNames' to add 'Name' as a new element.
-    - '.append()' method used on list 'CarData' to add 'Car' dictionary as a new element.
-    
-    - Returns a string giving positive feedback
-
-### edit_car(Name = str(), NewName = str(), NewPricen = float(), NewSpeed = int(), NewWindows = int(), NewDoors = int()):
-    ---------- Inputs ----------
-    * Name: <class 'str'> 
-    * NewName: <class 'str'>
-    * NewPrice: <class 'float'>
-    * NewSpeed: <class 'int'>
-    * NewWindows: <class 'int'>
-    * NewDoors: <class 'int'>
-
-    ---------- Explanation ----------
-    If 'Name' makes a match in list 'CarNames', then:
-        - Variable 'Index' is declared with the index of 'Name' in list 'CarNames'.
-        - 'NewName', 'NewPrice', 'NewSpeed', 'NewWindows' and 'NewDoors' will be the replacement for the old values of the dictionary.
-        - It returns a string giving positive feedback
-
-    Every other scenario:
-        - It returns a string giving negative feedback
-
-### delete_car(Name = str()):
-    ---------- Inputs ----------
-    * Name: <class 'str'>
-
-    ---------- Explanation ----------
-    If 'Name' makes a match in list 'CarNames', then:
-        - 'Index' variable is declared, with the index of 'Name' in 'CarNames' list, as value.
-        - With that index variable, '.pop()' method is called on both 'CarNames' and 'CarData' lists.
-        - It returns a string giving positive feedback
-
-    Every other scenario:
-        - It returns a string giving negative feedback
-  
-### search_car(Index = int()):
-    ---------- Inputs ----------
-    * Index: <class 'int'>
-
-    ---------- Explanation ----------
-    If 'Index' is between 0 and the lenth of list 'CarData', then:
-        - 'Car' variable is declared with the corresponding dictionary stored in list 'CarData' looked up by 'Index' variable
-        - A string with all the information of the dictionary will be returned
-    
-    Every other scenario:
-        - A string giving negative feedback will be returned.
- 
-### ask_new_car():
-    ---------- Inputs ----------
-    * Expects 0 inputs
-
-    ---------- Explanation ----------
-    - 'Name' variable is declared asking for the input to user.
-    - 'Price' variable is declared asking for the input to user, but automatically converting the input to <class 'float'>
-    - 'Speed' variable is declared asking for the input to user, but automatically converting the input to <class 'int'>
-    - 'Windows' variable is declared asking for the input to user, but automatically converting the input to <class 'int'>
-    - 'Doors' variable is declared asking for the input to user, but automatically converting the input to <class 'int'>
-    
-    - 'add_car()' function is called, passing by arguments the previous declared variables and the output of that function will be returned
-    
-### show_menu():
-    ---------- Inputs ----------
-    * Expects 0 arguments.
-
-    ---------- Explanation ----------
-    - Funtion that will only print the menu of the script
-
-    - Returns the option entered by user via input.
+</table>  
 
 --- 
- 
-## -------------- Made By --------------
+
+## Made By
 - Diego Monroy Minero
 - Sergio Barrera Chan
 - Juan Antonio Cel Vazquez
