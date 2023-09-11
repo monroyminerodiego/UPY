@@ -13,7 +13,7 @@ Our mission is to develop a robust and efficient code that allows:
 
 Our goal is to make this task an example of excellence in data management. Let's work together to create an elegant and efficient solution that demonstrates our commitment to quality.
 
---- 
+*** 
 
 ## Pseudocode of the script
 
