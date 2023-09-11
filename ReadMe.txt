@@ -21,3 +21,6 @@ IN EVERY SECTION, THERE WILL BE A SHORT DESCRIPTION OF THE CHANGES MADE IN EVERY
 - 3rd_quarter/Statistical_Modeling/env_task1/*: Completed documentation of functions and ReadMe.txt file. Changes on programming logic and printing format.
 - 2nd_quarter: 'D2A_2022' folder added with few files of python programming
 - .gitignore: Deleted path '2nd_quarter/D2A_2022'
+
+------------------------- 2023-09-11 -------------------------
+- 3rd_quarter/Data_Preprocesing/Bank_DataFrame/first_class.py: Unncomment the line 5
