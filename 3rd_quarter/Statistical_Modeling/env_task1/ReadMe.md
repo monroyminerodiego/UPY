@@ -45,15 +45,44 @@ Our goal is to make this task an example of excellence in data management. Let's
 --- 
 
 ## -------------- Explanation of functions --------------
+
+<table>
+    <thead>
+        <tr>
+            <th>Function Name</th>
+            <th>Inputs</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td align="center">add_car()</td>
+            <td align="center">
+                * Name: <class 'str'>
+                * Price: <class 'float'>
+                * Speed: <class 'int'>
+                * Windows: <class 'int'>
+                * Doors: <class 'int'>
+            </td>
+            <td align="center">
+                - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.
+                - '.append()' method used on list 'CarNames' to add 'Name' as a new element.
+                - '.append()' method used on list 'CarData' to add 'Car' dictionary as a new element.
+                - Returns a string giving positive feedback
+            </td>
+        </tr>
+    </tbody>
+</table>
+
 ### add_car(Name = str(), Price = float(), Speed = int(), Windows = int(), Doors = int()):
-    \---------- Input ----------
+    ---------- Inputs ----------
     * Name: <class 'str'>
     * Price: <class 'float'>
     * Speed: <class 'int'>
     * Windows: <class 'int'>
     * Doors: <class 'int'>
 
-    \---------- Explanation ----------
+    ---------- Explanation ----------
     - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.
     - '.append()' method used on list 'CarNames' to add 'Name' as a new element.
     - '.append()' method used on list 'CarData' to add 'Car' dictionary as a new element.
@@ -61,7 +90,7 @@ Our goal is to make this task an example of excellence in data management. Let's
     - Returns a string giving positive feedback
 
 ### edit_car(Name = str(), NewName = str(), NewPricen = float(), NewSpeed = int(), NewWindows = int(), NewDoors = int()):
-    ---------- Arguments ----------
+    ---------- Inputs ----------
     * Name: <class 'str'> 
     * NewName: <class 'str'>
     * NewPrice: <class 'float'>
@@ -79,7 +108,7 @@ Our goal is to make this task an example of excellence in data management. Let's
         - It returns a string giving negative feedback
 
 ### delete_car(Name = str()):
-    ---------- Arguments ----------
+    ---------- Inputs ----------
     * Name: <class 'str'>
 
     ---------- Explanation ----------
@@ -92,7 +121,7 @@ Our goal is to make this task an example of excellence in data management. Let's
         - It returns a string giving negative feedback
   
 ### search_car(Index = int()):
-    ---------- Arguments ----------
+    ---------- Inputs ----------
     * Index: <class 'int'>
 
     ---------- Explanation ----------
@@ -104,8 +133,8 @@ Our goal is to make this task an example of excellence in data management. Let's
         - A string giving negative feedback will be returned.
  
 ### ask_new_car():
-    ---------- Arguments ----------
-    * Expects 0 arguments
+    ---------- Inputs ----------
+    * Expects 0 inputs
 
     ---------- Explanation ----------
     - 'Name' variable is declared asking for the input to user.
@@ -117,7 +146,7 @@ Our goal is to make this task an example of excellence in data management. Let's
     - 'add_car()' function is called, passing by arguments the previous declared variables and the output of that function will be returned
     
 ### show_menu():
-    ---------- Arguments ----------
+    ---------- Inputs ----------
     * Expects 0 arguments.
 
     ---------- Explanation ----------
