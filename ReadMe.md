@@ -34,6 +34,7 @@ There are multiple purposes for this repository, which are:
 - 2nd_quarter: 'D2A_2022' folder added with few files of python programming
 - .gitignore: Deleted path '2nd_quarter/D2A_2022'
 
-### ------------------------- 2023-09-09 -------------------------
+### ------------------------- 2023-09-11 -------------------------
+- 3rd_quarter/Data_Preprocesing/Bank_DataFrame/first_class.py: Unncomment the line 5
 - ReadMe.txt: Change extension from ".txt" to ".md" and give new format and structure to documentation 
 - 3rd_quarter\Statistical_Modeling\env_task1\ReadMe.txt: Change extension from ".txt" to ".md"; Change of documentation style.
