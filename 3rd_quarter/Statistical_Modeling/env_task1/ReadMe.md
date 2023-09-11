@@ -1,6 +1,6 @@
-Car Data Managment (script)
+# Car Data Managment (script)
 
--------------- Instructions given by teacher --------------
+## -------------- Instructions given by teacher --------------
 Hello everyone!
 
 We have an exciting task ahead of us: efficient car data management. 
@@ -14,8 +14,9 @@ Our mission is to develop a robust and efficient code that allows:
 
 Our goal is to make this task an example of excellence in data management. Let's work together to create an elegant and efficient solution that demonstrates our commitment to quality.
 
+--- 
 
--------------- Pseudocode of the script --------------
+## -------------- Pseudocode of the script --------------
 
 - Declaration of
     - Libraries: 
@@ -41,24 +42,25 @@ Our goal is to make this task an example of excellence in data management. Let's
         - If user's choice is a valid option of the menu, then call the according function.
         - If user's choice is not a valid option, deploy a message
         
+--- 
 
--------------- Explanation of functions --------------
-add_car(Name = str(), Price = float(), Speed = int(), Windows = int(), Doors = int()):
-    ---------- Arguments ----------
+## -------------- Explanation of functions --------------
+### add_car(Name = str(), Price = float(), Speed = int(), Windows = int(), Doors = int()):
+    \---------- Input ----------
     * Name: <class 'str'>
     * Price: <class 'float'>
     * Speed: <class 'int'>
     * Windows: <class 'int'>
     * Doors: <class 'int'>
 
-    ---------- Explanation ----------
+    \---------- Explanation ----------
     - 'Car' dictionary is declared, having ['Name','Price','Speed','Windows','Doors'] as keys and their respective input attached as value.
     - '.append()' method used on list 'CarNames' to add 'Name' as a new element.
     - '.append()' method used on list 'CarData' to add 'Car' dictionary as a new element.
-
+    
     - Returns a string giving positive feedback
 
-edit_car(Name = str(), NewName = str(), NewPricen = float(), NewSpeed = int(), NewWindows = int(), NewDoors = int()):
+### edit_car(Name = str(), NewName = str(), NewPricen = float(), NewSpeed = int(), NewWindows = int(), NewDoors = int()):
     ---------- Arguments ----------
     * Name: <class 'str'> 
     * NewName: <class 'str'>
@@ -76,7 +78,7 @@ edit_car(Name = str(), NewName = str(), NewPricen = float(), NewSpeed = int(), N
     Every other scenario:
         - It returns a string giving negative feedback
 
-delete_car(Name = str()):
+### delete_car(Name = str()):
     ---------- Arguments ----------
     * Name: <class 'str'>
 
@@ -89,7 +91,7 @@ delete_car(Name = str()):
     Every other scenario:
         - It returns a string giving negative feedback
   
-search_car(Index = int()):
+### search_car(Index = int()):
     ---------- Arguments ----------
     * Index: <class 'int'>
 
@@ -101,7 +103,7 @@ search_car(Index = int()):
     Every other scenario:
         - A string giving negative feedback will be returned.
  
-ask_new_car():
+### ask_new_car():
     ---------- Arguments ----------
     * Expects 0 arguments
 
@@ -114,7 +116,7 @@ ask_new_car():
     
     - 'add_car()' function is called, passing by arguments the previous declared variables and the output of that function will be returned
     
-show_menu():
+### show_menu():
     ---------- Arguments ----------
     * Expects 0 arguments.
 
@@ -122,9 +124,11 @@ show_menu():
     - Funtion that will only print the menu of the script
 
     - Returns the option entered by user via input.
-    
--------------- Made By --------------
-Diego Monroy Minero
-Sergio Barrera Chan
-Juan Antonio Cel Vazquez
-Ariel Joel Buenfil Góngora
+
+--- 
+ 
+## -------------- Made By --------------
+- Diego Monroy Minero
+- Sergio Barrera Chan
+- Juan Antonio Cel Vazquez
+- Ariel Joel Buenfil Góngora
