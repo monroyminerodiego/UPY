@@ -29,8 +29,8 @@ There are multiple purposes for this repository, which are:
 - 3rd_quarter\Statistical_Modeling\env_task1\Task1.py: All prints that were displaying info in spanish were translated to english
 
 ### 2023-09-09
-- 3rd_quarter\Data_Preprocesing\Bank_DataFrame\*: Folder with a data set, a documentation of that data set and a simple approach to pandas library
-- 3rd_quarter\Statistical_Modeling\env_task1\*: Completed documentation of functions and ReadMe.txt file. Changes on programming logic and printing format.
+- 3rd_quarter\Data_Preprocesing\Bank_DataFrame\: Folder with a data set, a documentation of that data set and a simple approach to pandas library
+- 3rd_quarter\Statistical_Modeling\env_task1\: Completed documentation of functions and ReadMe.txt file. Changes on programming logic and printing format.
 - 2nd_quarter: 'D2A_2022' folder added with few files of python programming
 - .gitignore: Deleted path '2nd_quarter\D2A_2022'
 
@@ -42,3 +42,6 @@ There are multiple purposes for this repository, which are:
 ### 2023-09-11
 - 3rd_quarter\Data_Preprocesing\: Modification of folders, creation of files and databases (Still in progress)
 - 3rd_quarter\Statistical_Modeling\: Creation of folder for task 2 (Still in progress)
+- 3rd_quarter\Programming_Paradigms\: Creation of "ReadMe.md" file
+- 3rd_quarter\Data_Structures\: Creation of "ReadMe.md" file
+- 3rd_quarter\Data_Structures\Task_2\: Creation of "ReadMe.md" file
