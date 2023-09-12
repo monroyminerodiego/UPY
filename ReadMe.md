@@ -41,3 +41,4 @@ There are multiple purposes for this repository, which are:
 
 ### 2023-09-11
 - 3rd_quarter\Data_Preprocesing\: Modification of folders, creation of files and databases (Still in progress)
+- 3rd_quarter\Statistical_Modeling\: Creation of folder for task 2 (Still in progress)
