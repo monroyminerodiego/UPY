@@ -13,7 +13,7 @@ There are multiple purposes for this repository, which are:
 --- 
 
 ## Change Log
-### 2023-09-13
+### 2023-09-14
 - \\*: Change every 'ReadMe.md' file to 'README.md'
 - README.md: Change of structure for Change Log
 - 3rd_quarter\Data_Preprocesing\README.md: Change of structure and added comments
@@ -23,7 +23,7 @@ There are multiple purposes for this repository, which are:
 - 3rd_quarter\Statistical_Modeling: 'Task2' folder created and documented
 - 3rd_quarter\Statistical_Modeling\README.md: Added comments
 
-### 2023-09-11
+### 2023-09-12
 - 3rd_quarter\Programming_Paradigms\: "ReadMe.md" file created and documented
 - 3rd_quarter\Data_Structures\: "ReadMe.md" file created and documented
 - 3rd_quarter\Data_Structures\Task_2\: "ReadMe.md" file created and documented
