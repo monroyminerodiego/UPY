@@ -1,14 +1,14 @@
 # STATISTICAL MODELING FOLDER
 
 ## Description
-This folder will be divided in more folders according to the subject / project requirements.
-   * In folder 'env_task1' is an activity to create a script to delete, update, review and create objects with functions.
-   * In folder 'Task_2' the purpose is the same as folder 'env_task1', but made with classes.
+* env_task1 <br> See folder for further documentation.
+* Task2 <br> See folder for further documentation.
 
---- 
+## Change Log
+### 2023-09-14
+- \\*: Added 'README.md' file
+- 3rd_quarter\Statistical_Modeling\: 'env_task1' folder creation.
+- 3rd_quarter\Statistical_Modeling\: 'Task2' folder creation.
 
-## Made By:
+## Made By
 * Diego Monroy Minero
-* Sergio Barrera Chan
-* Juan Antonio Cel Vazquez
-* Ariel Joel Buenfil Góngora

@@ -1,11 +1,16 @@
 # DATA PREPROCESSING FOLDER
 
 ## Description
-This folder will be divided in two other folders: DataBases and Notebooks.
-   * In folder 'Databases' there will only be stored the databases files, such as '.txt', '.csv', '.data', etc.,
-   * In folder 'Notebooks' there will only be stored Jupyter Notebooks with one lesson per notebook.
+* DataBases
+   * bank-full.csv <br> It is a csv with data of a bank that will be used in '..\Notebook\Pandas_Notebook.ipynb'
+   * cc_approvals_2.data <br> File where has random information used in '..\Notebook\Pandas_Notebook.ipynb'
 
---- 
+* Notebook
+   * Pandas_Notebook.ipynb <br> Jupyter Notebook that reviews some of the functions of pandas
+
+## Change Log
+### 2023-09-14
+- README.md: Change of internal structure
 
 ## Made By:
 * Diego Monroy Minero

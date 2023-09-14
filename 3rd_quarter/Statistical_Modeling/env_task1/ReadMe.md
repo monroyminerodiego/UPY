@@ -13,7 +13,6 @@ Our mission is to develop a robust and efficient code that allows:
 
 Our goal is to make this task an example of excellence in data management. Let's work together to create an elegant and efficient solution that demonstrates our commitment to quality.
 
-*** 
 
 ## Pseudocode of the script
 
@@ -41,7 +40,6 @@ Our goal is to make this task an example of excellence in data management. Let's
         - If user's choice is a valid option of the menu, then call the according function.
         - If user's choice is not a valid option, deploy a message
         
---- 
 
 ## Explanation of functions 
 
