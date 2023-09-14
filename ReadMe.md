@@ -39,18 +39,14 @@ There are multiple purposes for this repository, which are:
 - 2nd_quarter: 'D2A_2022' folder added with few files of python programming
 - .gitignore: Deleted path '2nd_quarter\D2A_2022'
 
-### 2023-09-08 (2)
-- 3rd_quarter\Statistical_Modeling\env_task1\Task1.py: All prints that were displaying info in spanish were translated to english
-
 ### 2023-09-08
 - Added a short description for the description of this file
 - 3rd_quarter\Statistical_Modeling\env_task1: Modification of documentation
-
-### 2023-09-07 (2)
-- Rename "Documentation.txt" to "ReadMe.txt"
+- 3rd_quarter\Statistical_Modeling\env_task1\Task1.py: All prints that were displaying info in spanish were translated to english
 
 ### 2023-09-07
 - Added folders from 2nd and 3rd quarters; also added a .txt to keep track of the changes in this portfolio.
 - 2nd_quarter: In folder "D2B_2023" is stored all the exercises made in programming subject during the 4 Units of the quarter.
 - 3rd_quarter: An exercise is in progress for Data Structures. In Statistical Models we're learning about virtual environments, so we created one with our first task.
+- Rename "Documentation.txt" to "ReadMe.txt"
 
