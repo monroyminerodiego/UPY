@@ -12,7 +12,7 @@ There are multiple purposes for this repository, which are:
 
 --- 
 
-## Change Log (Commit description)
+## Change Log
 ### 2023-09-13
 - \\*: Change every 'ReadMe.md' file to 'README.md'
 - README.md: Change of structure for Change Log
