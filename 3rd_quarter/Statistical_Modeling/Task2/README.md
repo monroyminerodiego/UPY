@@ -31,6 +31,9 @@ You Just need to read the script with all comments that I already wrote and comp
             <td> - </td>
             <td> Function made to return a string with all the attributes of a car</td>
         <tr>
+        <tr>
+            <td></td>
+        </tr>
     </tbody>
 </table>
 

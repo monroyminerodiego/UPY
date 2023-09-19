@@ -1,6 +1,6 @@
 # DATA STRUCTURES FOLDER
 
-## Description
+## Detailed Description
 * Notebook
     * **parentesis_balance.py**<br>
     It is useful to be able to detect whether the parentheses in a source file are balanced or not.

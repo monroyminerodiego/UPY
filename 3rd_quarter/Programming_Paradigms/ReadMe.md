@@ -1,6 +1,6 @@
 # PROGRAMMING PARADIGMS FOLDER
 
-## Description
+## Detailed Description
 * Notebook
     * Study_cases.md <br> File where it gives a solution for two study cases. Activity made in teams
 

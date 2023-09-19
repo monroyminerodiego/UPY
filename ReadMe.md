@@ -1,7 +1,7 @@
 # UPY (Universidad Politécnica de Yucatán) - Personal Repository
 
 ## Description
-There are multiple purposes for this repository, which are:
+There are multiple purposes for this repository, which include:
 - Have a public documentation of all the lessons / tasks / projects that I'm making during my carrer.
 - Have a repository where my team and I can work for doing our task / projects.
 - Share the knowledge to anyone who wants to learn more about "Data Science Engineering".
@@ -10,9 +10,25 @@ There are multiple purposes for this repository, which are:
 >
 >The creation of some files and projects were made in teams, so there will be a "Read Me" file which will contain the names of the participants.
 
---- 
+## General Content
+- 2nd_quarter
+    - D2A_2022
+    - D2B_2023
+- 3rd_quarter
+    - Data_Preprocessing
+    - Data_Structures
+    - Programming_Paradigms
+    - Statistical_Modeling
 
 ## Change Log
+### 2023-09-18
+- README.md: Added 'General Content' section
+- 3rd_quarter\Statistical_Modeling: Added 'Class_resources' folder
+- 3rd_quarter\Data_Preprocesing\README.md: Change 'Description' subtitle to 'Detailed Description'
+- 3rd_quarter\Data_Structures\README.md: Change 'Description' subtitle to 'Detailed Description'
+- 3rd_quarter\Programming_Paradigms\README.md: Change 'Description' subtitle to 'Detailed Description'
+- 3rd_quarter\Statistical_Modeling\README.md: Change 'Description' subtitle to 'Detailed Description'
+
 ### 2023-09-14
 - \\*: Change every 'ReadMe.md' file to 'README.md'
 - README.md: Change of structure for Change Log
@@ -49,4 +65,3 @@ There are multiple purposes for this repository, which are:
 - 2nd_quarter: In folder "D2B_2023" is stored all the exercises made in programming subject during the 4 Units of the quarter.
 - 3rd_quarter: An exercise is in progress for Data Structures. In Statistical Models we're learning about virtual environments, so we created one with our first task.
 - Rename "Documentation.txt" to "ReadMe.txt"
-
