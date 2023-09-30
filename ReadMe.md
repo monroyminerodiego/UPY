@@ -21,6 +21,11 @@ There are multiple purposes for this repository, which include:
     - Statistical_Modeling
 
 ## Change Log
+### 2023-09-30
+- 3rd_quarter\Data_Preprocesing: Creation of 2 files. 'ModalidadVirtual.csv' in 'DataBases' folder and 'Handling_missing_values_activity.ipynb' in 'Notebook' folder.
+- 3rd_quarter\Statistical_Modeling\Class_Resources\3. Plotting and Visualization.ipynb: Modification of file.
+- .gitignore: Added more relative paths.
+
 ### 2023-09-18
 - README.md: Added 'General Content' section
 - 3rd_quarter\Statistical_Modeling: Added 'Class_resources' folder
