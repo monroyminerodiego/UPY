@@ -67,5 +67,4 @@ for header in headers_list:
 
 # Identify categorical features → Generate dummies
 print(f'\n\n{"*"*50} Dummies {"*"*50}')
-for header in headers_list:
-    print(f'{pd.get_dummies(df,columns=[header])}')
+print(f'{pd.get_dummies(df,columns=[header])}')
