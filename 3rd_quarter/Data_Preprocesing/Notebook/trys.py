@@ -44,8 +44,28 @@ for header in headers_list:
 
 # Identify type of data of each feature
 # for header in headers_list:
-#     print(f'{df[header].info()}\n\n{"*"*50}')
+    # print(f'{df[header].info()}\n\n{"*"*50}')
+
 
 # Validate that numbers are numeric Values
+for header in headers_list:
+    int_count = 0
+    float_count = 0
+    other_count = 0
+    feature = df[header]
+    for observation in feature:
+        if (type(observation) == int) or (type(observation) == float): 
+            int_count += 1 if type(observation) == int else 0
+            float_count += 1 if type(observation) == float else 0
+        else: other_count += 1
+    if not((int_count+float_count) > other_count): continue
+    if int_count > float_count:
+        df[header] = df[header].astype('int64')
+    if float_count > int_count:
+        df[header] = df[header].astype('float')
+
 
 # Identify categorical features → Generate dummies
+# print(f'\n\n{"*"*50} Dummies {"*"*50}')
+# for header in headers_list:
+#     print(f'{pd.get_dummies(df,columns=[header])}')
