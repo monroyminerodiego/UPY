@@ -1,4 +1,4 @@
-import pandas as pd, os, numpy as np
+import pandas as pd, os
 os.system('cls')
 
 # Load Data
@@ -43,8 +43,8 @@ for header in headers_list:
     if average == 0: df = df.drop(header,axis=1)
 
 # Identify type of data of each feature
-# for header in headers_list:
-    # print(f'{df[header].info()}\n\n{"*"*50}')
+for header in headers_list:
+    print(f'{df[header].info()}\n\n{"*"*50}')
 
 
 # Validate that numbers are numeric Values
@@ -66,6 +66,6 @@ for header in headers_list:
 
 
 # Identify categorical features → Generate dummies
-# print(f'\n\n{"*"*50} Dummies {"*"*50}')
-# for header in headers_list:
-#     print(f'{pd.get_dummies(df,columns=[header])}')
+print(f'\n\n{"*"*50} Dummies {"*"*50}')
+for header in headers_list:
+    print(f'{pd.get_dummies(df,columns=[header])}')

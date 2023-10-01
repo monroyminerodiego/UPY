@@ -22,7 +22,7 @@ There are multiple purposes for this repository, which include:
 
 ## Change Log
 ### 2023-09-30
-- 3rd_quarter\Data_Preprocesing: Creation of 2 files. 'ModalidadVirtual.csv' in 'DataBases' folder and 'Handling_missing_values_activity.ipynb' in 'Notebook' folder.
+- 3rd_quarter\Data_Preprocesing: Creation of 3 files. 'ModalidadVirtual.csv' in 'DataBases' folder and 'Handling_missing_values_activity.ipynb' and 'Handling_missing_values_script.ipynb' in 'Notebook' folder.
 - 3rd_quarter\Statistical_Modeling\Class_Resources\3. Plotting and Visualization.ipynb: Modification of file.
 - .gitignore: Added more relative paths.
 

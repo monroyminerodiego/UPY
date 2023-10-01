@@ -10,6 +10,7 @@
 
 ## Change Log
 ### 2023-09-30
+- 3rd_quarter\Data_Preprocesing\Notebook\: Creation of 'Handling_missing_values_script.py' file
 - 3rd_quarter\Data_Preprocesing\Notebook\: Creation of 'Handling_missing_values_activity.ipynb' file
 - 3rd_quarter\Data_Preprocesing\DataBases\: Creation of 'ModalidadVirtual.csv' file
 
