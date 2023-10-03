@@ -21,6 +21,9 @@ There are multiple purposes for this repository, which include:
     - Statistical_Modeling
 
 ## Change Log
+### 2023-10-02
+- 3rd_quarter\Statistical_Modeling: Added 'Discrete_Distributions' folder, which contains the files of a class made as an assigment.
+
 ### 2023-09-30
 - 3rd_quarter\Data_Preprocesing: Creation of 3 files. 'ModalidadVirtual.csv' in 'DataBases' folder and 'Handling_missing_values_activity.ipynb' and 'Handling_missing_values_script.ipynb' in 'Notebook' folder.
 - 3rd_quarter\Statistical_Modeling\Class_Resources\3. Plotting and Visualization.ipynb: Modification of file.

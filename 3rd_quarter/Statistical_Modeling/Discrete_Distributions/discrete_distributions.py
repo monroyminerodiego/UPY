@@ -1,15 +1,7 @@
 import math
 
 class DiscreteDistributions:
-    
-    def __init__(self):
-        self.n = float      #Number of trials
-        self.x = float      #Number of successes / probability of x
-        self.p = float      #Probability of success
-        self.q = float      #Probability of failure
-        self.miu = float
-
-    def Uniformdist(self):
+    def Uniformdist(self,n=int,x=float):
         """
         Function to calculate the Uniform Distribution
 
@@ -20,17 +12,13 @@ class DiscreteDistributions:
         Output
         - result <class 'float'>: The result of the uniform distribution calculus
         """
-        self.n = float(input("Introduzca el número de intentos: "))
-        self.x = float(input("Introduzca el número de éxitos: "))
-        self.fdex = (1) / (self.n)
-        self.result = self.fdex * self.x
+        self.fdex = (1) / (n)
+        self.result = self.fdex * x
         return self.result
-        def mean(self):
-            self.uniform_mean = (self.n + 1) / 2
     
         
     
-    def Poissondist(self):
+    def Poissondist(self,x=float,miu=float):
         """
         Function to calculate the Poisson Distribution
 
@@ -41,13 +29,11 @@ class DiscreteDistributions:
         Output
         - result <class 'float'>: The result of the Poisson distribution calculus
         """
-        self.x = int(input("Introduzca la probabilidad de x: "))
-        self.miu = float(input("Introduzca el valor esperado de x: "))
-        self.result = ((math.e**-self.miu) * (self.miu**self.x)) / (math.factorial(self.x))
+        self.result = ((math.e**-miu) * (miu**x)) / (math.factorial(int(x)))
         return self.result
         
     
-    def Binomialdist(self):
+    def Binomialdist(self,n=int,x=float,p=float,q=float):
         """
         Function to calculate the Binomial Distribution
 
@@ -60,15 +46,11 @@ class DiscreteDistributions:
         Output
         - result <class 'float'>: The result of the Binomial distribution calculus
         """
-        self.n = int(input("Introduzca el número de intentos: "))
-        self.x = int(input("Introduzca el número de éxitos: "))
-        self.p = float(input("Introduzca la probabilidad de éxito: "))
-        self.q = float(input("Introduzca la probabilidad de fallo: "))
-        self.combination_nx = (math.factorial(self.n)) / (math.factorial(self.x)) * (math.factorial(self.n - self.x))
-        self.result = float((self.combination_nx) * ((self.p**(self.x) * (self.q**(self.n - self.x)))))
+        self.combination_nx = (math.factorial(int(n))) / (math.factorial(int(x))) * (math.factorial(abs(int(n) - int(x))))
+        self.result = float((self.combination_nx) * ((p**(x) * (q**(n - x)))))
         return self.result
 
-    def Bernoullidist(self):
+    def Bernoullidist(self,x=float,p=float):
         """
         Function to calculate the Bernoulli Distribution
 
@@ -79,17 +61,15 @@ class DiscreteDistributions:
         Output
         - result <class 'float'>: The result of Bernoulli distribution calculus
         """
-        self.x = float(input("Introduzca 1 si hubo éxito, introduzca 0 si hubo fracaso: "))
-        self.p = float(input("Introduzca la probabilidad de éxito: "))
-        if self.x == True:
-            self.result = self.p**1 * ((1 - self.p)**(1-1))
+        if x == True:
+            self.result = p**1 * ((1 - p)**(1-1))
         else :
-            self.result = self.p**0 * ((1 - self.p)**(1-0))
+            self.result = p**0 * ((1 - p)**(1-0))
 
         return self.result
 
     
-    def Geometricdist (self):
+    def Geometricdist (self,x=float,p=float):
         """
         Function to calculate the Geometric Distribution
 
@@ -100,7 +80,5 @@ class DiscreteDistributions:
         Output
         - result <class 'float'>: The result of the Geometric distribution calculus
         """
-        self.x = float(input("Introduzca el número de intentos en el cual se quiere averiguar el experimento: "))
-        self.p = float(input("Introduzca la probabilidad de éxito: "))
-        self.result = self.p * (1 - self.p)**(self.x - 1)
+        self.result = p * (1 - p)**(x - 1)
         return self.result
