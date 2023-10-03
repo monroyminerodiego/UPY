@@ -1,4 +1,4 @@
-# Car Data Managment (script)
+# Car Data Managment
 
 ## Instructions given by teacher 
 You Just need to read the script with all comments that I already wrote and complete the last method Modify a product. As I described my methods and wrote my documentation you must replicate that one. 
