@@ -4,7 +4,7 @@
 Create a .py class in python called DiscreteDistributions With all distributions as a method.
 
 ## Explanation of files
-### discrete_distributions.py  
+### - discrete_distributions.py  
 File where we created our class with 5 diferent methods:
 <table style="text-align:center;">
     <tr>
@@ -92,7 +92,7 @@ File where we created our class with 5 diferent methods:
     </tr>
 </table>
 
-### main.py
+### - main.py
 File in which we test the class methods from 'discrete_distributions.py' file. It also prints the menu and validates if user wants to try again the script.
 
 
