@@ -1,3 +1,4 @@
+import os; os.system('cls')
 # 1. Class - Define a class called Car
 class Car:
     # 2. Instance - Initialize an instance of the class with attributes
@@ -29,18 +30,18 @@ class Driver(Car):
     # 7. Abstraction - Encapsulate the concept of enrolling in a course
     def register_tournament(self, tornament_name):
         self.tournaments.append(tornament_name)
-        print(f"{self.brand} {self.model} has won the torunament: {tornament_name}")
+        print(f"{self.brand} {self.model} has won the tournament: {tornament_name}")
  
 # 6. Polymorphism - Using polymorphism to call greet method on different objects
 def get_info(car):
     car.info()
  
 driver = Driver("Mariana", 22, "2109110")
-get_info(car1)  # Polymorphism with a Person object
-get_info(driver)   # Polymorphism with a Student object
+get_info(car1)  # Polymorphism with a car object
+get_info(driver)   # Polymorphism with a driver object
  
 # 8. Encapsulation - Accessing attributes through methods, encapsulating data
 driver.register_tournament("Grand Pix")
  
 # Accessing the encapsulated course list
-print(f"{driver.name} with the {driver.brand} {driver.model} has won the torunaments: {driver.tournaments}")
+print(f"The {driver.brand} {driver.model} has won the torunaments: {driver.tournaments}")
