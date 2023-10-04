@@ -21,6 +21,10 @@ There are multiple purposes for this repository, which include:
     - Statistical_Modeling
 
 ## Change Log
+### 2023-10-03
+- 3rd_quarter\Programming_Paradigms\Class_Resources: Added 'python101_example.py' file
+- 3rd_quarter\Programming_Paradigms: Creation of folder 'Class_Resources'
+
 ### 2023-10-02
 - 3rd_quarter\Statistical_Modeling: Added 'Discrete_Distributions' folder, which contains the files of a class made as an assigment.
 
