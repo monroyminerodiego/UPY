@@ -21,6 +21,9 @@ There are multiple purposes for this repository, which include:
     - Statistical_Modeling
 
 ## Change Log
+### 2023-10-04  
+- 3rd_quarter\Programming_Paradigms\Notebook: Added 'codes.py' file
+
 ### 2023-10-03
 - 3rd_quarter\Programming_Paradigms\Class_Resources: Added 'python101_example.py' file
 - 3rd_quarter\Programming_Paradigms: Creation of folder 'Class_Resources'

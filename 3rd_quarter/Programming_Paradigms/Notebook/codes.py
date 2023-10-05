@@ -1,10 +1,10 @@
-import os
+import os, random
 class Book:
     '''
     Class created to create an object with the principal properties of a 'Book', such as genre, title, the number of pages and the author.
 
     Methods:
-    - .info(): prints in console the information of the 'Book'
+    - @Book.info(): prints in console the information of the 'Book'
     '''
     def __init__(self,genre=str,title=str, n_pages=int, authors=list, editorial=str):
         self.title = title
@@ -24,13 +24,27 @@ class Book:
         print(f"Genre: {self.genre}\nTitle: '{self.title}'\nNo. of Pages: '{self.n_pages}'\nAuthors: {self.authors}\nEditorial: {self.editorial}")
 
 class Library(Book):
+    '''
+    Class that inherits 'Book' class.
+
+    Methods:
+    - @Book.assign_shelve(): Method created to asign a book to their respective shelve
+    '''
     def __init__(self, genre=str, title=str, n_pages=int, authors=list, editorial=str):
         super().__init__(genre, title, n_pages, authors, editorial)
         self.shelve = ''
 
     def assign_shelve(self,shelve=str):
+        '''
+        Assigns a shelve to the book.
+
+        Inputs: 
+            shelve type[str]: Expects the shelve in which the @Book will be stored
+
+        Outputs: Returns nothing, but prints in console the change made
+        '''
         self.shelve = shelve
-        print(f'{self.title} is now in shelve {shelve}')
+        print(f'"{self.title}" is now in shelve {shelve}')
 
 
 
@@ -42,6 +56,18 @@ if __name__ == '__main__':
         - Calculate the total number of pages in the library
         - List the titles of all the books in the library.
     '''
+    def describe(book):
+        '''
+        Prints the minimum information of 'book'
+
+        Inputs:
+            - book <class 'Library(Book)'>: Expects an object of the class 'Library'
+
+        Output:
+            - Returns nothing, but a print in console
+        '''
+        book.info()
+
     os.system('cls')
     
     books = [
@@ -55,8 +81,7 @@ if __name__ == '__main__':
     for index in range(len(books)):
         row = books[index]
         book = Library(genre=row[0],title=row[1],n_pages=row[2],authors=row[3])
-        book.info()
         print("*"*15)
-
         book.editorial = 'El Barco de papel'
-        book.assign_shelve(shelves[index])
+        describe(book)
+        book.assign_shelve(shelves[random.randint(0,3)])
