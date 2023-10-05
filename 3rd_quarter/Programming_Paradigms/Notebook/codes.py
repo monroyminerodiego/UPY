@@ -67,6 +67,7 @@ if __name__ == '__main__':
             - Returns nothing, but a print in console
         '''
         book.info()
+        print('')
 
     os.system('cls')
     
@@ -78,10 +79,23 @@ if __name__ == '__main__':
     ]
     shelves = ['A','B','C','D']
 
+    library_data = []
+
+    print(f'{"*"*15} Uploading data {"*"*15}')
     for index in range(len(books)):
         row = books[index]
         book = Library(genre=row[0],title=row[1],n_pages=row[2],authors=row[3])
-        print("*"*15)
         book.editorial = 'El Barco de papel'
-        describe(book)
+        
         book.assign_shelve(shelves[random.randint(0,3)])
+        describe(book)
+
+        library_data.append(book)
+
+    print(f'\n{"*"*15} Reading data {"*"*15}\nTitles')
+    total_number_of_pages = 0
+    for book in library_data:
+        total_number_of_pages += book.n_pages
+        print(f'\t- {book.title}')
+    print(f'\nNumber of pages in library: {total_number_of_pages}')
+    
