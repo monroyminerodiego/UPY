@@ -21,6 +21,9 @@ There are multiple purposes for this repository, which include:
     - Statistical_Modeling
 
 ## Change Log
+### 2023-10-06
+- 3rd_quarter\Data_Preprocesing\Notebook\Data_Imports: Modification of files
+
 ### 2023-10-04  
 - 3rd_quarter\Programming_Paradigms\Notebook: Added 'codes.py' file
 

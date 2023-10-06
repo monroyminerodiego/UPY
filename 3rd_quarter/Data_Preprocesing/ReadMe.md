@@ -9,6 +9,9 @@
    * Pandas_Notebook.ipynb <br> Jupyter Notebook that reviews some of the functions of pandas
 
 ## Change Log
+### 2023-10-06
+- Data_Preprocesing\Notebook\Data_Imports: Modification of files
+
 ### 2023-10-05
 - Data_Preprocesing\Notebook\: Creation of 'Data_Imports' folder.
 - Data_Preprocesing\Notebook\Data_Imports: Creation of 4 folders (JS, Python, R, SQL)
