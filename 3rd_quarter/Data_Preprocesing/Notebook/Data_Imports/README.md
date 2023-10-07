@@ -18,7 +18,7 @@ Instalar las siguientes aplicaciones (cualquier versión y cuando aplique):
 <br>
 
 2. Once it is installed, the first thing you'll see (after the initial configuration), is a screen like this:  
-<img src='Excel/First_page.png'>  
+<img src='Excel/First_page.png'>
 Then we need to click on "Abrir" or "Open".  
 <br>
 
@@ -98,17 +98,76 @@ node main.js
 <br>
 
 3. Once we create an account, we will be redirected to their landing page:
-<img src='PowerBi/First_page.png'>  
+<img src='PowerBi/First_page.png'>
 Then, we click on "Nuevo informe" to import data  
 <br>
 
-4. When clicked, a 
+4. When clicked, we need to select the first option in order to paste the data from our CSV File:
 <img src='PowerBi/paste.png'>  
 <br>
 
-5. 
+5. Here we paste our data from our CSV and then we click on "Crear informe de manera automatica" to generate our data import.
 <img src='PowerBi/data_pasted.png'>  
 <br>
+
+6. There you go, now we will have a dashboard in Power Bi.
+<img src='PowerBi/data_import.png'>  
+<br>
+
+
+
+### R - R Project
+1. First, we need to [download R Project](https://cran.r-project.org/bin/windows/base/):  
+<img src='R/images/download.png'>  
+<br>
+
+2. Once installed, we can run the next script to make a Data Import:
+``` R
+# Declare a variable with the data of our CSV File
+data <- read.csv("../../../../DataBases/data_imports.csv", header = TRUE, sep = ",")
+# Print in console the CSV File
+data
+```  
+<br>
+
+3. The output should look something like this:
+<img src='R/images/output.png'>  
+<br>
+
+
+
+### SQL - MySQL Workbench
+1. First, we need to download MySQL Workbench from [MySQL Community Downloads](https://dev.mysql.com/downloads/workbench/):  
+<img src='SQL/download.png'>  
+<br>
+
+2. After the installation, we need to select our connection:  
+<img src='SQL/first_page.png'>  
+<br>
+
+3. Right after we select our connection, we need to create a schema/database.   
+To create a database, we click on the first icon and it automatically open the menu to configure our schema.  
+<img src='SQL/create_schema.png'>  
+<br>
+
+4. Once our schema appears in 'Navigator' menu, we select it with the secondary button of our mouse to select 'Table Data Import Wizard' option.  
+<img src='SQL/table_import.png'>  
+<br>
+
+5. Then it will open another window to select our CSV File:
+<img src='SQL/path.png'>  
+<br>
+
+6. When our CSV File is selected, in another window we can configure our table:
+<img src='SQL/configuration_table.png'>  
+<br>
+
+7. Once we finish with the configuration of our table, the data import will be done.  
+To confirm it, we should be able to se the table we created in 'Navigator' Menu. If we select the table, it will show us a list with the column name and the data type of the table:
+<img src='SQL/data_import.png'>  
+<br>
+
+
 
 ## Made By
 - Diego Monroy Minero
