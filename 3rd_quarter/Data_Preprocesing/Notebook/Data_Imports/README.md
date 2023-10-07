@@ -33,8 +33,8 @@ Then we need to click on "Abrir" or "Open".<br>
 5. Finally, our information will be displayed and imported to Excel.
 <img src='Excel/data_import.png'>  
 <br>
-
-
+<br>
+<br>
 
 ### JS (JavaScript) - Node JS
 1. We need to download Node JS. We can download ir from [Node JS | Download](https://nodejs.org/es):
@@ -85,8 +85,8 @@ node main.js
 5. The output of the script will be something like this:
 <img src='JS/Images/output.png'>  
 <br>
-
-
+<br>
+<br>
 
 ### PowerBi
 1. We need to access to [Power Bi](https://powerbi.microsoft.com/es-mx/landing/free-account/?ef_id=_k_CjwKCAjw4P6oBhBsEiwAKYVkq8K6jcRKoTCI7a1Tk0wwfqI1ipRcbg2y5Nqe8MqiEXde2VmY1Ruk_RoCO7sQAvD_BwE_k_&OCID=AIDcmm2lib5waq_SEM__k_CjwKCAjw4P6oBhBsEiwAKYVkq8K6jcRKoTCI7a1Tk0wwfqI1ipRcbg2y5Nqe8MqiEXde2VmY1Ruk_RoCO7sQAvD_BwE_k_&gclid=CjwKCAjw4P6oBhBsEiwAKYVkq8K6jcRKoTCI7a1Tk0wwfqI1ipRcbg2y5Nqe8MqiEXde2VmY1Ruk_RoCO7sQAvD_BwE) and start a free trial:
@@ -113,8 +113,8 @@ Then, we click on "Nuevo informe" to import data<br>
 6. There you go, now we will have a dashboard in Power Bi.
 <img src='PowerBi/data_import.png'>  
 <br>
-
-
+<br>
+<br>
 
 ### R - R Project
 1. First, we need to [download R Project](https://cran.r-project.org/bin/windows/base/):  
@@ -166,8 +166,8 @@ To create a database, we click on the first icon and it automatically open the m
 To confirm it, we should be able to se the table we created in 'Navigator' Menu. If we select the table, it will show us a list with the column name and the data type of the table:
 <img src='SQL/data_import.png'>  
 <br>
-
-
+<br>
+<br>
 
 ## Made By
 - Diego Monroy Minero
