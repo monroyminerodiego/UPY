@@ -20,7 +20,7 @@ Instalar las siguientes aplicaciones (cualquier versión y cuando aplique):
 2. Once it is installed, the first thing you'll see (after the initial configuration), is a screen like this:  
 <img src='Excel/First_page.png'>
 Then we need to click on "Abrir" or "Open".  
-<br>
+<br><br>
 
 3. The next interface you'll see is something like the next one, where we need to click in "Examinar" to open a File Explorer.  
 <img src='Excel/Open.png'>  
