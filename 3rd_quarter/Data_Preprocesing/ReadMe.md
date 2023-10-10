@@ -9,6 +9,9 @@
    * Pandas_Notebook.ipynb <br> Jupyter Notebook that reviews some of the functions of pandas
 
 ## Change Log
+### 2023-10-10
+- Data_Preprocesing\Notebook: Creation of 'queries.sql' file
+
 ### 2023-10-06
 - Data_Preprocesing\Notebook\Data_Imports: Modification of files
 
