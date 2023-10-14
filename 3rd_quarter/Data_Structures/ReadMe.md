@@ -14,6 +14,9 @@
         6. If the end of the file is reached and the stack is not empty, report an error.
 
 ## Change Log
+### 2023-10-13
+- Notebook: Creation of 'non-linear_structures.py' file
+
 ### 2023-09-14
 - Notebook: Creation of 'parentesis_balance.py' file
 
