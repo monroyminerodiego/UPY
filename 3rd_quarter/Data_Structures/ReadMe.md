@@ -15,7 +15,7 @@
 
 ## Change Log
 ### 2023-10-13
-- Notebook: Creation of 'non-linear_structures.py' file
+- Notebook/Non-Linear_Structures: Creation of 'graphs.py' file
 
 ### 2023-09-14
 - Notebook: Creation of 'parentesis_balance.py' file

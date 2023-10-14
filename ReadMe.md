@@ -22,7 +22,7 @@ There are multiple purposes for this repository, which include:
 
 ## Change Log
 ### 2023-10-13
-- UPY\3rd_quarter\Data_Structures\Notebook: Created 'non-linear_structures.py' file
+- UPY\3rd_quarter\Data_Structures\Notebook\Non-Linear_Structures: Created 'graphs.py' file
 
 ### 2023-10-10
 - 3rd_quarter\Data_Preprocesing\Notebook: Created 'queries.sql' file
