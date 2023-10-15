@@ -15,10 +15,10 @@
 
 ## Change Log
 ### 2023-10-13
-- Notebook/Non-Linear_Structures: Creation of 'graphs.py' file
+- Notebook/Non-Linear_Structures: Creation of 'graphs.py' and 'binary.py' files
 
 ### 2023-09-14
-- Notebook: Creation of 'parentesis_balance.py' file
+- Notebook/: Creation of 'parentesis_balance.py' file
 
 ## Made By
 * Diego Monroy Minero
