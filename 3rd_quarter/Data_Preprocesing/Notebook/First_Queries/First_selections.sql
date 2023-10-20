@@ -1,0 +1,67 @@
+-- Selecion of all registers
+SELECT * FROM INEGI.dbo.INE_DISTRITO_2020;
+
+SELECT NOM_ENT
+FROM INEGI.dbo.INE_DISTRITO_2020
+WHERE PCON_DISC BETWEEN 18500 AND 30500;
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'Caracolandia'
+WHERE NOM_ENT = 'Quinatan Roo';
+
+SELECT * FROM INEGI.dbo.INE_DISTRITO_2020
+WHERE NOM_ENT = 'Caracolandia'
+
+SELECT DISTINCT NOM_ENT FROM INEGI.dbo.INE_DISTRITO_2020
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'Ciudad de M�xico'
+WHERE NOM_ENT like 'Ciudad de M%';
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'Michoac�n de Ocampo'
+WHERE NOM_ENT like 'Michoac%';
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'M�xico'
+WHERE NOM_ENT like 'M%xico';
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'Nuevo Le�n'
+WHERE NOM_ENT like 'Nuevo Le%n';
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'Quer�taro'
+WHERE NOM_ENT like 'Quer%';
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'Yucat�n'
+WHERE NOM_ENT like 'Yucat%n';
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET NOM_ENT = 'San Luis Potos�'
+WHERE NOM_ENT like 'San Luis%';
+
+
+
+UPDATE INEGI.dbo.INE_DISTRITO_2020
+SET COMPLEJIDA = 'Concentraci�n Media'
+WHERE COMPLEJIDA like 'Concentraci%n Media';
+
+Select * from INEGI.dbo.INE_DISTRITO_2020;
+
+
+SELECT DISTINCT COMPLEJIDA FROM INEGI.dbo.INE_DISTRITO_2020
+
+-- Altamente Concentrado 1
+-- Altamente Concentrado 2
+-- Concentraci�n Media
+-- Concentrado 1
+-- Concentrado 2
+-- Disperso 1
+-- Disperso 2
+-- Muy Disperso 1
+-- Muy Disperso 2
+
+ALTER TABLE dbo.INEGI.dbo.INE_DISTRITO_2020
+ADD ALT_CON_1 INT, ALT_CON_2 INT, CON_MED INT, CON1 INT, CON2 INT, DIS1 INT, DIS2 INT, MDIS_1 INT, MDIS_2 INT;
