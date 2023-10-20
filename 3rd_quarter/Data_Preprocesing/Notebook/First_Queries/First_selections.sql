@@ -1,56 +1,59 @@
--- Selecion of all registers
+-- Detailed description comment: Query_1
 SELECT * FROM INEGI.dbo.INE_DISTRITO_2020;
 
+
+-- Detailed description comment: Query_2
 SELECT NOM_ENT
 FROM INEGI.dbo.INE_DISTRITO_2020
 WHERE PCON_DISC BETWEEN 18500 AND 30500;
 
+-- Detailed description comment: Query_3
 UPDATE INEGI.dbo.INE_DISTRITO_2020
 SET NOM_ENT = 'Caracolandia'
-WHERE NOM_ENT = 'Quinatan Roo';
+WHERE NOM_ENT = 'Quintana Roo';
 
 SELECT * FROM INEGI.dbo.INE_DISTRITO_2020
 WHERE NOM_ENT = 'Caracolandia'
 
+-- Detailed description comment: Query_4
 SELECT DISTINCT NOM_ENT FROM INEGI.dbo.INE_DISTRITO_2020
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
-SET NOM_ENT = 'Ciudad de M�xico'
-WHERE NOM_ENT like 'Ciudad de M%';
+SET NOM_ENT = 'Ciudad de México'
+WHERE NOM_ENT LIKE 'Ciudad de M%';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
-SET NOM_ENT = 'Michoac�n de Ocampo'
-WHERE NOM_ENT like 'Michoac%';
+SET NOM_ENT = 'Michoacán de Ocampo'
+WHERE NOM_ENT LIKE 'Michoac%';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
-SET NOM_ENT = 'M�xico'
-WHERE NOM_ENT like 'M%xico';
+SET NOM_ENT = 'México'
+WHERE NOM_ENT LIKE 'M%xico';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
 SET NOM_ENT = 'Nuevo Le�n'
-WHERE NOM_ENT like 'Nuevo Le%n';
+WHERE NOM_ENT LIKE 'Nuevo Le%n';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
 SET NOM_ENT = 'Quer�taro'
-WHERE NOM_ENT like 'Quer%';
+WHERE NOM_ENT LIKE 'Quer%';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
 SET NOM_ENT = 'Yucat�n'
-WHERE NOM_ENT like 'Yucat%n';
+WHERE NOM_ENT LIKE 'Yucat%n';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
 SET NOM_ENT = 'San Luis Potos�'
-WHERE NOM_ENT like 'San Luis%';
+WHERE NOM_ENT LIKE 'San Luis%';
 
-
-
+-- Detailed description comment: Query_5
 UPDATE INEGI.dbo.INE_DISTRITO_2020
 SET COMPLEJIDA = 'Concentraci�n Media'
-WHERE COMPLEJIDA like 'Concentraci%n Media';
+WHERE COMPLEJIDA LIKE 'Concentraci%n Media';
 
-Select * from INEGI.dbo.INE_DISTRITO_2020;
+SELECT * FROM INEGI.dbo.INE_DISTRITO_2020;
 
-
+-- Detailed description comment: Query_6
 SELECT DISTINCT COMPLEJIDA FROM INEGI.dbo.INE_DISTRITO_2020
 
 -- Altamente Concentrado 1
@@ -63,5 +66,6 @@ SELECT DISTINCT COMPLEJIDA FROM INEGI.dbo.INE_DISTRITO_2020
 -- Muy Disperso 1
 -- Muy Disperso 2
 
-ALTER TABLE dbo.INEGI.dbo.INE_DISTRITO_2020
+-- Detailed description comment: Query_7
+ALTER TABLE INEGI.dbo.INE_DISTRITO_2020
 ADD ALT_CON_1 INT, ALT_CON_2 INT, CON_MED INT, CON1 INT, CON2 INT, DIS1 INT, DIS2 INT, MDIS_1 INT, MDIS_2 INT;
