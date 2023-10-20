@@ -31,19 +31,19 @@ SET NOM_ENT = 'México'
 WHERE NOM_ENT LIKE 'M%xico';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
-SET NOM_ENT = 'Nuevo Le�n'
+SET NOM_ENT = 'Nuevo León'
 WHERE NOM_ENT LIKE 'Nuevo Le%n';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
-SET NOM_ENT = 'Quer�taro'
+SET NOM_ENT = 'Querétaro'
 WHERE NOM_ENT LIKE 'Quer%';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
-SET NOM_ENT = 'Yucat�n'
+SET NOM_ENT = 'Yucatán'
 WHERE NOM_ENT LIKE 'Yucat%n';
 
 UPDATE INEGI.dbo.INE_DISTRITO_2020
-SET NOM_ENT = 'San Luis Potos�'
+SET NOM_ENT = 'San Luis Potosí'
 WHERE NOM_ENT LIKE 'San Luis%';
 
 -- Detailed description comment: Query_5
@@ -55,7 +55,7 @@ SELECT * FROM INEGI.dbo.INE_DISTRITO_2020;
 
 -- Detailed description comment: Query_6
 SELECT DISTINCT COMPLEJIDA FROM INEGI.dbo.INE_DISTRITO_2020
-
+ñ
 -- Altamente Concentrado 1
 -- Altamente Concentrado 2
 -- Concentraci�n Media
