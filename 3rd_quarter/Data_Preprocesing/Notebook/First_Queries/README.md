@@ -12,7 +12,7 @@ Expected delivery:
 
 ## Description of queries
 - Query_1  
-Selection of all registers
+    Selection of all registers  
     Query: 
     ``` sql
     SELECT * FROM INEGI.dbo.INE_DISTRITO_2020
@@ -21,7 +21,7 @@ Selection of all registers
     <image src='Images/Query_1.png' width="500" height="500">
 
 - Query_2  
-Selection of 'NOM_ENT' that fits in range from 18500 to 30500
+    Selection of 'NOM_ENT' that fits in range from 18500 to 30500  
     Query: 
     ``` sql
     SELECT NOM_ENT
@@ -32,7 +32,7 @@ Selection of 'NOM_ENT' that fits in range from 18500 to 30500
     <image src='./Images/Query_2.png' width="500" height="500">
 
 - Query_3  
-Updating the value 'Caracolandia' to 'Quintana Roo' from column 'NOM_ENT' and selecting the updated rows
+    Updating the value 'Caracolandia' to 'Quintana Roo' from column 'NOM_ENT' and selecting the updated rows  
     Query: 
     ``` sql
     UPDATE INEGI.dbo.INE_DISTRITO_2020
@@ -46,14 +46,14 @@ Updating the value 'Caracolandia' to 'Quintana Roo' from column 'NOM_ENT' and se
     <image src='./Images/Query_3.png' width="500" height="500">
 
 - Query_4  
-First, selecting 'NOM_ENT' column to then update the next values that follows a relation 'key:value' where key is the actual value and the value will be the new value:
-Ciudad de M% : Ciudad de México
-Michoac% : Michoacán de Ocampo
-M%exico : México
-Nuevo Le%n : Nuevo León
-Quer%taro : Querétaro
-Yucat%n : Yucatán
-San Luis% : San Luis Potosí
+    First, selecting 'NOM_ENT' column to then update the next values that follows a relation 'key:value' where key is the actual value and the value will be the new value:
+    Ciudad de M% : Ciudad de México
+    Michoac% : Michoacán de Ocampo
+    M%exico : México
+    Nuevo Le%n : Nuevo León
+    Quer%taro : Querétaro
+    Yucat%n : Yucatán
+    San Luis% : San Luis Potosí  
     Query: 
     ``` sql
     UPDATE INEGI.dbo.INE_DISTRITO_2020
@@ -90,33 +90,77 @@ San Luis% : San Luis Potosí
     <image src='./Images/Query_4.png' width="500" height="500">
 
 - Query_5  
-Updating the values like 'Concentraci%n Media' to 'Concentración Media' and selecting 
-    Query: 
+    Updating the values like 'Concentraci%n Media' to 'Concentración Media' from 'COMPLEJIDA' column and then selecting some information for a sample  
+    Query:  
     ``` sql
-    
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET COMPLEJIDA = 'Concentración Media'
+    WHERE COMPLEJIDA LIKE 'Concentraci%n Media';
+
+    SELECT * FROM INEGI.dbo.INE_DISTRITO_2020 WHERE COMPLEJIDA = 'Concentración Media';
     ```  
     Expected output:  
     <image src='./Images/Query_5.png' width="500" height="500">
 
 - Query_6  
+    Selecting all the different information of column 'COMPLEJIDA'  
     Query: 
     ``` sql
-    
+    SELECT DISTINCT COMPLEJIDA FROM INEGI.dbo.INE_DISTRITO_2020;
     ```  
     Expected output:  
     <image src='./Images/Query_6.png' width="500" height="500">
 
 - Query_7  
+    Editing the table 'INE_DISTRITO_2020' to add some columns  
     Query: 
     ``` sql
-    
+    ALTER TABLE INEGI.dbo.INE_DISTRITO_2020
+    ADD ALT_CON_1 INT, ALT_CON_2 INT, CON_MED INT, CON1 INT, CON2 INT, DIS1 INT, DIS2 INT, MDIS_1 INT, MDIS_2 INT;
     ```  
 
 
 - Query_8  
+    Setting some values for the different columns that were created according to a set of rules and selecting some data as example.  
     Query: 
     ``` sql
-    
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET ALT_CON_1 = 1
+    WHERE COMPLEJIDA = 'Altamente Concentrado 1';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET ALT_CON_2 = 1
+    WHERE COMPLEJIDA = 'Altamente Concentrado 2';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET CON_MED = 1
+    WHERE COMPLEJIDA = 'Concentración Media';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET CON1 = 1
+    WHERE COMPLEJIDA = 'Concentrado 1';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET CON2 = 1
+    WHERE COMPLEJIDA = 'Concentrado 2';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET DIS1 = 1
+    WHERE COMPLEJIDA = 'Disperso 1';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET DIS2 = 1
+    WHERE COMPLEJIDA = 'Disperso 2';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET MDIS_1 = 1
+    WHERE COMPLEJIDA = 'Muy Disperso 1';
+
+    UPDATE INEGI.dbo.INE_DISTRITO_2020
+    SET MDIS_2 = 1
+    WHERE COMPLEJIDA = 'Muy Disperso 2';
+
+    SELECT ALT_CON_1, COMPLEJIDA FROM INEGI.dbo.INE_DISTRITO_2020 WHERE ALT_CON_1 = 1;
     ```  
     Expected output:  
     <image src='./Images/Query_8.png' width="500" height="500">

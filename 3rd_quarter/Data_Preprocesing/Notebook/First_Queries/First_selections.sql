@@ -44,7 +44,7 @@ UPDATE INEGI.dbo.INE_DISTRITO_2020
 SET NOM_ENT = 'San Luis Potosí'
 WHERE NOM_ENT LIKE 'San Luis%';
 
-SELECT DISTINCT NOM_ENT FROM INEGI.dbo.INE_DISTRITO_2020
+SELECT DISTINCT NOM_ENT FROM INEGI.dbo.INE_DISTRITO_2020;
 
 -- Detailed description comment: Query_5
 UPDATE INEGI.dbo.INE_DISTRITO_2020
@@ -55,16 +55,6 @@ SELECT * FROM INEGI.dbo.INE_DISTRITO_2020 WHERE COMPLEJIDA = 'Concentración Med
 
 -- Detailed description comment: Query_6
 SELECT DISTINCT COMPLEJIDA FROM INEGI.dbo.INE_DISTRITO_2020;
-
--- Altamente Concentrado 1
--- Altamente Concentrado 2
--- Concentración Media
--- Concentrado 1
--- Concentrado 2
--- Disperso 1
--- Disperso 2
--- Muy Disperso 1
--- Muy Disperso 2
 
 -- Detailed description comment: Query_7
 ALTER TABLE INEGI.dbo.INE_DISTRITO_2020
