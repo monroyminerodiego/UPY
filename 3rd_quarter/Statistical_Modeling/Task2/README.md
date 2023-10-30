@@ -39,7 +39,7 @@ You Just need to read the script with all comments that I already wrote and comp
 
 
 ## Made By
-- Diego Monroy Minero
-- Sergio Barrera Chan
 - Juan Antonio Cel Vazquez
+- Sergio Johanan Barrera Chan
 - Ariel Joel Buenfil Góngora
+- Diego Monroy Minero

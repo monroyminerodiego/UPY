@@ -97,7 +97,7 @@ File in which we test the class methods from 'discrete_distributions.py' file. I
 
 
 ## Made By
+- Juan Antonio Cel Vazquez
+- Sergio Johanan Barrera Chan
 - Ariel Joel Buenfil Góngora
 - Diego Monroy Minero
-- Juan Antonio Cel Vazquez
-- Sergio Barrera Chan

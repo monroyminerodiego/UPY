@@ -143,7 +143,7 @@ Our goal is to make this task an example of excellence in data management. Let's
 --- 
 
 ## Made By
-- Diego Monroy Minero
-- Sergio Barrera Chan
 - Juan Antonio Cel Vazquez
+- Sergio Johanan Barrera Chan
 - Ariel Joel Buenfil Góngora
+- Diego Monroy Minero
