@@ -49,6 +49,8 @@ In order to accomplish this task we created a class in 'simple.py', which has th
     </tr>
 </table>
 
+To test the script, we replicated the data set we used in class and store it as a CSV file in 'Databases' folder.
+
 ## Made By
 - Juan Antonio Cel Vazquez
 - Sergio Johanan Barrera Chan
