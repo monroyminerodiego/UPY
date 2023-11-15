@@ -1,10 +1,20 @@
 '''
 Generate 40 lottery cards with 16 different images, selecting them from the 54 available cards
+
+Made By:
+* Data 3B Classroom
 '''
 class Lottery:
     def __init__(self,num_layers:int,images_per_layer:int):
         '''
-        
+        Class created to generate combinations for lottery cards.
+
+        Inputs
+        - num_layers: Expects an integer representing the number of cards with different combinations.
+        - images_per_layer: Expects an integer representing the number of different images per card.
+
+        Outputs
+        - Returns nothing
         '''
         self.num_layers = num_layers
         self.images_per_layer = images_per_layer
@@ -13,7 +23,15 @@ class Lottery:
 
     def __generate_combinations(self):
         '''
-        
+        Private function that generates random combinations according to 'num_layers' and 'images_per_layer' parameters.
+
+        Inputs
+        - Expects nothing
+
+        Outputs
+        - Returns a tuple with
+            - unsorted_final_combinations: List with the different cards displayed in an unsorted way
+            - sorted_final_combinations: List with the different cards displayed in a sorted way
         '''
         unsorted_final_combinations, sorted_final_combinations = [], []
         while len(unsorted_final_combinations) < self.num_layers:
