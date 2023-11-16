@@ -1,3 +1,11 @@
+'''
+Made by:
+Juan Antonio Cell Vazquez
+Sergio Barrera Chan
+Ariel Buenfil Gongora
+Diego Monroy Minero
+'''
+
 if __name__ == '__main__':
     '''
     1. Case: Factorial Calculation
