@@ -1,5 +1,6 @@
 # MULTIPLE LINEAL REGRESSION - NBA Prediction
 
+## Description
 Given a data set with information of some NBA players and their attributes, we will predict how much does it grow the rating of the team .
 
 * **API** <br> Folder with basic files to generate an API
