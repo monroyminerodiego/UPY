@@ -1,5 +1,14 @@
-# LINEAL REGRESSION
+# MULTIPLE LINEAL REGRESSION - NBA Prediction
 
-Given a data set with information of some NBA players and their attributes, we will predict how much does it grow the rating of the team 
-* Data_Cleaning <br> Scripts needed to clean the raw data
-* Database <br> Folder to store all the CSV files used in this prediction
+Given a data set with information of some NBA players and their attributes, we will predict how much does it grow the rating of the team .
+
+* **API** <br> Folder to store all the CSV files used in this lineal regression.
+    * index.html: Basic interface structure.
+    * main.py: Script with all the routes of the functions needed.
+
+* **Data_Cleaning** <br> Scripts needed to clean the raw data.
+    * cleaning_class.py: Script with the class created to clean the raw data.
+    * analisys_of_data.ipynb: Jupyter Notebook with the documentation of cleaning_class.
+
+* **Database** <br> Folder to store all the CSV files used in this lineal regression.
+    * raw_data.csv: Data downloaded from Kaggle which will be used in this prediction.
