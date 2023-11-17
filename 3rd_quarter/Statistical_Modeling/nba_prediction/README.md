@@ -12,3 +12,9 @@ Given a data set with information of some NBA players and their attributes, we w
 
 * **Database** <br> Folder to store all the CSV files used in this lineal regression.
     * raw_data.csv: Data downloaded from Kaggle which will be used in this prediction.
+
+## Made By
+- Barrera Chan Sergio Johanan
+- Buenfil Góngora Ariel Joel
+- Cel Vazquez Juan Antonio
+- Monroy Minero Diego
