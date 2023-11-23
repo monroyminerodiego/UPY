@@ -22,6 +22,8 @@ class Cleaning:
         # Selecting only features that we need from our df
         df = df[columns_with_needed_correlation]
 
+        df.drop(axis=1,labels='gp',inplace=True)
+
         # Creating the dictionary to map the categorical data
         dict_season = {}
         counter = 1
@@ -44,10 +46,11 @@ class Cleaning:
         Output
         - Returns a dataframe with the standarized data
         '''
-        df = self.df
+        df = self.df[:-1]
         scaler = StandardScaler()
         df = scaler.fit_transform(df)
         df = pd.DataFrame(df,columns=list(self.df.columns))
+        df['season'] = self.df['season']
         return df
 
     def __init__(self, raw_file_path:str, correlation_in_columns:float, download_mode:bool = False, cleaned_file_path:str = ''):

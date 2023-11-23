@@ -78,9 +78,10 @@ class multiple_linear_regression:
         self.RR                               = sum(self.data_table['SCR']) / self.__generate_multi_determination_coefficient()
         self.RR_adjusted                      = self.__adjust_multi_determination_coefficient()
         self.R                                = math.sqrt(self.RR)
+        self.R2                               = r2_score(self.data_table['y'],self.data_table['p'])
 
     def __str__(self):
-        string  = f"\n{'*'*10} Data Table {'*'*10}\n\n{self.data_table.to_string(index=False)}\n"
+        string  = f"\n{'*'*10} Data Table {'*'*10}\n\n{self.data_table.head().to_string(index=False)}\n"
 
         string += f"\n{'*'*10} Summatories {'*'*10}\n\ny: {self.sumatory_y} \t x1: {self.sumatory_x1}\n"
         string += f"x2: {self.sumatory_x2} \t\t x1x1: {self.sumatory_x1x1}\n"
@@ -95,6 +96,8 @@ class multiple_linear_regression:
         string += f"\nSum all Error Squares Adjusted: {self.RR_adjusted * 100:02f}"
 
         string += f"\nMultiple Correlation Coefficient: {self.R * 100:02f}"
+
+        string += f"\nR2: {self.R2 * 100:02f}"
 
         return string
     
@@ -116,8 +119,10 @@ class multiple_linear_regression:
 
 if __name__ == '__main__':
     import pandas as pd, os, math, matplotlib.pyplot as plt, numpy as np
+    from sklearn.metrics import r2_score
     os.system('cls')
-    file = pd.read_csv('Databases/multiple.csv')
-    data = [(row.y,row.x1,row.x2) for row in file.itertuples()]
+    # file = pd.read_csv('Databases/multiple.csv')
+    file = pd.read_csv('../nba_prediction/Databases/cleaned_raw_data.csv')
+    data = [(row.net_orating,row.pts,row.ast) for row in file.itertuples()]
     multiple = multiple_linear_regression(data)
     print(multiple)

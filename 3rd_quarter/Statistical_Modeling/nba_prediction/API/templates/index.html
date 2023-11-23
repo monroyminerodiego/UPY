@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./CSS/styles.css ">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/styles.css') }}">
     <title> Depp learning </title>
 
 </head>
@@ -17,10 +17,10 @@
 
     <div id="gallery">
         <div class="artwork">
-            <img src="../Images/foto_portada_3.jpg" alt="Obra 1">
+            <img src="{{ url_for('static',filename='Images/foto_portada_3.jpg') }}" alt="Obra 1">
         </div>
         <div class="artwork">
-            <img src="../Images/portada_4.jpg" alt="Obra 3">
+            <img src="{{ url_for('static',filename='Images/portada_4.jpg') }}" alt="Obra 3">
         </div>
         <!-- Agrega más obras aquí -->
     </div>
@@ -43,7 +43,7 @@
 <!-- Botón para predecir -->
 <button onclick="Resources/JS/predict()">Predecir</button>
     <div>
-        <script src="../CSS/styles.css"></script>
+        <script src="{{ url_for('static',filename='CSS/styles.css') }}"></script>
     
     <footer class="clearfix">
         <footer class="clearfix">
