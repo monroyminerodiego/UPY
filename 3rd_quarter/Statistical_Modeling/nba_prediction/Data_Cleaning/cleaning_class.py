@@ -50,7 +50,7 @@ class Cleaning:
         scaler = StandardScaler()
         df = scaler.fit_transform(df)
         df = pd.DataFrame(df,columns=list(self.df.columns))
-        df['season'] = self.df['season']
+        # df['season'] = self.df['season']
         return df
 
     def __init__(self, raw_file_path:str, correlation_in_columns:float, download_mode:bool = False, cleaned_file_path:str = ''):
