@@ -193,10 +193,26 @@ class multiple_linear_regression:
 
 
 if __name__ == '__main__':
-    import pandas as pd, os, math, matplotlib.pyplot as plt, numpy as np
+    import os; os.system('cls')
+    import pandas as pd, math, numpy as np
     from sklearn.metrics import r2_score
-    os.system('cls')
+
+    from sklearn.neural_network import MLPRegressor
+    from sklearn.model_selection import train_test_split
+
+    
     # file = pd.read_csv('Databases/multiple.csv')
-    file = pd.read_csv('../nba_prediction/Databases/cleaned_raw_data_o.csv')
-    data = [(row.net_rating,row.pts,row.reb,row.ast,row.usg_pct) for row in file.itertuples()]
-    multiple = multiple_linear_regression(data)
+    file = pd.read_csv('../nba_prediction/Databases/cleaned_raw_data_o.csv',index_col=0)
+
+    # data = [(row.net_rating,row.pts,row.reb,row.ast,row.usg_pct) for row in file.itertuples()]
+    # multiple = multiple_linear_regression(data)
+    
+    x = file[['pts','reb','ast','usg_pct']]
+    y = file['net_rating']
+    x = x[:, np.newaxis]
+    X_train, X_test, y_train, y_test = train_test_split(x, y)
+
+    mlr = MLPRegressor(solver='lbfgs',alpha=1e-5,hidden_layer_sizes=(3,3),random_state=1)
+    mlr.fit(X_train,y_train)
+    print(mlr.score())
+

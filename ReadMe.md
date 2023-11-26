@@ -17,6 +17,7 @@ There are multiple purposes for this repository, which include:
 - 3rd_quarter
     - Data_Preprocessing
     - Data_Structures
+    - Differential_Calculus
     - Programming_Paradigms
     - Statistical_Modeling
 
