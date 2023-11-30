@@ -17,8 +17,10 @@
         * exercise2.py <br> Write a Python program that takes a list of tuples, where each tuple contains a name and an age. Use lambda functions to sort the list by age in ascending order.
     
     * Prolog
-        * Task1_U4.pl <br> Implement a Prolog program that defines a family tree with at least three generations. Include rules to determine sibling relationships and ancestors.
-        * Task2_U4.pl <br> Utilize collections to represent a simple database of books. Implement queries to find books by a specific author or within a certain genre.
+        * Assignment1_Task1_U4.pl <br> Implement a Prolog program that defines a family tree with at least three generations. Include rules to determine sibling relationships and ancestors.
+        * Assignment1_Task2_U4.pl <br> Utilize collections to represent a simple database of books. Implement queries to find books by a specific author or within a certain genre.
+        * Assignment2_Task1_U4.pl <br> Develop a Prolog program that solves a Sudoku puzzle using logic programming principles. Use relations and constraints to ensure a valid solution.
+        * Assignment2_Task2_U4.pl <br> Implement a logical system to model a scheduling problem. Define constraints related to time, resources, and dependencies to find an optimal solution.
 
     * Study_cases.md <br> File where it gives a solution for two study cases. Activity made in teams
     
