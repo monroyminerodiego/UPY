@@ -34,7 +34,6 @@ class Cleaning:
         # # Changing to categorical the 'season' feature
         # df['season'] = df['season'].apply(lambda x: dict_season[x])
 
-        print(f"Correlation of cleaned data\n{df.corr()}\n\n")
         return df
 
     def __estandarizing_data(self):
@@ -88,9 +87,6 @@ class Cleaning:
         self.raw_file = pd.read_csv(raw_file_path,index_col=0)
         self.df = self.__clean_raw_data()
 
-        # Uncomment to see the distribution of the variables
-        # self.get_distribution()
-
         # Estandarizing data
         if estandarize_data: self.df = self.__estandarizing_data()
 
@@ -126,16 +122,16 @@ if __name__ == '__main__':
     from sklearn.preprocessing import StandardScaler
     from sklearn.preprocessing import normalize
 
-    version = '_o'
+    version = '_p'
     input = f'../Databases/raw_data{version}.csv'
-    correlation = 0.56
+    correlation = 0.49
     output_path = '../Databases/'
     
     
     Cleaning(raw_file_path          = input,
              correlation_in_columns = correlation,
              cleaned_file_path      = output_path,
-             download_mode          = False,
+             download_mode          = True,
              estandarize_data       = True,
              normalize_data         = False
-             ).get_distribution()
+             )

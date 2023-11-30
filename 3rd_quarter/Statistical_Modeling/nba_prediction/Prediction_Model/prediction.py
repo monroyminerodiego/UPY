@@ -182,10 +182,11 @@ class multiple_linear_regression:
         string += f"\nStandar Error of Multiple Estimation: {self.standar_error:02f}\n"
 
         string += f"\nError Squares: {self.sumatory_error_squares:02f}"
+        string += f"\nMultiple Correlation Coefficient (R): {self.R * 100:02f}\n"
+        
         string += f"\nManual R2: {self.RR * 100:02f}"
         string += f"\nAdjusted Manual R2: {self.RR_adjusted * 100:02f}\n"
 
-        string += f"\nMultiple Correlation Coefficient (R): {self.R * 100:02f}\n"
 
         string += f"\nR2 with sklearn.metrics: {self.R2 * 100:02f}\n"
 
@@ -200,12 +201,18 @@ if __name__ == '__main__':
     from sklearn.neural_network import MLPRegressor
     from sklearn.model_selection import train_test_split
 
-    
-    # file = pd.read_csv('Databases/multiple.csv')
-    file = pd.read_csv('../nba_prediction/Databases/cleaned_raw_data_o.csv',index_col=0)
-
+    file = pd.read_csv('../Databases/raw_data_p.csv',index_col=0).query("country == 'USA'")
     data = [(row.net_rating,row.pts,row.reb,row.ast,row.usg_pct) for row in file.itertuples()]
-    multiple = multiple_linear_regression(data)
-    print(multiple)
-    
+    multi = multiple_linear_regression(data)
+    print(multi)
 
+    y  = file['net_rating'].values
+    x1 = file['pts'].values
+    x2 = file['reb'].values
+    x3 = file['ast'].values
+    x4 = file['usg_pct'].values
+
+    X=np.array([x1,x2,x3,x4])
+    Y=np.array(y)
+
+    # reg=Line

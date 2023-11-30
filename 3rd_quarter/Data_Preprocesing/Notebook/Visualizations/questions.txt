@@ -1,0 +1,186 @@
+Preguntas para el análisis de las tablas
+GASTO, SUCURSALES, EMPLEADOS, TICKETS, COMPRAS
+
+********************************** Simbología **********************************
+p) Pregunta
+r) Requerimientos de data
+c) Consideraciones de como debe estar la data
+
+********************************** FINANZAS **********************************
+p) Relacion sucursal - gastos (¿Cuales son los gastos de la empresa nivel sucursal?)
+    r) Gastos de sucursal por mes / semestre / año
+        c) Los gastos tienen que ser diferentes por sucursales
+
+p) Relacion sucursal - compras (¿Cuales son las compras de la empresa nivel sucursal?)
+    r) Compras de sucursal por semana / mes / cuatri / año
+        c) La frecuencia de los pedidos tiene que variar entre sucursales
+        c) Corporativo no puede tener compras
+
+p) Relacion sucursal - ventas (¿Cuales son las ingresos de la empresa nivel sucursal?)
+    r) Ventas de sucursal por semana / mes / cuatri / año
+        c) Ventas tienen que ser diferentes por sucursal
+        c) Corporativo no puede tener ventas
+
+
+
+********************************** ALMACEN **********************************
+p) Relacion Sucursal - Proveedores (¿Que almacen cuenta con más proveedores?)
+    r) Numero de provedorees por sucursal
+        c) Corporativo no puede tener proveedores
+
+p) Relacion Sucursal - Productos (¿Que almacen tiene más variedad de productos?)
+    r) Numero de productos dferentes por sucursal
+        c) Corporativo no puede tener productos
+
+p) Relacion Empleados - Almacen (¿Que almacen tiene mas empleados?)
+    r) Numero de empleados de las sucursales tipo "Almacen"
+
+p) Relacion de Fecha Ingreso Producto - Fecha Venta Producto(¿Que producto tarda más en salir?)
+    r) Promedio cuanto tarda en salir un producto
+        c) Productos de las ventas tienen que coincidir con los productos dados de alta en ALMACEN_POR_SUCURSAL
+
+p) Relacion de Sucursal - Compras (Sucursales que piden más productos)
+    r) Pedidos de sucursal por semana / mes / cuatri / año
+
+
+
+********************************** VENTAS **********************************
+p) Relacion Tickets - Empleado (¿Cuál fue el empleado del mes basado en ventas?)
+    r) Numero de tickets generado por empleado por dia / semana / mes / cuatri / año
+        c) CURP de empleado tiene que coincidir con la lista de empleados
+
+p) Relacion Tickets - Producto (¿Que producto se vende mas/menos?)
+    r)  Ventas de producto por dia / semana / mes / año
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Tabla GASTO
+
+* ¿Cuáles son los gastos más comunes?
+* ¿En qué áreas de la empresa se concentran los gastos?
+* ¿Cómo han evolucionado los gastos a lo largo del tiempo?
+
+
+
+Tabla CATALOGO GASTOS
+
+* ¿Los gastos están clasificados de forma adecuada?
+* ¿Hay gastos que podrían clasificarse de forma diferente?
+* ¿Se pueden identificar áreas de oportunidad para reducir los gastos?
+
+
+
+Tabla SUCURSALES
+
+* ¿Cuáles son las sucursales más rentables?
+* ¿Cuáles son las sucursales con más empleados?
+* ¿Cómo ha evolucionado la actividad de las sucursales a lo largo del tiempo?
+
+
+
+Tabla CAJAS
+
+* ¿Cuáles son las cajas más rentables?
+* ¿Cuáles son las cajas con más empleados?
+* ¿Cómo ha evolucionado la actividad de las cajas a lo largo del tiempo?
+
+
+
+Tabla TICKETS
+
+* ¿Cuáles son los productos más vendidos?
+* ¿Cuáles son los empleados que más venden?
+* ¿Cómo ha evolucionado la actividad de venta a lo largo del tiempo?
+
+
+
+Tabla TICKETS DETALLE
+
+* ¿Cuáles son los productos con mayor margen de ganancia?
+* ¿Cuáles son los empleados que más margen de ganancia generan?
+* ¿Cómo ha evolucionado el margen de ganancia a lo largo del tiempo?
+
+
+
+Tabla COMPRA POR PRODUCTO
+
+* ¿Cuáles son los productos con mayor rotación?
+* ¿Cuáles son los productos con mayor costo de adquisición?
+* ¿Cómo ha evolucionado la rotación de productos a lo largo del tiempo?
+
+
+
+Tabla PRODUCTOS
+
+* ¿Cuáles son los productos más populares?
+* ¿Cuáles son los productos con mayor potencial de crecimiento?
+* ¿Cómo ha evolucionado la popularidad de los productos a lo largo del tiempo?
+
+
+
+Tabla PROVEEDORES
+
+* ¿Cuáles son los proveedores más confiables?
+* ¿Cuáles son los proveedores con los mejores precios?
+* ¿Cómo ha evolucionado la relación con los proveedores a lo largo del tiempo?
+
+
+
+Tabla COMPRAS
+
+* ¿Cuáles son los productos que más se compran?
+* ¿Cuáles son los proveedores con los que se compran más productos?
+* ¿Cómo ha evolucionado el volumen de compras a lo largo del tiempo?
+
+
+
+Tabla ALMACEN POR SUCURSAL
+
+* ¿Cuáles son las sucursales con más inventario?
+* ¿Cuáles son los productos con más inventario?
+* ¿Cómo ha evolucionado el inventario a lo largo del tiempo?
+
+
+
+Tabla TURNO
+
+* ¿Cuáles son los turnos con más empleados?
+* ¿Cuáles son los turnos con más ventas?
+* ¿Cómo ha evolucionado la actividad de los turnos a lo largo del tiempo?
+
+
+
+Tabla ESTATUS
+
+* ¿Cuáles son los estados con más empleados?
+* ¿Cuáles son los estados con más ventas?
+* ¿Cómo ha evolucionado la actividad de los estados a lo largo de tiempo?
+
+
+
+Tabla PUESTO
+
+* ¿Cuáles son los puestos con más empleados?
+* ¿Cuáles son los puestos con más ventas?
+* ¿Cómo ha evolucionado la actividad de los puestos a lo largo del tiempo?
+
+
+
+Tabla EMPLEADOS
+
+* ¿Cuáles son los empleados con más ventas?
+* ¿Cuáles son los empleados con más antigüedad?
+* ¿Cómo ha evolucionado la actividad de los empleados a lo largo del tiempo?

@@ -1,0 +1,3 @@
+- Modificaciones para tabla GASTOS:
+    - Renombrar a CATALOGO_GASTOS
+    - 
