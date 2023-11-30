@@ -8,7 +8,7 @@ c) Consideraciones de como debe estar la data
 
 ********************************** FINANZAS **********************************
 p) Relacion sucursal - gastos (¿Cuales son los gastos de la empresa nivel sucursal?)
-    r) Gastos de sucursal por mes / semestre / año
+    r) Gastos de sucursal por mes / cuatri / año
         c) Los gastos tienen que ser diferentes por sucursales
 
 p) Relacion sucursal - compras (¿Cuales son las compras de la empresa nivel sucursal?)
@@ -20,8 +20,6 @@ p) Relacion sucursal - ventas (¿Cuales son las ingresos de la empresa nivel suc
     r) Ventas de sucursal por semana / mes / cuatri / año
         c) Ventas tienen que ser diferentes por sucursal
         c) Corporativo no puede tener ventas
-
-
 
 ********************************** ALMACEN **********************************
 p) Relacion Sucursal - Proveedores (¿Que almacen cuenta con más proveedores?)
@@ -41,8 +39,6 @@ p) Relacion de Fecha Ingreso Producto - Fecha Venta Producto(¿Que producto tard
 
 p) Relacion de Sucursal - Compras (Sucursales que piden más productos)
     r) Pedidos de sucursal por semana / mes / cuatri / año
-
-
 
 ********************************** VENTAS **********************************
 p) Relacion Tickets - Empleado (¿Cuál fue el empleado del mes basado en ventas?)
