@@ -1,5 +1,5 @@
 Preguntas para el análisis de las tablas
-GASTO, SUCURSALES, EMPLEADOS, TICKETS, COMPRAS
+GASTO, SUCURSALES, EMPLEADOS, TICKETS, COMPRAS, ALMACEN_POR_SUCURSAL
 
 ********************************** Simbología **********************************
 p) Pregunta
@@ -8,41 +8,35 @@ c) Consideraciones de como debe estar la data
 
 ********************************** FINANZAS **********************************
 p) Relacion sucursal - gastos (¿Cuales son los gastos de la empresa nivel sucursal?)
-    r) Gastos de sucursal por mes / cuatri / año
+    r) Gastos de sucursal por mes / tri / año
         c) Los gastos tienen que ser diferentes por sucursales
 
 p) Relacion sucursal - compras (¿Cuales son las compras de la empresa nivel sucursal?)
-    r) Compras de sucursal por semana / mes / cuatri / año
+    r) Compras de sucursal por semana / mes / tri / año
         c) La frecuencia de los pedidos tiene que variar entre sucursales
         c) Corporativo no puede tener compras
 
 p) Relacion sucursal - ventas (¿Cuales son las ingresos de la empresa nivel sucursal?)
-    r) Ventas de sucursal por semana / mes / cuatri / año
+    r) Ventas de sucursal por semana / mes / tri / año
         c) Ventas tienen que ser diferentes por sucursal
         c) Corporativo no puede tener ventas
 
 ********************************** ALMACEN **********************************
-p) Relacion Sucursal - Proveedores (¿Que almacen cuenta con más proveedores?)
-    r) Numero de provedorees por sucursal
-        c) Corporativo no puede tener proveedores
-
 p) Relacion Sucursal - Productos (¿Que almacen tiene más variedad de productos?)
     r) Numero de productos dferentes por sucursal
         c) Corporativo no puede tener productos
 
-p) Relacion Empleados - Almacen (¿Que almacen tiene mas empleados?)
-    r) Numero de empleados de las sucursales tipo "Almacen"
+p) Relacion de Fecha Compra Producto - Fecha Recibido Producto(¿Que producto tarda más en llegar?)
+    r) Promedio cuanto tarda en llegar un producto
+        c) Productos de las ventas tienen que coincidir con los productos dados de alta en ALMACEN_POR_SUCURSAL
 
 p) Relacion de Fecha Ingreso Producto - Fecha Venta Producto(¿Que producto tarda más en salir?)
     r) Promedio cuanto tarda en salir un producto
         c) Productos de las ventas tienen que coincidir con los productos dados de alta en ALMACEN_POR_SUCURSAL
 
-p) Relacion de Sucursal - Compras (Sucursales que piden más productos)
-    r) Pedidos de sucursal por semana / mes / cuatri / año
-
 ********************************** VENTAS **********************************
 p) Relacion Tickets - Empleado (¿Cuál fue el empleado del mes basado en ventas?)
-    r) Numero de tickets generado por empleado por dia / semana / mes / cuatri / año
+    r) Numero de tickets generado por empleado por dia / semana / mes / tri / año
         c) CURP de empleado tiene que coincidir con la lista de empleados
 
 p) Relacion Tickets - Producto (¿Que producto se vende mas/menos?)

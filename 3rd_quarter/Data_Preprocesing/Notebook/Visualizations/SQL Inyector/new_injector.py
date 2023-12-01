@@ -5,9 +5,10 @@ import os
 import chardet
 import platform
 
-server = 'LAP-DIEGO\SQLEXPRESS'#input('inserte el nombre de su laptop/pc (es case sensitive, trate de ser exacto)\nPD:Si le cambiaste el nombre a tu lap agrega /EXPRESS al final: ')#.trim #toma el nombre del dispositivo nodo
+server = 'LAP-DIEGO\SQLEXPRESS'#type:ignore
 database = 'Upysusa'
 driver = 'ODBC Driver 17 for SQL Server'
+
 tablelperlevel = [['SUCURSALES','PROVEEDORES','CATALOGO_GASTOS','TURNO','ESTATUS','PUESTO'],
                   ['PRODUCTOS','COMPRAS','GASTOS','CAJAS','EMPLEADOS'],
                   ['COMPRA_POR_PRODUCTO','ALMACEN_POR_SUCURSAL','TICKETS'],
@@ -15,11 +16,11 @@ tablelperlevel = [['SUCURSALES','PROVEEDORES','CATALOGO_GASTOS','TURNO','ESTATUS
 
 for level in tablelperlevel:
     for table in level:
-        with open(f'./csvs/{table}.csv','rb') as f:
+        with open(f'CSV/{table}.csv','rb') as f:
             analysis = chardet.detect(f.read())#Lee el codigo para detectar su encoding y evitar problemas de "traduccion" con el dataframe(culpa de Moi)
             encoding = analysis['encoding']
-
-            df = pd.read_csv(f'./csvs/{table}.csv', encoding=encoding) #convierte el csv en un dataframe
+        
+            df = pd.read_csv(f'CSV/{table}.csv', encoding=encoding) #convierte el csv en un dataframe
 
             conn = pyodbc.connect(f'DRIVER={driver};SERVER={server};DATABASE={database};Trusted_Connection=yes')#Establece la conexion
             table_name = table.split('.')[0]
