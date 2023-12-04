@@ -1,3 +1,9 @@
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import normalize
+
 class Cleaning:
 
     def __clean_raw_data(self):
@@ -63,7 +69,7 @@ class Cleaning:
         OUTPUT
         * Returns a pandas.DataFrame with the data normalized.
         '''
-        return pd.DataFrame(data=normalize(self.df, axis=0),columns=[column for column in self.df.columns])
+        return pd.DataFrame(data=normalize(self.df, axis=0),columns=[column for column in self.df.columns]) #type:ignore
 
     def __init__(self, raw_file_path:str, correlation_in_columns:float, download_mode:bool = False, cleaned_file_path:str = '', estandarize_data:bool = True, normalize_data:bool = False):
         '''
@@ -94,17 +100,18 @@ class Cleaning:
         if normalize_data: self.df = self.__normalizing_data()
 
         # # Saving document
-        if download_mode: self.df.to_csv(f'{cleaned_file_path}cleaned_raw_data{version}.csv')
+        if download_mode: self.df.to_csv(f'{cleaned_file_path}cleaned_raw_data.csv')
 
-    def get_distribution(self):
+    def save_distribution_image(self,download_image_path:str):
         '''
-        Public method to get a graph with the histogram of every column
+        Public method to get a graph with the histogram of every column and save it.
 
         INPUT
-        * Expects nothing
+        * name_image [str] = Expects the name with extension for the image.
+        * download_image_path [str] = Expects the path to download the image.
 
         OUTPUT
-        * Returns nothing, but shows the plot with the histograms
+        * Returns nothing, but saves an image with the plot.
         '''
         x = 1
         for column in self.df.columns:
@@ -112,26 +119,4 @@ class Cleaning:
             plt.hist(self.df[column])
             plt.title(column)
             x += 1
-        plt.show()
-
-
-if __name__ == '__main__':
-    import os; os.system('cls')
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.preprocessing import normalize
-
-    version = '_p'
-    input = f'../Databases/raw_data{version}.csv'
-    correlation = 0.49
-    output_path = '../Databases/'
-    
-    
-    Cleaning(raw_file_path          = input,
-             correlation_in_columns = correlation,
-             cleaned_file_path      = output_path,
-             download_mode          = True,
-             estandarize_data       = True,
-             normalize_data         = False
-             )
+        plt.savefig(download_image_path)

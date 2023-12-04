@@ -1,0 +1,29 @@
+{% extends "template.html" %}
+
+{% block subtitulo %}Aqui puedes cambiar los parametros para tu cleaning (Próximamente){% endblock %}
+
+{% block imagenes %}
+<div id="gallery">
+    <div class="artwork">
+        <img src="{{ url_for('static',filename='Images/foto_portada_3.jpg') }}" alt="Obra 1">
+    </div>
+    <div class="artwork">
+        <img src="{{ url_for('static',filename='Images/portada_4.jpg') }}" alt="Obra 3">
+    </div>
+    <!-- Agrega más obras aquí -->
+</div>
+{% endblock %}
+
+
+
+
+
+
+{% block botones %}
+
+
+
+<!-- Botón para limpiar datos -->
+<button onclick="window.location.href='/cleaned'"> Limpiar Datos </button>
+<br>
+{% endblock %}

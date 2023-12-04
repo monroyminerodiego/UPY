@@ -1,0 +1,33 @@
+{% extends "template.html" %}
+
+{% block subtitulo %}Bienvenido aqui puedes colocar tu base de datos  digitales{% endblock %}
+
+{% block imagenes %}
+<div id="gallery">
+    <div class="artwork">
+        <img src="{{ url_for('static',filename='Images/foto_portada_3.jpg') }}" alt="Obra 1">
+    </div>
+    <div class="artwork">
+        <img src="{{ url_for('static',filename='Images/portada_4.jpg') }}" alt="Obra 3">
+    </div>
+    <!-- Agrega más obras aquí -->
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+{% block botones %}
+<!-- Botón para guardar archivo -->
+<h1>Upload File</h1>
+<form method="POST" action="/uploaded" enctype="multipart/form-data">
+    <br>
+    <input type="File", id="UploadFile" name="UploadFile" accept=".csv">
+    <br>
+    <br>
+    <input type="submit" class="input">
+</form>
+{% endblock %}

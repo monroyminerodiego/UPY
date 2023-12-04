@@ -1,0 +1,24 @@
+{% extends "template.html" %}
+
+{% block subtitulo %}Aqui puedes cambiar los parametros de entrenamiento de tu modelo y hacer predicciones{% endblock %}
+
+
+{% block imagenes %}
+<div id="gallery">
+    <div class="artwork">
+        <img src="{{ image_path }}" alt="Obra 1">
+    </div>
+</div>
+{% endblock %}
+
+
+{% block botones %}
+
+<!-- Botones para entrenar -->
+<button onclick="">Entrenar Modelo</button>
+
+<hr>
+
+<!-- Botones para predecir -->
+<button onclick="">Predecir</button>
+{% endblock %}
