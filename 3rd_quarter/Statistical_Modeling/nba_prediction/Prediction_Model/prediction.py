@@ -1,13 +1,28 @@
 class multiple_linear_regression:
+    def __split_dataframe(self,basic_matrix:list):
+        '''
+        '''
+        used_index = []
+        df = pd.DataFrame(data = basic_matrix, columns=['y','x1','x2','x3','x4'])
+        training_matrix = []
+        for _ in range(round(self.training_size * len(df))):
+            random_index = random.randint(0,len(basic_matrix)-1)
+            while random_index in used_index: random_index = random.randint(0,len(basic_matrix)-1)
+            training_matrix.append(basic_matrix[random_index])
+            df.drop([random_index],axis=0)
+            used_index.append(random_index)
+
+        return training_matrix, np.array(df[:])
+    
     def __generate_data_table(self,basic_matrix:list):
         '''
         Private method to generate the data table of the dataset for 1 dependent variable and 4 independent variables.
 
         INPUT
-        * basic_matrix -> list: Expects a list of tuples with the independent and dependen variables (y, x1, x2, x3, x4).
+        * basic_matrix [list]: Expects a list of tuples with the independent and dependen variables (y, x1, x2, x3, x4).
 
         OUTPUT
-        * dataframe -> pandas.DataFrame: Returns a pandas dataframe which will be used as the data table.
+        * dataframe [pandas.DataFrame]: Returns a pandas dataframe which will be used as the data table.
         '''
         return pd.DataFrame(data={
             'y'    : [ value[0]           for value in basic_matrix],
@@ -41,25 +56,25 @@ class multiple_linear_regression:
         OUTPUT
         * Returns a tuple with the values of the summatories of every column
         '''
-        y     = sum(self.data_table["y"])
-        x1    = sum(self.data_table["x1"])
-        x2    = sum(self.data_table["x2"])
-        x3    = sum(self.data_table["x3"])
-        x4    = sum(self.data_table["x4"])
-        x1x1  = sum(self.data_table['x1x1'])
-        x1x2  = sum(self.data_table['x1x2'])
-        x1x3  = sum(self.data_table['x1x3'])
-        x1x4  = sum(self.data_table['x1x4'])
-        x2x2  = sum(self.data_table['x2x2'])
-        x2x3  = sum(self.data_table['x2x3'])
-        x2x4  = sum(self.data_table['x2x4'])
-        x3x3  = sum(self.data_table['x3x3'])
-        x3x4  = sum(self.data_table['x3x4'])
-        x4x4  = sum(self.data_table['x4x4'])
-        x1y   = sum(self.data_table['x1y'])
-        x2y   = sum(self.data_table['x2y'])
-        x3y   = sum(self.data_table['x3y'])
-        x4y   = sum(self.data_table['x4y'])
+        y     = sum(self.training_data_table["y"])
+        x1    = sum(self.training_data_table["x1"])
+        x2    = sum(self.training_data_table["x2"])
+        x3    = sum(self.training_data_table["x3"])
+        x4    = sum(self.training_data_table["x4"])
+        x1x1  = sum(self.training_data_table['x1x1'])
+        x1x2  = sum(self.training_data_table['x1x2'])
+        x1x3  = sum(self.training_data_table['x1x3'])
+        x1x4  = sum(self.training_data_table['x1x4'])
+        x2x2  = sum(self.training_data_table['x2x2'])
+        x2x3  = sum(self.training_data_table['x2x3'])
+        x2x4  = sum(self.training_data_table['x2x4'])
+        x3x3  = sum(self.training_data_table['x3x3'])
+        x3x4  = sum(self.training_data_table['x3x4'])
+        x4x4  = sum(self.training_data_table['x4x4'])
+        x1y   = sum(self.training_data_table['x1y'])
+        x2y   = sum(self.training_data_table['x2y'])
+        x3y   = sum(self.training_data_table['x3y'])
+        x4y   = sum(self.training_data_table['x4y'])
         
         return y, x1, x2, x3, x4, x1x1, x2x2, x1x2, x1x3, x1x4, x2x3, x2x4, x3x3, x3x4, x4x4, x1x2, x1y, x2y, x3y, x4y
     
@@ -74,7 +89,7 @@ class multiple_linear_regression:
         * Returns a tuple with matrix, the intercept and the coefficients of every independent variable
         '''
         matrix = [
-            [len(self.data_table),  self.sumatory_x1  ,  self.sumatory_x2  ,  self.sumatory_x3,    self.sumatory_x4  ],
+            [len(self.training_data_table),  self.sumatory_x1  ,  self.sumatory_x2  ,  self.sumatory_x3,    self.sumatory_x4  ],
             [self.sumatory_x1    ,  self.sumatory_x1x1,  self.sumatory_x1x2,  self.sumatory_x1x3,  self.sumatory_x1x4],
             [self.sumatory_x2    ,  self.sumatory_x1x2,  self.sumatory_x2x2,  self.sumatory_x2x3,  self.sumatory_x2x4],
             [self.sumatory_x3    ,  self.sumatory_x1x3,  self.sumatory_x2x3,  self.sumatory_x3x3,  self.sumatory_x3x4],
@@ -98,11 +113,11 @@ class multiple_linear_regression:
         OUTPUT
         * Returns the sum of the squares errors column (ee).
         '''
-        self.data_table["p" ]  = [ self.a + (self.b1 * row.x1) + (self.b2 * row.x2) + (self.b3 * row.x3) + (self.b4 * row.x4) for row in self.data_table.itertuples()]
-        self.data_table["e" ]  = [ row.y - row.p                                     for row in self.data_table.itertuples()]
-        self.data_table["ee"]  = [ row.e**2                                          for row in self.data_table.itertuples()]
-        self.data_table["SCR"] = [ (row.p-(self.sumatory_y / self.n))**2             for row in self.data_table.itertuples()]
-        return sum(self.data_table['ee'])
+        self.training_data_table["p" ]  = [ self.a + (self.b1 * row.x1) + (self.b2 * row.x2) + (self.b3 * row.x3) + (self.b4 * row.x4) for row in self.training_data_table.itertuples()]
+        self.training_data_table["e" ]  = [ row.y - row.p                                     for row in self.training_data_table.itertuples()]
+        self.training_data_table["ee"]  = [ row.e**2                                          for row in self.training_data_table.itertuples()]
+        self.training_data_table["SCR"] = [ (row.p-(self.sumatory_y / self.n))**2             for row in self.training_data_table.itertuples()]
+        return sum(self.training_data_table['ee'])
 
     def __generate_standar_error(self):
         '''
@@ -127,7 +142,7 @@ class multiple_linear_regression:
         OUTPUT
         * Returns the value of the needed summatory
         '''
-        return sum(self.data_table["ee"]) + sum(self.data_table["SCR"])
+        return sum(self.training_data_table["ee"]) + sum(self.training_data_table["SCR"])
 
     def __adjust_multi_determination_coefficient(self):
         '''
@@ -142,77 +157,94 @@ class multiple_linear_regression:
         '''
         return 1 - (1 - self.RR) * ((self.n - 1)/(self.n - 4 - 1)) # 2 number of independent variables
 
-    def __init__(self,basic_matrix:list):
+    def __init__(self,basic_list:list,training_size:float = 0.8):
         '''
-        Class created to do a multiple linear regression of 1 dependent variable and 4 independent variables.
+        Class created to do a multiple linear regression of 1 dependent variable and 4 independent variables only.
 
         INPUT
-        * Expects a list of tuples|lists with the information of every row of the dataset.
-        The tuple|list needs to follow (y, x1, x2, x3, x4) format, being{
-            y              : Dependent variable
-            x1, x2, x3, x4 : Independent variables
+        * basic_matrix [list of iterable objects]: Expects an iterable object, from 0 to 1, with the information of every row of the dataset.
+        The iterable object needs to follow (y, x1, x2, x3, x4) format, being{
+            y              : Dependent variable.
+            x1, x2, x3, x4 : Independent variables.
         }
+        * training_size [float]: Expects a float number indicating the percentage of the data set destinated for training. Default is set to '0.8'.
         
         OUTPUT
         * Returns nothing
         '''
-        self.data_table = self.__generate_data_table(basic_matrix)
-        self.n = len(basic_matrix)
+        self.training_size = training_size
+        self.training_list, self.testing_list = self.__split_dataframe(basic_list)
+        self.training_data_table = self.__generate_data_table(self.training_list)
+        self.n = len(self.training_list)
         self.sumatory_y, self.sumatory_x1, self.sumatory_x2, self.sumatory_x3, self.sumatory_x4, self.sumatory_x1x1, self.sumatory_x2x2, self.sumatory_x1x2, self.sumatory_x1x3, self.sumatory_x1x4, self.sumatory_x2x3, self.sumatory_x2x4, self.sumatory_x3x3, self.sumatory_x3x4, self.sumatory_x4x4, self.sumatory_x1x2, self.sumatory_x1y, self.sumatory_x2y, self.sumatory_x3y, self.sumatory_x4y = self.__generate_sumatories()
         self.matrix, self.a, self.b1, self.b2, self.b3, self.b4 = self.__generate_matrix_and_coeficients()
         self.sumatory_error_squares           = self.__generate_sum_error_squares()
         self.standar_error                    = self.__generate_standar_error()
-        self.RR                               = sum(self.data_table['SCR']) / self.__generate_multi_determination_coefficient()
+        self.RR                               = sum(self.training_data_table['SCR']) / self.__generate_multi_determination_coefficient()
         self.RR_adjusted                      = self.__adjust_multi_determination_coefficient()
         self.R                                = math.sqrt(self.RR)
-        
-        # Esto es el R2 calculado con sklearn.metrics.r2_score
-        self.R2                               = r2_score(self.data_table['y'],self.data_table['p'])
 
     def __str__(self):
-        string  = f"\n{'*'*10} Data Table {'*'*10}\n\n{self.data_table.head().to_string(index=False)}\n"
+        string  = f"\n{'*'*10} Training Data Table {'*'*10}\n\n{self.training_data_table.head().to_string(index=False)}\n"
 
         string += f"\n{'*'*10} Summatories {'*'*10}\n\ny: {self.sumatory_y} \t x1: {self.sumatory_x1}\n"
-        string += f"x2: {self.sumatory_x2} \t\t x1x1: {self.sumatory_x1x1}\n"
-        string += f"x2x2: {self.sumatory_x2x2} \t x1x2: {self.sumatory_x1x2}\n"
-        string += f"x1y: {self.sumatory_x1y} \t x2y: {self.sumatory_x2y}\n"
+        string += f"x2: {self.sumatory_x2}\t\tx1x1: {self.sumatory_x1x1}\n"
+        string += f"x2x2: {self.sumatory_x2x2}\t\tx1x2: {self.sumatory_x1x2}\n"
+        string += f"x1y: {self.sumatory_x1y}\t\tx2y: {self.sumatory_x2y}\n"
 
-        string += f"\n{'*'*10} Coeficients {'*'*10}\n\na: {self.a:02f}\tb1: {self.b1:02f}\nb2: {self.b2:02f}\n"
+        string += f"\n{'*'*10} Coeficients {'*'*10}\n\n"
+        string += f"a: {self.a}\tb1: {self.b1}\n"
+        string += f"b2: {self.b2}\t\tb3: {self.b3}\n"
+        string += f"b4: {self.b4}\n"
 
-        string += f"\nStandar Error of Multiple Estimation: {self.standar_error:02f}\n"
+        # string += f"\nStandar Error of Multiple Estimation: {self.standar_error:02f}\n"
 
-        string += f"\nError Squares: {self.sumatory_error_squares:02f}"
-        string += f"\nMultiple Correlation Coefficient (R): {self.R * 100:02f}\n"
-        
-        string += f"\nManual R2: {self.RR * 100:02f}"
+        # string += f"\nError Squares: {self.sumatory_error_squares:02f}"
+        string += f"\nMultiple Correlation Coefficient (R2): {self.RR * 100:02f}\n"
         string += f"\nAdjusted Manual R2: {self.RR_adjusted * 100:02f}\n"
-
-
-        string += f"\nR2 with sklearn.metrics: {self.R2 * 100:02f}\n"
 
         return string
 
+    def predict(self,specific_values:list = []):
+        '''
+        Public method to do a prediction based on the coefficients.
+
+        INPUT
+        * specific_values [list of iterable objects] = Expects a list of iterable objects with (x1,x2,x3,x4) information to make the prediccion.
+
+        OUTPUT
+        * Returns a list with the predictions in the same order that came in the input.
+        '''
+
+        testing = pd.DataFrame(data={
+            "y^" : [self.a+(row[0]*self.b1)+(row[1]*self.b2)+(row[2]*self.b3)+(row[3]*self.b4) for row in specific_values],
+            "x1" : [row[0] for row in specific_values],
+            "x2" : [row[1] for row in specific_values],
+            "x3" : [row[2] for row in specific_values],
+            "x4" : [row[3] for row in specific_values]
+        })
+
+        return testing['y^'].values
 
 if __name__ == '__main__':
     import os; os.system('cls')
     import pandas as pd, math, numpy as np
-    from sklearn.metrics import r2_score
+    import random
 
-    from sklearn.neural_network import MLPRegressor
-    from sklearn.model_selection import train_test_split
+    file = pd.read_csv('../Databases/cleaned_raw_data_p.csv')
+    data = np.array(file[['net_rating','pts','reb','ast','usg_pct']])
+    
+    pct_training = 1
+    
+    model = multiple_linear_regression(
+        basic_list = data, #type:ignore
+        training_size = pct_training
+    )
+    
+    prediction_list = [
+        [2.9768789776189846,1.0278885699836584,3.4471073863787116,2.842656245134895]
+    ]
 
-    file = pd.read_csv('../Databases/raw_data_p.csv',index_col=0).query("country == 'USA'")
-    data = [(row.net_rating,row.pts,row.reb,row.ast,row.usg_pct) for row in file.itertuples()]
-    multi = multiple_linear_regression(data)
-    print(multi)
-
-    y  = file['net_rating'].values
-    x1 = file['pts'].values
-    x2 = file['reb'].values
-    x3 = file['ast'].values
-    x4 = file['usg_pct'].values
-
-    X=np.array([x1,x2,x3,x4])
-    Y=np.array(y)
-
-    # reg=Line
+    print(model.predict(prediction_list),
+          model,
+          sep='\n\n')
