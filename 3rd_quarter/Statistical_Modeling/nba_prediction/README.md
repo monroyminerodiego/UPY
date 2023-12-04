@@ -11,8 +11,13 @@ Given a data set with information of some NBA players and their attributes, we w
     * cleaning_class.py: Script with the class created to clean the raw data.
     * analisys_of_data.ipynb: Jupyter Notebook with the documentation of cleaning_class.
 
-* **Database** <br> Folder to store all the CSV files used in this lineal regression.
+* **Databases** <br> Folder to store all the CSV files used in this lineal regression.
     * raw_data.csv: Data downloaded from Kaggle which will be used in this prediction.
+
+* **Prediction_Model** <br> Folder to store class created to do the prediction.
+    * MLRegression.py: Class 'multiple_linear_regression' is declared
+
+* **Teachers_Example** <br> Folder to store example given by the teacher.
 
 ## Made By
 - Barrera Chan Sergio Johanan

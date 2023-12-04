@@ -1,6 +1,14 @@
 class multiple_linear_regression:
     def __split_dataframe(self,basic_matrix:list):
         '''
+        Private method to split the dataframe in order to get the training and testing section in a random way.
+
+        INPUT
+        * basic_matrix [list of iterable objects] = Expects a list of iterable objects.
+
+        OUTPUT
+        * training_matrix [list of iterble objects] = Returs a list of iterable objects only with the data selected for training.
+        * [numpy.Array] = Returns a list of iterable objects only with the data selected for testing.
         '''
         used_index = []
         df = pd.DataFrame(data = basic_matrix, columns=['y','x1','x2','x3','x4'])
