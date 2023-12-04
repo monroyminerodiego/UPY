@@ -14,18 +14,12 @@
 </div>
 {% endblock %}
 
-
-
-
-
-
-
 {% block botones %}
 <!-- Botón para guardar archivo -->
 <h1>Upload File</h1>
-<form method="POST" action="/uploaded" enctype="multipart/form-data">
+<form method="POST" action="/selected" enctype="multipart/form-data">
     <br>
-    <input type="File", id="UploadFile" name="UploadFile" accept=".csv">
+    <input type="File" name="Name_UploadFile" accept=".csv">
     <br>
     <br>
     <input type="submit" class="input">

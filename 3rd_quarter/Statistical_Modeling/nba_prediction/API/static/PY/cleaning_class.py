@@ -114,8 +114,9 @@ class Cleaning:
         * Returns nothing, but saves an image with the plot.
         '''
         x = 1
+        fig = plt.figure(figsize=(10, 6))
         for column in self.df.columns:
-            plt.subplot(round(len(self.df.columns)/3)+1 if len(self.df.columns)%3 != 0 else len(self.df.columns)/3,3,x)
+            plt.subplot(2,3,x)
             plt.hist(self.df[column])
             plt.title(column)
             x += 1
