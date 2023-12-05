@@ -2,11 +2,15 @@ import flask as fl
 from werkzeug.utils import secure_filename
 import os
 
+# Config of 
 app = fl.Flask(__name__,template_folder='static/HTML/')
 uploaded_file_path = ''
 app.config["UPLOAD_FOLDER"] = 'static/Downloads'
 
-ALLOWED_EXTENSIONS = set(['csv'])
+
+
+
+
 
 @app.route("/")
 def root():
@@ -14,7 +18,13 @@ def root():
     os.system('cls')
     print(f'\n\n\n{"*"*15} Esta en vista root {"*"*15}\n\n\n')
     return fl.render_template('views/index.html')
+
 uploaded_file_path = uploaded_file_path
+
+
+
+
+
 
 @app.route("/selected",methods=['POST']) #type: ignore
 def selected():
@@ -30,9 +40,13 @@ def selected():
 
 uploaded_file_path = uploaded_file_path
 
+
+
+
+
 @app.route("/cleaned",methods=['POST'])
 def cleaned():
-    pct_correlation = fl.request.get_data().split('&')
+    pct_correlation = fl.request.get_data().split('&') #type: ignore
     os.system('cls')
     print(f'\n\n\n{"*"*15} Esta en vista cleaned {"*"*15}\n{type(pct_correlation)}.- {pct_correlation}\n\n\n')
     from static.PY.cleaning_class import Cleaning

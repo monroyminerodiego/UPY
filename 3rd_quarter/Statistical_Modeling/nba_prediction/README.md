@@ -17,8 +17,6 @@ Given a data set with information of some NBA players and their attributes, we w
 * **Prediction_Model** <br> Folder to store class created to do the prediction.
     * MLRegression.py: Class 'multiple_linear_regression' is declared
 
-* **Teachers_Example** <br> Folder to store example given by the teacher.
-
 ## Made By
 - Barrera Chan Sergio Johanan
 - Buenfil Góngora Ariel Joel
