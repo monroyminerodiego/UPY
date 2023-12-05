@@ -17,6 +17,7 @@ app.template_folder           = 'static/HTML/'
 # ==================== Global variables ==================== 
 uploaded_file_path            = ''
 downloaded_image_path         = ''
+independent_variables         = ''
 
 
 # ==================== URL's ==================== 
@@ -25,8 +26,9 @@ def root():
     os.system('cls')
     return fl.render_template('views/index.html')
 
-uploaded_file_path = uploaded_file_path
+uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
+independent_variables = independent_variables
 
 
 
@@ -49,8 +51,9 @@ def selected():
         # === Output ===
         return fl.render_template("views/cleaning.html",column_names=column_names,file_name=os.path.split(uploaded_file_path)[1])
 
-uploaded_file_path = uploaded_file_path
+uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
+independent_variables = independent_variables
 
 
 
@@ -59,13 +62,13 @@ downloaded_image_path = downloaded_image_path
 def cleaned():
     # === Variables ===
     global downloaded_image_path
+    global independent_variables
     downloaded_image_path = f"{(os.path.splitext(uploaded_file_path)[0]).replace('Downloads','Images')}_distribution.png"
     requested_data        = fl.request.form
     variable              = requested_data['variables']
     pct_correlation       = float(requested_data['pct_correlation'])
     normalize             = False
     estandarize           = True
-    column_names          = (((open(uploaded_file_path,'r').readline()).replace('\n','')).split(','))
 
     # === Calling of methods / classes ===
     if (variable != 'net_rating') or (pct_correlation != 0.49) or (normalize) or not(estandarize):
@@ -79,36 +82,42 @@ def cleaned():
             download_image_path     = downloaded_image_path,
             name_dependent_variable = variable
         )
+        independent_variables = list(data_cleaned.df.columns)
     
     # === Output ===
     return fl.render_template(
         "views/testing.html",
         downloaded_image_path = downloaded_image_path,
         pct_correlation       = pct_correlation,
-        independent_varibles  = column_names
+        independent_varibles  = independent_variables
     )
 
-uploaded_file_path = uploaded_file_path
+uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
+independent_variables = independent_variables
 
 
 
 
 def default_behaviour():
     # === Variables ===
+    global independent_variables
     downloaded_image_path = f"{(os.path.splitext(uploaded_file_path)[0]).replace('Downloads','Images')}_distribution.png"
     
     # === Calling of methods / classes ===
     data_cleaned = Cleaning(
         raw_file_path=uploaded_file_path,
         correlation_in_columns=0.49
-    ) 
+    )
+    independent_variables = list(data_cleaned.df.columns)
+    print(f'\n\n\n {independent_variables} \n\n\n')
 
     # === Output ===
     data_cleaned.save_distribution_image(download_image_path=downloaded_image_path,name_dependent_variable='net_rating')
 
-uploaded_file_path = uploaded_file_path
+uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
+independent_variables = independent_variables
 
 
 

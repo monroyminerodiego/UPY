@@ -25,11 +25,11 @@ Aqui puedes cambiar los parametros para tu cleaning (Próximamente...)
     <p>Variable dependiente 
         <select name="variables">
             {% for name in column_names %}
-            {% if name == 'net_rating' %}
-            <option value="{{ name }}">{{ name }}</option>
-            {% else %}
-            <option value="{{ name }}" disabled>{{ name }}</option>
-            {% endif %}
+                {% if name == 'net_rating' %}
+                    <option value="{{ name }}">{{ name }}</option>
+                {% else %}
+                    <option value="{{ name }}" disabled>{{ name }}</option>
+                {% endif %}
             {% endfor %}
         </select>
     </p>

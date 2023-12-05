@@ -34,17 +34,11 @@ Aqui puedes cambiar los parametros de entrenamiento de tu modelo y hacer predicc
 <div id="predicting">
     <h4>PREDICTING</h4>
     <form method="POST" action="/">        
-        <p> Puntos
-            <input type="number" placeholder="pts" name="pts" id="pts">
-        </p>
-                    
-        <p> 
-            <input type="" placeholder="" name="" id="" >
-        </p>
-
-        <p> 
-            <input type="" placeholder="" name="" id="">
-        </p>
+        {% for variable in independent_varibles%}
+            <p> {{ variable }}
+                <input type="number" placeholder="{{ variable }}" name="{{ variable }}" id="{{ variable }}">
+            </p>
+        {% endfor %}
 
         <input type="submit" class="input">
         <br>
