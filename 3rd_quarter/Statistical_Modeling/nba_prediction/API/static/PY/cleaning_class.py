@@ -16,29 +16,23 @@ class Cleaning:
         OUTPUT
         - Returns a pandas.DataFrame with the cleaned data
         '''
-        # Selecting only 'USA' players        
+        # Selecting only 'USA' players and selecting only columns that can be described.    
         df = self.raw_file.query("country == 'USA'")
+        if self.verbose: print(f"Dataset with only 'USA' players...\n{df.head().to_string()}",end='\n\n')
+
+        df = df[[column for column in self.raw_file.describe().columns]]
+        if self.verbose: print(f"Dataset with only useful columns...\n{df.head().to_string()}",end='\n\n')
 
         # Checking which columns are related to 'net_rating'
-        columns_with_needed_correlation = [row.Index for row in self.raw_file.corr().itertuples() if row.net_rating >= self.correlation_in_columns]
-
-        # Adding season to columns
-        # columns_with_needed_correlation.append('season')
+        columns_with_needed_correlation = [row.Index for row in df.corr().itertuples() if row.net_rating >= self.correlation_in_columns]
+        if self.verbose: print(f"Correlation matrix...\n{df.corr()}",end='\n\n')
 
         # Selecting only features that we need from our df
         df = df[columns_with_needed_correlation]
+        if self.verbose: print(f"Data cleaned...\n{df.corr()}",end='\n\n')
 
+        # Validator to drop 'gp' column
         if 'gp' in df.columns: df.drop(axis=1,labels='gp',inplace=True)
-
-        # Creating the dictionary to map the categorical data
-        # dict_season = {}
-        # counter = 1
-        # for i in sorted(set(df['season'])):
-        #     dict_season[i] = counter
-        #     counter += 1
-
-        # # Changing to categorical the 'season' feature
-        # df['season'] = df['season'].apply(lambda x: dict_season[x])
 
         return df
 
@@ -71,47 +65,56 @@ class Cleaning:
         '''
         return pd.DataFrame(data=normalize(self.df, axis=0),columns=[column for column in self.df.columns]) #type:ignore
 
-    def __init__(self, raw_file_path:str, correlation_in_columns:float, download_mode:bool = False, cleaned_file_path:str = '', estandarize_data:bool = True, normalize_data:bool = False):
+    def __init__(self, raw_file_path:str, correlation_in_columns:float, download_mode:bool = False, cleaned_file_path:str = '', estandarize_data:bool = True, normalize_data:bool = False, verbose:bool = False):
         '''
         Class created to do the cleaning of a CSV file
 
         INPUT
-        - raw_file_path          [str]   : Expects the path where the raw_data is located.
-        - correlation_in_columns [float] : Expects a value between 0 and 1 that will be used to select columns that fits in that range.
-        - download_mode          [bool]  : If set to 'True', then at the end of the cleaning, a CSV file will be stored in 'cleaned_file_path'. Default set to 'False'
-        - cleaned_file_path      [str]   : Expects the path where the cleaned_data will be located.
-        - estandarize_data       [bool]  : If set to 'True', the raw data will be estandarized. Default set to 'True'
-        - normalize_data         [bool]  : If set to 'True', the raw data will be normalized. Default set to 'False'
+        - raw_file_path          [str]   = Expects the path where the raw_data is located.
+        - correlation_in_columns [float] = Expects a value between 0 and 1 that will be used to select columns that fits in that range.
+        - download_mode          [bool]  = If set to 'True', then at the end of the cleaning, a CSV file will be stored in 'cleaned_file_path'. Default set to 'False'
+        - cleaned_file_path      [str]   = Expects the path where the 'cleaned_raw_data.csv' file will be located.
+        - estandarize_data       [bool]  = If set to 'True', the raw data will be estandarized. Default set to 'True'
+        - normalize_data         [bool]  = If set to 'True', the raw data will be normalized. Default set to 'False'
+        - verbose                [bool]  = If set to 'True', it will be printing the process of the data cleaning; recommended for debugging. Default set to 'False'
 
-        OUTPUT
-        - Returns nothing, but when 'download_mode' is set to True, then it downloads a CSV File
+        OUTPUT (According to method)
+        - __init__(download_mode = True) = Downloads an CSV file with the cleaned data.
+        - save_distribution_image() = Downloads an PNG image with the distribution of the cleaned data
         '''
         # Defining parameters
         self.correlation_in_columns = correlation_in_columns
+        self.verbose = verbose
 
         # Reading our CSV
         self.raw_file = pd.read_csv(raw_file_path,index_col=0)
+        if verbose: print(f"{'*'*15} Handling Raw Data {'*'*15}\n{self.raw_file.head().to_string()}",end='\n\n')
         self.df = self.__clean_raw_data()
 
         # Estandarizing data
-        if estandarize_data: self.df = self.__estandarizing_data()
+        if estandarize_data: 
+            self.df = self.__estandarizing_data()
+            if verbose: print(f"\n{'*'*15} Estandarized DataSet {'*'*15}\n{self.df.head().to_string()}",end='\n\n')
 
         # Normalizing data
-        if normalize_data: self.df = self.__normalizing_data()
+        if normalize_data: 
+            self.df = self.__normalizing_data()
+            if verbose: print(f"\n{'*'*15} Normalized DataSet {'*'*15}\n{self.df.head().to_string()}",end='\n\n')
 
         # # Saving document
-        if download_mode: self.df.to_csv(f'{cleaned_file_path}cleaned_raw_data.csv')
+        if download_mode: 
+            self.df.to_csv(f'{cleaned_file_path}cleaned_raw_data.csv')
+            if verbose: print('\nFile saved...!\n\n')
 
     def save_distribution_image(self,download_image_path:str):
         '''
         Public method to get a graph with the histogram of every column and save it.
 
         INPUT
-        * name_image [str] = Expects the name with extension for the image.
         * download_image_path [str] = Expects the path to download the image.
 
         OUTPUT
-        * Returns nothing, but saves an image with the plot.
+        * Returns nothing, but saves an image with the plot in the 'download_image_path'.
         '''
         x = 1
         fig = plt.figure(figsize=(10, 6))
@@ -121,3 +124,17 @@ class Cleaning:
             plt.title(column)
             x += 1
         plt.savefig(download_image_path)
+
+
+# For debugging
+if __name__ == '__main__':
+    os.system('cls')
+    Cleaning(
+        raw_file_path          = '../Downloads/raw_data.csv',
+        correlation_in_columns = 0.49,
+        download_mode          = False,
+        cleaned_file_path      = '',
+        estandarize_data       = True,
+        normalize_data         = False,
+        verbose                = True
+    )
