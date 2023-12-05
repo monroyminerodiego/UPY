@@ -1,4 +1,4 @@
-class multiple_linear_regression:
+class Multiple_linear_regression:
     def __split_dataframe(self,basic_matrix:list):
         '''
         Private method to split the dataframe in order to get the training and testing section in a random way.
@@ -244,7 +244,7 @@ if __name__ == '__main__':
     
     pct_training = 0.8
     
-    model = multiple_linear_regression(
+    model = Multiple_linear_regression(
         basic_list = data, #type:ignore
         training_size = pct_training
     )

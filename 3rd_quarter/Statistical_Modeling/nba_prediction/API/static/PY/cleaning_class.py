@@ -79,8 +79,8 @@ class Cleaning:
         - verbose                [bool]  = If set to 'True', it will be printing the process of the data cleaning; recommended for debugging. Default set to 'False'
 
         OUTPUT (According to method)
-        - __init__(download_mode = True) = Downloads an CSV file with the cleaned data.
-        - save_distribution_image() = Downloads an PNG image with the distribution of the cleaned data
+        - __init__(download_mode = True) = Downloads a CSV file with the cleaned data.
+        - save_distribution_image() = Downloads a PNG image with the distribution of the cleaned data.
         '''
         # Defining parameters
         self.correlation_in_columns = correlation_in_columns
@@ -106,12 +106,13 @@ class Cleaning:
             self.df.to_csv(f'{cleaned_file_path}cleaned_raw_data.csv')
             if verbose: print('\nFile saved...!\n\n')
 
-    def save_distribution_image(self,download_image_path:str):
+    def save_distribution_image(self,download_image_path:str,name_dependent_variable:str):
         '''
         Public method to get a graph with the histogram of every column and save it.
 
         INPUT
         * download_image_path [str] = Expects the path to download the image.
+        * name_dependent_variable [str] = Expects the name of the dependent variable.
 
         OUTPUT
         * Returns nothing, but saves an image with the plot in the 'download_image_path'.
@@ -119,10 +120,12 @@ class Cleaning:
         x = 1
         fig = plt.figure(figsize=(10, 6))
         for column in self.df.columns:
-            plt.subplot(2,3,x)
+            if column == name_dependent_variable: continue
+            plt.subplot(2,2,x)
             plt.hist(self.df[column])
             plt.title(column)
             x += 1
+        fig.tight_layout()
         plt.savefig(download_image_path)
 
 
@@ -136,5 +139,5 @@ if __name__ == '__main__':
         cleaned_file_path      = '',
         estandarize_data       = True,
         normalize_data         = False,
-        verbose                = True
-    )
+        verbose                = False
+    ).save_distribution_image('../Images/raw_data_distribution.png','net_rating')
