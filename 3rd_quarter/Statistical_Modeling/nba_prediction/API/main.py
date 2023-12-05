@@ -15,10 +15,10 @@ app.template_folder           = 'static/HTML/'
 
 
 # ==================== Global variables ==================== 
-uploaded_file_path            = ''
-downloaded_image_path         = ''
-independent_variables         = ''
-dependent_variable            = ''
+uploaded_file_path    = ''
+downloaded_image_path = ''
+independent_variables = ''
+dependent_variable    = ''
 
 
 # ==================== URL's ==================== 

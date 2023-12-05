@@ -23,7 +23,7 @@ class Cleaning:
         df = df[[column for column in self.raw_file.describe().columns]]
         if self.verbose: print(f"Dataset with only useful columns...\n{df.head().to_string()}",end='\n\n')
 
-        # Checking which columns are related to 'net_rating'
+        # Checking which columns are related to 'net_rating'|
         columns_with_needed_correlation = [row.Index for row in df.corr().itertuples() if row.net_rating >= self.correlation_in_columns]
         if self.verbose: print(f"Correlation matrix...\n{df.corr()}",end='\n\n')
 

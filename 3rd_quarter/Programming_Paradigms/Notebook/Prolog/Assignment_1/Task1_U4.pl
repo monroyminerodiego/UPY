@@ -2,8 +2,7 @@
 Instructions:
 - Implement a Prolog program that defines a family tree with at least three generations. Include rules to determine sibling relationships and ancestors.
 
-Development:
-- Set of names {
+Set of names {
     alejandra
     alejandro
     angel
@@ -42,6 +41,9 @@ Development:
     valeria
     victor
 }
+
+Made by
+Diego Monroy Minero
 */
 
 % FACTS
@@ -96,7 +98,7 @@ is_father_of(octavio,mia).
 
 
 % RULES
-% Tipo Propiedades
+% Property type
 is_father(A):-
     is_father_of(A,_);
     is_mother_of(A,_).
@@ -106,7 +108,7 @@ is_granny(A):-
     (is_mother_of(A,B);is_father_of(A,B)),
     is_father(B).
 
-% Tipo Verificacion
+% Verification type
 is_grandson_of(A,B):-
     (is_mother_of(C,A); is_father_of(C,A)),
     is_son_of(C,B).
@@ -126,7 +128,7 @@ is_cousin_of(A,B):-
     (is_father_of(C,A), is_mother_of(D,B))),
     is_brother_of(C,D).
 
-is_auncle_of(A,B):-
+is_uncle_of(A,B):-
     (is_father_of(C,B);is_mother_of(C,B)),
     is_brother_of(A,C).
 
@@ -143,9 +145,9 @@ is_related_with(A,B):-
     is_son_of(A,B);
     is_brother_of(A,B);
     is_cousin_of(A,B);
-    is_auncle_of(A,B);
+    is_uncle_of(A,B);
     is_nephew_of(A,B);
     is_granny_de(A,B).
 
-% Copy before execute:
-% consult('c:/Users/diego/OneDrive/PROGRAMACION/UPY/3rd_quarter/Programming_Paradigms/Notebook/Prolog/Assignment1_Task1_U4.pl').
+% Copy before execute
+% consult('UPY/3rd_quarter/Programming_Paradigms/Notebook/Prolog/Assignment_1/Task1_U4.pl').
