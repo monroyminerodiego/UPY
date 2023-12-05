@@ -22,55 +22,33 @@ Aqui puedes cambiar los parametros de entrenamiento de tu modelo y hacer predicc
 
 <div id="contenedor">
     <h4>TRAINING</h4>
-    <div id="training">
-        <form method="POST" action="/">
-            <p>% of dataset for testing 
-                <input type="number" step="0.01" placeholder="&" name="pct_testing" id="pct_testing" min="0" max="1">
-            </p>
-                    
-            <p> 
-                <input type="" placeholder="" name="" id="" >
-            </p>
-
-            <p> 
-                <input type="" placeholder="" name="" id="">
-            </p>
-
-            <br>
-            <br>
-            <br>
-
-            <input type="submit" class="input">
-            <br>
-        </form>
-    </div>
+    <form method="POST" action="/">
+        <p>% of dataset for testing 
+            <input type="number" min="0" max="1" step="0.01" value="0.80" placeholder="0.00" name="pct_testing" id="pct_testing">
+        </p>
+        
+        <input type="submit" class="input">
+        <br>
+    </form>
 </div>
-
-
 <div id="predicting">
     <h4>PREDICTING</h4>
-    <div>
-        <form method="POST" action="/">        
-            <p>
-                <input type="" step="" value="" placeholder="" name="" id="" min="" max="" readonly>
-            </p>
-                        
-            <p> 
-                <input type="" placeholder="" name="" id="" >
-            </p>
+    <form method="POST" action="/">        
+        <p> Puntos
+            <input type="number" placeholder="pts" name="pts" id="pts">
+        </p>
+                    
+        <p> 
+            <input type="" placeholder="" name="" id="" >
+        </p>
 
-            <p> 
-                <input type="" placeholder="" name="" id="">
-            </p>
+        <p> 
+            <input type="" placeholder="" name="" id="">
+        </p>
 
-            <br>
-            <br>
-            <br>
-
-            <input type="submit" class="input">
-            <br>
-        </form>
-    </div>
+        <input type="submit" class="input">
+        <br>
+    </form>
 </div>
 
 {% endblock %}
