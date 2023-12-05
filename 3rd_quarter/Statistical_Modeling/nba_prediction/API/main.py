@@ -18,6 +18,7 @@ app.template_folder           = 'static/HTML/'
 uploaded_file_path            = ''
 downloaded_image_path         = ''
 independent_variables         = ''
+dependent_variable            = ''
 
 
 # ==================== URL's ==================== 
@@ -29,6 +30,7 @@ def root():
 uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
 independent_variables = independent_variables
+dependent_variable    = dependent_variable
 
 
 
@@ -38,6 +40,7 @@ def selected():
     if fl.request.method == 'POST':
         # === Variables ===
         global uploaded_file_path
+
         file                    = fl.request.files['Name_UploadFile']
         filename                = secure_filename(file.filename) #type: ignore
         uploaded_file_path      = f"{app.config['UPLOAD_FOLDER']}/{filename}"
@@ -54,6 +57,7 @@ def selected():
 uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
 independent_variables = independent_variables
+dependent_variable    = dependent_variable
 
 
 
@@ -63,26 +67,32 @@ def cleaned():
     # === Variables ===
     global downloaded_image_path
     global independent_variables
+    global dependent_variable
+
     downloaded_image_path = f"{(os.path.splitext(uploaded_file_path)[0]).replace('Downloads','Images')}_distribution.png"
     requested_data        = fl.request.form
-    variable              = requested_data['variables']
+    dependent_variable    = requested_data['variables']
     pct_correlation       = float(requested_data['pct_correlation'])
     normalize             = False
     estandarize           = True
 
     # === Calling of methods / classes ===
-    if (variable != 'net_rating') or (pct_correlation != 0.49) or (normalize) or not(estandarize):
+    if (dependent_variable != 'net_rating') or (pct_correlation != 0.49) or (normalize) or not(estandarize):
+        
         data_cleaned = Cleaning(
             raw_file_path          = uploaded_file_path,
             correlation_in_columns = pct_correlation,
             estandarize_data       = estandarize,
             normalize_data         = normalize
         ) 
+
         data_cleaned.save_distribution_image(
             download_image_path     = downloaded_image_path,
-            name_dependent_variable = variable
+            name_dependent_variable = dependent_variable
         )
+
         independent_variables = list(data_cleaned.df.columns)
+        independent_variables.remove(dependent_variable)
     
     # === Output ===
     return fl.render_template(
@@ -95,6 +105,7 @@ def cleaned():
 uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
 independent_variables = independent_variables
+dependent_variable    = dependent_variable
 
 
 
@@ -102,6 +113,7 @@ independent_variables = independent_variables
 def default_behaviour():
     # === Variables ===
     global independent_variables
+
     downloaded_image_path = f"{(os.path.splitext(uploaded_file_path)[0]).replace('Downloads','Images')}_distribution.png"
     
     # === Calling of methods / classes ===
@@ -110,7 +122,8 @@ def default_behaviour():
         correlation_in_columns=0.49
     )
     independent_variables = list(data_cleaned.df.columns)
-    print(f'\n\n\n {independent_variables} \n\n\n')
+    independent_variables.remove('net_rating')
+    
 
     # === Output ===
     data_cleaned.save_distribution_image(download_image_path=downloaded_image_path,name_dependent_variable='net_rating')
@@ -118,6 +131,7 @@ def default_behaviour():
 uploaded_file_path    = uploaded_file_path
 downloaded_image_path = downloaded_image_path
 independent_variables = independent_variables
+dependent_variable    = dependent_variable
 
 
 
