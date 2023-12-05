@@ -239,10 +239,10 @@ if __name__ == '__main__':
     import pandas as pd, math, numpy as np
     import random
 
-    file = pd.read_csv('../Databases/cleaned_raw_data.csv')
+    file = pd.read_csv('C:/Users/diego/OneDrive/PROGRAMACION/UPY/3rd_quarter/Statistical_Modeling/nba_prediction/Databases/cleaned_raw_data.csv')
     data = np.array(file[['net_rating','pts','reb','ast','usg_pct']])
     
-    pct_training = 1
+    pct_training = 0.8
     
     model = multiple_linear_regression(
         basic_list = data, #type:ignore

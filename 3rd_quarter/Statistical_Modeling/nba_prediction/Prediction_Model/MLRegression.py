@@ -253,6 +253,6 @@ if __name__ == '__main__':
         [2.9768789776189846,1.0278885699836584,3.4471073863787116,2.842656245134895]
     ]
 
-    print(model.predict(prediction_list),
-          model,
+    print(model,
+          model.predict(prediction_list),
           sep='\n\n')

@@ -14,11 +14,10 @@ def root():
     os.system('cls')
     print(f'\n\n\n{"*"*15} Esta en vista root {"*"*15}\n\n\n')
     return fl.render_template('views/index.html')
-
 uploaded_file_path = uploaded_file_path
 
 @app.route("/selected",methods=['POST']) #type: ignore
-def upload():
+def selected():
     global uploaded_file_path
     print(f'\n\n\n{"*"*15} Esta en vista selected {"*"*15}\n\n\n')
     if fl.request.method == 'POST':
@@ -31,12 +30,11 @@ def upload():
 
 uploaded_file_path = uploaded_file_path
 
-@app.route("/cleaned?corr")
-def clean():
-    global uploaded_file_path
-    file = fl.request.files['corr']
-    print(file)
-    print(f'\n\n\n{"*"*15} Esta en vista cleaned {"*"*15}\n{type(uploaded_file_path)}.- {uploaded_file_path}\n\n\n')
+@app.route("/cleaned",methods=['POST'])
+def cleaned():
+    pct_correlation = fl.request.get_data().split('&')
+    os.system('cls')
+    print(f'\n\n\n{"*"*15} Esta en vista cleaned {"*"*15}\n{type(pct_correlation)}.- {pct_correlation}\n\n\n')
     from static.PY.cleaning_class import Cleaning
     data_cleaned = Cleaning(
         raw_file_path=uploaded_file_path,#type:ignore
