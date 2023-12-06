@@ -1,4 +1,5 @@
 import os, threading, flask as fl, pandas as pd, numpy as np, json
+from tabnanny import verbose
 from werkzeug.utils import secure_filename
 from static.PY import cleaning_class, regression_class
 
@@ -17,6 +18,7 @@ downloaded_image_path = ''
 independent_variables = ''
 dependent_variable    = ''
 pct_correlation       = ''
+relevant_coefficients = []
 data_cleaned          = cleaning_class.Cleaning
 model                 = regression_class.MLRegression
 
@@ -37,11 +39,11 @@ def selected():
         file                    = fl.request.files['Name_UploadFile']
         filename                = secure_filename(file.filename) #type: ignore
         uploaded_file_path      = f"{app.config['UPLOAD_FOLDER']}/{filename}"
+        file.save(uploaded_file_path)
         column_names            = (((open(uploaded_file_path,'r').readline()).replace('\n','')).split(','))
         default_behavour_thread = threading.Thread(target=default_cleaning, daemon=True)
         
         # === Calling of methods / classes ===
-        file.save(uploaded_file_path)
         default_behavour_thread.start()
 
         # === Output ===
@@ -58,24 +60,20 @@ def cleaned():
         global downloaded_image_path
         global data_cleaned
         global pct_correlation
+        global relevant_coefficients
 
         requested_data        = fl.request.form
         dependent_variable    = requested_data['variables']
         pct_correlation       = float(requested_data['pct_correlation'])
-        try:
-            normalize             = True if requested_data['normalizacion']   == 'on' else False
-        except:
-            normalize             = False
-        try:
-            estandarize           = True if requested_data['estandarizacion'] == 'on' else False
-        except:
-            estandarize           = False
+        normalization_method  = requested_data['metodo-estandar']
+        
 
         # === Calling of methods / classes ===
-        if (dependent_variable != 'net_rating') or (pct_correlation != 0.49) or (normalize) or not(estandarize):
+        if (dependent_variable != 'net_rating') or (pct_correlation != 0.49) or (normalization_method != 'Scaler') :
             downloaded_image_path = os.path.split(os.path.splitext(uploaded_file_path.replace('Downloads','Images'))[0])
             downloaded_image_path = f"{downloaded_image_path[0]}/(Modified){downloaded_image_path[1]}_distribution.png"
             
+
             data_cleaned = cleaning_class.Cleaning(
                 raw_file_path           = uploaded_file_path,
                 correlation_in_columns  = pct_correlation,
@@ -101,7 +99,9 @@ def cleaned():
         model = regression_class.MLRegression(
                 basic_list = basic_list
             )
-
+        print(model)
+        relevant_coefficients = model.get_coefficients()
+        
         # === Output ===
         return fl.render_template(
             "views/testing.html",
@@ -110,7 +110,7 @@ def cleaned():
             independent_varibles  = list(independent_variables),
             prediction            = 'nada'
         )
-
+    
 
 @app.route("/predict", methods=['POST']) #type:ignore
 def predict():
@@ -125,10 +125,12 @@ def predict():
     # === Calling of methods / classes ===
     
     if pred:
-        prediction = model.predict([[float(data['x1']),float(data['x2']),float(data['x3']),float(data['x4'])]]) #type:ignore
+        prediction = model.predict(
+            specific_values = [[float(data['x1']),float(data['x2']),float(data['x3']),float(data['x4'])]],#type:ignore
+            coefficients    = relevant_coefficients
+            ) 
     else:
         prediction = 'nada'
-        print(f'\n\n\n  Tu puto culo\n\n\n')
     
 
     # === Output ===
@@ -166,7 +168,7 @@ def default_cleaning():
     independent_variables = list(data_cleaned.clean_data_df.columns)
     independent_variables.remove('net_rating')
 
-    # === Output ===
+    # === Outputs ===
     data_cleaned.save_distribution_image(download_image_path=downloaded_image_path)
 
 

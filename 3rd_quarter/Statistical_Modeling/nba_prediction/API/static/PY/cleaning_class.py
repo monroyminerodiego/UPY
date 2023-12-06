@@ -1,4 +1,5 @@
 import os, pandas as pd, matplotlib.pyplot as plt
+from matplotlib import axis
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 class Cleaning:
 
@@ -66,10 +67,12 @@ class Cleaning:
         '''
         df = self.clean_data_df
         dependent_variable_list = df[self.dependent_variable_name]
+        dependent_variable_list.reset_index(drop=True, inplace=True)
         df = df.drop(labels=[self.dependent_variable_name],axis=1)
         standar_scaler = StandardScaler()
         normalized = standar_scaler.fit_transform(df)
         normalized = pd.DataFrame(data=normalized, columns=df.columns)
+        normalized.reset_index(drop=True, inplace=True)
 
         df = pd.concat((dependent_variable_list,normalized),axis=1)
         return df

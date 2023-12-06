@@ -181,8 +181,9 @@ class MLRegression:
             }
         * training_size [float]: Expects a float number indicating the percentage of the data set destinated for training. Default is set to '0.8'.
         
-        OUTPUT
-        * Returns nothing
+        OUTPUT (According to method):
+        * .predict()
+        * .get_coefficients()
         """
         self.training_size = training_size
         self.training_list, self.testing_list = self.__split_dataframe(basic_list)
@@ -217,26 +218,40 @@ class MLRegression:
 
         return string
 
-    def predict(self,specific_values:list = []):
+    def predict(self,specific_values:list = [],coefficients: list = []):
         '''
         Public method to do a prediction based on the coefficients.
 
         INPUT
         * specific_values [list of iterable objects] = Expects a list of iterable objects with (x1,x2,x3,x4) information to make the prediccion.
+        * coefficients [list] = Expects a list with the coefficients parameters (a, b1, b2, b3, b4,...) in that exact order.
 
         OUTPUT
         * Returns a list with the predictions in the same order that came in the input.
         '''
-        print('\n\n\n',specific_values,'\n\n\n')
+
         testing = pd.DataFrame(data={
-            "y^" : [self.a+(row[0]*self.b1)+(row[1]*self.b2)+(row[2]*self.b3)+(row[3]*self.b4) for row in specific_values],
+            "y^" : [coefficients[0]+(row[0]*coefficients[1])+(row[1]*coefficients[2])+(row[2]*coefficients[3])+(row[3]*coefficients[4]) for row in specific_values],
             "x1" : [row[0] for row in specific_values],
             "x2" : [row[1] for row in specific_values],
             "x3" : [row[2] for row in specific_values],
             "x4" : [row[3] for row in specific_values]
         })
+        
 
         return testing['y^'].values
+    
+    def get_coefficients(self):
+        '''
+        Public method to get the relevant coefficients of the model.
+
+        INPUTS
+        * Expects nothing
+
+        OUTPUT
+        * Returns a list with relevant coefficients [a, b1, b2, b3, b4, RR_adjusted, standar_error, sumatory_error_squares]
+        '''
+        return [self.a, self.b1, self.b2, self.b3, self.b4, self.RR_adjusted, self.standar_error, self.sumatory_error_squares]
 
 if __name__ == '__main__':
     os.system('cls')
@@ -252,9 +267,9 @@ if __name__ == '__main__':
     )
     
     prediction_list = [
-        [2.9768789776189846,1.0278885699836584,3.4471073863787116,2.842656245134895]
+        [10.0,12.0,12.0,13.0]
     ]
 
     print(model.predict(prediction_list),
-          model,
+        #   model,
           sep='\n\n')
