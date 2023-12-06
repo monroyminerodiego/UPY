@@ -25,6 +25,7 @@ Aqui puedes hacer predicciones.
     <div id="prediction-div">
         {% if prediction != 'nada' %}
         <h4>La prediccion es {{ prediction[0] }}</h4>
+        <p>R2: {{ relevant_coefficients[5] }} // Standar Error: {{ relevant_coefficients[6] }} // Sum Error Squares: {{ relevant_coefficients[7] }}</p>
         {% endif %}
     </div>
     <form  method="POST" id="prediction-form" action="/predict">        

@@ -26,7 +26,7 @@ model                 = regression_class.MLRegression
 # ==================== URL's ==================== 
 @app.route("/")
 def root():
-    os.system('cls')
+    # os.system('cls')
     return fl.render_template('views/index.html')
 
 
@@ -69,7 +69,7 @@ def cleaned():
         
 
         # === Calling of methods / classes ===
-        if (dependent_variable != 'net_rating') or (pct_correlation != 0.49) or (normalization_method != 'Scaler') :
+        if (dependent_variable != 'net_rating') or (pct_correlation != 0.49):# or (normalization_method != 'Scaler'):
             downloaded_image_path = os.path.split(os.path.splitext(uploaded_file_path.replace('Downloads','Images'))[0])
             downloaded_image_path = f"{downloaded_image_path[0]}/(Modified){downloaded_image_path[1]}_distribution.png"
             
@@ -99,7 +99,6 @@ def cleaned():
         model = regression_class.MLRegression(
                 basic_list = basic_list
             )
-        print(model)
         relevant_coefficients = model.get_coefficients()
         
         # === Output ===
@@ -126,8 +125,7 @@ def predict():
     
     if pred:
         prediction = model.predict(
-            specific_values = [[float(data['x1']),float(data['x2']),float(data['x3']),float(data['x4'])]],#type:ignore
-            coefficients    = relevant_coefficients
+            specific_values = [[float(data['x1']),float(data['x2']),float(data['x3']),float(data['x4'])]]#type:ignore
             ) 
     else:
         prediction = 'nada'
@@ -139,7 +137,8 @@ def predict():
         downloaded_image_path = downloaded_image_path,
         pct_correlation       = pct_correlation,
         independent_varibles  = list(independent_variables),
-        prediction            = prediction
+        prediction            = prediction,
+        relevant_coefficients = relevant_coefficients
     )
 
 
@@ -159,7 +158,8 @@ def default_cleaning():
     data_cleaned = cleaning_class.Cleaning(
         raw_file_path          = uploaded_file_path,
         correlation_in_columns = 0.49,
-
+        # normalization_method   = 'Min-Max',
+        normalization_method   = 'Scaler',
         download_mode          = True,
         cleaned_file_path      = f"{app.config['UPLOAD_FOLDER']}/(Default)",
         # verbose                = True,

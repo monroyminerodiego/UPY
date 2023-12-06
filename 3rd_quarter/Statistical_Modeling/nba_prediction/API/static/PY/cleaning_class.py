@@ -57,7 +57,7 @@ class Cleaning:
 
     def __scaler_method(self):
         '''
-        Private method to standarize data
+        Private method to standarize data by scaling method
 
         INPUT
         - Expects nothing
@@ -79,13 +79,22 @@ class Cleaning:
     
     def __minmax_method(self):
         '''
+        Private method to standarize data by Min-Max method
+
+        INPUT
+        - Expects nothing
+
+        OUTPUT
+        - Returns a dataframe with the standarized data
         '''
         df = self.clean_data_df
         dependent_variable_list = df[self.dependent_variable_name]
+        dependent_variable_list.reset_index(drop=True, inplace=True)
         df = df.drop(labels=[self.dependent_variable_name],axis=1)
         minmax_scaler = MinMaxScaler()
         normalized = minmax_scaler.fit_transform(df)
         normalized = pd.DataFrame(data=normalized, columns=df.columns)
+        normalized.reset_index(drop=True, inplace=True)
         df = pd.concat((dependent_variable_list,normalized),axis=1)
         return df
 
