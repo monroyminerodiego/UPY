@@ -176,4 +176,4 @@ def default_cleaning():
 
 # ==================== Debugging = True ==================== 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="localhost", port=4000)

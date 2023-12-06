@@ -253,11 +253,7 @@ class MLRegression:
         '''
         return [round(self.a,6), round(self.b1,6), round(self.b2,6), round(self.b3,6), round(self.b4,6), round(self.RR_adjusted,6), round(self.standar_error,6), round(self.sumatory_error_squares,6)]
 
-class Regression:
-    def __init__(self):
-        '''
-        '''
-        
+
 
 if __name__ == '__main__':
     os.system('cls')
