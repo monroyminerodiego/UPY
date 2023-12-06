@@ -77,18 +77,16 @@ def cleaned():
             downloaded_image_path = f"{downloaded_image_path[0]}/(Modified){downloaded_image_path[1]}_distribution.png"
             
             data_cleaned = cleaning_class.Cleaning(
-                raw_file_path          = uploaded_file_path,
-                correlation_in_columns = pct_correlation,
-                estandarize_data       = estandarize,
-                normalize_data         = normalize,
-                download_mode          = True,
-                cleaned_file_path      = f"{app.config['UPLOAD_FOLDER']}/(Modified)",
-                # verbose                = True,
+                raw_file_path           = uploaded_file_path,
+                correlation_in_columns  = pct_correlation,
+                dependent_variable_name = dependent_variable,
+                download_mode           = True,
+                cleaned_file_path       = f"{app.config['UPLOAD_FOLDER']}/(Modified)",
+                # verbose                 = True,
             ) 
 
             data_cleaned.save_distribution_image(
-                download_image_path     = downloaded_image_path,
-                name_dependent_variable = dependent_variable
+                download_image_path     = downloaded_image_path
             )
 
             independent_variables = list(data_cleaned.clean_data_df.columns)
@@ -159,21 +157,17 @@ def default_cleaning():
     data_cleaned = cleaning_class.Cleaning(
         raw_file_path          = uploaded_file_path,
         correlation_in_columns = 0.49,
+
         download_mode          = True,
         cleaned_file_path      = f"{app.config['UPLOAD_FOLDER']}/(Default)",
         # verbose                = True,
     )
-
-    data_cleaned.save_distribution_image(
-            download_image_path     = downloaded_image_path,
-            name_dependent_variable = 'net_rating'
-        )
     
     independent_variables = list(data_cleaned.clean_data_df.columns)
     independent_variables.remove('net_rating')
 
     # === Output ===
-    data_cleaned.save_distribution_image(download_image_path=downloaded_image_path,name_dependent_variable='net_rating')
+    data_cleaned.save_distribution_image(download_image_path=downloaded_image_path)
 
 
 

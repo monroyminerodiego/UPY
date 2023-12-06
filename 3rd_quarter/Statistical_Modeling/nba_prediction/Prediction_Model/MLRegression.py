@@ -1,4 +1,8 @@
-class multiple_linear_regression:
+import os
+import pandas as pd, math, numpy as np
+import random
+
+class MLRegression:
     def __split_dataframe(self,basic_matrix:list):
         '''
         Private method to split the dataframe in order to get the training and testing section in a random way.
@@ -166,20 +170,20 @@ class multiple_linear_regression:
         return 1 - (1 - self.RR) * ((self.n - 1)/(self.n - 4 - 1)) # 2 number of independent variables
 
     def __init__(self,basic_list:list,training_size:float = 0.8):
-        '''
+        """
         Class created to do a multiple linear regression of 1 dependent variable and 4 independent variables only.
 
         INPUT
-        * basic_matrix [list of iterable objects]: Expects an iterable object, from 0 to 1, with the information of every row of the dataset.
-        The iterable object needs to follow (y, x1, x2, x3, x4) format, being{
-            y              : Dependent variable.
-            x1, x2, x3, x4 : Independent variables.
-        }
+        * basic_matrix [list of iterable objects]: Expects an iterable object, from 0 to 1, with the information of every row of the dataset.\n
+            The iterable object needs to follow (y, x1, x2, x3, x4) format, being{\n
+                y              : Dependent variable.\n
+                x1, x2, x3, x4 : Independent variables.\n
+            }
         * training_size [float]: Expects a float number indicating the percentage of the data set destinated for training. Default is set to '0.8'.
         
         OUTPUT
         * Returns nothing
-        '''
+        """
         self.training_size = training_size
         self.training_list, self.testing_list = self.__split_dataframe(basic_list)
         self.training_data_table = self.__generate_data_table(self.training_list)
@@ -223,7 +227,7 @@ class multiple_linear_regression:
         OUTPUT
         * Returns a list with the predictions in the same order that came in the input.
         '''
-
+        print('\n\n\n',specific_values,'\n\n\n')
         testing = pd.DataFrame(data={
             "y^" : [self.a+(row[0]*self.b1)+(row[1]*self.b2)+(row[2]*self.b3)+(row[3]*self.b4) for row in specific_values],
             "x1" : [row[0] for row in specific_values],
@@ -235,16 +239,14 @@ class multiple_linear_regression:
         return testing['y^'].values
 
 if __name__ == '__main__':
-    import os; os.system('cls')
-    import pandas as pd, math, numpy as np
-    import random
+    os.system('cls')
 
-    file = pd.read_csv('../Databases/cleaned_raw_data.csv')
+    file = pd.read_csv('C:/Users/diego/OneDrive/PROGRAMACION/UPY/3rd_quarter/Statistical_Modeling/nba_prediction/Databases/cleaned_raw_data.csv')
     data = np.array(file[['net_rating','pts','reb','ast','usg_pct']])
     
-    pct_training = 1
+    pct_training = 0.8
     
-    model = multiple_linear_regression(
+    model = MLRegression(
         basic_list = data, #type:ignore
         training_size = pct_training
     )
@@ -253,6 +255,6 @@ if __name__ == '__main__':
         [2.9768789776189846,1.0278885699836584,3.4471073863787116,2.842656245134895]
     ]
 
-    print(model,
-          model.predict(prediction_list),
+    print(model.predict(prediction_list),
+          model,
           sep='\n\n')

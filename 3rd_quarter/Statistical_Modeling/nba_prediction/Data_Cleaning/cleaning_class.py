@@ -1,3 +1,6 @@
+import os, pandas as pd, matplotlib.pyplot as plt
+from sklearn.preprocessing import MinMaxScaler, StandardScaler
+
 class Cleaning:
 
     def __clean_raw_data(self):
@@ -10,33 +13,49 @@ class Cleaning:
         OUTPUT
         - Returns a pandas.DataFrame with the cleaned data
         '''
-        # Selecting only 'USA' players        
+        # Selecting only 'USA' players and selecting only columns that can be described.    
         df = self.raw_file.query("country == 'USA'")
+        if self.verbose: print(f"Dataset with only 'USA' players...\n{df.head().to_string()}",end='\n\n')
 
-        # Checking which columns are related to 'net_rating'
-        columns_with_needed_correlation = [row.Index for row in self.raw_file.corr().itertuples() if row.net_rating >= self.correlation_in_columns]
+        df = df[[column for column in self.raw_file.describe().columns]]
+        if self.verbose: print(f"Dataset with only useful columns...\n{df.head().to_string()}",end='\n\n')
 
-        # Adding season to columns
-        # columns_with_needed_correlation.append('season')
+        # Checking which columns are related to 'net_rating'|
+        columns_with_needed_correlation = [row.Index for row in df.corr().itertuples() if row.net_rating >= self.correlation_in_columns]
+        if self.verbose: print(f"Correlation matrix...\n{df.corr()}",end='\n\n')
 
         # Selecting only features that we need from our df
         df = df[columns_with_needed_correlation]
 
+        # Validator to drop 'gp' column
         if 'gp' in df.columns: df.drop(axis=1,labels='gp',inplace=True)
 
-        # Creating the dictionary to map the categorical data
-        # dict_season = {}
-        # counter = 1
-        # for i in sorted(set(df['season'])):
-        #     dict_season[i] = counter
-        #     counter += 1
-
-        # # Changing to categorical the 'season' feature
-        # df['season'] = df['season'].apply(lambda x: dict_season[x])
-
+        if self.verbose: print(f"Data cleaned...\n{df.corr()}",end='\n\n')
         return df
 
-    def __estandarizing_data(self):
+    def __drop_outliers(self):
+        '''
+        Private method to eliminate the outliers of the 'clean_data_df'.
+
+        INPUT
+        * Expects nothing.
+
+        OUTPUT
+        * Returns a 'pandas.DataFrame' with the outliers dropped from 'clean_data_df'.
+        '''
+        
+        df = self.clean_data_df
+        for column in df.columns:
+            q1, q2, q3 = df[column].quantile([0.25,0.50,0.75])
+            interquartile_range = q3 - q1
+            upper_limit = q3 + 1.5 * interquartile_range
+            lower_limit = q3 - 1.5 * interquartile_range
+
+
+            df = df[(df[column] >= lower_limit) & (df[column] <= upper_limit)]
+        return df
+
+    def __scaler_method(self):
         '''
         Private method to standarize data
 
@@ -46,92 +65,102 @@ class Cleaning:
         OUTPUT
         - Returns a dataframe with the standarized data
         '''
-        df = self.df
-        scaler = StandardScaler()
-        df = scaler.fit_transform(df)
-        df = pd.DataFrame(df,columns=list(self.df.columns))
-        # df['season'] = self.df['season']
+        df = self.clean_data_df
+        dependent_variable_list = df[self.dependent_variable_name]
+        df = df.drop(labels=[self.dependent_variable_name],axis=1)
+        standar_scaler = StandardScaler()
+        normalized = standar_scaler.fit_transform(df)
+        normalized = pd.DataFrame(data=normalized, columns=df.columns)
+
+        df = pd.concat((dependent_variable_list,normalized),axis=1)
+        return df
+    
+    def __minmax_method(self):
+        '''
+        '''
+        df = self.clean_data_df
+        dependent_variable_list = df[self.dependent_variable_name]
+        df = df.drop(labels=[self.dependent_variable_name],axis=1)
+        minmax_scaler = MinMaxScaler()
+        normalized = minmax_scaler.fit_transform(df)
+        normalized = pd.DataFrame(data=normalized, columns=df.columns)
+        df = pd.concat((dependent_variable_list,normalized),axis=1)
         return df
 
-    def __normalizing_data(self):
-        '''
-        Private method that normalice data.
-
-        INPUT
-        * Expects nothing.
-
-        OUTPUT
-        * Returns a pandas.DataFrame with the data normalized.
-        '''
-        return pd.DataFrame(data=normalize(self.df, axis=0),columns=[column for column in self.df.columns])
-
-    def __init__(self, raw_file_path:str, correlation_in_columns:float, download_mode:bool = False, cleaned_file_path:str = '', estandarize_data:bool = True, normalize_data:bool = False):
+    def __init__(self, raw_file_path:str, dependent_variable_name:str, correlation_in_columns:float, normalization_method:str = 'Scaler', download_mode:bool = False, cleaned_file_path:str = '', verbose:bool = False):
         '''
         Class created to do the cleaning of a CSV file
 
         INPUT
-        - raw_file_path          [str]   : Expects the path where the raw_data is located.
-        - correlation_in_columns [float] : Expects a value between 0 and 1 that will be used to select columns that fits in that range.
-        - download_mode          [bool]  : If set to 'True', then at the end of the cleaning, a CSV file will be stored in 'cleaned_file_path'. Default set to 'False'
-        - cleaned_file_path      [str]   : Expects the path where the cleaned_data will be located.
-        - estandarize_data       [bool]  : If set to 'True', the raw data will be estandarized. Default set to 'True'
-        - normalize_data         [bool]  : If set to 'True', the raw data will be normalized. Default set to 'False'
+        - raw_file_path           [str]   = Expects the path where the raw_data is located.
+        - dependent_variable_name [str]   = Expects the name of the dependent variable
+        - correlation_in_columns  [float] = Expects a value between 0 and 1 that will be used to select columns that fits in that range.
+        - normalization_method    [str]   = Refers to the method that will be used to normalize data. Default set to 'Scaler'
+        - download_mode           [bool]  = If set to 'True', then at the end of the cleaning, a CSV file will be stored in 'cleaned_file_path'. Default set to 'False'
+        - cleaned_file_path       [str]   = Expects the path where the 'cleaned_raw_data.csv' file will be located.
+        - verbose                 [bool]  = If set to 'True', it will be printing the process of the data cleaning; recommended for debugging. Default set to 'False'
 
-        OUTPUT
-        - Returns nothing, but when 'download_mode' is set to True, then it downloads a CSV File
+        OUTPUT (According to method)
+        - __init__(download_mode = True) = Downloads a CSV file with the cleaned data.
+        - save_distribution_image() = Downloads a PNG image with the distribution of the cleaned data.
         '''
         # Defining parameters
+        self.dependent_variable_name = dependent_variable_name
         self.correlation_in_columns = correlation_in_columns
+        self.verbose = verbose
 
         # Reading our CSV
         self.raw_file = pd.read_csv(raw_file_path,index_col=0)
-        self.df = self.__clean_raw_data()
+        if verbose: print(f"{'*'*15} Handling Raw Data {'*'*15}\n{self.raw_file.head().to_string()}",end='\n\n')
+        self.clean_data_df = self.__clean_raw_data()
+
+        # Dropping outliers
+        self.clean_data_df = self.__drop_outliers()
+        if verbose: print(f"{'*'*15} DataSet without Outliers {'*'*15}\n{self.clean_data_df.head().to_string()}",end='\n\n')
 
         # Estandarizing data
-        if estandarize_data: self.df = self.__estandarizing_data()
-
-        # Normalizing data
-        if normalize_data: self.df = self.__normalizing_data()
+        if normalization_method == 'Min-Max':
+            self.clean_data_df = self.__minmax_method()
+        else:
+            self.clean_data_df = self.__scaler_method()
+        if verbose: print(f"\n{'*'*15} Scaled DataSet {'*'*15}\n{self.clean_data_df.head().to_string()}",end='\n\n')
 
         # # Saving document
-        if download_mode: self.df.to_csv(f'{cleaned_file_path}cleaned_raw_data{version}.csv')
+        if download_mode: 
+            self.clean_data_df.to_csv(f'{cleaned_file_path}cleaned_raw_data.csv')
+            if verbose: print('\nFile saved...!\n\n')
 
-    def get_distribution(self):
+    def save_distribution_image(self,download_image_path:str):
         '''
-        Public method to get a graph with the histogram of every column
+        Public method to get a graph with the histogram of every column and save it.
 
         INPUT
         * Expects nothing
 
         OUTPUT
-        * Returns nothing, but shows the plot with the histograms
+        * Returns nothing, but saves an image with the plot in the 'download_image_path'.
         '''
         x = 1
-        for column in self.df.columns:
-            plt.subplot(round(len(self.df.columns)/3)+1 if len(self.df.columns)%3 != 0 else len(self.df.columns)/3,3,x)
-            plt.hist(self.df[column])
+        fig = plt.figure(figsize=(10, 6))
+        for column in self.clean_data_df.columns:
+            if column == self.dependent_variable_name: continue
+            plt.subplot(2,2,x)
+            plt.hist(self.clean_data_df[column])
             plt.title(column)
             x += 1
-        plt.show()
+        fig.tight_layout()
+        plt.savefig(download_image_path)
 
 
+# For debugging
 if __name__ == '__main__':
-    import os; os.system('cls')
-    import pandas as pd
-    import matplotlib.pyplot as plt
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.preprocessing import normalize
-
-    version = '_p'
-    input = f'../Databases/raw_data{version}.csv'
-    correlation = 0.49
-    output_path = '../Databases/'
-    
-    
-    Cleaning(raw_file_path          = input,
-             correlation_in_columns = correlation,
-             cleaned_file_path      = output_path,
-             download_mode          = True,
-             estandarize_data       = True,
-             normalize_data         = False
-             )
+    os.system('cls')
+    Cleaning(
+        raw_file_path           = '../Databases/raw_data.csv',
+        dependent_variable_name = 'net_rating',
+        correlation_in_columns  = 0.49,
+        normalization_method    = 'Scaler',
+        download_mode           = False,
+        cleaned_file_path       = '',
+        verbose                 = True
+    ).save_distribution_image('../Images/raw_data_distribution.png')
