@@ -1,6 +1,4 @@
-import os
-import pandas as pd
-import matplotlib.pyplot as plt
+import os, pandas as pd, matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import normalize
 
@@ -46,10 +44,10 @@ class Cleaning:
         OUTPUT
         - Returns a dataframe with the standarized data
         '''
-        df = self.df
+        df = self.clean_data_df
         scaler = StandardScaler()
         df = scaler.fit_transform(df)
-        df = pd.DataFrame(df,columns=list(self.df.columns))
+        df = pd.DataFrame(df,columns=list(self.clean_data_df.columns))
         # df['season'] = self.df['season']
         return df
 
@@ -63,7 +61,7 @@ class Cleaning:
         OUTPUT
         * Returns a pandas.DataFrame with the data normalized.
         '''
-        return pd.DataFrame(data=normalize(self.df, axis=0),columns=[column for column in self.df.columns]) #type:ignore
+        return pd.DataFrame(data=normalize(self.clean_data_df, axis=0),columns=[column for column in self.clean_data_df.columns]) #type:ignore
 
     def __init__(self, raw_file_path:str, correlation_in_columns:float, download_mode:bool = False, cleaned_file_path:str = '', estandarize_data:bool = True, normalize_data:bool = False, verbose:bool = False):
         '''
@@ -89,21 +87,21 @@ class Cleaning:
         # Reading our CSV
         self.raw_file = pd.read_csv(raw_file_path,index_col=0)
         if verbose: print(f"{'*'*15} Handling Raw Data {'*'*15}\n{self.raw_file.head().to_string()}",end='\n\n')
-        self.df = self.__clean_raw_data()
+        self.clean_data_df = self.__clean_raw_data()
 
         # Estandarizing data
         if estandarize_data: 
-            self.df = self.__estandarizing_data()
-            if verbose: print(f"\n{'*'*15} Estandarized DataSet {'*'*15}\n{self.df.head().to_string()}",end='\n\n')
+            self.clean_data_df = self.__estandarizing_data()
+            if verbose: print(f"\n{'*'*15} Estandarized DataSet {'*'*15}\n{self.clean_data_df.head().to_string()}",end='\n\n')
 
         # Normalizing data
         if normalize_data: 
-            self.df = self.__normalizing_data()
-            if verbose: print(f"\n{'*'*15} Normalized DataSet {'*'*15}\n{self.df.head().to_string()}",end='\n\n')
+            self.clean_data_df = self.__normalizing_data()
+            if verbose: print(f"\n{'*'*15} Normalized DataSet {'*'*15}\n{self.clean_data_df.head().to_string()}",end='\n\n')
 
         # # Saving document
         if download_mode: 
-            self.df.to_csv(f'{cleaned_file_path}cleaned_raw_data.csv')
+            self.clean_data_df.to_csv(f'{cleaned_file_path}cleaned_raw_data.csv')
             if verbose: print('\nFile saved...!\n\n')
 
     def save_distribution_image(self,download_image_path:str,name_dependent_variable:str):
@@ -119,10 +117,10 @@ class Cleaning:
         '''
         x = 1
         fig = plt.figure(figsize=(10, 6))
-        for column in self.df.columns:
+        for column in self.clean_data_df.columns:
             if column == name_dependent_variable: continue
             plt.subplot(2,2,x)
-            plt.hist(self.df[column])
+            plt.hist(self.clean_data_df[column])
             plt.title(column)
             x += 1
         fig.tight_layout()

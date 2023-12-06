@@ -2,7 +2,7 @@
 
 {% block subtitulo %}
 
-Aqui puedes cambiar los parametros de entrenamiento de tu modelo
+Aqui puedes hacer predicciones.
 
 {% endblock %}
 
@@ -20,23 +20,13 @@ Aqui puedes cambiar los parametros de entrenamiento de tu modelo
 
 {% block botones %}
 
-<div id="contenedor">
-    <h4>TRAINING</h4>
-    <form method="POST" action="/predict">
-        <p>% of dataset for testing 
-            <input type="number" min="0" max="1" step="0.01" value="0.80" placeholder="0.00" name="pct_testing" id="pct_testing">
-        </p>
-        
-        <input type="submit" class="input">
-        <br>
-    </form>
-</div>
-
-{% endblock %}
-
 <div id="predicting">
     <h4>PREDICTING</h4>
-    <div id="prediction-div"></div>
+    <div id="prediction-div">
+        {% if prediction != 'nada' %}
+        <h4>La prediccion es {{ prediction[0] }}</h4>
+        {% endif %}
+    </div>
     <form  method="POST" id="prediction-form" action="/predict">        
         {% for index in range(independent_varibles|length) %}
         <label for="x{{ loop.index }}"></label> {{ independent_varibles[index] }}
@@ -50,3 +40,4 @@ Aqui puedes cambiar los parametros de entrenamiento de tu modelo
     </form>
 </div>
 
+{% endblock %}
