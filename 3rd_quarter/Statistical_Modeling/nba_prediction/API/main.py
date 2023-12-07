@@ -98,8 +98,10 @@ def cleaned():
 
         model = regression_class.MLRegression(
                 basic_list = basic_list
+                # training_size=0.85
             )
         relevant_coefficients = model.get_coefficients()
+        
         
         # === Output ===
         return fl.render_template(
@@ -114,6 +116,7 @@ def cleaned():
 @app.route("/predict", methods=['POST']) #type:ignore
 def predict():
     # === Variables ===
+    global model
     data = fl.request.form
     pred = False
     for datita in data:
@@ -127,9 +130,11 @@ def predict():
         prediction = model.predict(
             specific_values = [[float(data['x1']),float(data['x2']),float(data['x3']),float(data['x4'])]]#type:ignore
             ) 
+        relevant_coefficients = model.get_coefficients() #type:ignore
     else:
         prediction = 'nada'
-    
+        relevant_coefficients = 'nada'
+    print('\n\n\n',relevant_coefficients,'\n\n\n')
 
     # === Output ===
     return fl.render_template(
