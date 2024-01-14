@@ -12,12 +12,15 @@ There are multiple purposes for this repository, which include:
 
 ## General Content
 - 2nd_quarter
-    - D2A_2022
-    - D2B_2023
-- 3rd_quarter
-    - Data_Preprocessing
-    - Data_Structures
-    - Differential_Calculus
-    - Programming_Paradigms
-    - Statistical_Modeling
+    - [D2A_2022](https://github.com/monroyminerodiego/UPY/tree/master/2nd_quarter/D2A_2022)
+    - [D2B_2023](https://github.com/monroyminerodiego/UPY/tree/master/2nd_quarter/D2B_2023)
 
+- 3rd_quarter
+    - [Data_Preprocessing](https://github.com/monroyminerodiego/UPY/tree/master/3rd_quarter/Data_Preprocesing)
+    - [Data_Structures](https://github.com/monroyminerodiego/UPY/tree/master/3rd_quarter/Data_Structures)
+    - [Differential_Calculus](https://github.com/monroyminerodiego/UPY/tree/master/3rd_quarter/Differential_Calculus)
+    - [Programming_Paradigms](https://github.com/monroyminerodiego/UPY/tree/master/3rd_quarter/Programming_Paradigms)
+    - [Statistical_Modeling](https://github.com/monroyminerodiego/UPY/tree/master/3rd_quarter/Statistical_Modeling)
+
+- 4rd_quarter
+    - [Algorithmic_Analysis](https://github.com/monroyminerodiego/UPY/tree/master/4rd_quarter/Algorithmic_Analysis)
