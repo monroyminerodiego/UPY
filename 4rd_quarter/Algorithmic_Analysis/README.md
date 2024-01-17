@@ -15,3 +15,6 @@
 
     * __big_omega_theta.ipynb__  
     Jupyter Notebook with some exercises of BIG OMEGA and BIG THETA exercises.
+
+    * __sorting_algorithms.py__  
+    
