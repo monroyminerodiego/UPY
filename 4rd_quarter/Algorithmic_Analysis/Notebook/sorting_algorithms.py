@@ -1,7 +1,12 @@
 class sorting_algorithms:
-    def bubble_sort(self):
+    def bubble_sort(self,array:list = [9,1,7,3,5,4,6,2,8,0]):
         '''
         '''
+        sorted_flag = False
+        while not(sorted_flag):
+            for index in range(1,len(array)):
+                actual_value = array[index]
+                before_actual_value = array[index-1]
 
     def merge_sort(self):
         '''
