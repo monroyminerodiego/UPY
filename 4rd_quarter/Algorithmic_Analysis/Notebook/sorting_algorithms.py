@@ -7,6 +7,11 @@ class sorting_algorithms:
             for index in range(1,len(array)):
                 actual_value = array[index]
                 before_actual_value = array[index-1]
+                # Swaping the values
+                if actual_value < before_actual_value:
+                    array[index]   = array[index-1]
+                    array[index-1] = array[index]
+
 
     def merge_sort(self):
         '''
