@@ -4,6 +4,18 @@ from random import randint
 class sort_list_big_o:
     def __init__(self,array:list = [9,1,3,7,5,6,4,8,2,0]):
         '''
+        Initializes an instance of the `sort_list_big_o` class.
+
+        This class is designed for performing sorting operations and finding the maximum number in an array. It provides methods with different time complexities for these operations.
+
+        ### Args:
+        * `array`: A list of integers to be sorted or searched. Default is `[9, 1, 3, 7, 5, 6, 4, 8, 2, 0]`.
+
+        ### Methods:
+        - `sort_by_constant_time`: Sorts an array using a recursive approach with time complexity ranging from `O(N log N)` to `O(N^2)`.
+        - `get_max_number`: Finds the maximum number in an array with a time complexity of `O(N)`.
+
+        The instance stores the provided array and is used by these methods for sorting and finding the maximum number.
         '''
         self.array = array
         print(f'Initialized class with array: \n{self.array}')
