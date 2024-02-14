@@ -1,27 +1,132 @@
+import random
+import time
+
+
 class sorting_algorithms:
-    def bubble_sort(self,array:list = [9,1,7,3,5,4,6,2,8,0]):
-        '''
-        '''
-        sorted_flag = False
-        while not(sorted_flag):
-            for index in range(1,len(array)):
-                actual_value = array[index]
-                before_actual_value = array[index-1]
-                # Swaping the values
-                if actual_value < before_actual_value:
-                    array[index]   = array[index-1]
-                    array[index-1] = array[index]
+    def bubble_sort(self,array:list = [9,1,7,3,8,2,4,5,6,0]) -> list:
+        """
+        Sorts an array in ascending order using the Bubble Sort algorithm.
+        
+        ### Args:
+        * array (list, optional): A list of elements to be sorted. Default is set to [9,1,7,3,8,2,4,5,6,0].
 
+        ### Returns:
+        * array: Sorted array list.
+        """
+        n = len(array)
+        for i in range(n):
+            for j in range(0, n-i-1):
+                if array[j] > array[j+1]:
+                    array[j], array[j+1] = array[j+1], array[j]
+        return array
 
-    def merge_sort(self):
-        '''
-        '''
+    def merge_sort(self,array:list = [9,1,7,3,8,2,4,5,6,0]) -> list:
+        """
+        Sorts an array in ascending order using Merge Sort.
+        
+        ### Args:
+        * array (list, optional): A list of elements to be sorted. Default is set to [9,1,7,3,8,2,4,5,6,0].
 
-    def quick_sort(self):
-        '''
-        '''
+        ### Returns:
+        * array: Sorted array list.
+        """
+        if len(array) > 1:
+            mid = len(array) // 2
+            L = array[:mid]
+            R = array[mid:]
+            self.merge_sort(L)
+            self.merge_sort(R)
+            i = j = k = 0
+            while i < len(L) and j < len(R):
+                if L[i] < R[j]:
+                    array[k] = L[i]
+                    i += 1
+                else:
+                    array[k] = R[j]
+                    j += 1
+                k += 1
+            while i < len(L):
+                array[k] = L[i]
+                i += 1
+                k += 1
+            while j < len(R):
+                array[k] = R[j]
+                j += 1
+                k += 1
+        return array
 
+    def quick_sort(self, array:list = [9,1,7,3,8,2,4,5,6,0]) -> list:
+        """
+        Sorts an array in ascending order using the Quick Sort algorithm.
+        
+        ### Args:
+        * array (list, optional): A list of elements to be sorted. Default's to: [9,1,7,3,8,2,4,5,6,0].
+
+        ### Returns:
+        * list: The sorted list.
+        """
+        if len(array) < 2:
+            return array
+        else:
+            pivot = array[0]
+            less = [i for i in array[1:] if i <= pivot]
+            greater = [i for i in array[1:] if i > pivot]
+            return self.quick_sort(less) + [pivot] + self.quick_sort(greater)
+
+    def linear_search(self,array:list = [9,1,7,3,8,2,4,5,6,0],target:int = 5) -> bool:
+        '''
+        Searchs for a target using the linear search algorithm.
+        
+        ### Args:
+        * array (list, optional): A list of elements in which the target will be searched. Default's to: [9,1,7,3,8,2,4,5,6,0].
+        * target (int, optional): An integer to check if is in the list.
+
+        ### Returns:
+        * bool: Indicating if the target was found in the list or not. 
+        '''
+        for i in range(len(array)):
+            if array[i] == target:
+                return True
+        return False
     
+    def binary_search(self,array:list = [9,1,7,3,8,2,4,5,6,0],target:int = 5) -> bool:
+        '''
+        Searchs for a target using the binary search algorithm.
+        
+        ### Args:
+        * array (list, optional): A list of elements in which the target will be searched. Default's to: [9,1,7,3,8,2,4,5,6,0].
+        * target (int, optional): An integer to check if is in the list.
+
+        ### Returns:
+        * bool: Indicating if the target was found in the list or not. 
+        '''
+        low = 0
+        high = len(array) - 1
+        while low <= high:
+            mid = (low + high) // 2
+            if array[mid] == target:
+                return True
+            elif array[mid] < target:
+                low = mid + 1
+            else:
+                high = mid - 1
+        return False
+
+    def time_function(self):
+        '''
+        Measures the time elapsed during the execution of a function.
+
+        ### Args:
+        * func (callable): The search/sort function to be measured.
+
+        ### Returns:
+        * float: The time elapsed durign the execution of the function.
+        '''
+        for func in [self.bubble_sort,self.merge_sort,self.quick_sort,self.linear_search,self.binary_search]:
+            time_elapsed = time.time()
+            print(type(func))
+            print(f"Time elapsed during execution of {func.__name__}: {time.time() - time_elapsed}")
+
 
 if __name__ == '__main__':
     '''
@@ -61,4 +166,6 @@ if __name__ == '__main__':
         * Include a separate text document (analysis.txt) with your time complexity analysis and comparison results.
     '''
 
-    test = ''
+    test = sorting_algorithms()
+
+    test.time_function()

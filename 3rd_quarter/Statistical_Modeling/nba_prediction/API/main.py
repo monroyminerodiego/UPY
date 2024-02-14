@@ -1,5 +1,4 @@
-import os, threading, flask as fl, pandas as pd, numpy as np, json
-from tabnanny import verbose
+import os, threading, flask as fl, numpy as np
 from werkzeug.utils import secure_filename
 from static.PY import cleaning_class, regression_class
 
