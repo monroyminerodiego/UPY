@@ -2,7 +2,7 @@
 FROM ubuntu:20.04
 
 # Establecer variables de entorno
-ENV HADOOP_VERSION=3.3.0
+ENV HADOOP_VERSION=3.3.6
 ENV HADOOP_HOME=/opt/hadoop
 ENV PATH=$PATH:$HADOOP_HOME/bin
 
