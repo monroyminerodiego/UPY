@@ -8,6 +8,13 @@ services:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - APP_DB_USER=jason
+      - APP_DB_PASS=jason
+      - APP_DB_NAME=generaldb
 
 volumes:
   postgres_data:

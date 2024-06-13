@@ -2,9 +2,9 @@
 FROM postgres:latest
 
 # Variables de entorno para configurar la base de datos
-ENV POSTGRES_DB=server_arch
-ENV POSTGRES_USER=myuser
-ENV POSTGRES_PASSWORD=mypassword
+ENV POSTGRES_DB=generaldb
+ENV POSTGRES_USER=jason
+ENV POSTGRES_PASSWORD=jason
 
 VOLUME [ "/var/lib/postgresql/data" ]
 
