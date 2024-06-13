@@ -1,0 +1,37 @@
+# Usar una imagen base de Ubuntu
+FROM ubuntu:20.04
+
+# Establecer variables de entorno
+ENV HADOOP_VERSION=3.3.0
+ENV HADOOP_HOME=/opt/hadoop
+ENV PATH=$PATH:$HADOOP_HOME/bin
+
+# Actualizar los repositorios de apt y instalar dependencias
+RUN apt-get update && \
+    apt-get install -y openjdk-8-jdk wget ssh rsync && \
+    apt-get clean
+
+# Descargar y extraer Hadoop
+RUN wget https://downloads.apache.org/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz -O /tmp/hadoop.tar.gz && \
+    tar -xzvf /tmp/hadoop.tar.gz -C /opt && \
+    mv /opt/hadoop-$HADOOP_VERSION /opt/hadoop && \
+    rm /tmp/hadoop.tar.gz
+
+# Configurar SSH
+RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && \
+    cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && \
+    chmod 0600 ~/.ssh/authorized_keys
+
+# Copiar archivos de configuración necesarios
+COPY core-site.xml $HADOOP_HOME/etc/hadoop/core-site.xml
+COPY hdfs-site.xml $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+
+# Exponer puertos necesarios
+EXPOSE 9870 9864 8042 8088 10020 19888
+
+# Iniciar SSH y Hadoop
+CMD service ssh start && \
+    $HADOOP_HOME/bin/hdfs namenode -format && \
+    $HADOOP_HOME/sbin/start-dfs.sh && \
+    $HADOOP_HOME/sbin/start-yarn.sh && \
+    /bin/bash
