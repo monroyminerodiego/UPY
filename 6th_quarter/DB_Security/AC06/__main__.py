@@ -1,5 +1,5 @@
 import os, platform
-from AC06.code import main as AC06
+from code import AC06
 
 os.system('cls') if platform.system() == 'Windows' else os.system('clear')
 

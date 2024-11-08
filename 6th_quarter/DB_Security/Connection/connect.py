@@ -28,23 +28,31 @@ class Conexion:
 
         self.cursor = self.conexion.cursor()
     
-    def ejecutar_query(self,query:str):
+    def ejecutar_query(self,query:str,args:tuple = None):
         ''' Ejecuta una sentencia SQL en la base de datos conectada 
         
         ## Args: 
         * query (str): Sentencia en SQL a ejecutar en la base de datos.
+        * args (tuple, opcional): Tupla con los argumentos a pasar en el query. Recomendado para sanitizar consultas.
 
         ## Returns: 
         * results (str|list): Si el sql fue de tipo "SELECT", devuelve los datos buscados.
         '''
         try:
-            self.cursor.execute(query)
+            if not(args):
+                self.cursor.execute(query)
+            else:
+                self.cursor.execute(query,args)
         except Exception as e:
             self.conexion.rollback()
         finally:
             query = query.strip().upper()
             if "SELECT" in query.strip().upper():
-                return self.cursor.fetchall()
+                try:
+                    return self.cursor.fetchall()
+                except Exception as ex:
+                    return f"Ocurrio un error: {ex}"
+
             # return self.cursor.fetchall()
             
     def obtener_conexion(self):
