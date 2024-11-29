@@ -58,13 +58,12 @@ class database_manager(Conexion):
         print(f"Se conectó a la base de datos '{sql[0][0]}'")
 
     # ===== Tablas
-    def crear_tabla_dummy(self,nombre_bd:str):
+    def crear_tabla_dummy(self):
         ''' Crea una tabla dummy llamada 'students' y la llena con 3 datos ficticios.
 
         ### Args:
         * `nombre_bd` (str): Nombre de la base de datos a la que se quiere conectar.
         '''
-        self.conectar_bd(nombre_bd)
 
         sql = """
         CREATE TABLE students (

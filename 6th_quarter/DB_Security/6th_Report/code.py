@@ -13,8 +13,6 @@ class AC06:
         print(f"\n{'='*5} API Configuration")
         self.conexion = database_manager()
         self.conexion.conectar_bd('db_security')
-        students = self.conexion.ejecutar_query("SELECT * FROM students;")
-        print(f"Los students son: {students}")
 
     def create_table_for_testing(self):
         print(f"\n{'='*5} Create table for Testing")
