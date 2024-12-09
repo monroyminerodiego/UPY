@@ -8,13 +8,22 @@ from Connection.connect import Conexion
 
 class database_manager(Conexion):
 
-    def __init__(self,conexion = None):
+    def __init__(self,user:str = 'postgres',password:str = 'postgres',
+                 db_name:str = 'postgres', host:str = 'localhost',
+                 port:int = 5432, conexion = None):
         ''' 
 
         ### Returns
         * `conexion`: Retorna el objeto con el cuál se hizo la conexion.
         '''
-        super().__init__()
+        super().__init__(
+            user     = user,
+            password = password,
+            db_name  = db_name,
+            host     = host,
+            port     = port,
+            conexion = conexion,
+        )
 
         self.conectar_servidor()
         print("database_manager iniciado")
