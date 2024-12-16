@@ -33,8 +33,8 @@ def euler_method_gui():
             # Implementar el método de Euler para resolver la EDO.
             for i in range(n_steps):
                 # Obtener los valores actuales (x_n, y_n).
-                xn = x_values[-1]  # Último valor de x en la lista (x_n).
-                yn = y_values[-1]  # Último valor de y en la lista (y_n).
+                xn = float(x_values[-1])  # Último valor de x en la lista (x_n).
+                yn = float(y_values[-1])  # Último valor de y en la lista (y_n).
 
                 # Evaluar la función f(x, y) en el punto actual (x_n, y_n).
                 # Esto corresponde a calcular f(x_n, y_n) en la ecuación del método de Euler.
@@ -93,22 +93,27 @@ def euler_method_gui():
     tk.Label(root, text="Función f(x, y)\n(Ejemplo: 4*x + 3*y):", font=("Arial", 12), fg="white", bg="#2f2f2f").grid(row=1, column=0, padx=10, pady=5)
     func_entry = tk.Entry(root, width=30, font=("Arial", 12))
     func_entry.grid(row=1, column=1, padx=10, pady=5)
+    func_entry.insert(0,"0.2 * t * y")
 
     tk.Label(root, text="x0 (Valor inicial de x):", font=("Arial", 12), fg="white", bg="#2f2f2f").grid(row=2, column=0, padx=10, pady=5)
     x0_entry = tk.Entry(root, width=10, font=("Arial", 12))
     x0_entry.grid(row=2, column=1, padx=10, pady=5, sticky="w")
+    x0_entry.insert(0,"1")
 
     tk.Label(root, text="y0 (Valor inicial de y):", font=("Arial", 12), fg="white", bg="#2f2f2f").grid(row=3, column=0, padx=10, pady=5)
     y0_entry = tk.Entry(root, width=10, font=("Arial", 12))
     y0_entry.grid(row=3, column=1, padx=10, pady=5, sticky="w")
+    y0_entry.insert(0,"1")
 
     tk.Label(root, text="Tamaño del paso (h):", font=("Arial", 12), fg="white", bg="#2f2f2f").grid(row=4, column=0, padx=10, pady=5)
     h_entry = tk.Entry(root, width=10, font=("Arial", 12))
     h_entry.grid(row=4, column=1, padx=10, pady=5, sticky="w")
+    h_entry.insert(0,"0.05")
 
     tk.Label(root, text="x final:", font=("Arial", 12), fg="white", bg="#2f2f2f").grid(row=5, column=0, padx=10, pady=5)
     x_final_entry = tk.Entry(root, width=10, font=("Arial", 12))
     x_final_entry.grid(row=5, column=1, padx=10, pady=5, sticky="w")
+    x_final_entry.insert(0,"1.5")
 
     # Botón para resolver la ecuación diferencial usando el método de Euler.
     solve_button = tk.Button(root, text="Resolver", command=solve_euler, font=("Arial", 12), bg="#4caf50", fg="white")
