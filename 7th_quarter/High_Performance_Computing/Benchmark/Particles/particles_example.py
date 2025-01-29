@@ -1,4 +1,4 @@
-import os, matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from matplotlib import animation
 from random import uniform
 import cProfile
@@ -13,7 +13,7 @@ class ParticleSimulator:
     def __init__(self,particles:list):
         self.particles = particles
 
-    @profile #type: ignore
+    # @profile #type: ignore
     def evolve(self,dt):
         timestep = 0.00001 #Time Delta
         nsteps = int(dt / timestep)
@@ -69,22 +69,31 @@ def visualize(simulator):
     plt.show()
 
 def benchmark():
-
     particles = [Particle(uniform(-1.0,1.0),uniform(-1.0,1.0),uniform(-1.0,1.0)) for _ in range(100)]
-
     simulator = ParticleSimulator(particles)
     simulator.evolve(0.1)
 
 
+def mostrar_particulas():
+    particles = [Particle(uniform(-1.0,1.0),uniform(-1.0,1.0),uniform(-1.0,1.0)) for _ in range(100)]
+    simulator = ParticleSimulator(particles)
+    simulator.evolve(0.1)
+    visualize(simulator)
+
 if __name__ == '__main__':
-    os.system('clear')
+    # import os, platform
+    # os.system('cls') if platform.system() == 'Windows' else os.system('clear')
     
-    # pr = cProfile.Profile()
-    # pr.enable()
+
+    # =============== Codigo para medir tiempos
+    pr = cProfile.Profile()
+    pr.enable()
     benchmark()
-    # pr.disable()
-    # pr.print_stats(sort = 'ncalls')
+    pr.disable()
+    pr.print_stats(sort = 'ncalls')
+    pr.print_stats(sort = 'tottime')
+    pr.print_stats(sort = 'cumtime')
 
-    # pr.print_stats(sort = 'tottime')
-
-    # pr.print_stats(sort = 'cumtime')
+    # =============== Codigo para mostrar particulas
+    input('Presiona enter para simular las particulas...')
+    mostrar_particulas()
