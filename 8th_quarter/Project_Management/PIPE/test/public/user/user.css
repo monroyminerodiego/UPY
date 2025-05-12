@@ -1,0 +1,72 @@
+.account {}
+
+.account .banner {
+  height: 14rem;
+}
+.account .banner img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.account .top {
+  display: flex;
+  background-color: #e7e7e7;
+}
+
+.account .top .--right {
+  width: 1rem;
+}
+
+.account .top .nameplate {
+  display: flex;
+  flex-grow: 1;
+}
+.account .top .nameplate .pfp {
+  background-color: #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.account .top .nameplate .pfp i {
+  font-size: 4rem;
+}
+.account .top .nameplate .username {
+  padding-left: 1rem;
+  display: table;
+}
+.account .top .nameplate .username h2 {
+  margin: 0;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.account .top .--left {
+  flex-grow: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2rem;
+}
+.account .top .--left > div + div {
+  margin-left: 1rem;
+}
+
+.account .middle {
+  background-color: #f4f3f3;
+  height: 18rem;
+}
+
+.account .bottom {
+  background-color: #dbdbdb;
+  height: 6rem;
+  border-bottom-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  text-align: center;
+  align-content: center;
+  margin-bottom: 6rem;
+}

@@ -1,0 +1,280 @@
+/* INCLUDE CIRRUS.CSS */
+@import url('/.pipe/cirrus-all.min.css');
+
+/* MODIFY FURTHER */
+/* added to simplify u-flex u-flex-column */
+.u-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.u-flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.header-container {
+  display: flex;
+}
+.header:not(.header-clear) .nav-item:active,
+.header:not(.header-clear) .nav-item:hover:active {
+  background-color: #ababab59;
+}
+
+footer.footer {
+  margin-top: 0;
+}
+
+/* MAKE BODY FILL SPACE */
+
+body > div.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+body > div.main > div.--content-filler {
+  display: flex;
+  flex-grow: 1;
+}
+
+/* COLOR TABLE */
+.--pink {
+  --i100: 252, 232, 243;
+  --i200: 250, 209, 232;
+  --i300: 248, 180, 217;
+  --i400: 241, 126, 184;
+  --i500: 231, 70, 148;
+  --i600: 214, 31, 105;
+  --i700: 191, 18, 93;
+  --i800: 153, 21, 75;
+  --i900: 117, 26, 61;
+}
+.--red {
+  --i100: 253, 232, 232;
+  --i200: 251, 213, 213;
+  --i300: 248, 180, 180;
+  --i400: 249, 128, 128;
+  --i500: 240, 82, 82;
+  --i600: 224, 36, 36;
+  --i700: 200, 30, 30;
+  --i800: 155, 28, 28;
+  --i900: 119, 29, 29;
+}
+.--orange {
+  --i100: 254, 236, 220;
+  --i200: 252, 217, 189;
+  --i300: 253, 186, 140;
+  --i400: 255, 138, 76;
+  --i500: 255, 90, 31;
+  --i600: 208, 56, 1;
+  --i700: 180, 52, 3;
+  --i800: 138, 44, 13;
+  --i900: 115, 35, 13;
+}
+.--yellow {
+  --i100: 253, 246, 178;
+  --i200: 252, 233, 106;
+  --i300: 250, 202, 21;
+  --i400: 227, 160, 8;
+  --i500: 194, 120, 3;
+  --i600: 159, 88, 10;
+  --i700: 142, 75, 16;
+  --i800: 114, 59, 19;
+  --i900: 99, 49, 18;
+}
+.--green {
+  --i100: 222, 247, 236;
+  --i200: 188, 240, 218;
+  --i300: 132, 225, 188;
+  --i400: 49, 196, 141;
+  --i500: 14, 159, 110;
+  --i600: 5, 122, 85;
+  --i700: 4, 108, 78;
+  --i800: 3, 84, 63;
+  --i900: 1, 71, 55;
+}
+.--teal {
+  --i100: 213, 245, 246;
+  --i200: 175, 236, 239;
+  --i300: 126, 220, 226;
+  --i400: 22, 189, 202;
+  --i500: 6, 148, 162;
+  --i600: 4, 116, 129;
+  --i700: 3, 102, 114;
+  --i800: 5, 80, 92;
+  --i900: 1, 68, 81;
+}
+.--blue {
+  --i100: 225, 239, 254;
+  --i200: 195, 221, 253;
+  --i300: 164, 202, 254;
+  --i400: 118, 169, 250;
+  --i500: 63, 131, 248;
+  --i600: 28, 100, 242;
+  --i700: 26, 86, 219;
+  --i800: 30, 66, 159;
+  --i900: 35, 56, 118;
+}
+.--indigo {
+  --i100: 229, 237, 255;
+  --i200: 205, 219, 254;
+  --i300: 180, 198, 252;
+  --i400: 141, 162, 251;
+  --i500: 104, 117, 245;
+  --i600: 88, 80, 236;
+  --i700: 81, 69, 205;
+  --i800: 66, 56, 157;
+  --i900: 54, 47, 120;
+}
+.--purple {
+  --i100: 237, 235, 254;
+  --i200: 220, 215, 254;
+  --i300: 202, 191, 253;
+  --i400: 172, 148, 250;
+  --i500: 144, 97, 249;
+  --i600: 126, 58, 242;
+  --i700: 108, 43, 217;
+  --i800: 85, 33, 181;
+  --i900: 74, 29, 150;
+}
+.--gray {
+  --i000: 248, 249, 250;
+  --i100: 241, 243, 245;
+  --i200: 233, 236, 239;
+  --i300: 222, 226, 230;
+  --i400: 206, 212, 218;
+  --i500: 173, 181, 189;
+  --i600: 134, 142, 150;
+  --i700: 73, 80, 87;
+  --i800: 52, 58, 64;
+  --i900: 33, 37, 41;
+}
+
+/* COLOR SHORTCUTS */
+
+.color-100 {
+  background-color: rgb(var(--i100));
+  border-color: rgb(var(--i100));
+  color: rgb(var(--i700));
+}
+.color-300 {
+  background-color: rgb(var(--i300));
+  border-color: rgb(var(--i300));
+  color: rgb(var(--i700));
+}
+.color-500 {
+  background-color: rgb(var(--i500));
+  border-color: rgb(var(--i500));
+  color: rgb(var(--i100));
+}
+.color-700 {
+  background-color: rgb(var(--i700));
+  border-color: rgb(var(--i700));
+  color: rgb(var(--i100));
+}
+.color-900 {
+  background-color: rgb(var(--i900));
+  border-color: rgb(var(--i900));
+  color: rgb(var(--i100));
+}
+
+/* BUTTONS */
+.btn, [type=button], [type=reset], [type=submit], button {
+  margin-bottom: unset;
+  text-transform: unset;
+  font-family: inherit;
+  font-size: inherit;
+}
+.btn-color-100 {
+  --btn-color: var(--i100);
+  --btn-hover-color: var(--i200);
+  --btn-border-color: var(--i100);
+  --btn-fg: var(--i700);
+}
+.btn-color-300 {
+  --btn-color: var(--i300);
+  --btn-hover-color: var(--i400);
+  --btn-border-color: var(--i300);
+  --btn-fg: var(--i700);
+}
+.btn-color-500 {
+  --btn-color: var(--i500);
+  --btn-hover-color: var(--i600);
+  --btn-border-color: var(--i500);
+  --btn-fg: var(--i100);
+}
+.btn-color-700 {
+  --btn-color: var(--i700);
+  --btn-hover-color: var(--i500);
+  --btn-border-color: var(--i700);
+  --btn-fg: var(--i100);
+}
+.btn-color-900 {
+  --btn-color: var(--i900);
+  --btn-hover-color: var(--i700);
+  --btn-border-color: var(--i900);
+  --btn-fg: var(--i100);
+}
+button.--ani:active, .button.--ani:active {
+  transform: scale(.95);
+  transition: calc(var(--animation-duration)/ 2) ease;
+}
+button.--ani, .button.--ani {
+  transition: calc(var(--animation-duration)/ 2) ease;
+}
+
+/* BASIC RESPONSIVE */
+
+.main-content {
+  max-width: 12in;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 0.2in;
+}
+
+.u-right {
+  display: flex;
+  justify-content: right;
+}
+
+.u-left {
+  display: flex;
+  justify-content: left;
+}
+
+.--r {
+  --color-fg: var(--cirrus-fg);
+  --color-bg: var(--cirrus-bg);
+
+  --color-hover-fg: var(--cirrus-fg);
+  --color-hover-bg: #dfdfdf;
+
+  --color-active-fg: var(--cirrus-fg);
+  --color-active-bg: #ccc;
+  
+  color: var(--color-fg);
+  background-color: var(--color-bg);
+
+  transition-property: color, background-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+.--r:hover {
+  color: var(--color-hover-fg);
+  background-color: var(--color-hover-bg);
+}
+.--r:active {
+  color: var(--color-active-fg);
+  background-color: var(--color-active-bg);
+}
+
+/* TABLE */
+
+
+/* PRETTY STUFF */
+
+.--border {
+  margin: 4rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 3px 15px rgba(57,63,72,.2);
+}

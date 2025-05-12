@@ -1,0 +1,20 @@
+/* Register (Sign Up) Login CSS */
+
+.reglog-bg {
+  background-image: url('/imgs/landscape.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  flex-grow: 1;
+}
+
+.reglog-bg .float {
+  min-width: 10rem;
+  min-height: 10rem;
+  background-color: var(--cirrus-bg);
+  display: inline-block;
+}
+
+.--content-filler {
+  display: none !important;
+}
