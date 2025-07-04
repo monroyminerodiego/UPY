@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificados</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .title {
+            margin-top: 0.5rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            padding-top: 60px;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .modal-content img,
+        .modal-content iframe {
+            width: 100%;
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            display: block;
+            margin: auto;
+            border: none;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 600px) {
+            .modal-content {
+                width: 90%;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <h1>Diego Monroy - Certificados</h1>
+    <div class="grid">
+        {% for cert in certs %}
+        <div class="card" onclick="openModal('/static/files/{{ cert.filename }}', '{{ cert.type }}')">
+            <img src="/static/files/{{ cert.filename }}" alt="Certificado">
+            <div class="title">{{ cert.title }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" onclick="closeModal()">
+        <span class="modal-close">&times;</span>
+        <div id="modalContent" class="modal-content"></div>
+    </div>
+
+    <script>
+        function openModal(src, type) {
+            const content = document.getElementById('modalContent');
+            if (type === 'image') {
+                content.innerHTML = `<img src="${src}">`;
+            } else if (type === 'pdf') {
+                content.innerHTML = `<iframe src="${src}" frameborder="0"></iframe>`;
+            }
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.getElementById('modalContent').innerHTML = '';
+        }
+
+        // ⌨️ Cerrar modal con ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                closeModal();
+            }
+        });
+    </script>
+
+</body>
+</html>
