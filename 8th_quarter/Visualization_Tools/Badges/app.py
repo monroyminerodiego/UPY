@@ -18,8 +18,8 @@ def index():
         },
         {
             "title"    : "Activity 09 - Get started with Microsoft data analytics",
-            "filename" : "Get started with Microsoft data analytics.png",
-            "type"     : "image",
+            "filename" : "Get started with Microsoft data analytics.pdf",
+            "type"     : "pdf",
         },
     ]
     return render_template('index.html', certs=certs)
