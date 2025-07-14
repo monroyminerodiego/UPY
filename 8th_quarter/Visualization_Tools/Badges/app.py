@@ -21,5 +21,15 @@ def index():
             "filename" : "Get started with Microsoft data analytics.pdf",
             "type"     : "pdf",
         },
+        {
+            "title"    : "Activity A09 - Model data with Power BI",
+            "filename" : "Model data with Power BI.pdf",
+            "type"     : "pdf",
+        },
+        {
+            "title"    : "Activity A10 - Build Power BI visuals and reports",
+            "filename" : "Build Power BI visuals and reports.pdf",
+            "type"     : "pdf",
+        },
     ]
     return render_template('index.html', certs=certs)
