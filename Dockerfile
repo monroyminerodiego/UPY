@@ -1,5 +1,5 @@
 # ===== Comandos para ejecutar docker
-# docker rm UPY; docker build -t upy . && docker run --name UPY -p 10000:10000 upy
+# clear; docker rm UPY; docker build -t upy . && docker run --name UPY -p 10000:10000 upy
 # ==========
 
 # Imagen base oficial de Python

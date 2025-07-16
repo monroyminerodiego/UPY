@@ -19,6 +19,9 @@ def index():
         ],
         'Social Network Analysis':[
             'Friendship Paradox'
+        ],
+        'English VIII': [
+            "TED Talk"
         ]
     }
 
@@ -68,4 +71,11 @@ def badges():
 @app.route('/visualization-tools/wikistream-analytics')
 def wikistream_analytics():
     html_path = os.path.join('8th_quarter','Visualization_Tools','WikiStream','stream.html')
+    return render_template(html_path)
+
+
+# ===== English VIII
+@app.route('/english-viii/ted-talk')
+def ted_talk():
+    html_path = os.path.join('8th_quarter','English','TED_Talk','talk.html')
     return render_template(html_path)
