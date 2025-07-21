@@ -18,7 +18,8 @@ def index():
             'WikiStream Analytics',
         ],
         'Social Network Analysis':[
-            'Friendship Paradox'
+            'Friendship Paradox',
+            'Difussion of Information'
         ],
         'English VIII': [
             "TED Talk"
@@ -32,6 +33,11 @@ def index():
 @app.route('/social-network-analysis/friendship-paradox')
 def friendship_paradox():
     html_path = os.path.join('8th_quarter','Network_Analysis','HW5','friendship_paradox_infographic.html')
+    return render_template(html_path)
+
+@app.route('/social-network-analysis/difussion-of-information')
+def difussion_of_information():
+    html_path = os.path.join('8th_quarter','Network_Analysis','E2_Project','difussion_of_Information.html')
     return render_template(html_path)
 
 
