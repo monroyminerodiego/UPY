@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, send_file, abort
 
 location_path = os.path.dirname(__file__)
 app = Flask(
@@ -13,20 +13,40 @@ app = Flask(
 def index():
     
     materias = {
-        'Visualization Tools':[
-            'Badges - Diego Monroy',
-            'WikiStream Analytics',
+        'English VIII': [
+            "TED Talk",
+            'Engineering Week'
         ],
         'Social Network Analysis':[
             'Friendship Paradox',
-            'Difussion of Information'
+            'Difussion of Information',
+            'Engineering Week'
         ],
-        'English VIII': [
-            "TED Talk"
+        'Visualization Tools':[
+            'Badges - Diego Monroy',
+            'WikiStream Analytics',
+            'Engineering Week'
+        ],
+        'Requirements Engineering':[
+            'Engineering Week'
+        ],
+        'Project Management':[
+            'Engineering Week'
         ]
     }
 
     return render_template('/index.html', materias = materias)
+
+@app.route('/pdf/engineering-week')
+def serve_engineering_week_pdf():
+    pdf_file_path = os.path.join(location_path, 'Files', '8th_quarter', 'Engineering_Week_Report.pdf')
+    
+    if os.path.exists(pdf_file_path):
+        return send_file(pdf_file_path, as_attachment=False, mimetype='application/pdf')
+    else:
+        abort(404)
+
+
 
 
 # ===== Social Network Analysis
@@ -39,6 +59,14 @@ def friendship_paradox():
 def difussion_of_information():
     html_path = os.path.join('8th_quarter','Network_Analysis','E2_Project','difussion_of_Information.html')
     return render_template(html_path)
+
+@app.route('/social-network-analysis/engineering-week')
+def eng_week_networks():
+    html_path = os.path.join('8th_quarter','Network_Analysis','Engineering_week','report.html')
+    pdf_path = '/pdf/engineering-week'
+    return render_template(html_path,pdf_path=pdf_path)
+
+
 
 
 # ===== Visualization Tools
@@ -79,9 +107,48 @@ def wikistream_analytics():
     html_path = os.path.join('8th_quarter','Visualization_Tools','WikiStream','stream.html')
     return render_template(html_path)
 
+@app.route('/visualization-tools/engineering-week')
+def eng_week_visualization():
+    html_path = os.path.join('8th_quarter','Visualization_Tools','Engineering_week','report.html')
+    pdf_path = '/pdf/engineering-week'
+    return render_template(html_path,pdf_path=pdf_path)
+
+
+
 
 # ===== English VIII
 @app.route('/english-viii/ted-talk')
 def ted_talk():
     html_path = os.path.join('8th_quarter','English','TED_Talk','talk.html')
     return render_template(html_path)
+
+@app.route('/english-viii/engineering-week')
+def eng_week_english():
+    html_path = os.path.join('8th_quarter','English','Engineering_week','report.html')
+    pdf_path = '/pdf/engineering-week'
+    return render_template(html_path,pdf_path=pdf_path)
+
+
+
+
+# ===== Project Management
+@app.route('/project-management/engineering-week')
+def eng_week_project():
+    html_path = os.path.join('8th_quarter','Project_Management','Engineering_week','report.html')
+    pdf_path = '/pdf/engineering-week'
+    return render_template(html_path,pdf_path=pdf_path)
+
+
+
+
+# ===== Requirements Engineering
+@app.route('/requirements-engineering/engineering-week')
+def eng_week_requirements():
+    html_path = os.path.join('8th_quarter','Requirements_Engineering','Engineering_week','report.html')
+    pdf_path = '/pdf/engineering-week'
+    return render_template(html_path,pdf_path=pdf_path)
+
+
+
+
+
