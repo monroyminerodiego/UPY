@@ -12,6 +12,17 @@ app = Flask(
 @app.route('/')
 def index():
     
+    materias_final = {}
+
+    # ===== 9no
+    materias_9 = {
+        "Digital Economy":[
+            "Smart Factory Data Pipeline Challenge"
+        ]
+    }
+    for k,v in materias_9.items(): materias_final[k] = v
+    
+    # ===== 8vo
     materias_8 = {
         'English VIII': [
             "TED Talk",
@@ -34,24 +45,9 @@ def index():
             'Engineering Week'
         ]
     }
+    for k,v in materias_8.items(): materias_final[k] = v
 
-    materias_9 = {
-        "Digital Economy":[
-            "Smart Factory Data Pipeline Challenge"
-        ]
-    }
-
-    return render_template('/index.html', materias = materias_9)
-
-@app.route('/pdf/engineering-week')
-def serve_engineering_week_pdf():
-    pdf_file_path = os.path.join(location_path, 'Files', '8th_quarter', 'Engineering_Week_Report.pdf')
-    
-    if os.path.exists(pdf_file_path):
-        return send_file(pdf_file_path, as_attachment=False, mimetype='application/pdf')
-    else:
-        abort(404)
-
+    return render_template('/index.html', materias = materias_final)
 
 
 
@@ -61,6 +57,18 @@ def serve_engineering_week_pdf():
 def smart_factory_data_pipeline_challenge():
     html_path = os.path.join('9th_quarter','Digital_Economy','index.html')
     return render_template(html_path)
+
+
+
+
+@app.route('/pdf/engineering-week')
+def serve_engineering_week_pdf():
+    pdf_file_path = os.path.join(location_path, 'Files', '8th_quarter', 'Engineering_Week_Report.pdf')
+    
+    if os.path.exists(pdf_file_path):
+        return send_file(pdf_file_path, as_attachment=False, mimetype='application/pdf')
+    else:
+        abort(404)
 
 
 

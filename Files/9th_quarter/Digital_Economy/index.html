@@ -1,1 +1,561 @@
-Cocinando...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Irrigation Pipeline - Industry 4.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 118, 117, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(255, 204, 112, 0.3) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.02em;
+            background: linear-gradient(45deg, #ffffff, #a8edea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .header .tech-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            animation: slideUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+            pointer-events: none;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .section-content {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Mermaid Diagram Styles */
+        .mermaid-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .mermaid-diagram {
+            width: 100%;
+            height: auto;
+            min-height: 600px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .diagram-node {
+            background: #e1f5fe;
+            border: 2px solid #4ecdc4;
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 0.5rem;
+            font-weight: 600;
+            color: #333;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .diagram-node:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .diagram-node.kafka { background: #f3e5f5; border-color: #9c27b0; }
+        .diagram-node.spark { background: #e8f5e8; border-color: #4caf50; }
+        .diagram-node.database { background: #fff3e0; border-color: #ff9800; }
+        .diagram-node.analytics { background: #ffebee; border-color: #f44336; }
+        .diagram-node.control { background: #e0f2f1; border-color: #009688; }
+
+        .visual-flow {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .flow-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .flow-arrow {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin: 0 0.5rem;
+        }
+
+        .vertical-arrow {
+            font-size: 2rem;
+            color: #667eea;
+            transform: rotate(90deg);
+        }
+
+        /* Tech Stack Flip Cards */
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-card {
+            perspective: 1000px;
+            height: 120px;
+        }
+
+        .tech-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .tech-card.flipped .tech-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .tech-card-front, .tech-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .tech-card-front {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .tech-card-back {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            transform: rotateY(180deg);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            text-align: center;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 165, 0, 0.2));
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box h4 {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .benefit-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            border-left: 4px solid #4ecdc4;
+        }
+
+        .benefit-item h5 {
+            color: white;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .benefit-item p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .header h1 { font-size: 2.5rem; }
+            .section { padding: 1.5rem; }
+            .flow-row { flex-direction: column; }
+            .flow-arrow { transform: rotate(90deg); }
+            .tech-stack { grid-template-columns: 1fr; }
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script>
+        // Inicializa Mermaid en el navegador
+        mermaid.initialize({ startOnLoad: true });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 Smart Irrigation Pipeline</h1>
+            <p class="subtitle">IoT-Based Intelligent Irrigation System</p>
+            <div class="tech-badge">Industry 4.0 • Agriculture • Data Science</div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <div class="section-icon">📋</div>
+                Project Overview
+            </h2>
+            <div class="section-content">
+                This project implements a real-time data pipeline to optimize agricultural irrigation through distributed temperature sensors deployed across farmland. 
+                The system leverages <strong>Industry 4.0</strong> technologies to collect, process, and analyze sensor data, 
+                generating automatic alerts and controlling irrigation systems based on artificial intelligence and business rules.
+                
+                <div class="highlight-box">
+                    <h4>🎯 Main Objective</h4>
+                    <p>Maximize water resource efficiency in agriculture through early detection of conditions requiring irrigation, 
+                    reducing water waste and optimizing crop growth.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🏗️</div>
+                Pipeline Architecture
+            </h2>
+            <div class="section-content" style="display: flex; justify-content: center; align-items: center;">
+                <pre class="mermaid">
+                    flowchart TD
+                        A[Temperature Sensors<br/>Field/Greenhouse] --> B[Data Ingestion<br/>Apache Kafka]
+                        A --> C[Soil Humidity Sensors<br/>Optional]
+                        C --> B
+                        
+                        B --> D{Streaming Processing<br/>Apache Spark Streaming}
+                        
+                        D --> E[Data Validation &<br/>Cleaning]
+                        E --> F[Real-time Metrics<br/>Calculation]
+                        
+                        F --> G[(Time-Series Database<br/>InfluxDB)]
+                        F --> H[(Data Lake<br/>HDFS/S3)]
+                        
+                        G --> I[Anomaly Detection<br/>& Analytics]
+                        H --> J[Historical Analysis<br/>& ML Models]
+                        
+                        I --> K{Irrigation Rules<br/>Engine}
+                        J --> K
+                        
+                        K --> L[Alert System<br/>Slack/Email/SMS]
+                        K --> M[Automatic Control<br/>Irrigation Valves]
+                        
+                        N[Dashboard<br/>Grafana/Tableau] --> G
+                        N --> H
+                        
+                        style A fill:#e1f5fe
+                        style B fill:#f3e5f5
+                        style D fill:#e8f5e8
+                        style G fill:#fff3e0
+                        style I fill:#ffebee
+                        style M fill:#e0f2f1
+                </pre>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🔧</div>
+                Technology Stack
+            </h2>
+            <div class="section-content">
+                <p style="margin-bottom: 1rem; color: rgba(255, 255, 255, 0.8);">Click on each technology card to learn how it's used in our pipeline:</p>
+                <div class="tech-stack">
+                    <div class="tech-card" onclick="flipCard(this)">
+                        <div class="tech-card-inner">
+                            <div class="tech-card-front">Apache Kafka</div>
+                            <div class="tech-card-back">High-throughput message broker for ingesting sensor data streams with fault tolerance and scalability.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card" onclick="flipCard(this)">
+                        <div class="tech-card-inner">
+                            <div class="tech-card-front">Spark Streaming</div>
+                            <div class="tech-card-back">Real-time distributed processing engine for data validation, cleaning, and metric calculations.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card" onclick="flipCard(this)">
+                        <div class="tech-card-inner">
+                            <div class="tech-card-front">InfluxDB</div>
+                            <div class="tech-card-back">Time-series database optimized for high-frequency sensor data writes and fast query performance.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card" onclick="flipCard(this)">
+                        <div class="tech-card-inner">
+                            <div class="tech-card-front">Python ML</div>
+                            <div class="tech-card-back">Machine learning algorithms for anomaly detection and predictive irrigation scheduling.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card" onclick="flipCard(this)">
+                        <div class="tech-card-inner">
+                            <div class="tech-card-front">Grafana</div>
+                            <div class="tech-card-back">Real-time monitoring dashboard for visualizing sensor data and system performance metrics.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card" onclick="flipCard(this)">
+                        <div class="tech-card-inner">
+                            <div class="tech-card-front">Docker</div>
+                            <div class="tech-card-back">Containerization platform ensuring consistent deployment across development and production environments.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <div class="section-icon">💡</div>
+                Architecture Rationale
+            </h2>
+            <div class="section-content">
+                <h3 style="color: white; font-size: 1.3rem; margin-bottom: 1rem;">Why this architecture?</h3>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <h5>🚀 Streaming vs Batch</h5>
+                        <p>Crops require immediate response. Real-time processing prevents damage from drought or overwatering.</p>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <h5>🔄 Apache Kafka</h5>
+                        <p>Handles multiple distributed sensors with high availability and fault tolerance. Scalable for hundreds of sensors.</p>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <h5>📊 InfluxDB</h5>
+                        <p>Optimized for time-series with high write frequency. Fast queries for real-time alerts.</p>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <h5>🧮 Spark Streaming</h5>
+                        <p>Distributed processing for complex analysis: moving averages, trend detection, data validation.</p>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h4>🎯 Smart Irrigation Logic</h4>
+                    <p><strong>Simple Rules:</strong> If temperature > 30°C for 2+ consecutive hours → Activate irrigation</p>
+                    <p><strong>Advanced ML:</strong> Prediction based on historical patterns, considering time of day, season, and crop type</p>
+                    <p><strong>Optimization:</strong> Prevents unnecessary irrigation during rain and optimizes schedules based on evapotranspiration</p>
+                </div>
+
+                <h4 style="color: white; font-size: 1.2rem; margin: 1.5rem 0 1rem 0;">Economic and Environmental Benefits:</h4>
+                <ul style="color: rgba(255, 255, 255, 0.9); line-height: 1.6;">
+                    <li>• <strong>Water savings:</strong> 30-40% reduction in water consumption</li>
+                    <li>• <strong>Yield improvement:</strong> Optimal irrigation increases productivity</li>
+                    <li>• <strong>Cost reduction:</strong> Automation reduces labor costs</li>
+                    <li>• <strong>Sustainability:</strong> Responsible use of natural resources</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <div class="section-icon">🚀</div>
+                System Demonstration
+            </h2>
+            <div class="section-content">
+                <div class="highlight-box">
+                    <h4>🔍 Alert Logic - Practical Example</h4>
+                    <div style="background: rgba(255, 255, 255, 0.1); padding: 1rem; border-radius: 8px; margin-top: 1rem; font-family: 'Courier New', monospace;">
+                        <p style="color: #4ecdc4;">// Example rule in pseudocode</p>
+                        <p style="color: white;">if (avg_temperature_2h > 30°C && soil_humidity < 40%) {</p>
+                        <p style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;activate_irrigation(sensor_zone);</p>
+                        <p style="color: white;">&nbsp;&nbsp;&nbsp;&nbsp;send_alert("Irrigation activated in Zone A");</p>
+                        <p style="color: white;">}</p>
+                    </div>
+                    
+                    <p style="margin-top: 1rem;"><strong>Processed data:</strong> Moving averages, outlier detection, correlation with weather data</p>
+                    <p><strong>Resulting action:</strong> Automatic valve activation + WhatsApp/Email notification + dashboard logging</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+
+        // Simple animation for diagram nodes
+        document.addEventListener('DOMContentLoaded', function() {
+            const nodes = document.querySelectorAll('.diagram-node');
+            nodes.forEach((node, index) => {
+                node.style.animationDelay = `${index * 0.1}s`;
+                node.style.animation = 'slideUp 0.6s ease-out forwards';
+            });
+
+            // Add click instructions for tech cards
+            const techCards = document.querySelectorAll('.tech-card');
+            techCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('flipped')) {
+                        this.style.transform = 'scale(1.05)';
+                    }
+                });
+                card.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('flipped')) {
+                        this.style.transform = 'scale(1)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
