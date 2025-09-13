@@ -12,7 +12,7 @@ app = Flask(
 @app.route('/')
 def index():
     
-    materias = {
+    materias_8 = {
         'English VIII': [
             "TED Talk",
             'Engineering Week'
@@ -35,7 +35,13 @@ def index():
         ]
     }
 
-    return render_template('/index.html', materias = materias)
+    materias_9 = {
+        "Digital Economy":[
+            "Smart Factory Data Pipeline Challenge"
+        ]
+    }
+
+    return render_template('/index.html', materias = materias_9)
 
 @app.route('/pdf/engineering-week')
 def serve_engineering_week_pdf():
@@ -45,6 +51,16 @@ def serve_engineering_week_pdf():
         return send_file(pdf_file_path, as_attachment=False, mimetype='application/pdf')
     else:
         abort(404)
+
+
+
+
+
+# ===== Social Network Analysis
+@app.route('/digital-economy/smart-factory-data-pipeline-challenge')
+def smart_factory_data_pipeline_challenge():
+    html_path = os.path.join('9th_quarter','Digital_Economy','index.html')
+    return render_template(html_path)
 
 
 

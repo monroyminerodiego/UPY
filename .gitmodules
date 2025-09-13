@@ -1,0 +1,4 @@
+[submodule "Files/9th_quarter/Data_Trends"]
+	path = Files/9th_quarter/Data_Trends
+	url = git@github.com:GabrielISB/UPY-Trends-In-DS-9A-2025.git
+	branch = 2109110-diego-monroy
