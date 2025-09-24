@@ -36,7 +36,7 @@ def index():
             'Difussion of Information',
             'Engineering Week'
         ],
-        'Visualization Tools':[
+        'Visualization Tools I':[
             'Badges - Diego Monroy',
             'WikiStream Analytics',
             'Engineering Week'
@@ -97,7 +97,7 @@ def eng_week_networks():
 
 
 # ===== Visualization Tools
-@app.route('/visualization-tools/badges-diego-monroy')
+@app.route('/visualization-tools-i/badges-diego-monroy')
 def badges():
     html_path = os.path.join('8th_quarter','Visualization_Tools','Badges','badges.html')
     certs = [
@@ -129,12 +129,12 @@ def badges():
     ]
     return render_template(html_path, certs=certs)
 
-@app.route('/visualization-tools/wikistream-analytics')
+@app.route('/visualization-tools-i/wikistream-analytics')
 def wikistream_analytics():
     html_path = os.path.join('8th_quarter','Visualization_Tools','WikiStream','stream.html')
     return render_template(html_path)
 
-@app.route('/visualization-tools/engineering-week')
+@app.route('/visualization-tools-i/engineering-week')
 def eng_week_visualization():
     html_path = os.path.join('8th_quarter','Visualization_Tools','Engineering_week','report.html')
     pdf_path = '/pdf/engineering-week'
