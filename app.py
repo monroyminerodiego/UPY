@@ -18,6 +18,9 @@ def index():
     materias_9 = {
         "Digital Economy":[
             "Smart Factory Data Pipeline Challenge"
+        ],
+        "Oral Expression":[
+            ""
         ]
     }
     for k,v in materias_9.items(): materias_final[k] = v

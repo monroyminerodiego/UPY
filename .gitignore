@@ -7,3 +7,4 @@ pendings.txt
 .ipynb_checkpoints
 __pycache__
 build/
+.env

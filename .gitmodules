@@ -2,3 +2,7 @@
 	path = Files/9th_quarter/Data_Trends
 	url = git@github.com:GabrielISB/UPY-Trends-In-DS-9A-2025.git
 	branch = 2109110-diego-monroy
+[submodule "Files/9th_quarter/visualization-tools"]
+	path = Files/9th_quarter/visualization-tools
+	url = git@github.com:monroyminerodiego/visualization-tools-IX.git
+	branch = dev
