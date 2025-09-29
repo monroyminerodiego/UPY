@@ -17,7 +17,8 @@ def index():
     # ===== 9no
     materias_9 = {
         "Digital Economy":[
-            "Smart Factory Data Pipeline Challenge"
+            "Smart Factory Data Pipeline Challenge",
+            "Business Model"
         ],
         "Oral Expression":[
             ""
@@ -55,10 +56,15 @@ def index():
 
 
 
-# ===== Social Network Analysis
+# ===== Digital Economy
 @app.route('/digital-economy/smart-factory-data-pipeline-challenge')
 def smart_factory_data_pipeline_challenge():
-    html_path = os.path.join('9th_quarter','Digital_Economy','index.html')
+    html_path = os.path.join('9th_quarter','Digital_Economy','Smart_Irrigation_Pipeline.html')
+    return render_template(html_path)
+
+@app.route('/digital-economy/business-model')
+def amazon_case_business():
+    html_path = os.path.join('9th_quarter','Digital_Economy','Amazon_case_business.html')
     return render_template(html_path)
 
 
