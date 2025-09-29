@@ -9,21 +9,21 @@ services:
   web_upy:
     build: .
     container_name: web_upy
-    ports:
-      - "501:501"
+    # ports:
+      # - "501:501"
     expose:
       - "501"
     env_file:
       - .env
-    # networks:
-      # - proxy_net
+    networks:
+      - proxy_net
 
   web_visualization:
     build:
       context: ./Files/9th_quarter/visualization-tools/Web
     container_name: web_visualization
-    ports:
-      - "502:502"
+    # ports:
+      # - "502:502"
     expose:
       - "502"
     env_file:
@@ -32,7 +32,7 @@ services:
       - api_visualization
     networks:
       - upy_net
-      # - proxy_net
+      - proxy_net
 
   api_visualization:
     build:
@@ -49,7 +49,7 @@ services:
       - postgres_visualization
     networks:
       - upy_net
-      # - proxy_net
+      - proxy_net
       
   
   
@@ -97,8 +97,8 @@ services:
 networks:
   upy_net:
     driver: bridge
-  # proxy_net:
-    # external: true
+  proxy_net:
+    external: true
 
 volumes:
   mongo_data:
