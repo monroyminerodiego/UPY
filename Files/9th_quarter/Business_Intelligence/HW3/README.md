@@ -5,4 +5,4 @@
 * Buenfil Góngora Ariel Joel 
 * Monroy Minero Diego 
 * Valbuena Novelo Alan Alberto 
-* Yuselin Dzul Damaris 
+* Dzul Uc Damaris Yuselin
