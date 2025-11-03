@@ -20,9 +20,9 @@ def index():
             "Smart Factory Data Pipeline Challenge",
             "Business Model"
         ],
-        "Oral Expression":[
-            ""
-        ]
+        # "Oral Expression":[
+        #     ""
+        # ]
     }
     for k,v in materias_9.items(): materias_final[k] = v
     
@@ -30,17 +30,14 @@ def index():
     materias_8 = {
         'English VIII': [
             "TED Talk",
-            'Engineering Week'
         ],
         'Social Network Analysis':[
             'Friendship Paradox',
             'Difussion of Information',
-            'Engineering Week'
         ],
         'Visualization Tools I':[
             'Badges - Diego Monroy',
             'WikiStream Analytics',
-            'Engineering Week'
         ],
         'Requirements Engineering':[
             'Engineering Week'
