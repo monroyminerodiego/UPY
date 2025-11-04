@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Actividades</title>
+    <title>Portfolio | DMM</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -412,8 +412,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Materias Disponibles</h1>
-            <p>Explora las actividades y proyectos organizados por materia</p>
+            <h1>Portafolio de Proyectos Escolares</h1>
+            <p>Explora las actividades y proyectos hechos por Diego Monroy</p>
         </div>
 
         <div class="subjects-grid">
@@ -423,9 +423,9 @@
                         <i class="fas fa-book"></i>
                     </div>
                     <div class="subject-title">{{ materia }}</div>
-                    <div class="subject-description">
+                    <!-- <div class="subject-description">
                         Actividades y proyectos de la materia
-                    </div>
+                    </div> -->
                     <div class="activity-count">
                         <i class="fas fa-tasks"></i>
                         <span>{{ materias[materia]|length }} actividades</span>
@@ -474,7 +474,14 @@
                     .replace(/-+/g, '-');
 
                 let base = materia.toLowerCase().replace(/\s+/g, '-');
-                item.href = `/${base}/${slug}`;
+                // Casos especiales para URLs externas
+                if (materia === "Visualization Tools II" && activity === "Personalized Web") {
+                    item.href = 'https://upy-homeworks.xpert-ia.com.mx/visualization-tools';
+                    item.target = '_blank';
+                    item.rel = 'noopener noreferrer';
+                } else {
+                    item.href = `/${base}/${slug}`;
+                }
 
                 // Icono dinámico basado en el contenido
                 let iconClass = 'fas fa-file-alt';

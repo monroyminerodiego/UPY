@@ -20,9 +20,9 @@ def index():
             "Smart Factory Data Pipeline Challenge",
             "Business Model"
         ],
-        # "Oral Expression":[
-        #     ""
-        # ]
+        "Visualization Tools II":[
+            "Personalized Web"
+        ]
     }
     for k,v in materias_9.items(): materias_final[k] = v
     
@@ -32,23 +32,32 @@ def index():
             "TED Talk",
         ],
         'Social Network Analysis':[
-            'Friendship Paradox',
-            'Difussion of Information',
+            'Friendship Paradox'
         ],
         'Visualization Tools I':[
             'Badges - Diego Monroy',
             'WikiStream Analytics',
-        ],
-        'Requirements Engineering':[
-            'Engineering Week'
-        ],
-        'Project Management':[
             'Engineering Week'
         ]
     }
     for k,v in materias_8.items(): materias_final[k] = v
 
+    materias_final = dict(sorted(materias_final.items(),key=lambda item: item[0]))
+
     return render_template('/index.html', materias = materias_final)
+
+
+
+
+# ===== General
+@app.route('/pdf/engineering-week')
+def serve_engineering_week_pdf():
+    pdf_file_path = os.path.join(location_path, 'Files', '8th_quarter', 'Engineering_Week_Report.pdf')
+    
+    if os.path.exists(pdf_file_path):
+        return send_file(pdf_file_path, as_attachment=False, mimetype='application/pdf')
+    else:
+        abort(404)
 
 
 
@@ -67,39 +76,16 @@ def amazon_case_business():
 
 
 
-@app.route('/pdf/engineering-week')
-def serve_engineering_week_pdf():
-    pdf_file_path = os.path.join(location_path, 'Files', '8th_quarter', 'Engineering_Week_Report.pdf')
-    
-    if os.path.exists(pdf_file_path):
-        return send_file(pdf_file_path, as_attachment=False, mimetype='application/pdf')
-    else:
-        abort(404)
-
-
-
-
 # ===== Social Network Analysis
 @app.route('/social-network-analysis/friendship-paradox')
 def friendship_paradox():
     html_path = os.path.join('8th_quarter','Network_Analysis','HW5','friendship_paradox_infographic.html')
     return render_template(html_path)
 
-@app.route('/social-network-analysis/difussion-of-information')
-def difussion_of_information():
-    html_path = os.path.join('8th_quarter','Network_Analysis','E2_Project','difussion_of_Information.html')
-    return render_template(html_path)
-
-@app.route('/social-network-analysis/engineering-week')
-def eng_week_networks():
-    html_path = os.path.join('8th_quarter','Network_Analysis','Engineering_week','report.html')
-    pdf_path = '/pdf/engineering-week'
-    return render_template(html_path,pdf_path=pdf_path)
 
 
 
-
-# ===== Visualization Tools
+# ===== Visualization Tools I
 @app.route('/visualization-tools-i/badges-diego-monroy')
 def badges():
     html_path = os.path.join('8th_quarter','Visualization_Tools','Badges','badges.html')
@@ -151,34 +137,3 @@ def eng_week_visualization():
 def ted_talk():
     html_path = os.path.join('8th_quarter','English','TED_Talk','talk.html')
     return render_template(html_path)
-
-@app.route('/english-viii/engineering-week')
-def eng_week_english():
-    html_path = os.path.join('8th_quarter','English','Engineering_week','report.html')
-    pdf_path = '/pdf/engineering-week'
-    return render_template(html_path,pdf_path=pdf_path)
-
-
-
-
-# ===== Project Management
-@app.route('/project-management/engineering-week')
-def eng_week_project():
-    html_path = os.path.join('8th_quarter','Project_Management','Engineering_week','report.html')
-    pdf_path = '/pdf/engineering-week'
-    return render_template(html_path,pdf_path=pdf_path)
-
-
-
-
-# ===== Requirements Engineering
-@app.route('/requirements-engineering/engineering-week')
-def eng_week_requirements():
-    html_path = os.path.join('8th_quarter','Requirements_Engineering','Engineering_week','report.html')
-    pdf_path = '/pdf/engineering-week'
-    return render_template(html_path,pdf_path=pdf_path)
-
-
-
-
-
