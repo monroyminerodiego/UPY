@@ -15,8 +15,8 @@ services:
       - "501"
     env_file:
       - .env
-    # networks:
-    #   - proxy_net
+    networks:
+      - proxy_net
 
   web_visualization:
     build:
@@ -32,14 +32,14 @@ services:
       - api_visualization
     networks:
       - upy_net
-      # - proxy_net
+      - proxy_net
 
   api_visualization:
     build:
       context: ./Files/9th_quarter/visualization-tools/API
     container_name: api_visualization
-    ports:
-      - "503:503"
+    # ports:
+    #   - "503:503"
     expose:
       - "503"
     env_file:
@@ -49,23 +49,23 @@ services:
       - postgres_visualization
     networks:
       - upy_net
-      # - proxy_net
+      - proxy_net
       
   
   
   
 
   # =============== Servicios Privados ===============
-  inyector_visualization:
-    build:
-      context: ./Files/9th_quarter/visualization-tools/Inyector
-    container_name: inyector_visualization
-    env_file:
-      - .env
-    depends_on:
-      - api_visualization
-    networks:
-      - upy_net
+  # inyector_visualization:
+  #   build:
+  #     context: ./Files/9th_quarter/visualization-tools/Inyector
+  #   container_name: inyector_visualization
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - api_visualization
+  #   networks:
+  #     - upy_net
 
   # gen_visualization:
   #   build:
@@ -108,8 +108,8 @@ services:
 networks:
   upy_net:
     driver: bridge
-  # proxy_net:
-  #   external: true
+  proxy_net:
+    external: true
 
 volumes:
   mongo_data:
