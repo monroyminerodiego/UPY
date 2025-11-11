@@ -22,6 +22,9 @@ def index():
         ],
         "Visualization Tools II":[
             "Personalized Web"
+        ],
+        "Business Intelligence":[
+            "Credit Risk"
         ]
     }
     for k,v in materias_9.items(): materias_final[k] = v
@@ -45,6 +48,15 @@ def index():
     materias_final = dict(sorted(materias_final.items(),key=lambda item: item[0]))
 
     return render_template('/index.html', materias = materias_final)
+
+
+
+
+# ===== Business Intelligence
+@app.route('/business-intelligence/credit-risk')
+def credit_risk():
+    html_path = os.path.join('9th_quarter','Business_Intelligence','PR3','index.html')
+    return render_template(html_path)
 
 
 

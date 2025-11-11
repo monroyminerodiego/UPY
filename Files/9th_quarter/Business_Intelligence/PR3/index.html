@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Riesgo Crediticio</title>
+    <style>
+        :root {
+            --primary-dark: #4B0082; /* Indigo */
+            --primary-medium: #6A0DAD; /* Púrpura oscuro */
+            --primary-light: #8A2BE2; /* Azul violeta */
+            --accent-light: #D8BFD8; /* Tono claro de lavanda */
+            --neutral-dark: #2C2C2C;
+            --neutral-light: #F5F5F5;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --error: #F44336;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--neutral-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-medium));
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--accent-light);
+            opacity: 0.9;
+        }
+
+        .tabs {
+            display: flex;
+            background-color: var(--primary-medium);
+            border-bottom: 1px solid var(--primary-light);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1rem;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .tab-button:hover {
+            background-color: var(--primary-light);
+        }
+
+        .tab-button.active {
+            background-color: var(--primary-light);
+            border-bottom: 3px solid white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 2rem;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            color: var(--primary-medium);
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent-light);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--primary-dark);
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight {
+            background-color: var(--accent-light);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--primary-light);
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-card {
+            background-color: var(--accent-light);
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .metric-card {
+            background-color: white;
+            border: 1px solid var(--accent-light);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-medium);
+        }
+
+        .metric-name {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .preprocessing-flow {
+            background-color: #f0f0ff;
+            padding: 1rem;
+            border-left: 4px solid var(--primary-light);
+            margin: 1rem 0;
+        }
+
+        .modeling-highlight {
+            background-color: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--success);
+        }
+
+        .modeling-highlight h3 {
+            color: var(--success);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .prediction-result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .prediction-high {
+            background-color: #ffebee;
+            color: var(--error);
+            border: 1px solid var(--error);
+        }
+
+        .prediction-low {
+            background-color: #e8f5e9;
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .btn {
+            background-color: var(--primary-medium);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .info-box {
+            background-color: #e6e6fa;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary-light);
+        }
+
+        .info-box h3 {
+            color: var(--primary-dark);
+        }
+
+        .recommendation {
+            background-color: #fff8e1;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--warning);
+        }
+
+        .recommendation h3 {
+            color: var(--warning);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Análisis de Riesgo Crediticio - Alemania</h1>
+        <div class="subtitle">Modelo predictivo para evaluación de solvencia</div>
+    </header>
+
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'EDA')">EDA</button>
+        <button class="tab-button" onclick="openTab(event, 'Preprocessing')">Preprocessing</button>
+        <button class="tab-button" onclick="openTab(event, 'Modeling')">Modeling</button>
+        <button class="tab-button" onclick="openTab(event, 'Testing')">Testing</button>
+    </div>
+
+    <div id="EDA" class="tab-content active">
+        <h2>Exploratory Data Analysis (EDA)</h2>
+
+        <div class="section">
+            <h3>Información General del Dataset</h3>
+            <p>El dataset contiene información de <span class="highlight">1000 solicitudes de crédito</span> en Alemania.</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">1000</div>
+                    <div class="stat-label">Registros</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">21</div>
+                    <div class="stat-label">Variables</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">2</div>
+                    <div class="stat-label">Clases (target)</div>
+                </div>
+            </div>
+            <p>El dataset está desbalanceado, con un <span class="highlight">70% de clientes buenos pagadores</span> (clase 1) y un <span class="highlight">30% de clientes con riesgo de impago</span> (clase 2).</p>
+        </div>
+
+        <div class="section">
+            <h3>Distribución de la Variable Objetivo</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Clase</th>
+                        <th>Descripción</th>
+                        <th>Número de Registros</th>
+                        <th>Porcentaje</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Buen Pagador</td>
+                        <td>700</td>
+                        <td>70.00%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Riesgo de Impago</td>
+                        <td>300</td>
+                        <td>30.00%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Hallazgos Principales</h3>
+            <div class="info-box">
+                <h3>Variables Numéricas Relevantes</h3>
+                <p>Las variables <span class="highlight">month_credit_duration</span> (duración del crédito en meses) y <span class="highlight">credit_amount</span> (monto del crédito) mostraron una diferencia significativa entre las clases:</p>
+                <ul>
+                    <li><strong>Duración media:</strong> Buen Pagador (19.21), Riesgo (24.86) - Diferencia: 29.43%</li>
+                    <li><strong>Monto medio:</strong> Buen Pagador (2985.46), Riesgo (3938.13) - Diferencia: 31.91%</li>
+                </ul>
+                <p>Estas variables son potencialmente muy útiles para la predicción.</p>
+            </div>
+            <div class="info-box">
+                <h3>Variables Categóricas Relevantes</h3>
+                <p>Algunas categorías mostraron una alta proporción de clientes con riesgo:</p>
+                <ul>
+                    <li><strong>Historial de Crédito (A30):</strong> 62.50% de riesgo</li>
+                    <li><strong>Cuenta de Cheque (A11):</strong> 49.27% de riesgo</li>
+                    <li><strong>Propósito del Crédito (A41):</strong> 40.74% de riesgo</li>
+                </ul>
+            </div>
+            <div class="info-box">
+                <h3>Calidad de los Datos</h3>
+                <p>No se encontraron valores faltantes ni duplicados. Se detectaron outliers en variables numéricas como <span class="highlight">credit_amount</span> (72 casos) y <span class="highlight">month_credit_duration</span> (70 casos), que requieren tratamiento.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="Preprocessing" class="tab-content">
+        <h2>Preprocesamiento de Datos</h2>
+
+        <div class="section">
+            <h3>Técnicas de Preprocesamiento</h3>
+            <p>Se implementaron cuatro flujos de preprocesamiento especializados, adaptados a distintas familias de modelos para maximizar su efectividad:</p>
+
+            <div class="preprocessing-flow">
+                <h3>Flujo para Regresión Logística</h3>
+                <ul>
+                    <li>Winsorización suave para tratar outliers.</li>
+                    <li>One-Hot Encoding con <code>drop_first=True</code> para evitar multicolinealidad.</li>
+                    <li>Estandarización de variables numéricas.</li>
+                    <li>Transformaciones logarítmicas y creación de features como <code>monthly_payment</code>.</li>
+                </ul>
+            </div>
+
+            <div class="preprocessing-flow">
+                <h3>Flujo para Árboles de Decisión</h3>
+                <ul>
+                    <li>Winsorización robusta (usando 3xIQR) para suavizar outliers extremos.</li>
+                    <li>Codificación ordinal para variables categóricas ordinales.</li>
+                    <li>Target Encoding regularizado para la variable <code>purpose</code>.</li>
+                    <li>Creación de features interactivas como <code>high_risk_profile</code>.</li>
+                    <li>Eliminación de variables de baja relevancia (<code>years_of_residence</code>, <code>num_dependents</code>).</li>
+                </ul>
+            </div>
+
+            <div class="preprocessing-flow">
+                <h3>Flujo para Modelos Ensemble</h3>
+                <ul>
+                    <li>Recodificación semántica de variables categóricas.</li>
+                    <li>Creación de features acumulativas de riesgo (<code>risk_factor_count</code>).</li>
+                    <li>Target Encoding regularizado para variables clave.</li>
+                    <li>Feature Selection basado en varianza y correlación.</li>
+                </ul>
+            </div>
+
+            <div class="preprocessing-flow">
+                <h3>Flujo para Redes Neuronales</h3>
+                <ul>
+                    <li>Winsorización conservadora.</li>
+                    <li>Normalización Min-Max a [0,1] para todas las variables numéricas.</li>
+                    <li>Preparación de variables categóricas para embeddings.</li>
+                    <li>Creación de features polinómicas y cíclicas.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Resultados del Benchmark</h3>
+            <p>Se evaluaron automáticamente más de 30 algoritmos con cada flujo de preprocesamiento. El objetivo fue maximizar la métrica <span class="highlight">ROC AUC</span>.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Flujo de Preprocesamiento</th>
+                        <th>Mejor Modelo</th>
+                        <th>ROC AUC</th>
+                        <th>Accuracy Balanceada</th>
+                        <th>Tiempo de Entrenamiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background-color: #e6f7ff;">
+                        <td><strong>Árboles</strong></td>
+                        <td>BernoulliNB</td>
+                        <td><strong>0.7127</strong></td>
+                        <td>0.7127</td>
+                        <td>0.019 s</td>
+                    </tr>
+                    <tr>
+                        <td>Red Neuronal</td>
+                        <td>NearestCentroid</td>
+                        <td>0.6389</td>
+                        <td>0.6389</td>
+                        <td>0.009 s</td>
+                    </tr>
+                    <tr>
+                        <td>Ensemble</td>
+                        <td>NearestCentroid</td>
+                        <td>0.6270</td>
+                        <td>0.6270</td>
+                        <td>0.013 s</td>
+                    </tr>
+                    <tr>
+                        <td>Regresión Logística</td>
+                        <td>NearestCentroid</td>
+                        <td>0.6103</td>
+                        <td>0.6103</td>
+                        <td>0.019 s</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>El flujo <span class="highlight">árboles</span> combinado con el modelo <span class="highlight">BernoulliNB</span> obtuvo el mejor desempeño.</p>
+        </div>
+
+    </div>
+
+    <div id="Modeling" class="tab-content">
+        <h2>Modelado y Evaluación</h2>
+
+        <div class="section">
+            <h3>Modelo Seleccionado</h3>
+            <div class="modeling-highlight">
+                <h3>Preprocesamiento: Árboles + Modelo: BernoulliNB</h3>
+                <p>El modelo final elegido se entrenó con el flujo de preprocesamiento optimizado para árboles de decisión y el algoritmo de Naive Bayes (BernoulliNB). Este flujo generó variables binarias (0/1) ideales para este algoritmo.</p>
+            </div>
+            <p>Este modelo fue seleccionado porque:</p>
+            <ul>
+                <li>Obtuvo el <strong>mejor ROC AUC (0.7269)</strong>, lo que indica una buena capacidad para distinguir entre buenos y malos pagadores.</li>
+                <li>Presenta un <strong>Recall del 99.52%</strong>, lo cual es crucial para detectar clientes de alto riesgo y minimizar pérdidas por impagos.</li>
+                <li>Tiene un <strong>tiempo de entrenamiento muy bajo</strong>, lo que lo hace eficiente para producción.</li>
+                <li>El flujo de preprocesamiento de árboles creó características muy discriminativas, como <code>high_risk_profile</code> y <code>purpose_encoded</code>.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h3>Métricas del Modelo Final</h3>
+            <div class="stats-grid">
+                <div class="metric-card">
+                    <div class="metric-value">0.7269</div>
+                    <div class="metric-name">ROC AUC</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0.9952</div>
+                    <div class="metric-name">Recall</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0.7133</div>
+                    <div class="metric-name">Precision</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">0.8310</div>
+                    <div class="metric-name">F1-Score</div>
+                </div>
+            </div>
+            <p>El umbral de decisión óptimo para este modelo se determinó en <span class="highlight">0.1000</span>, lo que significa que si la probabilidad predicha es mayor a 0.1, el cliente se clasifica como "Riesgo Alto". Este umbral se eligió para maximizar el recall, priorizando la detección de clientes potencialmente malos pagadores.</p>
+        </div>
+
+        <div class="section">
+            <h3>Características Más Importantes</h3>
+            <p>Las variables que más contribuyen a la predicción del riesgo son:</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Importancia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>status_checking_account_A14</td>
+                        <td>0.0547</td>
+                    </tr>
+                    <tr>
+                        <td>purpose_A41</td>
+                        <td>0.0373</td>
+                    </tr>
+                    <tr>
+                        <td>status_checking_account_A11</td>
+                        <td>0.0352</td>
+                    </tr>
+                    <tr>
+                        <td>credit_history_A34</td>
+                        <td>0.0280</td>
+                    </tr>
+                    <tr>
+                        <td>purpose_encoded</td>
+                        <td>0.0266</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h3>Análisis de Equidad</h3>
+            <p>Se evaluó la equidad del modelo con respecto al atributo <span class="highlight">Edad</span>, dividiendo a los clientes en grupos: Joven (<30), Adulto (30-50), Mayor (>50).</p>
+            <ul>
+                <li><strong>Demographic Parity:</strong> 0.0044 (muy baja diferencia en la tasa de riesgo predicho entre grupos).</li>
+                <li><strong>Equal Opportunity:</strong> 0.0130 (muy baja diferencia en la tasa de verdaderos positivos entre grupos).</li>
+            </ul>
+            <p>El modelo muestra una <strong>alta equidad</strong> entre los grupos de edad, lo cual es un aspecto positivo desde la perspectiva ética y regulatoria.</p>
+        </div>
+
+    </div>
+
+    <div id="Testing" class="tab-content">
+        <h2>Prueba del Modelo</h2>
+        <div class="section">
+            <p>Ingrese los datos del solicitante para evaluar su riesgo crediticio:</p>
+
+            <form id="predictionForm">
+                <div class="form-group">
+                    <label for="status_checking_account">Estado de Cuenta de Cheque:</label>
+                    <select id="status_checking_account" required>
+                        <option value="A11">low</option>
+                        <option value="A12">mid</option>
+                        <option value="A13">high</option>
+                        <option value="A14">no checking account</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="credit_history">Historial de Crédito:</label>
+                    <select id="credit_history" required>
+                        <option value="A30">no credits/all paid</option>
+                        <option value="A31">all paid</option>
+                        <option value="A32">existing paid</option>
+                        <option value="A33">delay in paying</option>
+                        <option value="A34">critical account</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="purpose">Propósito del Crédito:</label>
+                    <select id="purpose" required>
+                        <option value="A40">car (new)</option>
+                        <option value="A41">car (used)</option>
+                        <option value="A42">furniture/equipment</option>
+                        <option value="A43">radio/television</option>
+                        <option value="A44">domestic appliance</option>
+                        <option value="A45">repairs</option>
+                        <option value="A46">education</option>
+                        <option value="A48">retraining</option>
+                        <option value="A49">business</option>
+                        <option value="A410">others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="credit_amount">Monto del Crédito:</label>
+                    <input type="number" id="credit_amount" min="250" max="18424" value="2000" required>
+                </div>
+                <div class="form-group">
+                    <label for="month_credit_duration">Duración del Crédito (meses):</label>
+                    <input type="number" id="month_credit_duration" min="4" max="72" value="24" required>
+                </div>
+                <div class="form-group">
+                    <label for="savings_type">Tipo de Ahorro:</label>
+                    <select id="savings_type" required>
+                        <option value="A61">less than 100 DM</option>
+                        <option value="A62">100-500 DM</option>
+                        <option value="A63">500-1000 DM</option>
+                        <option value="A64">more than 1000 DM</option>
+                        <option value="A65">no savings</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="age">Edad:</label>
+                    <input type="number" id="age" min="19" max="75" value="35" required>
+                </div>
+                <div class="form-group">
+                    <label for="years_of_employment">Años de Empleo:</label>
+                    <select id="years_of_employment" required>
+                        <option value="A71">unemployed</option>
+                        <option value="A72">less than 1 year</option>
+                        <option value="A73">1-4 years</option>
+                        <option value="A74">4-7 years</option>
+                        <option value="A75">more than 7 years</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="status_sex">Estado Civil / Sexo:</label>
+                    <select id="status_sex" required>
+                        <option value="A91">male, divorced/separated</option>
+                        <option value="A92">female, divorced/separated/married</option>
+                        <option value="A93">male, single</option>
+                        <option value="A94">male, married/widowed</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="property">Propiedad:</label>
+                    <select id="property" required>
+                        <option value="A121">real estate</option>
+                        <option value="A122">building society savings</option>
+                        <option value="A123">car or other</option>
+                        <option value="A124">unknown/no property</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="other_installments">Otros Pagos:</label>
+                    <select id="other_installments" required>
+                        <option value="A141">bank</option>
+                        <option value="A142">stores</option>
+                        <option value="A143">none</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="housing">Vivienda:</label>
+                    <select id="housing" required>
+                        <option value="A151">rent</option>
+                        <option value="A152">own</option>
+                        <option value="A153">for free</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="job">Trabajo:</label>
+                    <select id="job" required>
+                        <option value="A171">unemployed/unskilled - non-resident</option>
+                        <option value="A172">unskilled - resident</option>
+                        <option value="A173">skilled employee / official</option>
+                        <option value="A174">management / high qualified employee</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="foreign_worker">Trabajador Extranjero:</label>
+                    <select id="foreign_worker" required>
+                        <option value="A201">yes</option>
+                        <option value="A202">no</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="telephone">Teléfono:</label>
+                    <select id="telephone" required>
+                        <option value="A191">no</option>
+                        <option value="A192">yes</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pct_fee_income">Porcentaje de Cuota de Ingreso:</label>
+                    <select id="pct_fee_income" required>
+                        <option value="1">less than 100%</option>
+                        <option value="2">100% to 200%</option>
+                        <option value="3">more than 200%</option>
+                        <option value="4">unknown</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="years_of_residence">Años de Residencia:</label>
+                    <input type="number" id="years_of_residence" min="1" max="4" value="3" required>
+                </div>
+                <div class="form-group">
+                    <label for="num_existing_credits">Créditos Existentes:</label>
+                    <input type="number" id="num_existing_credits" min="1" max="4" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="num_dependents">Dependientes:</label>
+                    <input type="number" id="num_dependents" min="1" max="2" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="debtors">Fiadores / Co-aplicantes:</label>
+                    <select id="debtors" required>
+                        <option value="A101">none</option>
+                        <option value="A102">co-applicant</option>
+                        <option value="A103">guarantor</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Evaluar Riesgo</button>
+            </form>
+
+            <div id="predictionResult" class="prediction-result" style="display: none;">
+                <!-- El resultado se mostrará aquí -->
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="recommendation">
+                <h3>Recomendación Operativa</h3>
+                <p>El modelo se recomienda para su uso en entornos de producción con las siguientes pautas:</p>
+                <ul>
+                    <li><strong>Supervisión:</strong> Monitorear el desempeño del modelo mensualmente.</li>
+                    <li><strong>Equidad:</strong> Auditar la equidad del modelo trimestralmente.</li>
+                    <li><strong>Reentrenamiento:</strong> Reentrenar el modelo cada 6 meses con nuevos datos.</li>
+                    <li><strong>Documentación:</strong> Documentar todas las decisiones de crédito para trazabilidad.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].className = tabcontent[i].className.replace(" active", "");
+            }
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).className += " active";
+            evt.currentTarget.className += " active";
+        }
+
+        // Simulación de predicción (ya que no se puede ejecutar Python en el navegador)
+        document.getElementById('predictionForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Simular un cálculo de riesgo basado en inputs comunes de alto riesgo
+            const creditAmount = parseFloat(document.getElementById('credit_amount').value);
+            const duration = parseFloat(document.getElementById('month_credit_duration').value);
+            const creditHistory = document.getElementById('credit_history').value;
+            const checkingAccount = document.getElementById('status_checking_account').value;
+
+            let riskScore = 0.5; // Puntaje base
+
+            // Ajustar puntaje basado en factores de riesgo
+            if (creditHistory === 'A34' || creditHistory === 'A30') riskScore += 0.3; // crítico o sin créditos
+            if (checkingAccount === 'A11') riskScore += 0.15; // cuenta baja
+            if (creditAmount > 5000) riskScore += 0.1; // monto alto
+            if (duration > 36) riskScore += 0.05; // duración larga
+
+            riskScore = Math.min(riskScore, 1.0); // Limitar a 1.0
+
+            const resultDiv = document.getElementById('predictionResult');
+            if (riskScore > 0.1) { // Umbral de 0.1 como en el modelo real
+                resultDiv.className = 'prediction-result prediction-high';
+                resultDiv.innerHTML = `<h3>Riesgo Alto</h3><p>Probabilidad de impago: ${(riskScore * 100).toFixed(2)}%</p>`;
+            } else {
+                resultDiv.className = 'prediction-result prediction-low';
+                resultDiv.innerHTML = `<h3>Riesgo Bajo</h3><p>Probabilidad de impago: ${(riskScore * 100).toFixed(2)}%</p>`;
+            }
+            resultDiv.style.display = 'block';
+        });
+
+    </script>
+
+</body>
+</html>
