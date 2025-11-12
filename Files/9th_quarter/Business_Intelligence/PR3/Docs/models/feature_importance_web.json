@@ -1,0 +1,142 @@
+[
+  {
+    "rank": 37,
+    "feature": "status_checking_account_A14",
+    "importance": 0.09153604797798445,
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "original_feature": "status"
+  },
+  {
+    "rank": 34,
+    "feature": "status_checking_account_A11",
+    "importance": 0.07890676205022977,
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "original_feature": "status"
+  },
+  {
+    "rank": 32,
+    "feature": "purpose_encoded",
+    "importance": 0.060418886983554215,
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "original_feature": "purpose"
+  },
+  {
+    "rank": 42,
+    "feature": "credit_history_A34",
+    "importance": 0.05770286430329156,
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "original_feature": "credit"
+  },
+  {
+    "rank": 1,
+    "feature": "month_credit_duration",
+    "importance": 0.05126841053961265,
+    "description": "Caracter\u00edstica derivada de procesamiento de month",
+    "original_feature": "month"
+  },
+  {
+    "rank": 44,
+    "feature": "purpose_A41",
+    "importance": 0.05013371111337132,
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "original_feature": "purpose"
+  },
+  {
+    "rank": 53,
+    "feature": "savings_type_A61",
+    "importance": 0.04449190182736412,
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "original_feature": "savings"
+  },
+  {
+    "rank": 9,
+    "feature": "high_amount",
+    "importance": 0.041180065994418334,
+    "description": "Caracter\u00edstica derivada de procesamiento de high",
+    "original_feature": "high"
+  },
+  {
+    "rank": 43,
+    "feature": "purpose_A40",
+    "importance": 0.036989426830320866,
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "original_feature": "purpose"
+  },
+  {
+    "rank": 17,
+    "feature": "debtors_A103",
+    "importance": 0.03642141278231466,
+    "description": "Caracter\u00edstica derivada de procesamiento de debtors",
+    "original_feature": "debtors"
+  },
+  {
+    "rank": 38,
+    "feature": "credit_history_A30",
+    "importance": 0.03259366058127705,
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "original_feature": "credit"
+  },
+  {
+    "rank": 21,
+    "feature": "property_A124",
+    "importance": 0.032467392412386706,
+    "description": "Caracter\u00edstica derivada de procesamiento de property",
+    "original_feature": "property"
+  },
+  {
+    "rank": 57,
+    "feature": "savings_type_A65",
+    "importance": 0.03081964651580731,
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "original_feature": "savings"
+  },
+  {
+    "rank": 27,
+    "feature": "other_installments_A143",
+    "importance": 0.030271607687117175,
+    "description": "Caracter\u00edstica derivada de procesamiento de other",
+    "original_feature": "other"
+  },
+  {
+    "rank": 56,
+    "feature": "savings_type_A64",
+    "importance": 0.029904248340813958,
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "original_feature": "savings"
+  },
+  {
+    "rank": 35,
+    "feature": "status_checking_account_A12",
+    "importance": 0.029722121845546734,
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "original_feature": "status"
+  },
+  {
+    "rank": 39,
+    "feature": "credit_history_A31",
+    "importance": 0.029269988591762282,
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "original_feature": "credit"
+  },
+  {
+    "rank": 50,
+    "feature": "purpose_A46",
+    "importance": 0.029022572477573557,
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "original_feature": "purpose"
+  },
+  {
+    "rank": 3,
+    "feature": "pct_fee_income",
+    "importance": 0.02849740714058607,
+    "description": "Caracter\u00edstica derivada de procesamiento de pct",
+    "original_feature": "pct"
+  },
+  {
+    "rank": 2,
+    "feature": "credit_amount",
+    "importance": 0.028470366981149037,
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "original_feature": "credit"
+  }
+]

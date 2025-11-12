@@ -1,0 +1,89 @@
+{
+  "dataset_info": {
+    "total_samples": 1000,
+    "positive_class_ratio": 0.7,
+    "train_test_split": "70/30",
+    "stratified": true
+  },
+  "model_info": {
+    "model_type": "RidgeClassifierCV",
+    "best_alpha": 1000.0,
+    "calibration_method": "sigmoid (Platt scaling)",
+    "training_time_seconds": 0.22009897232055664,
+    "calibration_time_seconds": 0.00470280647277832,
+    "class_weights": {
+      "0": 1.6666666666666667,
+      "1": 0.7142857142857143
+    }
+  },
+  "threshold_optimization": {
+    "search_range": [
+      0.1,
+      0.9
+    ],
+    "step": 0.01,
+    "best_threshold": 0.4199999999999998,
+    "best_f1_train": 0.8587570621468926
+  },
+  "evaluation_metrics": {
+    "default_threshold_0.5": {
+      "Accuracy": 0.7433333333333333,
+      "Precision": 0.7878787878787878,
+      "Recall": 0.8666666666666667,
+      "F1": 0.8253968253968254,
+      "ROC-AUC": 0.7824867724867726,
+      "PR-AUC": 0.8900281787845566
+    },
+    "optimized_threshold": {
+      "threshold": 0.4199999999999998,
+      "Accuracy": 0.75,
+      "Precision": 0.7777777777777778,
+      "Recall": 0.9,
+      "F1": 0.8344370860927153,
+      "ROC-AUC": 0.7824867724867726,
+      "PR-AUC": 0.8900281787845566
+    }
+  },
+  "feature_importance_top10": [
+    {
+      "feature": "status_checking_account_A14",
+      "importance": 0.09153604797798445
+    },
+    {
+      "feature": "status_checking_account_A11",
+      "importance": 0.07890676205022977
+    },
+    {
+      "feature": "purpose_encoded",
+      "importance": 0.060418886983554215
+    },
+    {
+      "feature": "credit_history_A34",
+      "importance": 0.05770286430329156
+    },
+    {
+      "feature": "month_credit_duration",
+      "importance": 0.05126841053961265
+    },
+    {
+      "feature": "purpose_A41",
+      "importance": 0.05013371111337132
+    },
+    {
+      "feature": "savings_type_A61",
+      "importance": 0.04449190182736412
+    },
+    {
+      "feature": "high_amount",
+      "importance": 0.041180065994418334
+    },
+    {
+      "feature": "purpose_A40",
+      "importance": 0.036989426830320866
+    },
+    {
+      "feature": "debtors_A103",
+      "importance": 0.03642141278231466
+    }
+  ]
+}

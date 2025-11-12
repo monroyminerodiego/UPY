@@ -1,0 +1,662 @@
+{
+  "month_credit_duration": {
+    "name": "month_credit_duration",
+    "type": "num\u00e9rico continuo",
+    "description": "Caracter\u00edstica derivada de procesamiento de month",
+    "min": 4.0,
+    "max": 60.0,
+    "mean": 20.891,
+    "std": 12.013802497562978,
+    "original_feature": "month"
+  },
+  "credit_amount": {
+    "name": "credit_amount",
+    "type": "num\u00e9rico continuo",
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "min": 250.0,
+    "max": 11792.5,
+    "mean": 3221.683,
+    "std": 2636.7859079636014,
+    "original_feature": "credit"
+  },
+  "pct_fee_income": {
+    "name": "pct_fee_income",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de pct",
+    "min": 1.0,
+    "max": 4.0,
+    "mean": 2.973,
+    "std": 1.1187146743126786,
+    "original_feature": "pct"
+  },
+  "age": {
+    "name": "age",
+    "type": "num\u00e9rico continuo",
+    "description": "Caracter\u00edstica age",
+    "min": 19.0,
+    "max": 75.0,
+    "mean": 35.546,
+    "std": 11.375468574317512,
+    "original_feature": "age"
+  },
+  "num_existing_credits": {
+    "name": "num_existing_credits",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de num",
+    "min": 1.0,
+    "max": 4.0,
+    "mean": 1.407,
+    "std": 0.5776544682461002,
+    "original_feature": "num"
+  },
+  "credit_to_duration_ratio": {
+    "name": "credit_to_duration_ratio",
+    "type": "num\u00e9rico continuo",
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "min": 24.05555555555556,
+    "max": 1965.4166666666667,
+    "mean": 165.71598197331627,
+    "std": 138.56502671686602,
+    "original_feature": "credit"
+  },
+  "age_squared": {
+    "name": "age_squared",
+    "type": "num\u00e9rico continuo",
+    "description": "Caracter\u00edstica derivada de procesamiento de age",
+    "min": 361.0,
+    "max": 5625.0,
+    "mean": 1392.79,
+    "std": 954.1927193421911,
+    "original_feature": "age"
+  },
+  "high_duration": {
+    "name": "high_duration",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de high",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.23,
+    "std": 0.42104308244795724,
+    "original_feature": "high"
+  },
+  "high_amount": {
+    "name": "high_amount",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de high",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.25,
+    "std": 0.4332293707583636,
+    "original_feature": "high"
+  },
+  "high_risk_profile": {
+    "name": "high_risk_profile",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de high",
+    "min": 0.0,
+    "max": 0.0,
+    "mean": 0.0,
+    "std": 0.0,
+    "original_feature": "high"
+  },
+  "status_sex_A91": {
+    "name": "status_sex_A91",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.05,
+    "std": 0.2180540014481448,
+    "original_feature": "status"
+  },
+  "status_sex_A92": {
+    "name": "status_sex_A92",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.31,
+    "std": 0.4627246633951059,
+    "original_feature": "status"
+  },
+  "status_sex_A93": {
+    "name": "status_sex_A93",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.548,
+    "std": 0.4979396991041626,
+    "original_feature": "status"
+  },
+  "status_sex_A94": {
+    "name": "status_sex_A94",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.092,
+    "std": 0.28917057184232914,
+    "original_feature": "status"
+  },
+  "debtors_A101": {
+    "name": "debtors_A101",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de debtors",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.907,
+    "std": 0.290577761426155,
+    "original_feature": "debtors"
+  },
+  "debtors_A102": {
+    "name": "debtors_A102",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de debtors",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.041,
+    "std": 0.19838941090279583,
+    "original_feature": "debtors"
+  },
+  "debtors_A103": {
+    "name": "debtors_A103",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de debtors",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.052,
+    "std": 0.22213812222431645,
+    "original_feature": "debtors"
+  },
+  "property_A121": {
+    "name": "property_A121",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de property",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.282,
+    "std": 0.45019848809017415,
+    "original_feature": "property"
+  },
+  "property_A122": {
+    "name": "property_A122",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de property",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.232,
+    "std": 0.42232020358296196,
+    "original_feature": "property"
+  },
+  "property_A123": {
+    "name": "property_A123",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de property",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.332,
+    "std": 0.47116663506449397,
+    "original_feature": "property"
+  },
+  "property_A124": {
+    "name": "property_A124",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de property",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.154,
+    "std": 0.36112935966826953,
+    "original_feature": "property"
+  },
+  "housing_A151": {
+    "name": "housing_A151",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de housing",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.179,
+    "std": 0.3835441384066586,
+    "original_feature": "housing"
+  },
+  "housing_A152": {
+    "name": "housing_A152",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de housing",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.713,
+    "std": 0.4525879316064844,
+    "original_feature": "housing"
+  },
+  "housing_A153": {
+    "name": "housing_A153",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de housing",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.108,
+    "std": 0.3105357184486713,
+    "original_feature": "housing"
+  },
+  "other_installments_A141": {
+    "name": "other_installments_A141",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de other",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.139,
+    "std": 0.3461196307619647,
+    "original_feature": "other"
+  },
+  "other_installments_A142": {
+    "name": "other_installments_A142",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de other",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.047,
+    "std": 0.21174474216810163,
+    "original_feature": "other"
+  },
+  "other_installments_A143": {
+    "name": "other_installments_A143",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de other",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.814,
+    "std": 0.38930136855083824,
+    "original_feature": "other"
+  },
+  "telephone_A191": {
+    "name": "telephone_A191",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de telephone",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.596,
+    "std": 0.49094299569810046,
+    "original_feature": "telephone"
+  },
+  "telephone_A192": {
+    "name": "telephone_A192",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de telephone",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.404,
+    "std": 0.49094299569810046,
+    "original_feature": "telephone"
+  },
+  "foreign_worker_A201": {
+    "name": "foreign_worker_A201",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de foreign",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.963,
+    "std": 0.18885620632287056,
+    "original_feature": "foreign"
+  },
+  "foreign_worker_A202": {
+    "name": "foreign_worker_A202",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de foreign",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.037,
+    "std": 0.18885620632287056,
+    "original_feature": "foreign"
+  },
+  "purpose_encoded": {
+    "name": "purpose_encoded",
+    "type": "num\u00e9rico continuo",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.6196581204783268,
+    "max": 0.834281179194798,
+    "mean": 0.7048832084924599,
+    "std": 0.075114676475787,
+    "original_feature": "purpose"
+  },
+  "log_credit_amount": {
+    "name": "log_credit_amount",
+    "type": "num\u00e9rico continuo",
+    "description": "Caracter\u00edstica derivada de procesamiento de log",
+    "min": 5.525452939131784,
+    "max": 9.37530381122393,
+    "mean": 7.7855306454944255,
+    "std": 0.7678527652679153,
+    "original_feature": "log"
+  },
+  "status_checking_account_A11": {
+    "name": "status_checking_account_A11",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.274,
+    "std": 0.4462321403968154,
+    "original_feature": "status"
+  },
+  "status_checking_account_A12": {
+    "name": "status_checking_account_A12",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.269,
+    "std": 0.44366184852411616,
+    "original_feature": "status"
+  },
+  "status_checking_account_A13": {
+    "name": "status_checking_account_A13",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.063,
+    "std": 0.24308453280719056,
+    "original_feature": "status"
+  },
+  "status_checking_account_A14": {
+    "name": "status_checking_account_A14",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de status",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.394,
+    "std": 0.4888793337859589,
+    "original_feature": "status"
+  },
+  "credit_history_A30": {
+    "name": "credit_history_A30",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.04,
+    "std": 0.19605723255834875,
+    "original_feature": "credit"
+  },
+  "credit_history_A31": {
+    "name": "credit_history_A31",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.049,
+    "std": 0.21597603025716913,
+    "original_feature": "credit"
+  },
+  "credit_history_A32": {
+    "name": "credit_history_A32",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.53,
+    "std": 0.4993489254512813,
+    "original_feature": "credit"
+  },
+  "credit_history_A33": {
+    "name": "credit_history_A33",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.088,
+    "std": 0.28343665312788385,
+    "original_feature": "credit"
+  },
+  "credit_history_A34": {
+    "name": "credit_history_A34",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de credit",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.293,
+    "std": 0.4553661805166897,
+    "original_feature": "credit"
+  },
+  "purpose_A40": {
+    "name": "purpose_A40",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.234,
+    "std": 0.42358402168096876,
+    "original_feature": "purpose"
+  },
+  "purpose_A41": {
+    "name": "purpose_A41",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.103,
+    "std": 0.304110972316823,
+    "original_feature": "purpose"
+  },
+  "purpose_A410": {
+    "name": "purpose_A410",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.012,
+    "std": 0.10893974420691409,
+    "original_feature": "purpose"
+  },
+  "purpose_A42": {
+    "name": "purpose_A42",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.181,
+    "std": 0.3852108349818153,
+    "original_feature": "purpose"
+  },
+  "purpose_A43": {
+    "name": "purpose_A43",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.28,
+    "std": 0.4492235543710968,
+    "original_feature": "purpose"
+  },
+  "purpose_A44": {
+    "name": "purpose_A44",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.012,
+    "std": 0.10893974420691409,
+    "original_feature": "purpose"
+  },
+  "purpose_A45": {
+    "name": "purpose_A45",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.022,
+    "std": 0.14675672910479282,
+    "original_feature": "purpose"
+  },
+  "purpose_A46": {
+    "name": "purpose_A46",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.05,
+    "std": 0.2180540014481448,
+    "original_feature": "purpose"
+  },
+  "purpose_A48": {
+    "name": "purpose_A48",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.009,
+    "std": 0.09448771310560929,
+    "original_feature": "purpose"
+  },
+  "purpose_A49": {
+    "name": "purpose_A49",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de purpose",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.097,
+    "std": 0.296105857217784,
+    "original_feature": "purpose"
+  },
+  "savings_type_A61": {
+    "name": "savings_type_A61",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.603,
+    "std": 0.48952081736186726,
+    "original_feature": "savings"
+  },
+  "savings_type_A62": {
+    "name": "savings_type_A62",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.103,
+    "std": 0.30411097231682305,
+    "original_feature": "savings"
+  },
+  "savings_type_A63": {
+    "name": "savings_type_A63",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.063,
+    "std": 0.24308453280719056,
+    "original_feature": "savings"
+  },
+  "savings_type_A64": {
+    "name": "savings_type_A64",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.048,
+    "std": 0.21387319079712103,
+    "original_feature": "savings"
+  },
+  "savings_type_A65": {
+    "name": "savings_type_A65",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de savings",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.183,
+    "std": 0.3868600013708585,
+    "original_feature": "savings"
+  },
+  "years_of_employment_A71": {
+    "name": "years_of_employment_A71",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de years",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.062,
+    "std": 0.24127621974453717,
+    "original_feature": "years"
+  },
+  "years_of_employment_A72": {
+    "name": "years_of_employment_A72",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de years",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.172,
+    "std": 0.3775692765024169,
+    "original_feature": "years"
+  },
+  "years_of_employment_A73": {
+    "name": "years_of_employment_A73",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de years",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.339,
+    "std": 0.4736066968522545,
+    "original_feature": "years"
+  },
+  "years_of_employment_A74": {
+    "name": "years_of_employment_A74",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de years",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.174,
+    "std": 0.3792991798934819,
+    "original_feature": "years"
+  },
+  "years_of_employment_A75": {
+    "name": "years_of_employment_A75",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de years",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.253,
+    "std": 0.43494847991478275,
+    "original_feature": "years"
+  },
+  "job_A171": {
+    "name": "job_A171",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de job",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.022,
+    "std": 0.14675672910479282,
+    "original_feature": "job"
+  },
+  "job_A172": {
+    "name": "job_A172",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de job",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.2,
+    "std": 0.40020015012510957,
+    "original_feature": "job"
+  },
+  "job_A173": {
+    "name": "job_A173",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de job",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.63,
+    "std": 0.48304589153964794,
+    "original_feature": "job"
+  },
+  "job_A174": {
+    "name": "job_A174",
+    "type": "num\u00e9rico discreto",
+    "description": "Caracter\u00edstica derivada de procesamiento de job",
+    "min": 0.0,
+    "max": 1.0,
+    "mean": 0.148,
+    "std": 0.3552776691859794,
+    "original_feature": "job"
+  }
+}

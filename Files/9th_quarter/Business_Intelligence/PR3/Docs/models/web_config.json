@@ -1,6 +1,36 @@
 {
-  "model_path": "/home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/credit_risk_model.pkl",
-  "threshold": 0.1,
+  "model_name": "RidgeClassifierCV (Preprocesamiento Arboles)",
+  "model_type": "RidgeClassifierCV with Platt Scaling",
+  "best_threshold": 0.4199999999999998,
+  "default_threshold": 0.5,
+  "metrics": {
+    "training": {
+      "f1_optimized": 0.8587570621468926,
+      "best_threshold": 0.4199999999999998
+    },
+    "test": {
+      "default_threshold": {
+        "Accuracy": 0.7433333333333333,
+        "Precision": 0.7878787878787878,
+        "Recall": 0.8666666666666667,
+        "F1": 0.8253968253968254,
+        "ROC-AUC": 0.7824867724867726,
+        "PR-AUC": 0.8900281787845566
+      },
+      "optimized_threshold": {
+        "Accuracy": 0.75,
+        "Precision": 0.7777777777777778,
+        "Recall": 0.9,
+        "F1": 0.8344370860927153,
+        "ROC-AUC": 0.7824867724867726,
+        "PR-AUC": 0.8900281787845566
+      }
+    }
+  },
+  "class_names": [
+    "Bad (Riesgo Alto)",
+    "Good (Riesgo Bajo)"
+  ],
   "feature_names": [
     "month_credit_duration",
     "credit_amount",
@@ -69,7 +99,20 @@
     "job_A173",
     "job_A174"
   ],
-  "roc_auc": 0.7268783068783068,
-  "recall": 0.9952380952380953,
-  "precision": 0.7133105802047781
+  "target_name": "Credit Risk",
+  "training_time": 0.22009897232055664,
+  "calibration_time": 0.00470280647277832,
+  "data_shape": {
+    "total_samples": 1000,
+    "features": 66,
+    "train_samples": 700,
+    "test_samples": 300
+  },
+  "calibration_method": "sigmoid (Platt scaling)",
+  "best_alpha": 1000.0,
+  "class_weights": {
+    "0": 1.6666666666666667,
+    "1": 0.7142857142857143
+  },
+  "created_at": "2025-11-11 18:06:38"
 }
