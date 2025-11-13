@@ -1,9 +1,0 @@
-INFORME EJECUTIVO - MODELO DE RIESGO DE CRÉDITO
-============================================================
-
-DESEMPEÑO DEL MODELO
-* ROC AUC: 0.7269
-* F1 Score: 0.8310
-* Recall: 0.9952
-* Precision: 0.7133
-* Umbral óptimo: 0.1000

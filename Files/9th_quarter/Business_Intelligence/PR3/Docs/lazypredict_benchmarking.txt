@@ -1,0 +1,237 @@
+🤖 INICIANDO ANÁLISIS COMPARATIVO CON LAZYPREDICT
+🎯 Objetivo: Encontrar la mejor combinación preprocesamiento-modelo
+   para detectar malos pagadores (clase 0)
+📊 Métricas clave: Sensitivity y AUC-PR (prioridad detectar malos pagadores)
+
+============================================================
+EVALUANDO PREPROCESAMIENTO: REG_LOGISTICA
+============================================================
+✓ Dataset cargado: (1000, 39)
+✓ Características: 38, Target: 1000
+✓ Distribución del target: {1: 700, 0: 300}
+✓ Conjunto de entrenamiento: (800, 38)
+✓ Conjunto de prueba: (200, 38)
+
+🚀 ENTRENANDO CON LAZYPREDICT PARA REG_LOGISTICA...
+ 97%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌     | 30/31 [00:01<00:00, 25.25it/s][LightGBM] [Info] Number of positive: 560, number of negative: 240
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000307 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 934
+[LightGBM] [Info] Number of data points in the train set: 800, number of used features: 37
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.700000 -> initscore=0.847298
+[LightGBM] [Info] Start training from score 0.847298
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 31/31 [00:01<00:00, 25.72it/s]
+✓ Modelos evaluados: 27
+
+🏆 TOP 10 MODELOS PARA REG_LOGISTICA:
+                               Balanced Accuracy  ROC AUC  F1 Score  Time Taken
+Model                                                                          
+NearestCentroid                             0.65     0.65      0.66        0.01
+Perceptron                                  0.62     0.62      0.68        0.01
+BernoulliNB                                 0.62     0.62      0.68        0.01
+DecisionTreeClassifier                      0.61     0.61      0.68        0.01
+GaussianNB                                  0.60     0.60      0.64        0.01
+SGDClassifier                               0.57     0.57      0.63        0.01
+PassiveAggressiveClassifier                 0.57     0.57      0.63        0.01
+LabelPropagation                            0.57     0.57      0.63        0.05
+LabelSpreading                              0.57     0.57      0.63        0.05
+QuadraticDiscriminantAnalysis               0.56     0.56      0.62        0.04
+✓ Modelos con predict_proba disponibles: 18
+
+⭐ MEJOR MODELO CON predict_proba: BernoulliNB
+
+📊 EVALUACIÓN ESPECÍFICA PARA REG_LOGISTICA
+🎯 MÉTRICAS PARA MALOS PAGADORES (Clase 0):
+   • Sensitivity/Recall: 0.4667 (capacidad de detectar malos pagadores)
+   • Precision: 0.4590 (cuán precisos son los que marcamos como malos)
+   • F1-Score: 0.4628
+   • AUC-ROC: 0.3343
+   • AUC-PR: 0.3920 (mejor métrica para clases desbalanceadas)
+   • Matriz de confusión:
+                 Predicción
+               Malo   Bueno
+Real Malo    [ 28     32]
+Real Bueno   [ 33    107]
+
+============================================================
+EVALUANDO PREPROCESAMIENTO: ARBOLES
+============================================================
+✓ Dataset cargado: (1000, 67)
+✓ Características: 66, Target: 1000
+✓ Distribución del target: {1: 700, 0: 300}
+✓ Conjunto de entrenamiento: (800, 66)
+✓ Conjunto de prueba: (200, 66)
+
+🚀 ENTRENANDO CON LAZYPREDICT PARA ARBOLES...
+ 97%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌     | 30/31 [00:01<00:00, 26.43it/s][LightGBM] [Info] Number of positive: 560, number of negative: 240
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000507 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 1065
+[LightGBM] [Info] Number of data points in the train set: 800, number of used features: 61
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.700000 -> initscore=0.847298
+[LightGBM] [Info] Start training from score 0.847298
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 31/31 [00:01<00:00, 25.32it/s]
+✓ Modelos evaluados: 27
+
+🏆 TOP 10 MODELOS PARA ARBOLES:
+                        Balanced Accuracy  ROC AUC  F1 Score  Time Taken
+Model                                                                   
+NearestCentroid                      0.71     0.71      0.71        0.02
+BernoulliNB                          0.69     0.69      0.73        0.01
+RandomForestClassifier               0.69     0.69      0.76        0.19
+GaussianNB                           0.68     0.68      0.69        0.01
+NuSVC                                0.67     0.67      0.74        0.06
+Perceptron                           0.66     0.66      0.71        0.01
+XGBClassifier                        0.66     0.66      0.71        0.10
+SVC                                  0.66     0.66      0.74        0.05
+LGBMClassifier                       0.66     0.66      0.73        0.06
+BaggingClassifier                    0.65     0.65      0.71        0.05
+✓ Modelos con predict_proba disponibles: 18
+
+⭐ MEJOR MODELO CON predict_proba: BernoulliNB
+
+📊 EVALUACIÓN ESPECÍFICA PARA ARBOLES
+🎯 MÉTRICAS PARA MALOS PAGADORES (Clase 0):
+   • Sensitivity/Recall: 0.6167 (capacidad de detectar malos pagadores)
+   • Precision: 0.5286 (cuán precisos son los que marcamos como malos)
+   • F1-Score: 0.5692
+   • AUC-ROC: 0.2373
+   • AUC-PR: 0.5175 (mejor métrica para clases desbalanceadas)
+   • Matriz de confusión:
+                 Predicción
+               Malo   Bueno
+Real Malo    [ 37     23]
+Real Bueno   [ 33    107]
+
+============================================================
+EVALUANDO PREPROCESAMIENTO: ENSAMBLE
+============================================================
+✓ Dataset cargado: (1000, 33)
+✓ Características: 32, Target: 1000
+✓ Distribución del target: {1: 700, 0: 300}
+✓ Conjunto de entrenamiento: (800, 32)
+✓ Conjunto de prueba: (200, 32)
+
+🚀 ENTRENANDO CON LAZYPREDICT PARA ENSAMBLE...
+ 97%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌     | 30/31 [00:00<00:00, 33.83it/s][LightGBM] [Info] Number of positive: 560, number of negative: 240
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000283 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 686
+[LightGBM] [Info] Number of data points in the train set: 800, number of used features: 31
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.700000 -> initscore=0.847298
+[LightGBM] [Info] Start training from score 0.847298
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 31/31 [00:00<00:00, 33.63it/s]
+✓ Modelos evaluados: 27
+
+🏆 TOP 10 MODELOS PARA ENSAMBLE:
+                        Balanced Accuracy  ROC AUC  F1 Score  Time Taken
+Model                                                                   
+NearestCentroid                      0.66     0.66      0.67        0.01
+BernoulliNB                          0.62     0.62      0.68        0.01
+LGBMClassifier                       0.62     0.62      0.70        0.05
+SGDClassifier                        0.62     0.62      0.67        0.02
+XGBClassifier                        0.61     0.61      0.69        0.12
+BaggingClassifier                    0.61     0.61      0.67        0.04
+ExtraTreeClassifier                  0.60     0.60      0.67        0.01
+RandomForestClassifier               0.60     0.60      0.69        0.14
+Perceptron                           0.58     0.58      0.66        0.01
+ExtraTreesClassifier                 0.58     0.58      0.68        0.10
+✓ Modelos con predict_proba disponibles: 18
+
+⭐ MEJOR MODELO CON predict_proba: BernoulliNB
+
+📊 EVALUACIÓN ESPECÍFICA PARA ENSAMBLE
+🎯 MÉTRICAS PARA MALOS PAGADORES (Clase 0):
+   • Sensitivity/Recall: 0.5000 (capacidad de detectar malos pagadores)
+   • Precision: 0.4615 (cuán precisos son los que marcamos como malos)
+   • F1-Score: 0.4800
+   • AUC-ROC: 0.3231
+   • AUC-PR: 0.3910 (mejor métrica para clases desbalanceadas)
+   • Matriz de confusión:
+                 Predicción
+               Malo   Bueno
+Real Malo    [ 30     30]
+Real Bueno   [ 35    105]
+
+============================================================
+EVALUANDO PREPROCESAMIENTO: RED_NEURONAL
+============================================================
+✓ Dataset cargado: (1000, 39)
+✓ Características: 38, Target: 1000
+✓ Distribución del target: {1: 700, 0: 300}
+✓ Conjunto de entrenamiento: (800, 38)
+✓ Conjunto de prueba: (200, 38)
+
+🚀 ENTRENANDO CON LAZYPREDICT PARA RED_NEURONAL...
+ 97%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▌     | 30/31 [00:01<00:00, 27.36it/s][LightGBM] [Info] Number of positive: 560, number of negative: 240
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.000241 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 1929
+[LightGBM] [Info] Number of data points in the train set: 800, number of used features: 35
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.700000 -> initscore=0.847298
+[LightGBM] [Info] Start training from score 0.847298
+100%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 31/31 [00:01<00:00, 26.40it/s]
+✓ Modelos evaluados: 27
+
+🏆 TOP 10 MODELOS PARA RED_NEURONAL:
+                      Balanced Accuracy  ROC AUC  F1 Score  Time Taken
+Model                                                                 
+NearestCentroid                    0.70     0.70      0.71        0.01
+Perceptron                         0.67     0.67      0.67        0.01
+BernoulliNB                        0.64     0.64      0.68        0.01
+BaggingClassifier                  0.62     0.62      0.69        0.07
+GaussianNB                         0.62     0.62      0.67        0.01
+ExtraTreeClassifier                0.62     0.62      0.67        0.01
+ExtraTreesClassifier               0.60     0.60      0.69        0.10
+LogisticRegression                 0.60     0.60      0.68        0.02
+LabelSpreading                     0.58     0.58      0.66        0.05
+LabelPropagation                   0.58     0.58      0.66        0.05
+✓ Modelos con predict_proba disponibles: 18
+
+⭐ MEJOR MODELO CON predict_proba: BernoulliNB
+
+📊 EVALUACIÓN ESPECÍFICA PARA RED_NEURONAL
+🎯 MÉTRICAS PARA MALOS PAGADORES (Clase 0):
+   • Sensitivity/Recall: 0.5667 (capacidad de detectar malos pagadores)
+   • Precision: 0.4595 (cuán precisos son los que marcamos como malos)
+   • F1-Score: 0.5075
+   • AUC-ROC: 0.3161
+   • AUC-PR: 0.4000 (mejor métrica para clases desbalanceadas)
+   • Matriz de confusión:
+                 Predicción
+               Malo   Bueno
+Real Malo    [ 34     26]
+Real Bueno   [ 40    100]
+
+================================================================================
+🎯 RECOMENDACIÓN FINAL
+================================================================================
+📈 RESULTADOS COMPARATIVOS:
+--------------------------------------------------------------------------------
+REG_LOGISTICA   | Sens: 0.467 | AUC-PR: 0.392 | AUC-ROC: 0.334 | F1: 0.463 | Modelo: BernoulliNB
+ARBOLES         | Sens: 0.617 | AUC-PR: 0.517 | AUC-ROC: 0.237 | F1: 0.569 | Modelo: BernoulliNB
+ENSAMBLE        | Sens: 0.500 | AUC-PR: 0.391 | AUC-ROC: 0.323 | F1: 0.480 | Modelo: BernoulliNB
+RED_NEURONAL    | Sens: 0.567 | AUC-PR: 0.400 | AUC-ROC: 0.316 | F1: 0.507 | Modelo: BernoulliNB
+
+🏅 MEJOR COMBINACIÓN:
+   • Preprocesamiento: arboles
+   • Modelo: BernoulliNB
+   • Sensitivity (detección malos pagadores): 0.617
+   • AUC-PR: 0.517
+   • AUC-ROC: 0.237
+   • F1-Score (malos pagadores): 0.569
+   • Puntuación ponderada: 0.504
+
+💡 RECOMENDACIÓN ESTRATÉGICA:
+   Para detectar eficientemente malos pagadores, use:
+   → Preprocesamiento: arboles
+   → Algoritmo: BernoulliNB
+   → Este enfoque detecta correctamente el 61.7% de los malos pagadores
+
+💰 ANÁLISIS DE COSTOS:
+   • Malos pagadores no detectados (FN): 33 → PÉRDIDA DIRECTA
+   • Buenos pagadores rechazados (FP): 23 → OPORTUNIDAD PERDIDA
+   → Ventaja: Los modelos basados en árboles capturan mejor interacciones no lineales
+   → Ideal para: Detectar patrones complejos en el comportamiento de pago
+
+✅ ANÁLISIS COMPLETADO - MEJOR ELECCIÓN IDENTIFICADA

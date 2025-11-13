@@ -1,0 +1,234 @@
+⚠️ Librería aif360 no disponible. El análisis de fairness podría estar limitado.
+
+============================================================
+INICIANDO PIPELINE DE MODELADO PARA RIESGO CREDITICIO
+============================================================
+
+🔍 Objetivo: Desarrollar un modelo web-friendly para predecir riesgo crediticio
+
+🔍 Cargando datos preprocesados para árboles
+
+🔍 ✓ Dataset cargado exitosamente: 1000 filas, 67 columnas
+
+🔍 ✓ Características: 66 features, Target: 1000 muestras
+
+🔍 ✓ Distribución del target: {1: 700, 0: 300}
+
+🔍 Dividiendo datos en conjuntos de entrenamiento y prueba
+
+🔍 ✓ Conjunto de entrenamiento: 800 muestras
+
+🔍 ✓ Conjunto de prueba: 200 muestras
+
+🔍 ✓ Distribución en entrenamiento: {1: 560, 0: 240}
+
+🔍 ✓ Distribución en prueba: {1: 140, 0: 60}
+
+============================================================
+OPTIMIZANDO HIPERPARÁMETROS DEL MODELO XGBOOST
+============================================================
+
+🔍 Iniciando búsqueda aleatoria de hiperparámetros...
+
+🔍 Espacio de búsqueda: 8 dimensiones
+Fitting 3 folds for each of 25 candidates, totalling 75 fits
+/home/diego/.local/lib/python3.12/site-packages/xgboost/training.py:199: UserWarning: [08:57:53] WARNING: /workspace/src/learner.cc:790: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+/home/diego/.local/lib/python3.12/site-packages/xgboost/training.py:199: UserWarning: [08:57:53] WARNING: /workspace/src/learner.cc:790: 
+Parameters: { "use_label_encoder" } are not used.
+
+...
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+/home/diego/.local/lib/python3.12/site-packages/xgboost/training.py:199: UserWarning: [08:57:54] WARNING: /workspace/src/learner.cc:790: 
+Parameters: { "use_label_encoder" } are not used.
+
+  bst.update(dtrain, iteration=i, fobj=obj)
+
+🔍 ✓ Búsqueda de hiperparámetros completada
+
+🔍 Mejores hiperparámetros: {'subsample': 1.0, 'scale_pos_weight': 2.3333333333333335, 'n_estimators': 50, 'min_child_weight': 3, 'max_depth': 5, 'learning_rate': 0.05, 'gamma': 0.5, 'colsample_bytree': 0.6}
+
+🔍 Mejor puntuación (average_precision): 0.9003
+
+🔍 Entrenando modelo final con mejores hiperparámetros...
+
+============================================================
+CALIBRANDO PROBABILIDADES DEL MODELO
+============================================================
+
+🔍 Utilizando calibración isotónica para mejorar la confiabilidad de las probabilidades
+
+🔍 ✓ Modelo calibrado exitosamente
+
+============================================================
+EVALUANDO RENDIMIENTO DEL MODELO
+============================================================
+
+🔍 📊 Métricas de rendimiento:
+
+🔍 • Accuracy: 0.7350
+
+🔍 • Precision: 0.8085
+
+🔍 • Recall: 0.8143
+
+🔍 • F1: 0.8114
+
+🔍 • Roc Auc: 0.7586
+
+🔍 • Pr Auc: 0.8596
+
+🔍 Matriz de confusión:
+              Predicción
+            Malo (0)  Bueno (1)
+Real Malo    [ 33       27]
+Real Bueno   [ 26      114]
+
+🔍 Reporte de clasificación detallado:
+              precision    recall  f1-score   support
+
+    Malo (0)       0.56      0.55      0.55        60
+   Bueno (1)       0.81      0.81      0.81       140
+
+    accuracy                           0.73       200
+   macro avg       0.68      0.68      0.68       200
+weighted avg       0.73      0.73      0.73       200
+
+
+🔍 
+🔍 Umbral óptimo encontrado para maximizar F1: 0.1667
+
+🔍 📊 Métricas con umbral óptimo:
+
+🔍 • Accuracy: 0.7450
+
+🔍 • Precision: 0.7633
+
+🔍 • Recall: 0.9214
+
+🔍 • F1: 0.8350
+
+============================================================
+GENERANDO GRÁFICAS DE EVALUACIÓN
+============================================================
+
+🔍 ✅ Gráficas ROC y PR generadas y guardadas
+
+🔍 ✅ Matriz de confusión generada y guardada
+
+🔍 ✅ Curva de calibración generada y guardada
+
+🔍 ✅ Distribución de probabilidades generada y guardada
+
+============================================================
+ANALIZANDO EQUIDAD DEL MODELO
+============================================================
+
+🔍 
+👥 Análisis de equidad usando 'age' como proxy de edad:
+
+🔍   • Grupo 2 (96 muestras):
+
+🔍     - Demographic Parity (tasa de aprobación): 0.7500
+
+🔍     - Equal Opportunity (recall): 0.8857
+
+🔍   • Grupo 1 (104 muestras):
+
+🔍     - Demographic Parity (tasa de aprobación): 0.6635
+
+🔍     - Equal Opportunity (recall): 0.7429
+
+🔍 
+👥 Análisis de equidad usando 'status_sex_A91' como proxy de género:
+
+🔍   • Grupo A (192 muestras):
+
+🔍     - Demographic Parity (tasa de aprobación): 0.7135
+
+🔍     - Equal Opportunity (recall): 0.8175
+
+============================================================
+GENERANDO EXPLICACIONES DEL MODELO CON SHAP
+============================================================
+
+🔍 Calculando valores SHAP para explicabilidad global...
+
+🔍 ✅ Importancia global de características generada y guardada
+
+🔍 ✅ Gráfico de resumen SHAP generado y guardado
+
+🔍 
+🔍 Explicaciones locales para casos representativos:
+
+🔍   • Caso de alto riesgo (índice 7)
+
+🔍 ✅ Explicación SHAP para caso de alto riesgo generada y guardada
+
+🔍   • Caso frontera (índice 76, prob=0.5040)
+
+🔍 ✅ Explicación SHAP para caso frontera generada y guardada
+
+============================================================
+GUARDANDO ARTEFACTOS PARA DEPLOYMENT WEB
+============================================================
+
+🔍 ✓ Modelo guardado en: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/credit_risk_model.pkl
+
+🔍 ✓ Diccionario de características guardado en: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/feature_dictionary.csv
+
+🔍 ✓ Configuración para web guardada en: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/web_config.json
+
+🔍 ✓ Métricas del modelo guardadas en: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/model_metrics.json
+
+============================================================
+GENERANDO REPORTE FINAL DEL MODELO
+============================================================
+
+🔍 
+REPORTE DEL MODELO DE RIESGO CREDITICIO
+============================================================
+Fecha de generación: 2025-11-13 08:57:59
+Modelo: Modelo de Riesgo Crediticio (versión 1.0)
+
+DESEMPEÑO EN CONJUNTO DE PRUEBA:
+------------------------------------------------------------
+• Recall (Capacidad para detectar malos pagadores): 0.8143
+• Precisión (Exactitud en aprobaciones): 0.8085
+• F1-Score (Balance): 0.8114
+• AUC-ROC (Capacidad de discriminación): 0.7586
+• AUC-PR (Robustez ante desbalance): 0.8596
+
+CONFIGURACIÓN DEL MODELO:
+------------------------------------------------------------
+• Umbral de decisión óptimo: 0.1667
+• Características utilizadas: 66
+• Clases objetivo: Alto riesgo - No aprobar crédito, Bajo riesgo - Aprobar crédito
+
+RECOMENDACIONES OPERATIVAS:
+------------------------------------------------------------
+• Utilizar el umbral óptimo de 0.1667 para balancear detección de riesgo y oportunidades de negocio
+• Monitorear periódicamente las métricas de desempeño y equidad
+• Realizar recalibración cada 6 meses o cuando se observe desviación significativa en las métricas
+• Revisar las decisiones en los casos frontera (probabilidades cercanas al umbral)
+• Auditar las decisiones para diferentes segmentos demográficos para garantizar equidad
+
+ARTEFACTOS GENERADOS:
+------------------------------------------------------------
+• Modelo entrenado: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/credit_risk_model.pkl
+• Configuración para web: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/web_config.json
+• Diccionario de características: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/feature_dictionary.csv
+• Métricas completas: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models/model_metrics.json
+• Visualizaciones: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs
+    
+
+============================================================
+PIPELINE DE MODELADO COMPLETADO EXITOSAMENTE
+============================================================
+
+🔍 El modelo está listo para ser implementado en la aplicación web
+
+🔍 Artefactos guardados en: /home/diego/PROGRAMACION/VPS/UPY/Files/9th_quarter/Business_Intelligence/PR3/Docs/models    
