@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riesgo Crediticio - Modelo Predictivo</title>
+    <title>Credit Risk - Predictive Model</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -30,18 +30,15 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             animation: slideIn 0.8s ease-out;
         }
-
         .home-button:hover {
             background: rgba(255, 255, 255, 0.2);
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
             border-color: rgba(255, 255, 255, 0.3);
         }
-
         .home-button:active {
             transform: translateY(0);
         }
-
         :root {
             --purple-primary: #6a1b9a;
             --purple-secondary: #9c27b0;
@@ -49,21 +46,17 @@
             --purple-dark: #4a006a;
             --purple-accent: #ce93d8;
         }
-        
         body {
             background-color: #f8f9fa;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
         .navbar {
             background: linear-gradient(135deg, var(--purple-primary), var(--purple-dark));
             box-shadow: 0 4px 12px rgba(106, 27, 154, 0.3);
         }
-        
         .nav-tabs {
             border-bottom: 3px solid var(--purple-secondary);
         }
-        
         .nav-tabs .nav-link {
             color: var(--purple-dark);
             font-weight: 600;
@@ -71,18 +64,15 @@
             padding: 12px 24px;
             transition: all 0.3s ease;
         }
-        
         .nav-tabs .nav-link:hover {
             color: var(--purple-secondary);
             background-color: rgba(156, 39, 176, 0.05);
         }
-        
         .nav-tabs .nav-link.active {
             color: var(--purple-secondary);
             border-bottom: 3px solid var(--purple-secondary);
             background-color: rgba(156, 39, 176, 0.1);
         }
-        
         .card {
             border-radius: 12px;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
@@ -90,11 +80,9 @@
             transition: transform 0.3s ease;
             border: none;
         }
-        
         .card:hover {
             transform: translateY(-5px);
         }
-        
         .card-header {
             background: linear-gradient(135deg, var(--purple-light), var(--purple-accent));
             color: var(--purple-dark);
@@ -103,11 +91,9 @@
             border: none;
             padding: 16px 20px;
         }
-        
         .card-body {
             padding: 20px;
         }
-        
         .section-title {
             color: var(--purple-dark);
             border-left: 4px solid var(--purple-secondary);
@@ -115,58 +101,49 @@
             margin: 24px 0 16px;
             font-weight: 600;
         }
-        
         .metric-card {
             text-align: center;
             padding: 20px;
             border-radius: 12px;
             background: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             border: 1px solid rgba(156, 39, 176, 0.2);
         }
-        
         .metric-card:hover {
             transform: scale(1.03);
             box-shadow: 0 8px 16px rgba(156, 39, 176, 0.2);
         }
-        
         .metric-value {
             font-size: 2.2rem;
             font-weight: 700;
             color: var(--purple-secondary);
             margin: 10px 0;
         }
-        
         .metric-label {
             color: #666;
             font-size: 1rem;
         }
-        
         .authors {
             background: linear-gradient(135deg, var(--purple-light), #f3e5f5);
             border-radius: 12px;
             padding: 20px;
             margin-top: 30px;
         }
-        
         .author-list {
             list-style-type: none;
             padding: 0;
             margin: 0;
         }
-        
         .author-list li {
             padding: 8px 0;
             border-bottom: 1px solid rgba(156, 39, 176, 0.1);
             color: var(--purple-dark);
             text-align: center;
         }
-        
         .author-list li:last-child {
             border-bottom: none;
         }
-        
         .image-container {
             text-align: center;
             margin: 20px 0;
@@ -174,14 +151,12 @@
             overflow: hidden;
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
         }
-        
         .model-image {
             max-width: 100%;
             height: auto;
             border: 2px solid var(--purple-accent);
             border-radius: 8px;
         }
-        
         .highlight-box {
             background-color: rgba(156, 39, 176, 0.08);
             border-left: 4px solid var(--purple-secondary);
@@ -189,7 +164,6 @@
             margin: 15px 0;
             border-radius: 0 8px 8px 0;
         }
-        
         .feature-item {
             background: rgba(156, 39, 176, 0.05);
             padding: 12px;
@@ -197,17 +171,15 @@
             margin-bottom: 10px;
             transition: all 0.3s ease;
         }
-        
         .feature-item:hover {
             background: rgba(156, 39, 176, 0.1);
             transform: translateX(5px);
         }
-        
-        .form-control:focus, .form-select:focus {
+        .form-control:focus,
+        .form-select:focus {
             border-color: var(--purple-secondary);
             box-shadow: 0 0 0 0.25rem rgba(156, 39, 176, 0.25);
         }
-        
         .btn-purple {
             background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary));
             border: none;
@@ -217,13 +189,11 @@
             border-radius: 8px;
             transition: all 0.3s ease;
         }
-        
         .btn-purple:hover {
             background: linear-gradient(135deg, var(--purple-dark), var(--purple-primary));
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(106, 27, 154, 0.4);
         }
-        
         .table-purple {
             --bs-table-bg: var(--purple-light);
             --bs-table-striped-bg: var(--purple-accent);
@@ -236,106 +206,101 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        
         .progress-purple {
             height: 10px;
             background-color: #e1bee7;
         }
-        
         .progress-bar {
             background: linear-gradient(135deg, var(--purple-primary), var(--purple-secondary));
         }
-        
         .shap-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
             gap: 20px;
         }
-        
         .shap-box {
             flex: 1;
             min-width: 300px;
             background: white;
             border-radius: 12px;
             padding: 15px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--purple-light);
         }
-        
         footer {
             background: linear-gradient(135deg, var(--purple-dark), var(--purple-primary));
             color: white;
             padding: 20px 0;
             margin-top: 40px;
         }
-        
         @media (max-width: 768px) {
             .nav-tabs .nav-link {
                 padding: 10px 15px;
                 font-size: 0.9rem;
             }
-            
             .shap-container {
                 flex-direction: column;
             }
         }
     </style>
 </head>
-<body>    
+<body>
     <a href="/" class="home-button">
         <i class="fas fa-home"></i>
-        <span>Inicio</span>
+        <span>Home</span>
     </a>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand fw-bold" href="#">
-                <i class="fas fa-chart-line me-2"></i>Riesgo Crediticio ML
+                <i class="fas fa-chart-line me-2"></i>Credit Risk ML
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
     </nav>
-    
     <div class="container my-4">
         <div class="text-center mb-5">
             <h1 class="display-4 fw-bold" style="color: var(--purple-dark);">
-                <i class="fas fa-credit-card me-3"></i>Análisis de Riesgo Crediticio
+                <i class="fas fa-credit-card me-3"></i>Credit Risk Analysis
             </h1>
-            <p class="lead text-muted">Modelo predictivo para evaluación de riesgo crediticio con enfoque en explicabilidad y equidad</p>
+            <p class="lead text-muted">Predictive model for credit risk assessment with focus on
+                explainability and fairness</p>
         </div>
-
         <div class="authors">
-            <h3 class="text-center mb-4" style="color: var(--purple-dark);"><i class="fas fa-user-friends me-2"></i>Autores</h3>
+            <h3 class="text-center mb-4" style="color: var(--purple-dark);"><i
+                    class="fas fa-user-friends me-2"></i>Authors</h3>
             <ul class="author-list">
                 <li>Diego Monroy | Ariel Buenfil | Alan Valbuena | Damaris Dzul | Sergio Barrera | Moises Carrillo</li>
             </ul>
         </div>
-
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="eda-tab" data-bs-toggle="tab" data-bs-target="#eda" type="button" role="tab" aria-controls="eda" aria-selected="true">
+                <button class="nav-link active" id="eda-tab" data-bs-toggle="tab" data-bs-target="#eda" type="button"
+                    role="tab" aria-controls="eda" aria-selected="true">
                     <i class="fas fa-chart-bar me-2"></i>EDA
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="preprocessing-tab" data-bs-toggle="tab" data-bs-target="#preprocessing" type="button" role="tab" aria-controls="preprocessing" aria-selected="false">
+                <button class="nav-link" id="preprocessing-tab" data-bs-toggle="tab" data-bs-target="#preprocessing"
+                    type="button" role="tab" aria-controls="preprocessing" aria-selected="false">
                     <i class="fas fa-gem me-2"></i>Preprocessing
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="modeling-tab" data-bs-toggle="tab" data-bs-target="#modeling" type="button" role="tab" aria-controls="modeling" aria-selected="false">
+                <button class="nav-link" id="modeling-tab" data-bs-toggle="tab" data-bs-target="#modeling" type="button"
+                    role="tab" aria-controls="modeling" aria-selected="false">
                     <i class="fas fa-brain me-2"></i>Modeling
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="testing-tab" data-bs-toggle="tab" data-bs-target="#testing" type="button" role="tab" aria-controls="testing" aria-selected="false">
+                <button class="nav-link" id="testing-tab" data-bs-toggle="tab" data-bs-target="#testing" type="button"
+                    role="tab" aria-controls="testing" aria-selected="false">
                     <i class="fas fa-vial me-2"></i>Testing
                 </button>
             </li>
         </ul>
-
         <div class="tab-content mt-4" id="myTabContent">
             <!-- EDA Tab -->
             <div class="tab-pane fade show active" id="eda" role="tabpanel" aria-labelledby="eda-tab">
@@ -343,178 +308,206 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-database me-2"></i>Información General del Dataset
+                                <i class="fas fa-database me-2"></i>General Dataset Information
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><strong>Dimensiones:</strong> 1000 filas × 21 columnas</li>
-                                    <li class="list-group-item"><strong>Variables numéricas:</strong> 7</li>
-                                    <li class="list-group-item"><strong>Variables categóricas:</strong> 14</li>
-                                    <li class="list-group-item"><strong>Valores faltantes:</strong> 0 (0.00%)</li>
-                                    <li class="list-group-item"><strong>Registros duplicados:</strong> 0 (0.00%)</li>
-                                    <li class="list-group-item"><strong>Calidad de datos:</strong> 100.00%</li>
+                                    <li class="list-group-item"><strong>Dimensions:</strong> 1000 rows × 21 columns
+                                    </li>
+                                    <li class="list-group-item"><strong>Numeric variables:</strong> 7</li>
+                                    <li class="list-group-item"><strong>Categorical variables:</strong> 14</li>
+                                    <li class="list-group-item"><strong>Missing values:</strong> 0 (0.00%)</li>
+                                    <li class="list-group-item"><strong>Duplicate records:</strong> 0 (0.00%)</li>
+                                    <li class="list-group-item"><strong>Data quality:</strong> 100.00%</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-balance-scale me-2"></i>Variable Objetivo - Target
+                                <i class="fas fa-balance-scale me-2"></i>Target Variable
                             </div>
                             <div class="card-body">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><strong>Clase '1' (Buenos pagadores):</strong> 700 registros (70.00%)</li>
-                                    <li class="list-group-item"><strong>Clase '2' (Malos pagadores):</strong> 300 registros (30.00%)</li>
-                                    <li class="list-group-item"><strong>Ratio de desbalance:</strong> 2.33:1</li>
+                                    <li class="list-group-item"><strong>Class '1' (Good payers):</strong> 700
+                                        records (70.00%)</li>
+                                    <li class="list-group-item"><strong>Class '2' (Bad payers):</strong> 300
+                                        records (30.00%)</li>
+                                    <li class="list-group-item"><strong>Imbalance ratio:</strong> 2.33:1</li>
                                 </ul>
                                 <div class="mt-3">
                                     <div class="d-flex justify-content-between mb-1">
-                                        <span>Buenos pagadores (70%)</span>
+                                        <span>Good payers (70%)</span>
                                         <span>70%</span>
                                     </div>
                                     <div class="progress progress-purple mb-3">
                                         <div class="progress-bar" role="progressbar" style="width: 70%"></div>
                                     </div>
                                     <div class="d-flex justify-content-between mb-1">
-                                        <span>Malos pagadores (30%)</span>
+                                        <span>Bad payers (30%)</span>
                                         <span>30%</span>
                                     </div>
                                     <div class="progress progress-purple">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 30%"></div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 30%">
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="alert alert-warning mt-3">
-                                    <i class="fas fa-exclamation-triangle me-2"></i>El dataset presenta un significativo desbalance de clases, lo que requiere técnicas específicas de manejo durante el modelado.
+                                    <i class="fas fa-exclamation-triangle me-2"></i>The dataset presents a significant
+                                    class imbalance, which requires specific handling techniques during modeling.
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-chart-line me-2"></i>Hallazgos Clave del EDA
+                                <i class="fas fa-chart-line me-2"></i>Key EDA Findings
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <h5 class="section-title">Variables Numéricas</h5>
+                                        <h5 class="section-title">Numeric Variables</h5>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                                <strong>Duración del crédito:</strong> Los malos pagadores tienen una duración promedio de 24.86 meses vs 19.21 meses de los buenos pagadores (+29.43%).
+                                                <strong>Credit duration:</strong> Bad payers have an average duration of 24.86 months vs 19.21 months for good payers
+                                                (+29.43%).
                                             </li>
                                             <li class="list-group-item">
-                                                <strong>Monto del crédito:</strong> Los malos pagadores solicitan montos promedio de 3,938.13 vs 2,985.46 de los buenos pagadores (+31.91%).
+                                                <strong>Credit amount:</strong> Bad payers request average amounts of 3,938.13 vs 2,985.46 for good payers (+31.91%).
                                             </li>
                                             <li class="list-group-item">
-                                                <strong>Outliers:</strong> Se detectaron 326 outliers en variables numéricas, principalmente en <code>num_dependents</code> (15.50%).
+                                                <strong>Outliers:</strong> 326 outliers were detected in numeric variables, primarily in <code>num_dependents</code> (15.50%).
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="col-md-6">
-                                        <h5 class="section-title">Variables Categóricas</h5>
+                                        <h5 class="section-title">Categorical Variables</h5>
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item">
-                                                <strong>Historial crediticio:</strong> Para la categoría A30 (crítico), el 62.5% son malos pagadores.
+                                                <strong>Credit history:</strong> For category A30 (critical),
+                                                62.5% are bad payers.
                                             </li>
                                             <li class="list-group-item">
-                                                <strong>Cuenta corriente:</strong> Para la categoría A11 (baja), el 49.27% son malos pagadores.
+                                                <strong>Checking account:</strong> For category A11 (low), 
+                                                49.27% are bad payers.
                                             </li>
                                             <li class="list-group-item">
-                                                <strong>Propiedad:</strong> Quienes poseen propiedad de alto valor (A121) tienen solo 21.28% de malos pagadores.
+                                                <strong>Property:</strong> Those who own high-value property
+                                                (A121) have only 21.28% bad payers.
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
-                                
                                 <div class="highlight-box mt-4">
-                                    <h5 class="mb-3"><i class="fas fa-lightbulb me-2"></i>Insights de Negocio</h5>
-                                    <p>Los perfiles de mayor riesgo se caracterizan por: montos de crédito altos (>3,972), duración prolongada (>24 meses), historial crediticio crítico (A30), y cuenta corriente con bajo balance (A11). Estos factores son indicadores tempranos de potencial impago y deben priorizarse en la evaluación de solicitudes.</p>
+                                    <h5 class="mb-3"><i class="fas fa-lightbulb me-2"></i>Business Insights</h5>
+                                    <p>The highest risk profiles are characterized by: high credit amounts
+                                        (>3,972), extended duration (>24 months), critical credit history (A30), and
+                                        checking accounts with low balances (A11). These factors are early indicators
+                                        of potential default and should be prioritized in application evaluations.</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
             <!-- Preprocessing Tab -->
             <div class="tab-pane fade" id="preprocessing" role="tabpanel" aria-labelledby="preprocessing-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-sync-alt me-2"></i>Estrategias de Preprocesamiento
+                                <i class="fas fa-sync-alt me-2"></i>Preprocessing Strategies
                             </div>
                             <div class="card-body">
-                                <p>Se implementaron cuatro estrategias distintas de preprocesamiento para optimizar para diferentes tipos de algoritmos de machine learning:</p>
-                                
+                                <p>Four distinct preprocessing strategies were implemented to optimize for
+                                    different types of machine learning algorithms:</p>
                                 <div class="row mt-4">
                                     <div class="col-md-6 mb-4">
                                         <div class="card h-100">
-                                            <div class="card-header bg-gradient" style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
-                                                <i class="fas fa-calculator me-2"></i>Preprocesamiento para Regresión Logística
+                                            <div class="card-header bg-gradient"
+                                                style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
+                                                <i class="fas fa-calculator me-2"></i>Preprocessing for Logistic
+                                                Regression
                                             </div>
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><strong>Tratamiento de outliers:</strong> Winsorización en variables clave (duración, monto, edad)</li>
-                                                    <li><strong>Transformaciones:</strong> Variables logarítmicas y ratios (pago mensual)</li>
-                                                    <li><strong>One-Hot Encoding:</strong> para variables categóricas con <code>drop_first=True</code></li>
-                                                    <li><strong>Estandarización:</strong> Escalado de variables numéricas con StandardScaler</li>
-                                                    <li><strong>Características agrupadas:</strong> Nuevas categorías para duración, monto y edad</li>
+                                                    <li><strong>Outlier treatment:</strong> Winsorization on
+                                                        key variables (duration, amount, age)</li>
+                                                    <li><strong>Transformations:</strong> Logarithmic variables and
+                                                        ratios (monthly payment)</li>
+                                                    <li><strong>One-Hot Encoding:</strong> for categorical variables
+                                                        with <code>drop_first=True</code></li>
+                                                    <li><strong>Standardization:</strong> Scaling numeric variables with StandardScaler</li>
+                                                    <li><strong>Grouped features:</strong> New categories
+                                                        for duration, amount, and age</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-6 mb-4">
                                         <div class="card h-100">
-                                            <div class="card-header bg-gradient" style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
-                                                <i class="fas fa-tree me-2"></i>Preprocesamiento para Árboles
+                                            <div class="card-header bg-gradient"
+                                                style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
+                                                <i class="fas fa-tree me-2"></i>Preprocessing for Tree Models
                                             </div>
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><strong>Suavizado de outliers:</strong> Winsorización menos agresiva (3×IQR)</li>
-                                                    <li><strong>Características de interacción:</strong> ratios y variables derivadas</li>
-                                                    <li><strong>Codificación ordinal:</strong> para variables ordinales (ahorros, empleo, etc.)</li>
-                                                    <li><strong>Target Encoding:</strong> regularizado para la variable propósito</li>
-                                                    <li><strong>Eliminación:</strong> de variables de baja relevancia (residencia, dependientes)</li>
-                                                    <li><strong>Transformaciones:</strong> logaritmo y variables polinómicas</li>
+                                                    <li><strong>Outlier smoothing:</strong> Less aggressive
+                                                        winsorization (3×IQR)</li>
+                                                    <li><strong>Interaction features:</strong> ratios and
+                                                        derived variables</li>
+                                                    <li><strong>Ordinal encoding:</strong> for ordinal variables
+                                                        (savings, employment, etc.)</li>
+                                                    <li><strong>Target Encoding:</strong> regularized for the purpose
+                                                        variable</li>
+                                                    <li><strong>Elimination:</strong> of low relevance variables
+                                                        (residence, dependents)</li>
+                                                    <li><strong>Transformations:</strong> logarithmic and polynomial variables</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-6 mb-4">
                                         <div class="card h-100">
-                                            <div class="card-header bg-gradient" style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
-                                                <i class="fas fa-project-diagram me-2"></i>Preprocesamiento para Ensemble
+                                            <div class="card-header bg-gradient"
+                                                style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
+                                                <i class="fas fa-project-diagram me-2"></i>Preprocessing for
+                                                Ensemble Models
                                             </div>
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><strong>Interacciones estratégicas:</strong> combinaciones basadas en hallazgos del EDA</li>
-                                                    <li><strong>Variables de riesgo acumulativo:</strong> conteo y ratio de factores de riesgo</li>
-                                                    <li><strong>Target Encoding regularizado:</strong> para variables categóricas clave</li>
-                                                    <li><strong>Selección de características:</strong> basada en varianza y correlación</li>
-                                                    <li><strong>Características adicionales:</strong> específicas para modelos ensemble</li>
+                                                    <li><strong>Strategic interactions:</strong> combinations
+                                                        based on EDA findings</li>
+                                                    <li><strong>Cumulative risk features:</strong> count and ratio
+                                                        of risk factors</li>
+                                                    <li><strong>Regularized Target Encoding:</strong> for key
+                                                        categorical variables</li>
+                                                    <li><strong>Feature selection:</strong> based on
+                                                        variance and correlation</li>
+                                                    <li><strong>Additional features:</strong> specific for
+                                                        ensemble models</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-6 mb-4">
                                         <div class="card h-100">
-                                            <div class="card-header bg-gradient" style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
-                                                <i class="fas fa-microchip me-2"></i>Preprocesamiento para Red Neuronal
+                                            <div class="card-header bg-gradient"
+                                                style="background: linear-gradient(135deg, #e1bee7, #ce93d8);">
+                                                <i class="fas fa-microchip me-2"></i>Preprocessing for Neural Networks
                                             </div>
                                             <div class="card-body">
                                                 <ul>
-                                                    <li><strong>Normalización:</strong> todas las características escaladas al rango [0,1]</li>
-                                                    <li><strong>Características polinómicas:</strong> para capturar relaciones no lineales</li>
-                                                    <li><strong>Preparación para embeddings:</strong> variables categóricas convertidas a índices</li>
-                                                    <li><strong>Perfiles de riesgo sintéticos:</strong> creación de variables de alto/bajo riesgo</li>
-                                                    <li><strong>Agrupamiento:</strong> para edad y monto (ayuda a la red a aprender patrones)</li>
+                                                    <li><strong>Normalization:</strong> all features scaled to range [0,1]</li>
+                                                    <li><strong>Polynomial features:</strong> to capture
+                                                        non-linear relationships</li>
+                                                    <li><strong>Preparation for embeddings:</strong> categorical variables converted to indices</li>
+                                                    <li><strong>Synthetic risk profiles:</strong> creation of
+                                                        high/low risk variables</li>
+                                                    <li><strong>Binning:</strong> for age and amount (helps the network
+                                                        learn patterns)</li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -523,21 +516,22 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="col-md-12 mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-robot me-2"></i>Benchmarking con LazyPredict
+                                <i class="fas fa-robot me-2"></i>Benchmarking with LazyPredict
                             </div>
                             <div class="card-body">
-                                <p>Se realizó un benchmark exhaustivo utilizando LazyPredict para identificar la mejor combinación de preprocesamiento y algoritmo. Se evaluaron 27 modelos para cada estrategia de preprocesamiento, priorizando la capacidad de detectar malos pagadores (clase 0).</p>
-                                
+                                <p>A comprehensive benchmark was performed using LazyPredict to identify the best
+                                    combination of preprocessing and algorithm. 27 models were evaluated for each
+                                    preprocessing strategy, prioritizing the ability to detect bad payers
+                                    (class 0).</p>
                                 <div class="table-responsive mt-4">
                                     <table class="table table-purple table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Preprocesamiento</th>
-                                                <th>Mejor Modelo</th>
+                                                <th>Preprocessing</th>
+                                                <th>Best Model</th>
                                                 <th>Sensitivity</th>
                                                 <th>AUC-PR</th>
                                                 <th>AUC-ROC</th>
@@ -546,7 +540,7 @@
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td><strong>Árboles</strong></td>
+                                                <td><strong>Trees</strong></td>
                                                 <td>BernoulliNB</td>
                                                 <td>0.617</td>
                                                 <td>0.517</td>
@@ -554,7 +548,7 @@
                                                 <td>0.569</td>
                                             </tr>
                                             <tr>
-                                                <td>Regresión Logística</td>
+                                                <td>Logistic Regression</td>
                                                 <td>BernoulliNB</td>
                                                 <td>0.467</td>
                                                 <td>0.392</td>
@@ -562,7 +556,7 @@
                                                 <td>0.463</td>
                                             </tr>
                                             <tr>
-                                                <td>Red Neuronal</td>
+                                                <td>Neural Network</td>
                                                 <td>BernoulliNB</td>
                                                 <td>0.567</td>
                                                 <td>0.400</td>
@@ -570,7 +564,7 @@
                                                 <td>0.507</td>
                                             </tr>
                                             <tr>
-                                                <td>Ensamble</td>
+                                                <td>Ensemble</td>
                                                 <td>BernoulliNB</td>
                                                 <td>0.500</td>
                                                 <td>0.391</td>
@@ -580,18 +574,25 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                
                                 <div class="highlight-box mt-4">
-                                    <h5 class="mb-3"><i class="fas fa-star me-2"></i>Recomendación Inicial vs. Modelo Final</h5>
-                                    <p><strong>Recomendación inicial (LazyPredict):</strong> BernoulliNB con preprocesamiento para árboles, con una capacidad del 61.7% para detectar malos pagadores.</p>
-                                    <p><strong>Modelo final implementado:</strong> XGBoost con calibración isotónica</p>
-                                    <p><strong>¿Por qué el cambio?</strong> Aunque BernoulliNB mostró buen rendimiento inicial, se seleccionó XGBoost con calibración isotónica por:</p>
+                                    <h5 class="mb-3"><i class="fas fa-star me-2"></i>Initial Recommendation vs. Final
+                                        Model</h5>
+                                    <p><strong>Initial recommendation (LazyPredict):</strong> BernoulliNB with
+                                        tree preprocessing, with a 61.7% capacity to detect bad
+                                        payers.</p>
+                                    <p><strong>Final implemented model:</strong> XGBoost with isotonic calibration</p>
+                                    <p><strong>Why the change?</strong> Although BernoulliNB showed good initial
+                                        performance, XGBoost with isotonic calibration was selected because:</p>
                                     <ul>
-                                        <li><strong>Mejor rendimiento:</strong> XGBoost logró un recall de 0.8143 vs 0.617 de BernoulliNB</li>
-                                        <li><strong>Mejor calibración:</strong> Las probabilidades de XGBoost son más confiables después de la calibración</li>
-                                        <li><strong>Mayor flexibilidad:</strong> Capacidad para capturar relaciones complejas y no lineales</li>
-                                        <li><strong>Explicabilidad:</strong> Compatibilidad con SHAP para explicaciones globales y locales</li>
-                                        <li><strong>Robustez:</strong> Menor varianza y mayor estabilidad en predicciones</li>
+                                        <li><strong>Better performance:</strong> XGBoost achieved a recall of 0.8143 vs
+                                            0.617 of BernoulliNB</li>
+                                        <li><strong>Better calibration:</strong> XGBoost probabilities are more
+                                            reliable after calibration</li>
+                                        <li><strong>Greater flexibility:</strong> Ability to capture complex
+                                            and non-linear relationships</li>
+                                        <li><strong>Explainability:</strong> Compatibility with SHAP for global and local explanations</li>
+                                        <li><strong>Robustness:</strong> Lower variance and greater stability in
+                                            predictions</li>
                                     </ul>
                                 </div>
                             </div>
@@ -599,59 +600,66 @@
                     </div>
                 </div>
             </div>
-            
             <!-- Modeling Tab -->
             <div class="tab-pane fade" id="modeling" role="tabpanel" aria-labelledby="modeling-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-brain me-2"></i>Modelo Final: XGBoost con Calibración Isotónica
+                                <i class="fas fa-brain me-2"></i>Final Model: XGBoost with Isotonic Calibration
                             </div>
                             <div class="card-body">
-                                <p>Se implementó un modelo XGBoost optimizado con búsqueda aleatoria de hiperparámetros y calibración isotónica para garantizar probabilidades bien calibradas.</p>
-                                
+                                <p>An optimized XGBoost model was implemented with random search for hyperparameters
+                                    and isotonic calibration to ensure well-calibrated probabilities.</p>
                                 <div class="row mt-4">
                                     <div class="col-md-6 mb-4">
                                         <div class="card">
                                             <div class="card-header">
-                                                <i class="fas fa-sliders-h me-2"></i>Hiperparámetros Optimizados
+                                                <i class="fas fa-sliders-h me-2"></i>Optimized Hyperparameters
                                             </div>
                                             <div class="card-body">
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item"><strong>n_estimators:</strong> 50</li>
                                                     <li class="list-group-item"><strong>max_depth:</strong> 5</li>
-                                                    <li class="list-group-item"><strong>learning_rate:</strong> 0.05</li>
+                                                    <li class="list-group-item"><strong>learning_rate:</strong> 0.05
+                                                    </li>
                                                     <li class="list-group-item"><strong>subsample:</strong> 1.0</li>
-                                                    <li class="list-group-item"><strong>colsample_bytree:</strong> 0.6</li>
+                                                    <li class="list-group-item"><strong>colsample_bytree:</strong> 0.6
+                                                    </li>
                                                     <li class="list-group-item"><strong>gamma:</strong> 0.5</li>
-                                                    <li class="list-group-item"><strong>min_child_weight:</strong> 3</li>
-                                                    <li class="list-group-item"><strong>scale_pos_weight:</strong> 2.333 (para balancear clases)</li>
+                                                    <li class="list-group-item"><strong>min_child_weight:</strong> 3
+                                                    </li>
+                                                    <li class="list-group-item"><strong>scale_pos_weight:</strong> 2.333
+                                                        (for class balancing)</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="col-md-6 mb-4">
                                         <div class="card">
                                             <div class="card-header">
-                                                <i class="fas fa-balance-scale me-2"></i>Umbral de Decisión
+                                                <i class="fas fa-balance-scale me-2"></i>Decision Threshold
                                             </div>
                                             <div class="card-body">
-                                                <p>Se optimizó el umbral de decisión para maximizar el F1-Score:</p>
+                                                <p>The decision threshold was optimized to maximize the F1-Score:</p>
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item"><strong>Umbral estándar:</strong> 0.5</li>
-                                                    <li class="list-group-item"><strong>Umbral óptimo:</strong> 0.1667</li>
-                                                    <li class="list-group-item"><strong>Efecto:</strong> Aumento del recall de 0.8143 a 0.9214</li>
-                                                    <li class="list-group-item"><strong>Trade-off:</strong> Reducción de la precisión de 0.8085 a 0.7633</li>
-                                                    <li class="list-group-item"><strong>Justificación:</strong> Priorizar la detección de malos pagadores para minimizar pérdidas</li>
+                                                    <li class="list-group-item"><strong>Standard threshold:</strong> 0.5
+                                                    </li>
+                                                    <li class="list-group-item"><strong>Optimal threshold:</strong> 0.1667
+                                                    </li>
+                                                    <li class="list-group-item"><strong>Effect:</strong> Increase in
+                                                        recall from 0.8143 to 0.9214</li>
+                                                    <li class="list-group-item"><strong>Trade-off:</strong> Reduction in
+                                                        precision from 0.8085 to 0.7633</li>
+                                                    <li class="list-group-item"><strong>Justification:</strong>
+                                                        Prioritize detection of bad payers to minimize
+                                                        losses</li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                
-                                <h5 class="section-title mt-4">Métricas de Rendimiento</h5>
+                                <h5 class="section-title mt-4">Performance Metrics</h5>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="metric-card">
@@ -662,7 +670,7 @@
                                     <div class="col-md-3">
                                         <div class="metric-card">
                                             <div class="metric-value">0.81</div>
-                                            <div class="metric-label">Precisión</div>
+                                            <div class="metric-label">Precision</div>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -681,68 +689,79 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="col-md-12 mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-chart-area me-2"></i>Visualizaciones de Evaluación
+                                <i class="fas fa-chart-area me-2"></i>Evaluation Visualizations
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-6 mb-4">
                                         <div class="image-container">
-                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/confusion_matrix.png" alt="Matriz de Confusión" class="model-image">
-                                            <p class="mt-2 text-muted">Matriz de Confusión - 81.43% de malos pagadores correctamente identificados</p>
+                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/confusion_matrix.png"
+                                                alt="Confusion Matrix" class="model-image">
+                                            <p class="mt-2 text-muted">Confusion Matrix - 81.43% of bad payers
+                                                correctly identified</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="image-container">
-                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/roc_pr_curves.png" alt="Curvas ROC y PR" class="model-image">
-                                            <p class="mt-2 text-muted">Curvas ROC (AUC: 0.7586) y PR (AUC: 0.8596)</p>
+                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/roc_pr_curves.png"
+                                                alt="ROC and PR Curves" class="model-image">
+                                            <p class="mt-2 text-muted">ROC Curve (AUC: 0.7586) and PR Curve (AUC: 0.8596)</p>
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-4">
                                         <div class="image-container">
-                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/probability_distribution.png" alt="Distribución de Probabilidades" class="model-image">
-                                            <p class="mt-2 text-muted">Distribución de probabilidades por clase con umbral óptimo (0.1667)</p>
+                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/probability_distribution.png"
+                                                alt="Probability Distribution" class="model-image">
+                                            <p class="mt-2 text-muted">Probability distribution by class with
+                                                optimal threshold (0.1667)</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
                     <div class="col-md-12 mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-bullseye me-2"></i>Explicabilidad con SHAP
+                                <i class="fas fa-bullseye me-2"></i>Explainability with SHAP
                             </div>
                             <div class="card-body">
-                                <p>Se implementó SHAP (SHapley Additive exPlanations) para proporcionar explicaciones globales y locales del modelo.</p>
-                                
+                                <p>SHAP (SHapley Additive exPlanations) was implemented to provide global and
+                                    local explanations of the model.</p>
                                 <div class="row mb-4">
                                     <div class="col-md-12">
                                         <div class="image-container">
-                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/shap_summary.png" alt="Resumen SHAP" class="model-image">
-                                            <p class="mt-2 text-muted">Importancia global de características - Las variables más influyentes son credit_amount, month_credit_duration y credit_history</p>
+                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/shap_summary.png"
+                                                alt="SHAP Summary" class="model-image">
+                                            <p class="mt-2 text-muted">Global feature importance - The most influential variables are credit_amount, month_credit_duration and
+                                                credit_history</p>
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div class="shap-container">
                                     <div class="shap-box">
-                                        <h5><i class="fas fa-user-times me-2"></i>Caso de Alto Riesgo</h5>
+                                        <h5><i class="fas fa-user-times me-2"></i>High-Risk Case</h5>
                                         <div class="image-container mb-3">
-                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/shap_alto_riesgo.png" alt="SHAP Alto Riesgo" class="model-image" style="max-height: 300px; object-fit: contain;">
+                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/shap_alto_riesgo.png"
+                                                alt="SHAP High Risk" class="model-image"
+                                                style="max-height: 300px; object-fit: contain;">
                                         </div>
-                                        <p>Este solicitante presenta un alto riesgo de impago debido principalmente al monto elevado del crédito, historial crediticio crítico y bajo balance en cuenta corriente.</p>
+                                        <p>This applicant presents a high risk of default primarily due to the
+                                            high credit amount, critical credit history, and low checking account balance.</p>
                                     </div>
                                     <div class="shap-box">
-                                        <h5><i class="fas fa-user-clock me-2"></i>Caso Frontera</h5>
+                                        <h5><i class="fas fa-user-clock me-2"></i>Borderline Case</h5>
                                         <div class="image-container mb-3">
-                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/shap_caso_frontera.png" alt="SHAP Caso Frontera" class="model-image" style="max-height: 300px; object-fit: contain;">
+                                            <img src="/Files/9th_quarter/Business_Intelligence/PR3/Docs/Images/shap_caso_frontera.png"
+                                                alt="SHAP Borderline Case" class="model-image"
+                                                style="max-height: 300px; object-fit: contain;">
                                         </div>
-                                        <p>Este solicitante está cerca del umbral de decisión (probabilidad = 0.5040). Factores positivos como empleo estable y alto ahorro compensan factores de riesgo como el monto del crédito.</p>
+                                        <p>This applicant is near the decision threshold (probability = 0.5040).
+                                            Positive factors such as stable employment and high savings offset risk
+                                            factors like credit amount.</p>
                                     </div>
                                 </div>
                             </div>
@@ -750,117 +769,289 @@
                     </div>
                 </div>
             </div>
-            
             <!-- Testing Tab -->
             <div class="tab-pane fade" id="testing" role="tabpanel" aria-labelledby="testing-tab">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-vial me-2"></i>Prueba del Modelo
+                                <i class="fas fa-vial me-2"></i>Model Testing
                             </div>
                             <div class="card-body">
-                                <p>Ingrese los datos del solicitante para evaluar su riesgo crediticio utilizando el modelo XGBoost calibrado.</p>
-                                
+                                <p>Enter applicant data to evaluate their credit risk using the calibrated
+                                    XGBoost model.</p>
                                 <form id="creditForm" class="mt-4">
+                                    <h5 class="section-title"><i class="fas fa-user-circle me-2"></i>Personal
+                                        Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-user me-2"></i>Gender and Marital
+                                                    Status</label>
+                                                <select class="form-select" name="status_sex">
+                                                    <option value="A91">Male - Divorced/Separated</option>
+                                                    <option value="A93" selected>Male - Single</option>
+                                                    <option value="A94">Male - Married/Widowed</option>
+                                                    <option value="A92">Female - Divorced/Separated/Married</option>
+                                                    <option value="A95">Female - Single</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-calendar-alt me-2"></i>Age</label>
+                                                <input type="number" class="form-control" name="age" value="35" min="19"
+                                                    max="75">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-briefcase me-2"></i>Occupation</label>
+                                                <select class="form-select" name="job">
+                                                    <option value="A171">Unemployed / Unskilled - Non-resident
+                                                    </option>
+                                                    <option value="A172">Unskilled - Resident</option>
+                                                    <option value="A173" selected>Skilled employee / Official</option>
+                                                    <option value="A174">Management / Self-employed / Highly
+                                                        skilled employee</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="section-title mt-4"><i class="fas fa-home me-2"></i>Housing and Property Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-house-user me-2"></i>Housing Type</label>
+                                                <select class="form-select" name="housing">
+                                                    <option value="A151">Rental</option>
+                                                    <option value="A152" selected>Own</option>
+                                                    <option value="A153">Free</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-building me-2"></i>Property</label>
+                                                <select class="form-select" name="property">
+                                                    <option value="A121">Real estate</option>
+                                                    <option value="A122">Life insurance / Building savings</option>
+                                                    <option value="A123" selected>Car or other</option>
+                                                    <option value="A124">Unknown / No property</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-phone me-2"></i>Telephone</label>
+                                                <select class="form-select" name="telephone">
+                                                    <option value="A191">No</option>
+                                                    <option value="A192" selected>Yes, registered under client's name
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="section-title mt-4"><i class="fas fa-university me-2"></i>Financial
+                                        Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-piggy-bank me-2"></i>Checking
+                                                    Account</label>
+                                                <select class="form-select" name="status_checking_account">
+                                                    <option value="A11">
+                                                        < 0 DM (Low)</option>
+                                                    <option value="A12" selected>0-200 DM (Medium)</option>
+                                                    <option value="A13">≥ 200 DM (High)</option>
+                                                    <option value="A14">No checking account</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-chart-line me-2"></i>Credit History</label>
+                                                <select class="form-select" name="credit_history">
+                                                    <option value="A30">No credits / All paid (Warning)
+                                                    </option>
+                                                    <option value="A31">All paid on time at this bank (Good)
+                                                    </option>
+                                                    <option value="A32" selected>Existing credits paid
+                                                        on time (Good)</option>
+                                                    <option value="A33">Delayed payments in the past (Warning)
+                                                    </option>
+                                                    <option value="A34">Critical account / Other existing credits
+                                                        (Critical)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-money-bill-wave me-2"></i>Savings Type</label>
+                                                <select class="form-select" name="savings_type">
+                                                    <option value="A61" selected>
+                                                        < 100 DM (Low)</option>
+                                                    <option value="A62">100-500 DM (Medium)</option>
+                                                    <option value="A63">500-1000 DM (High)</option>
+                                                    <option value="A64">≥ 1000 DM (High)</option>
+                                                    <option value="A65">Unknown / No savings account</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="section-title mt-4"><i class="fas fa-file-contract me-2"></i>Credit
+                                        Details</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-calendar-alt me-2"></i>Duration (months)</label>
+                                                <input type="number" class="form-control" name="month_credit_duration"
+                                                    value="24" min="4" max="72">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-money-bill-wave me-2"></i>Credit Amount</label>
+                                                <input type="number" class="form-control" name="credit_amount"
+                                                    value="3000" min="250" max="18424">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-bullseye me-2"></i>Credit Purpose</label>
+                                                <select class="form-select" name="purpose">
+                                                    <option value="A40">New car</option>
+                                                    <option value="A41">Used car</option>
+                                                    <option value="A42">Furniture/Equipment</option>
+                                                    <option value="A43" selected>Radio/Television</option>
+                                                    <option value="A44">Appliances</option>
+                                                    <option value="A45">Repairs</option>
+                                                    <option value="A46">Education</option>
+                                                    <option value="A47">Vacation</option>
+                                                    <option value="A48">Retraining</option>
+                                                    <option value="A49">Business</option>
+                                                    <option value="A410">Other</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-percentage me-2"></i>%
+                                                    Income for Payments</label>
+                                                <select class="form-select" name="pct_fee_income">
+                                                    <option value="1">1 (Lowest)</option>
+                                                    <option value="2">2 (Low-Medium)</option>
+                                                    <option value="3" selected>3 (Medium-High)</option>
+                                                    <option value="4">4 (Highest)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="section-title mt-4"><i class="fas fa-users me-2"></i>Employment and Guarantees Information</h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-briefcase me-2"></i>Years of
+                                                    Employment</label>
+                                                <select class="form-select" name="years_of_employment">
+                                                    <option value="A71">Unemployed</option>
+                                                    <option value="A72">
+                                                        < 1 year (Junior)</option>
+                                                    <option value="A73" selected>1-4 years (Medium)</option>
+                                                    <option value="A74">4-7 years (Medium)</option>
+                                                    <option value="A75">≥ 7 years (Senior)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i
+                                                        class="fas fa-user-friends me-2"></i>Co-debtors/Guarantors</label>
+                                                <select class="form-select" name="debtors">
+                                                    <option value="A101" selected>None</option>
+                                                    <option value="A102">Co-applicant</option>
+                                                    <option value="A103">Guarantor</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-passport me-2"></i>Foreign
+                                                    Worker</label>
+                                                <select class="form-select" name="foreign_worker">
+                                                    <option value="A201" selected>Yes</option>
+                                                    <option value="A202">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="mb-3">
+                                                <label class="form-label"><i class="fas fa-credit-card me-2"></i>Other
+                                                    Payment Plans</label>
+                                                <select class="form-select" name="other_installments">
+                                                    <option value="A141">Bank</option>
+                                                    <option value="A142">Stores</option>
+                                                    <option value="A143" selected>None</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-calendar-alt me-2"></i>Duración del crédito (meses)</label>
-                                                <input type="number" class="form-control" value="24" min="4" max="72">
+                                                <label class="form-label"><i
+                                                        class="fas fa-credit-card me-2"></i>Existing Credits</label>
+                                                <input type="number" class="form-control" name="num_existing_credits"
+                                                    value="1" min="0" max="4">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-money-bill-wave me-2"></i>Monto del crédito</label>
-                                                <input type="number" class="form-control" value="3000" min="250" max="18424">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-history me-2"></i>Historial crediticio</label>
-                                                <select class="form-select">
-                                                    <option value="A30">Crítico (A30)</option>
-                                                    <option value="A31" selected>Bueno (A31)</option>
-                                                    <option value="A32">Bueno (A32)</option>
-                                                    <option value="A33">Advertencia (A33)</option>
-                                                    <option value="A34">Crítico (A34)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-university me-2"></i>Balance cuenta corriente</label>
-                                                <select class="form-select">
-                                                    <option value="A11">Bajo (A11)</option>
-                                                    <option value="A12" selected>Medio (A12)</option>
-                                                    <option value="A13">Alto (A13)</option>
-                                                    <option value="A14">Sin cuenta (A14)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-piggy-bank me-2"></i>Tipo de ahorros</label>
-                                                <select class="form-select">
-                                                    <option value="A61" selected>Bajo (A61)</option>
-                                                    <option value="A62">Medio (A62)</option>
-                                                    <option value="A63">Alto (A63)</option>
-                                                    <option value="A64">Alto (A64)</option>
-                                                    <option value="A65">Sin ahorros (A65)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-briefcase me-2"></i>Años de empleo</label>
-                                                <select class="form-select">
-                                                    <option value="A71">Junior (A71)</option>
-                                                    <option value="A72">Junior (A72)</option>
-                                                    <option value="A73" selected>Medio (A73)</option>
-                                                    <option value="A74">Medio (A74)</option>
-                                                    <option value="A75">Senior (A75)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-percentage me-2"></i>% de ingresos para pagos</label>
-                                                <select class="form-select">
-                                                    <option value="1">Bajo (1)</option>
-                                                    <option value="2">Medio-bajo (2)</option>
-                                                    <option value="3" selected>Medio-alto (3)</option>
-                                                    <option value="4">Alto (4)</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label class="form-label"><i class="fas fa-user me-2"></i>Edad</label>
-                                                <input type="number" class="form-control" value="35" min="19" max="75">
+                                                <label class="form-label"><i class="fas fa-user-plus me-2"></i>Dependents</label>
+                                                <input type="number" class="form-control" name="num_dependents"
+                                                    value="1" min="0" max="4">
                                             </div>
                                         </div>
                                     </div>
-                                    
                                     <div class="d-grid mt-4">
                                         <button type="button" class="btn btn-purple" onclick="predictRisk()">
-                                            <i class="fas fa-calculator me-2"></i>Calcular Riesgo Crediticio
+                                            <i class="fas fa-calculator me-2"></i>Calculate Credit Risk
                                         </button>
                                     </div>
                                 </form>
-                                
-                                <div id="predictionResult" class="mt-5 p-4 rounded d-none" style="background-color: #f8f5ff; border: 1px solid var(--purple-light);">
-                                    <h4 class="mb-4" style="color: var(--purple-dark);"><i class="fas fa-chart-pie me-2"></i>Resultado de la Predicción</h4>
+                                <div id="predictionResult" class="mt-5 p-4 rounded d-none"
+                                    style="background-color: #f8f5ff; border: 1px solid var(--purple-light);">
+                                    <h4 class="mb-4" style="color: var(--purple-dark);">
+                                        <i class="fas fa-chart-pie me-2"></i>Prediction Result
+                                    </h4>
                                     <div class="row align-items-center">
                                         <div class="col-md-4 text-center mb-3 mb-md-0">
-                                            <div id="riskGauge" style="width: 200px; height: 200px; margin: 0 auto;"></div>
+                                            <!-- EXCLUSIVE CONTAINER FOR THE CHART -->
+                                            <div id="riskGaugeContainer"
+                                                style="width: 200px; height: 200px; margin: 0 auto;">
+                                                <canvas id="riskGaugeChart"></canvas>
+                                            </div>
                                         </div>
                                         <div class="col-md-8">
-                                            <h2 id="riskLabel" class="fw-bold mb-3">RIESGO MODERADO</h2>
-                                            <p id="riskDescription" class="mb-4">La probabilidad de impago es del <strong id="riskProbability">25.37%</strong>, lo que indica un riesgo moderado para aprobar el crédito.</p>
+                                            <h2 id="riskLabel" class="fw-bold mb-3">MODERATE RISK</h2>
+                                            <p id="riskDescription" class="mb-4">
+                                                The probability of default is <strong
+                                                    id="riskProbability">25.37%</strong>,
+                                                indicating a moderate risk for approving the credit.
+                                            </p>
                                             <div class="d-flex align-items-center">
-                                                <span class="me-3 fw-bold" style="color: var(--purple-dark);">Recomendación:</span>
-                                                <span id="recommendation" class="badge bg-warning text-dark fs-5 p-2">REVISIÓN MANUAL</span>
+                                                <span class="me-3 fw-bold"
+                                                    style="color: var(--purple-dark);">Recommendation:</span>
+                                                <span id="recommendation"
+                                                    class="badge bg-warning text-dark fs-5 p-2">MANUAL REVIEW</span>
                                             </div>
                                         </div>
                                     </div>
@@ -868,41 +1059,49 @@
                             </div>
                         </div>
                     </div>
-                    
                     <div class="col-md-12 mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <i class="fas fa-lightbulb me-2"></i>Guía de Interpretación
+                                <i class="fas fa-lightbulb me-2"></i>Interpretation Guide
                             </div>
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-4 mb-4">
                                         <div class="feature-item">
-                                            <h5 class="mb-2" style="color: var(--purple-dark);"><i class="fas fa-circle text-success me-2"></i>Bajo Riesgo</h5>
-                                            <p>Probabilidad de impago &lt; 16.67%. Se recomienda aprobar el crédito con condiciones estándar.</p>
+                                            <h5 class="mb-2" style="color: var(--purple-dark);"><i
+                                                    class="fas fa-circle text-success me-2"></i>Low Risk</h5>
+                                            <p>Probability of default < 16.67%. It is recommended to approve the credit with
+                                                standard conditions.</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
                                         <div class="feature-item">
-                                            <h5 class="mb-2" style="color: var(--purple-dark);"><i class="fas fa-circle text-warning me-2"></i>Riesgo Moderado</h5>
-                                            <p>Probabilidad de impago entre 16.67% y 40%. Se recomienda revisión manual y posiblemente condiciones especiales.</p>
+                                            <h5 class="mb-2" style="color: var(--purple-dark);"><i
+                                                    class="fas fa-circle text-warning me-2"></i>Moderate Risk</h5>
+                                            <p>Probability of default between 16.67% and 40%. Manual review is recommended
+                                                and possibly special conditions.</p>
                                         </div>
                                     </div>
                                     <div class="col-md-4 mb-4">
                                         <div class="feature-item">
-                                            <h5 class="mb-2" style="color: var(--purple-dark);"><i class="fas fa-circle text-danger me-2"></i>Alto Riesgo</h5>
-                                            <p>Probabilidad de impago &gt; 40%. Se recomienda no aprobar el crédito o solicitar garantías adicionales.</p>
+                                            <h5 class="mb-2" style="color: var(--purple-dark);"><i
+                                                    class="fas fa-circle text-danger me-2"></i>High Risk</h5>
+                                            <p>Probability of default > 40%. It is recommended not to approve the credit or
+                                                request additional guarantees.</p>
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div class="highlight-box mt-4">
-                                    <h5 class="mb-3" style="color: var(--purple-dark);"><i class="fas fa-info-circle me-2"></i>Notas Importantes</h5>
+                                    <h5 class="mb-3" style="color: var(--purple-dark);"><i
+                                            class="fas fa-info-circle me-2"></i>Important Notes</h5>
                                     <ul>
-                                        <li>El umbral de decisión óptimo (16.67%) fue seleccionado para maximizar el F1-Score y balancear la precisión con la capacidad de detectar malos pagadores.</li>
-                                        <li>Este modelo ha sido calibrado para proporcionar probabilidades confiables de impago.</li>
-                                        <li>Las decisiones automatizadas deben ser complementadas con revisión humana en casos frontera.</li>
-                                        <li>El modelo debe ser reevaluado y recalibrado cada 6 meses para mantener su efectividad.</li>
+                                        <li>The optimal decision threshold (16.67%) was selected to maximize the
+                                            F1-Score and balance precision with the ability to detect bad
+                                            payers.</li>
+                                        <li>This model has been calibrated to provide reliable default probabilities.</li>
+                                        <li>Automated decisions should be complemented with human review in borderline cases.</li>
+                                        <li>The model should be reevaluated and recalibrated every 6 months to maintain its
+                                            effectiveness.</li>
                                     </ul>
                                 </div>
                             </div>
@@ -912,95 +1111,213 @@
             </div>
         </div>
     </div>
-
     <footer class="mt-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <h5><i class="fas fa-project-diagram me-2"></i>Riesgo Crediticio ML</h5>
-                    <p class="mb-0">Sistema de evaluación de riesgo crediticio basado en machine learning</p>
+                    <h5><i class="fas fa-project-diagram me-2"></i>Credit Risk ML</h5>
+                    <p class="mb-0">Machine learning-based credit risk assessment system</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">© 2025 Todos los derechos reservados</p>
-                    <p class="mb-0">Modelo actualizado: 13 de noviembre de 2025</p>
+                    <p class="mb-0">© 2025 All rights reserved</p>
+                    <p class="mb-0">Model updated: November 13, 2025</p>
                 </div>
             </div>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Simulación de la predicción (en un entorno real, esto se conectaría al modelo)
+        // Global variables to maintain references
+        let riskChart = null;
+        let domElements = {};
+        // Initialization when DOM is ready
+        document.addEventListener('DOMContentLoaded', function () {
+            console.log('DOM loaded, JavaScript ready');
+            initializeDOMElements();
+        });
+        function initializeDOMElements() {
+            // Save references to DOM elements once
+            domElements = {
+                resultDiv: document.getElementById('predictionResult'),
+                riskLabel: document.getElementById('riskLabel'),
+                riskProbability: document.getElementById('riskProbability'),
+                riskDescription: document.getElementById('riskDescription'),
+                recommendation: document.getElementById('recommendation'),
+                gaugeContainer: document.getElementById('riskGaugeContainer'),
+                gaugeCanvas: document.getElementById('riskGaugeChart')
+            };
+            console.log('DOM elements initialized:', domElements);
+        }
         function predictRisk() {
-            // Simular una probabilidad de riesgo basada en inputs (en la realidad, esto vendría del modelo)
-            const randomProbability = (Math.random() * 60 + 5).toFixed(2);
-            document.getElementById('riskProbability').textContent = `${randomProbability}%`;
-            
-            // Determinar el nivel de riesgo
-            let riskLevel, riskColor, recommendation;
-            if (randomProbability < 16.67) {
-                riskLevel = "BAJO RIESGO";
-                riskColor = "success";
-                recommendation = "APROBAR CRÉDITO";
-            } else if (randomProbability < 40) {
-                riskLevel = "RIESGO MODERADO";
-                riskColor = "warning";
-                recommendation = "REVISIÓN MANUAL";
-            } else {
-                riskLevel = "ALTO RIESGO";
-                riskColor = "danger";
-                recommendation = "NO APROBAR";
-            }
-            
-            document.getElementById('riskLabel').textContent = riskLevel;
-            document.getElementById('riskLabel').style.color = `var(--bs-${riskColor})`;
-            document.getElementById('recommendation').textContent = recommendation;
-            document.getElementById('recommendation').className = `badge bg-${riskColor} text-dark fs-5 p-2`;
-            
-            // Mostrar el resultado
-            document.getElementById('predictionResult').classList.remove('d-none');
-            
-            // Actualizar el gráfico de gauge
-            updateRiskGauge(parseFloat(randomProbability));
-        }
-        
-        // Función para crear un gráfico de gauge con Chart.js
-        function updateRiskGauge(probability) {
-            const ctx = document.createElement('canvas');
-            ctx.id = 'riskGaugeChart';
-            document.getElementById('riskGauge').innerHTML = '';
-            document.getElementById('riskGauge').appendChild(ctx);
-            
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: [probability, 100 - probability],
-                        backgroundColor: [
-                            probability < 16.67 ? '#4CAF50' : 
-                            probability < 40 ? '#FFC107' : '#F44336',
-                            '#e0e0e0'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    rotation: -90 * Math.PI / 180,
-                    circumference: 180 * Math.PI / 180,
-                    cutout: '70%',
-                    plugins: {
-                        tooltip: { enabled: false },
-                        legend: { display: false }
-                    },
-                    responsive: true,
-                    maintainAspectRatio: false
+            console.log('Starting prediction...');
+            // Show loading state
+            const button = document.querySelector('.btn-purple');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Calculating...';
+            button.disabled = true;
+            try {
+                // Collect form data
+                const formData = new FormData(document.getElementById('creditForm'));
+                const data = {};
+                for (const [key, value] of formData.entries()) {
+                    if (['month_credit_duration', 'credit_amount', 'age', 'num_existing_credits', 'num_dependents', 'pct_fee_income'].includes(key)) {
+                        data[key] = parseFloat(value) || 0;
+                    } else {
+                        data[key] = value;
+                    }
                 }
-            });
+                console.log('Data sent:', data);
+                // Make request to endpoint
+                fetch('/business-intelligence/credit-risk/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(result => {
+                        console.log('Response received:', result);
+                        displayPredictionResult(result);
+                    })
+                    .catch(error => {
+                        console.error('Error in fetch:', error);
+                        alert('Error connecting to server: ' + error.message);
+                    })
+                    .finally(() => {
+                        // Always restore button
+                        button.innerHTML = originalText;
+                        button.disabled = false;
+                    });
+            } catch (error) {
+                console.error('Error in predictRisk:', error);
+                button.innerHTML = originalText;
+                button.disabled = false;
+                alert('Error processing request: ' + error.message);
+            }
         }
-        
-        // Inicializar un gauge vacío
-        updateRiskGauge(25);
+        function displayPredictionResult(result) {
+            console.log('Displaying result:', result);
+            // Verify we have DOM element references
+            if (!domElements.resultDiv || !domElements.riskLabel || !domElements.riskProbability ||
+                !domElements.riskDescription || !domElements.recommendation) {
+                console.error('DOM element references lost, reinitializing...');
+                initializeDOMElements();
+                // Verify again after reinitializing
+                if (!domElements.resultDiv || !domElements.riskLabel || !domElements.riskProbability ||
+                    !domElements.riskDescription || !domElements.recommendation) {
+                    console.error('Could not recover DOM references');
+                    alert('Error: Cannot display results. Please reload the page.');
+                    return;
+                }
+            }
+            try {
+                const badPayerProb = (result.probabilities?.bad_payer_probability || 0) * 100;
+                // Update content using saved references
+                domElements.riskProbability.textContent = `${badPayerProb.toFixed(2)}%`;
+                // Determine risk level
+                let riskLevel, riskClass, recommendationText;
+                if (badPayerProb < 16.67) {
+                    riskLevel = "LOW RISK";
+                    riskClass = "success";
+                    recommendationText = "APPROVE CREDIT";
+                } else if (badPayerProb < 40) {
+                    riskLevel = "MODERATE RISK";
+                    riskClass = "warning";
+                    recommendationText = "MANUAL REVIEW";
+                } else {
+                    riskLevel = "HIGH RISK";
+                    riskClass = "danger";
+                    recommendationText = "DO NOT APPROVE";
+                }
+                domElements.riskLabel.textContent = riskLevel;
+                domElements.riskLabel.className = `fw-bold mb-3 text-${riskClass}`;
+                domElements.recommendation.textContent = recommendationText;
+                domElements.recommendation.className = `badge bg-${riskClass} ${riskClass === 'warning' ? 'text-dark' : 'text-white'} fs-5 p-2`;
+                domElements.riskDescription.innerHTML = `The probability of default is <strong>${badPayerProb.toFixed(2)}%</strong>, 
+                                indicating ${riskLevel.toLowerCase()} for credit approval.`;
+                // Show result
+                domElements.resultDiv.classList.remove('d-none');
+                // Create gauge chart
+                createRiskGauge(badPayerProb);
+            } catch (error) {
+                console.error('Error in displayPredictionResult:', error);
+                alert('Error displaying result: ' + error.message);
+            }
+        }
+        function createRiskGauge(riskPercentage) {
+            try {
+                // Verify chart container exists
+                if (!domElements.gaugeContainer || !domElements.gaugeCanvas) {
+                    console.error('Chart elements not found, reinitializing...');
+                    initializeDOMElements();
+                    if (!domElements.gaugeContainer || !domElements.gaugeCanvas) {
+                        console.error('Could not recover chart container');
+                        return;
+                    }
+                }
+                const ctx = domElements.gaugeCanvas.getContext('2d');
+                // Destroy previous chart if exists
+                if (riskChart) {
+                    riskChart.destroy();
+                    riskChart = null;
+                }
+                // Create new chart
+                riskChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        datasets: [{
+                            data: [riskPercentage, 100 - riskPercentage],
+                            backgroundColor: [
+                                riskPercentage < 16.67 ? '#28a745' : riskPercentage < 40 ? '#ffc107' : '#dc3545',
+                                '#f8f9fa'
+                            ],
+                            borderWidth: 0,
+                            circumference: 180,
+                            rotation: -90
+                        }]
+                    },
+                    options: {
+                        cutout: '70%',
+                        plugins: {
+                            legend: { display: false },
+                            tooltip: {
+                                enabled: true,
+                                callbacks: {
+                                    label: function (context) {
+                                        return `Risk: ${riskPercentage.toFixed(2)}%`;
+                                    }
+                                }
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: true,
+                        animation: {
+                            animateRotate: true,
+                            animateScale: false // Disable scale for better stability
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Error creating chart:', error);
+            }
+        }
+        // Reset function if needed
+        function resetPrediction() {
+            if (riskChart) {
+                riskChart.destroy();
+                riskChart = null;
+            }
+            if (domElements.resultDiv) {
+                domElements.resultDiv.classList.add('d-none');
+            }
+        }
     </script>
 </body>
 </html>
