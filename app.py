@@ -1,4 +1,4 @@
-import os, pickle, json, traceback
+import os, pickle, json, traceback, sys
 import numpy as np, pandas as pd
 from flask import Flask, render_template, send_file, abort, request, jsonify
 
@@ -25,6 +25,20 @@ except Exception as e:
     credit_model = None
 # =====
 
+kafka_modules_path = os.path.join(location_path, 'Files', '9th_quarter', 'Visualization_Tools_II', 'Kafka_Clicker')
+sys.path.append(kafka_modules_path)
+
+# Ahora sí podemos importar las instancias globales
+try:
+    from producer import click_producer #type:ignore
+    from consumer import click_consumer #type:ignore
+    print("Módulos de Kafka importados correctamente.")
+except ImportError as e:
+    print(f"Error importando módulos de Kafka: {e}")
+    # Definimos mocks por si falla la importación para que no crashee la app entera
+    click_producer = None
+    click_consumer = None
+
 # ===== General
 @app.route('/')
 def index():
@@ -39,7 +53,8 @@ def index():
         ],
         "Visualization Tools II":[
             "Personalized Web",
-            "Kafka Clicker"
+            "Kafka Clicker",
+            "Kafka Dashboard",
         ],
         "Business Intelligence":[
             "Credit Risk"
@@ -72,14 +87,45 @@ def index():
 
 # ===== Visualization Tools II
 @app.route('/visualization-tools-ii/kafka-clicker')
-def kafka_clicker():
+def kafka_clicker_gem():
     html_path = os.path.join('9th_quarter','Visualization_Tools_II','Kafka_Clicker','clicker.html')
     return render_template(html_path)
 
 @app.route('/visualization-tools-ii/kafka-dashboard')
-def kafka_dashboard():
+def kafka_dashboard_gem():
     html_path = os.path.join('9th_quarter','Visualization_Tools_II','Kafka_Clicker','dashboard.html')
     return render_template(html_path)
+
+@app.route('/visualization-tools-ii/kafka/click', methods=['POST'])
+def send_click():
+    print('Click...')
+    if not click_producer:
+        return jsonify({'status': 'error', 'message': 'Producer not loaded'}), 500
+
+    data = request.json
+    click_type = data.get('type') # Espera 'cheers' o 'fuck'
+    
+    if click_type not in ['cheers', 'fuck']:
+        return jsonify({'status': 'error', 'message': 'Invalid click type'}), 400
+
+    # Usar el producer importado para enviar a Kafka
+    success = click_producer.send_click(click_type)
+    
+    if success:
+        return jsonify({'status': 'success', 'message': f'Click {click_type} sent!'})
+    else:
+        return jsonify({'status': 'error', 'message': 'Failed to send to Kafka'}), 500
+
+@app.route('/visualization-tools-ii/kafka/data', methods=['GET'])
+def get_kafka_data():
+    print('Dashboards...')
+    if not click_consumer:
+        return jsonify({'status': 'error', 'message': 'Consumer not loaded'}), 500
+    
+    # Obtener datos procesados del consumer (Totales y Recientes)
+    data = click_consumer.get_data()
+    return jsonify(data)
+
 
 
 

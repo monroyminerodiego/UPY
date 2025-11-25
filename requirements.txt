@@ -5,3 +5,6 @@ gunicorn
 pandas
 scikit-learn
 xgboost
+
+kafka-python
+pymongo

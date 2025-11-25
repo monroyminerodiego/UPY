@@ -17,4 +17,4 @@ COPY . .
 
 EXPOSE 501
 
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:501", "app:app"]
+CMD ["gunicorn", "-w", "1", "--threads", "4", "-b", "0.0.0.0:501", "app:app"]
