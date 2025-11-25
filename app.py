@@ -16,17 +16,14 @@ FEATURE_DICT_PATH = os.path.join(location_path, 'Files', '9th_quarter', 'Busines
 
 # Cargar modelo
 try:
-    with open(MODEL_PATH, 'rb') as f:
-        credit_model = pickle.load(f)
-    
-    with open(CONFIG_PATH, 'r') as f:
-        model_config = json.load(f)
-    
+    with open(MODEL_PATH, 'rb') as f: credit_model = pickle.load(f)
+    with open(CONFIG_PATH, 'r') as f: model_config = json.load(f)
     feature_dict = pd.read_csv(FEATURE_DICT_PATH)
-    print("✅ Modelo de crédito cargado exitosamente")
+    print("Modelo de crédito cargado exitosamente")
 except Exception as e:
-    print(f"⚠️ Error al cargar el modelo: {e}")
+    print(f"Error al cargar el modelo: {e}")
     credit_model = None
+# =====
 
 # ===== General
 @app.route('/')
@@ -41,7 +38,8 @@ def index():
             "Business Model"
         ],
         "Visualization Tools II":[
-            "Personalized Web"
+            "Personalized Web",
+            "Kafka Clicker"
         ],
         "Business Intelligence":[
             "Credit Risk"
@@ -68,6 +66,20 @@ def index():
     materias_final = dict(sorted(materias_final.items(),key=lambda item: item[0]))
 
     return render_template('/index.html', materias = materias_final)
+
+
+
+
+# ===== Visualization Tools II
+@app.route('/visualization-tools-ii/kafka-clicker')
+def kafka_clicker():
+    html_path = os.path.join('9th_quarter','Visualization_Tools_II','Kafka_Clicker','clicker.html')
+    return render_template(html_path)
+
+@app.route('/visualization-tools-ii/kafka-dashboard')
+def kafka_dashboard():
+    html_path = os.path.join('9th_quarter','Visualization_Tools_II','Kafka_Clicker','dashboard.html')
+    return render_template(html_path)
 
 
 
