@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BigMart Sales - Business Intelligence Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #34495e;
+            --accent-color: #e74c3c;
+            --light-gray: #ecf0f1;
+            --medium-gray: #95a5a6;
+            --dark-gray: #7f8c8d;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-tab {
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .nav-tab.active {
+            border-bottom-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+        
+        .nav-tab:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gray) 100%);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .chart-container {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(44, 62, 80, 0.3);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-4">
+                    <i class="fas fa-chart-line text-2xl text-red-500"></i>
+                    <h1 class="text-xl font-bold text-gray-800">BigMart Analytics</h1>
+                </div>
+                <div class="flex space-x-8">
+                    <button id="tab-eda" class="nav-tab active px-4 py-2 font-medium text-gray-700 hover:text-red-500">
+                        <i class="fas fa-search mr-2"></i>EDA / Cleaning
+                    </button>
+                    <button id="tab-modeling" class="nav-tab px-4 py-2 font-medium text-gray-700 hover:text-red-500">
+                        <i class="fas fa-brain mr-2"></i>Decisión Modelaje
+                    </button>
+                    <button id="tab-analysis" class="nav-tab px-4 py-2 font-medium text-gray-700 hover:text-red-500">
+                        <i class="fas fa-chart-bar mr-2"></i>Análisis BI
+                    </button>
+                </div>
+                <a href="/" class="btn-primary text-white px-6 py-2 rounded-lg font-medium">
+                    <i class="fas fa-home mr-2"></i>Home
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Vista 1: EDA / Cleaning -->
+        <div id="view-eda" class="view-content fade-in">
+            <div class="text-center mb-12">
+                <h2 class="hero-title mb-4">Exploratory Data Analysis</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Análisis exhaustivo del dataset BigMart para entender la estructura, calidad y características de los datos antes del clustering de productos.
+                </p>
+            </div>
+
+            <!-- Resumen General -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                <div class="metric-card p-6 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total Registros</p>
+                            <p id="total-records" class="text-3xl font-bold text-gray-900">-</p>
+                        </div>
+                        <i class="fas fa-database text-3xl text-blue-500"></i>
+                    </div>
+                </div>
+                <div class="metric-card p-6 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Productos Únicos</p>
+                            <p id="unique-products" class="text-3xl font-bold text-gray-900">-</p>
+                        </div>
+                        <i class="fas fa-boxes text-3xl text-green-500"></i>
+                    </div>
+                </div>
+                <div class="metric-card p-6 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Tiendas Únicas</p>
+                            <p id="unique-stores" class="text-3xl font-bold text-gray-900">-</p>
+                        </div>
+                        <i class="fas fa-store text-3xl text-purple-500"></i>
+                    </div>
+                </div>
+                <div class="metric-card p-6 rounded-xl">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Features</p>
+                            <p id="total-features" class="text-3xl font-bold text-gray-900">-</p>
+                        </div>
+                        <i class="fas fa-list text-3xl text-orange-500"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Análisis de Datos Faltantes -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>
+                        Valores Faltantes
+                    </h3>
+                    <div id="missing-values" class="space-y-4">
+                        <div class="loading"></div>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-chart-pie text-blue-500 mr-2"></i>
+                        Distribución de Categorías
+                    </h3>
+                    <div id="category-distributions" class="space-y-4">
+                        <div class="loading"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Distribuciones Numéricas -->
+            <div class="card p-6 rounded-xl mb-12">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-chart-line text-green-500 mr-2"></i>
+                    Análisis de Distribuciones
+                </h3>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-4">Ventas por Producto</h4>
+                        <div id="sales-histogram" class="chart-container"></div>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-4">Precios MRP</h4>
+                        <div id="mrp-histogram" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Análisis de Outliers -->
+            <div class="card p-6 rounded-xl">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-search-plus text-red-500 mr-2"></i>
+                    Análisis de Outliers
+                </h3>
+                <div id="outliers-analysis" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="loading"></div>
+                </div>
+                <div class="mt-6 p-4 bg-blue-50 rounded-lg">
+                    <p class="text-sm text-blue-800">
+                        <strong>Metodología:</strong> Se identificaron outliers usando el método IQR (Rango Intercuartílico). 
+                        Los valores por debajo de Q1 - 1.5×IQR o por encima de Q3 + 1.5×IQR se consideran outliers.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vista 2: Decisión Modelaje -->
+        <div id="view-modeling" class="view-content hidden">
+            <div class="text-center mb-12">
+                <h2 class="hero-title mb-4">Decisión de Modelaje</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Análisis de métricas de clustering y selección del número óptimo de clusters para la segmentación de productos.
+                </p>
+            </div>
+
+            <!-- Métricas de Clustering -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-chart-line text-blue-500 mr-2"></i>
+                        Puntajes Silhouette
+                    </h3>
+                    <div id="silhouette-chart" class="chart-container">
+                        <div class="loading"></div>
+                    </div>
+                    <div class="mt-4 p-4 bg-green-50 rounded-lg">
+                        <p class="text-sm text-green-800">
+                            <strong>Óptimo:</strong> K=4 con puntaje silhouette de 0.3109
+                        </p>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-chart-area text-purple-500 mr-2"></i>
+                        Método del Codo (Inercia)
+                    </h3>
+                    <div id="inertia-chart" class="chart-container">
+                        <div class="loading"></div>
+                    </div>
+                    <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                        <p class="text-sm text-blue-800">
+                            <strong>Interpretación:</strong> El "codo" aparece en K=4, indicando un buen balance entre complejidad y performance.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visualización PCA -->
+            <div class="card p-6 rounded-xl mb-12">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-project-diagram text-orange-500 mr-2"></i>
+                    Visualización de Clusters (PCA)
+                </h3>
+                <div id="pca-visualization" class="chart-container">
+                    <div class="loading"></div>
+                </div>
+                <div class="mt-4 p-4 bg-yellow-50 rounded-lg">
+                    <p class="text-sm text-yellow-800">
+                        <strong>Nota:</strong> La visualización muestra los clusters en un espacio 2D reducido mediante PCA. 
+                        Los colores representan los diferentes clusters identificados.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Resumen de Decisión -->
+            <div class="card p-6 rounded-xl">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                    Decisión Final
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <i class="fas fa-check-circle text-3xl text-green-500 mb-2"></i>
+                        <h4 class="font-bold text-green-800">Número Óptimo</h4>
+                        <p class="text-2xl font-bold text-green-900">4 Clusters</p>
+                    </div>
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <i class="fas fa-chart-bar text-3xl text-blue-500 mb-2"></i>
+                        <h4 class="font-bold text-blue-800">Silhouette Score</h4>
+                        <p class="text-2xl font-bold text-blue-900">0.3109</p>
+                    </div>
+                    <div class="text-center p-4 bg-purple-50 rounded-lg">
+                        <i class="fas fa-cogs text-3xl text-purple-500 mb-2"></i>
+                        <h4 class="font-bold text-purple-800">Algoritmo</h4>
+                        <p class="text-2xl font-bold text-purple-900">K-Means</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vista 3: Análisis BI -->
+        <div id="view-analysis" class="view-content hidden">
+            <div class="text-center mb-12">
+                <h2 class="hero-title mb-4">Business Intelligence</h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Dashboard interactivo para análisis de clusters de productos y mezcla por tienda.
+                </p>
+            </div>
+
+            <!-- Perfiles de Clusters -->
+            <div class="card p-6 rounded-xl mb-12">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-users text-blue-500 mr-2"></i>
+                    Perfiles de Clusters de Productos
+                </h3>
+                <div id="cluster-profiles" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="loading"></div>
+                </div>
+            </div>
+
+            <!-- Mezcla de Clusters por Tienda -->
+            <div class="card p-6 rounded-xl mb-12">
+                <h3 class="text-xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-store text-green-500 mr-2"></i>
+                    Mezcla de Clusters por Tienda
+                </h3>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Seleccionar Tienda:</label>
+                    <select id="store-selector" class="w-full md:w-64 p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                        <option value="">Cargando tiendas...</option>
+                    </select>
+                </div>
+                <div id="store-mix-chart" class="chart-container">
+                    <div class="loading"></div>
+                </div>
+            </div>
+
+            <!-- Análisis de Oportunidades -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                <div class="card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>
+                        Oportunidades por Tienda
+                    </h3>
+                    <div id="opportunities-analysis" class="space-y-4">
+                        <div class="p-4 bg-blue-50 rounded-lg">
+                            <h4 class="font-bold text-blue-800">Tiendas Tipo 1</h4>
+                            <p class="text-sm text-blue-600">Oportunidad de incrementar productos premium (Cluster 2)</p>
+                        </div>
+                        <div class="p-4 bg-green-50 rounded-lg">
+                            <h4 class="font-bold text-green-800">Tiendas Tipo 2</h4>
+                            <p class="text-sm text-green-600">Fuerte en productos básicos, oportunidad en productos especializados</p>
+                        </div>
+                        <div class="p-4 bg-purple-50 rounded-lg">
+                            <h4 class="font-bold text-purple-800">Tiendas Tipo 3</h4>
+                            <p class="text-sm text-purple-600">Balance óptimo, enfocarse en mantener la mezcla actual</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card p-6 rounded-xl">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        <i class="fas fa-chart-pie text-red-500 mr-2"></i>
+                        Jerarquía de Tiendas
+                    </h3>
+                    <div id="store-hierarchy" class="chart-container">
+                        <div class="loading"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h3 class="text-lg font-semibold mb-4">Autores del Proyecto</h3>
+                <div class="flex flex-wrap justify-center gap-4 text-sm">
+                    <span class="px-3 py-1 bg-gray-700 rounded-full">Diego Monroy</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full">Ariel Buenfil</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full">Alan Valbuena</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full">Damaris Dzul</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full">Sergio Barrera</span>
+                    <span class="px-3 py-1 bg-gray-700 rounded-full">Moises Carrillo</span>
+                </div>
+                <p class="mt-4 text-gray-400 text-sm">
+                    Business Intelligence Dashboard - BigMart Sales Analysis
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/Files/9th_quarter/Business_Intelligence/HW4/dashboard.js"></script>
+</body>
+</html>

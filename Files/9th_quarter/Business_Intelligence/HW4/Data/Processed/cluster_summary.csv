@@ -1,5 +1,0 @@
-cluster_producto,n_productos,Total_Sales_median,Total_Sales_mean,Avg_MRP_median,Avg_MRP_mean,Store_Count_median,Store_Count_mean,Avg_Visibility_median,Avg_Visibility_mean
-0,369,9224.66,9471.04,119.92,124.97,5.0,5.26,0.06,0.07
-1,468,14332.01,15168.08,168.25,167.81,6.0,5.74,0.06,0.07
-2,311,19163.72,19393.91,217.98,213.6,6.0,5.53,0.06,0.07
-3,411,4414.25,4783.81,60.82,69.96,5.0,5.3,0.06,0.07

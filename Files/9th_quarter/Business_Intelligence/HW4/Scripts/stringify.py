@@ -29,14 +29,16 @@ if __name__ == "__main__":
     os.system('clear')
 
     args = sys.argv
-    if '--gemini' in args: book = 'gemini'
-    elif '--deep' in args: book = 'deep'
-    elif '--kimi' in args: book = 'kimi'
-    
-
+    if   '--fase1' in args: book = 'fase_a.ipynb'
+    elif '--fase2' in args: book = 'fase_b.ipynb'
+    elif '--fase3' in args: book = 'fase_c.ipynb'
+    elif '--fase4' in args: book = 'fase_d.ipynb'
+        
     notebook_path = os.path.join(
         os.path.dirname(os.path.dirname(__file__)),
         'Notebooks',
-        f'fase2_{book}.ipynb'
+        book
     )
+
     notebook_to_string(notebook_path)
+    print('Done...!!!')

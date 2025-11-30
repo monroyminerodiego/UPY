@@ -1,0 +1,482 @@
+[
+    {
+        "id": "OUT010",
+        "type": "Grocery Store",
+        "size": "nan",
+        "location": "Tier 3",
+        "year_established": 1998,
+        "total_sales": 188340.1724,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "NCK30",
+                "Broad_Category": "Non-Consumable",
+                "Item_Outlet_Sales": 1775.6886
+            },
+            {
+                "Item_Identifier": "FDJ55",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 1575.2828
+            },
+            {
+                "Item_Identifier": "FDV59",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 1524.0162
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 16403.98,
+                "percent": 8.71
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 33931.83,
+                "percent": 18.02
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 95627.52,
+                "percent": 50.77
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 42376.84,
+                "percent": 22.5
+            }
+        ]
+    },
+    {
+        "id": "OUT013",
+        "type": "Supermarket Type1",
+        "size": "High",
+        "location": "Tier 3",
+        "year_established": 1987,
+        "total_sales": 2142663.5782,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "FDF39",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 10256.649
+            },
+            {
+                "Item_Identifier": "FDA21",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 9069.5276
+            },
+            {
+                "Item_Identifier": "DRK23",
+                "Broad_Category": "Drinks",
+                "Item_Outlet_Sales": 7843.124
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 193042.05,
+                "percent": 9.01
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 444175.82,
+                "percent": 20.73
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 1103025.53,
+                "percent": 51.48
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 402420.17,
+                "percent": 18.78
+            }
+        ]
+    },
+    {
+        "id": "OUT017",
+        "type": "Supermarket Type1",
+        "size": "nan",
+        "location": "Tier 2",
+        "year_established": 2007,
+        "total_sales": 2167465.2939999998,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "FDK03",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 9664.7528
+            },
+            {
+                "Item_Identifier": "FDK28",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 9275.9256
+            },
+            {
+                "Item_Identifier": "FDD44",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 8760.5964
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 206101.72,
+                "percent": 9.51
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 486858.26,
+                "percent": 22.46
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 1089838.7,
+                "percent": 50.28
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 384666.62,
+                "percent": 17.75
+            }
+        ]
+    },
+    {
+        "id": "OUT018",
+        "type": "Supermarket Type2",
+        "size": "Medium",
+        "location": "Tier 3",
+        "year_established": 2009,
+        "total_sales": 1851822.83,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "FDC02",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 6768.5228
+            },
+            {
+                "Item_Identifier": "FDU51",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 6729.9064
+            },
+            {
+                "Item_Identifier": "FDY51",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 6611.394
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 160238.75,
+                "percent": 8.65
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 399099.16,
+                "percent": 21.55
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 950299.67,
+                "percent": 51.32
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 342185.25,
+                "percent": 18.48
+            }
+        ]
+    },
+    {
+        "id": "OUT019",
+        "type": "Grocery Store",
+        "size": "Small",
+        "location": "Tier 1",
+        "year_established": 1985,
+        "total_sales": 179694.0936,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "NCX41",
+                "Broad_Category": "Non-Consumable",
+                "Item_Outlet_Sales": 1482.0708
+            },
+            {
+                "Item_Identifier": "FDY39",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 1470.0864
+            },
+            {
+                "Item_Identifier": "FDS13",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 1324.942
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 14122.95,
+                "percent": 7.86
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 41496.65,
+                "percent": 23.09
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 90450.26,
+                "percent": 50.34
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 33624.23,
+                "percent": 18.71
+            }
+        ]
+    },
+    {
+        "id": "OUT027",
+        "type": "Supermarket Type3",
+        "size": "Medium",
+        "location": "Tier 3",
+        "year_established": 1985,
+        "total_sales": 3453926.0514,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "NCE42",
+                "Broad_Category": "Non-Consumable",
+                "Item_Outlet_Sales": 13086.9648
+            },
+            {
+                "Item_Identifier": "FDQ19",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 12117.56
+            },
+            {
+                "Item_Identifier": "FDZ20",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 11445.102
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 260236.59,
+                "percent": 7.53
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 764871.71,
+                "percent": 22.14
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 1810920.07,
+                "percent": 52.43
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 617897.69,
+                "percent": 17.89
+            }
+        ]
+    },
+    {
+        "id": "OUT035",
+        "type": "Supermarket Type1",
+        "size": "Small",
+        "location": "Tier 2",
+        "year_established": 2004,
+        "total_sales": 2268122.9354,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "FDI15",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 8479.6288
+            },
+            {
+                "Item_Identifier": "FDB37",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 7931.6754
+            },
+            {
+                "Item_Identifier": "FDX09",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 7763.228
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 187649.74,
+                "percent": 8.27
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 458654.97,
+                "percent": 20.22
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 1195686.92,
+                "percent": 52.72
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 426131.31,
+                "percent": 18.79
+            }
+        ]
+    },
+    {
+        "id": "OUT045",
+        "type": "Supermarket Type1",
+        "size": "nan",
+        "location": "Tier 2",
+        "year_established": 2002,
+        "total_sales": 2036725.4770000002,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "FDY55",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 8994.958
+            },
+            {
+                "Item_Identifier": "FDT16",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 8851.1452
+            },
+            {
+                "Item_Identifier": "FDR45",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 8604.7992
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 198143.41,
+                "percent": 9.73
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 415443.89,
+                "percent": 20.4
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 1055913.53,
+                "percent": 51.84
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 367224.65,
+                "percent": 18.03
+            }
+        ]
+    },
+    {
+        "id": "OUT046",
+        "type": "Supermarket Type1",
+        "size": "Small",
+        "location": "Tier 1",
+        "year_established": 1997,
+        "total_sales": 2118395.1681999997,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "NCM05",
+                "Broad_Category": "Non-Consumable",
+                "Item_Outlet_Sales": 9779.9362
+            },
+            {
+                "Item_Identifier": "NCQ53",
+                "Broad_Category": "Non-Consumable",
+                "Item_Outlet_Sales": 8508.924
+            },
+            {
+                "Item_Identifier": "FDG47",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 8132.0812
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 164635.7,
+                "percent": 7.77
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 465465.44,
+                "percent": 21.97
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 1094043.89,
+                "percent": 51.64
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 394250.14,
+                "percent": 18.61
+            }
+        ]
+    },
+    {
+        "id": "OUT049",
+        "type": "Supermarket Type1",
+        "size": "Medium",
+        "location": "Tier 1",
+        "year_established": 1999,
+        "total_sales": 2183969.8102,
+        "dominant_price_tier": "Premium",
+        "top_products": [
+            {
+                "Item_Identifier": "FDB15",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 7646.0472
+            },
+            {
+                "Item_Identifier": "FDU55",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 7549.5062
+            },
+            {
+                "Item_Identifier": "FDP16",
+                "Broad_Category": "Food",
+                "Item_Outlet_Sales": 7370.406
+            }
+        ],
+        "breakdown": [
+            {
+                "cluster": "Drinks",
+                "value": 195294.45,
+                "percent": 8.94
+            },
+            {
+                "cluster": "Food: Low Viz / Economy",
+                "value": 458382.66,
+                "percent": 20.99
+            },
+            {
+                "cluster": "Food: Mass Market / High Rev",
+                "value": 1114858.13,
+                "percent": 51.05
+            },
+            {
+                "cluster": "Non-Edible Goods",
+                "value": 415434.57,
+                "percent": 19.02
+            }
+        ]
+    }
+]
