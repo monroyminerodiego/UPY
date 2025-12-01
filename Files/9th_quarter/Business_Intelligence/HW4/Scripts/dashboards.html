@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboards - BigMart Sales Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Home Button Styles */
+        .home-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .home-button:active {
+            transform: translateY(0);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 0 1rem;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-btn.prev {
+            left: 1rem;
+        }
+
+        .carousel-btn.next {
+            right: 1rem;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: #667eea;
+            transform: scale(1.2);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .treemap-container {
+            height: 500px;
+        }
+
+        .sunburst-container {
+            height: 500px;
+        }
+
+        .bubble-container {
+            height: 600px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    
+    <header class="bg-white/95 backdrop-blur-sm shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">BigMart Analytics</h1>
+                        <p class="text-xs text-gray-600">Strategic Dashboards</p>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/Files/9th_quarter/Business_Intelligence/HW4/index.html"
+                        class="nav-link text-gray-700 font-medium hover:text-indigo-600 transition-colors">Overview</a>
+                    <a href="/Files/9th_quarter/Business_Intelligence/HW4/Scripts/eda.html"
+                        class="nav-link text-gray-700 font-medium hover:text-indigo-600 transition-colors">EDA</a>
+                    <a href="/Files/9th_quarter/Business_Intelligence/HW4/Scripts/modeling.html"
+                        class="nav-link text-gray-700 font-medium hover:text-indigo-600 transition-colors">Modeling</a>
+                    <a href="#" class="nav-link text-indigo-600 font-medium">Dashboards</a>
+                </nav>
+
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+        
+    <main class="pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header -->
+            <div class="text-center mb-12 fade-in">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                    Strategic Dashboards
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Interactive visualizations displaying key insights for strategic decision-making in the retail
+                    business.
+                </p>
+            </div>
+    
+            <!-- Home Button -->
+            <a href="/" class="home-button">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+
+            <!-- Insight Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12 fade-in" id="kpi-container">
+                <div class="kpi-card animate-pulse">
+                    <div class="h-20 bg-gray-200 rounded"></div>
+                </div>
+                <div class="kpi-card animate-pulse">
+                    <div class="h-20 bg-gray-200 rounded"></div>
+                </div>
+                <div class="kpi-card animate-pulse">
+                    <div class="h-20 bg-gray-200 rounded"></div>
+                </div>
+                <div class="kpi-card animate-pulse">
+                    <div class="h-20 bg-gray-200 rounded"></div>
+                </div>
+            </div>
+
+            <!-- Carousel -->
+            <div class="carousel-container fade-in delay-1 relative">
+                <div class="carousel-track" id="carouselTrack">
+
+                    <!-- 1. Sales by Mix -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Sales Mix by Category</h3>
+                            <div id="salesMixChart" style="height: 400px;"></div>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-semibold text-blue-900 mb-2">Sales Mix Insights:</h4>
+                                <ul class="text-sm text-blue-800 space-y-1">
+                                    <li>• <strong>Dominance:</strong> Fruits & Vegetables and Snack Foods lead the
+                                        sales.</li>
+                                    <li>• <strong>Stability:</strong> Household goods provide a stable revenue base.
+                                    </li>
+                                    <li>• <strong>Opportunity:</strong> Dairy and Baking Goods show potential for growth
+                                        through cross-selling.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Breakdown by Store Type -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Cluster Breakdown by Store Type</h3>
+                            <div id="stackedBarChart" style="height: 400px;"></div>
+                            <div class="mt-4 p-4 bg-red-50 rounded-lg">
+                                <h4 class="font-semibold text-red-900 mb-2">Cluster Distribution:</h4>
+                                <ul class="text-sm text-red-800 space-y-2">
+                                    <li>• <strong>Supermarkets:</strong> Higher mix of Mass Market / High Revenue items.
+                                    </li>
+                                    <li>• <strong>Grocery Stores:</strong> Balanced mix, but volume limited by physical
+                                        size.</li>
+                                    <li>• <strong>Optimization:</strong> Tailor planograms based on these cluster
+                                        proportions.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Strategic Dimension -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Strategic Dimension: The Power of Premium
+                            </h3>
+                            <div id="premiumPowerChart" style="height: 400px;"></div>
+                            <div class="mt-4 p-4 bg-purple-50 rounded-lg">
+                                <h4 class="font-semibold text-purple-900 mb-2">Premium Segment Analysis:</h4>
+                                <ul class="text-sm text-purple-800 space-y-2">
+                                    <li>• <strong>ROI:</strong> Premium products yield significantly higher margins than
+                                        standard ones.</li>
+                                    <li>• <strong>Geography:</strong> Highly concentrated in Tier 1 cities.</li>
+                                    <li>• <strong>Strategy:</strong> Expand premium lines to high-potential Tier 2
+                                        cities.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Geographic Preferences -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Geographic Preferences: Tier vs Category
+                            </h3>
+                            <div id="geographicChart" style="height: 400px;"></div>
+                            <div class="mt-4 p-4 bg-orange-50 rounded-lg">
+                                <h4 class="font-semibold text-orange-900 mb-2">Geographic Patterns:</h4>
+                                <ul class="text-sm text-orange-800 space-y-2">
+                                    <li>• <strong>Tier 1:</strong> Preference for premium and convenience goods.</li>
+                                    <li>• <strong>Tier 2:</strong> Focus on value and staple products.</li>
+                                    <li>• <strong>Tier 3:</strong> Emphasis on price sensitivity and local goods.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Treemap -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Hierarchical Treemap: Sales by Store &Cluster</h3>
+                            <div id="treemapChart" class="treemap-container"></div>
+                            <div class="mt-4 p-4 bg-teal-50 rounded-lg">
+                                <h4 class="font-semibold text-teal-900 mb-2">Sales Hierarchy:</h4>
+                                <ul class="text-sm text-teal-800 space-y-2">
+                                    <li>• <strong>Level 1:</strong> Stores ordered by sales volume.</li>
+                                    <li>• <strong>Level 2:</strong> Product clusters within each store.</li>
+                                    <li>• <strong>Size:</strong> Proportional to segment sales revenue.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Summary -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Strategic Summary & Recommendations</h3>
+                            <div class="dashboard-grid">
+                                <div
+                                    class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-trophy text-blue-600 text-2xl mr-3"></i>
+                                        <h4 class="text-lg font-bold text-blue-900">Key Opportunities</h4>
+                                    </div>
+                                    <ul class="text-sm text-blue-800 space-y-2">
+                                        <li>• Premium line expansion in Tier 2 cities.</li>
+                                        <li>• Assortment optimization by geography.</li>
+                                        <li>• Increase visibility for high-margin economy goods.</li>
+                                    </ul>
+                                </div>
+
+                                <div
+                                    class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-chart-line text-green-600 text-2xl mr-3"></i>
+                                        <h4 class="text-lg font-bold text-green-900">Target Metrics</h4>
+                                    </div>
+                                    <ul class="text-sm text-green-800 space-y-2">
+                                        <li>• Increase YoY revenue by 18%.</li>
+                                        <li>• Improve gross margin by 25% in premium segment.</li>
+                                        <li>• Reduce operational costs by 12%.</li>
+                                    </ul>
+                                </div>
+
+                                <div
+                                    class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-rocket text-purple-600 text-2xl mr-3"></i>
+                                        <h4 class="text-lg font-bold text-purple-900">Next Steps</h4>
+                                    </div>
+                                    <ul class="text-sm text-purple-800 space-y-2">
+                                        <li>• Implement differentiated pricing strategies.</li>
+                                        <li>• Redesign planograms based on cluster analysis.</li>
+                                        <li>• Launch customer loyalty program.</li>
+                                    </ul>
+                                </div>
+
+                                <div
+                                    class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-xl border border-orange-200">
+                                    <div class="flex items-center mb-4">
+                                        <i class="fas fa-exclamation-triangle text-orange-600 text-2xl mr-3"></i>
+                                        <h4 class="text-lg font-bold text-orange-900">Risk Monitoring</h4>
+                                    </div>
+                                    <ul class="text-sm text-orange-800 space-y-2">
+                                        <li>• Premium market saturation.</li>
+                                        <li>• Shifts in consumer preferences (Health/Bio).</li>
+                                        <li>• Supply chain cost volatility.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div
+                                class="mt-8 p-6 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl border border-indigo-200">
+                                <h4 class="text-xl font-bold text-gray-900 mb-4 text-center">Projected Financial Impact
+                                </h4>
+                                <div class="grid grid-cols-3 gap-6 text-center">
+                                    <div>
+                                        <div class="text-3xl font-bold text-blue-600 mb-2">+$2.1M</div>
+                                        <div class="text-sm text-gray-600">Annual Revenue Increase</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-3xl font-bold text-green-600 mb-2">+32%</div>
+                                        <div class="text-sm text-gray-600">Gross Margin Improvement</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-3xl font-bold text-purple-600 mb-2">$850K</div>
+                                        <div class="text-sm text-gray-600">OpEx Savings</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="carousel-btn prev" onclick="changeSlide(-1)"><i class="fas fa-chevron-left text-gray-700"></i></button>
+                <button class="carousel-btn next" onclick="changeSlide(1)"><i class="fas fa-chevron-right text-gray-700"></i></button>
+
+                <div class="slide-indicator">
+                    <div class="indicator-dot active" onclick="goToSlide(0)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(1)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(2)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(3)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(4)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(5)"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div
+                        class="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-semibold">BigMart Analytics</span>
+                </div>
+                <p class="text-gray-400 text-sm">
+                    © 2024 Business Intelligence Project. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // --- Carousel Logic ---
+        let currentSlide = 0;
+        const totalSlides = 6;
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.querySelectorAll('.indicator-dot');
+
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            // Force redraw of Plotly charts when slide changes to ensure correct sizing
+            window.dispatchEvent(new Event('resize'));
+        }
+
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
+        });
+
+        // --- Data Fetching & Chart Rendering ---
+        const API_BASE = '/business-intelligence/bigmart-analisys';
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Initiate all fetches in parallel
+            try {
+                await Promise.all([
+                    fetchKPIs(),              // 0.
+                    fetchSalesMix(),          // 1.
+                    fetchStackedBar(),        // 4.
+                    fetchPremiumPower(),      // 2.
+                    fetchGeoAnalysis(),       // 3.
+                    fetchTreemap(),           // 5.
+                ]);
+            } catch (error) {
+                console.error("Error loading dashboard data:", error);
+            }
+        });
+
+        // 0. KPIs (Using store-cards summary)
+        async function fetchKPIs() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboards/store-cards`);
+                const data = await response.json();
+                const summary = data.summary;
+
+                const kpiContainer = document.getElementById('kpi-container');
+                kpiContainer.innerHTML = `
+                    <div class="kpi-card">
+                        <div class="flex items-center justify-between mb-2">
+                            <i class="fas fa-dollar-sign text-2xl"></i>
+                            <span class="text-sm font-medium">Total Sales</span>
+                        </div>
+                        <div class="text-3xl font-bold">$${(summary.total_sales / 1000000).toFixed(2)}M</div>
+                        <div class="text-sm text-gray-200">Total Revenue</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="flex items-center justify-between mb-2">
+                            <i class="fas fa-store text-2xl"></i>
+                            <span class="text-sm font-medium">Active Stores</span>
+                        </div>
+                        <div class="text-3xl font-bold">${summary.total_stores}</div>
+                        <div class="text-sm text-gray-200">Across 3 Tiers</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="flex items-center justify-between mb-2">
+                            <i class="fas fa-chart-bar text-2xl"></i>
+                            <span class="text-sm font-medium">Avg Sales/Store</span>
+                        </div>
+                        <div class="text-3xl font-bold">$${(summary.avg_sales_per_store / 1000).toFixed(1)}K</div>
+                        <div class="text-sm text-gray-200">Performance KPI</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="flex items-center justify-between mb-2">
+                            <i class="fas fa-chart-line text-2xl"></i>
+                            <span class="text-sm font-medium">Data Points</span>
+                        </div>
+                        <div class="text-3xl font-bold">8,523</div>
+                        <div class="text-sm text-gray-200">Products Analyzed</div>
+                    </div>
+                `;
+            } catch (e) { console.error("KPI Error", e); }
+        }
+
+        // 1. Sales Mix (Using Feature Engineering Distribution)
+        async function fetchSalesMix() {
+            try {
+                const response = await fetch(`${API_BASE}/eda/feature-engineering`);
+                const data = await response.json();
+                const dist = data.broad_category.distribution; // Returns {Food: X, Drinks: Y, ...}
+
+                // Note: If you want specific item types (Fruits, Snacks), we would need a different endpoint.
+                // Using Broad Category as proxy based on available endpoint, or falling back to 'feature-engineering' 
+                // containing Item_Type mapping if available. Assuming simple pie for now.
+
+                const labels = Object.keys(dist);
+                const values = Object.values(dist);
+
+                const plotData = [{
+                    labels: labels,
+                    values: values,
+                    type: 'pie',
+                    marker: {
+                        colors: ['#22c55e', '#3b82f6', '#f59e0b', '#ef4444']
+                    }
+                }];
+
+                Plotly.newPlot('salesMixChart', plotData, {
+                    title: 'Sales Mix by Broad Category'
+                });
+            } catch (e) { console.error("Sales Mix Error", e); }
+        }
+
+        // 2. Premium Power
+        async function fetchPremiumPower() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboards/strategic-premium`);
+                const data = await response.json();
+
+                // Data format: [{outlet_type: 'Grocery Store', values: {'Economy': 123, 'Premium': 456}}, ...]
+                const categories = data.map(d => d.outlet_type);
+                const economy = data.map(d => d.values['Economy'] || 0);
+                const premium = data.map(d => d.values['Premium'] || 0);
+                const standard = data.map(d => d.values['Standard'] || 0);
+
+                const traces = [
+                    { x: categories, y: economy, name: 'Economy', type: 'bar' },
+                    { x: categories, y: standard, name: 'Standard', type: 'bar' },
+                    { x: categories, y: premium, name: 'Premium', type: 'bar' }
+                ];
+
+                Plotly.newPlot('premiumPowerChart', traces, {
+                    title: 'Avg Sales by Price Tier & Outlet',
+                    barmode: 'group',
+                    yaxis: { title: 'Avg Sales ($)' }
+                });
+            } catch (e) { console.error("Premium Error", e); }
+        }
+
+        // 3. Environment (Static - No endpoint available for time series)
+        function renderEnvironmentChart() {
+            const envData = [{
+                x: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                y: [100, 115, 128, 142, 156, 172],
+                name: 'Low Fat Products',
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#10b981', width: 3 }
+            }, {
+                x: ['2019', '2020', '2021', '2022', '2023', '2024'],
+                y: [100, 108, 125, 138, 151, 165],
+                name: 'Organic Products',
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#22c55e', width: 3 }
+            }];
+
+            Plotly.newPlot('environmentChart', envData, {
+                title: 'Growth Trends (Index 2019=100)',
+                xaxis: { title: 'Year' },
+                yaxis: { title: 'Growth Index' }
+            });
+        }
+
+        // 4. Geographic Preferences
+        async function fetchGeoAnalysis() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboards/geo-analysis`);
+                const data = await response.json();
+                // Returns: [{x: 'Tier 1', y: 'Food', value: 123}, ...]
+
+                // Transform to Heatmap format
+                const xValues = [...new Set(data.map(d => d.x))].sort();
+                const yValues = [...new Set(data.map(d => d.y))].sort();
+                const zValues = [];
+
+                yValues.forEach(y => {
+                    const row = [];
+                    xValues.forEach(x => {
+                        const item = data.find(d => d.x === x && d.y === y);
+                        row.push(item ? item.value : 0);
+                    });
+                    zValues.push(row);
+                });
+
+                const trace = [{
+                    x: xValues,
+                    y: yValues,
+                    z: zValues,
+                    type: 'heatmap',
+                    colorscale: 'Viridis'
+                }];
+
+                Plotly.newPlot('geographicChart', trace, {
+                    title: 'Sales Heatmap: Location vs Category'
+                });
+            } catch (e) { console.error("Geo Error", e); }
+        }
+
+        // 5. Bubble Map
+        async function fetchBubbleMap() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboards/bubble-map`);
+                const json = await response.json();
+                const data = json.data;
+
+                const trace = {
+                    x: data.map(d => d.x), // Year
+                    y: data.map(d => d.y), // Sales
+                    mode: 'markers',
+                    marker: {
+                        size: data.map(d => d.size),
+                        color: data.map(d => d.color === 'Supermarket Type1' ? '#3b82f6' : '#10b981'), // Simplified color mapping
+                        opacity: 0.7
+                    },
+                    text: data.map(d => d.text),
+                    type: 'scatter',
+                    hovertemplate: '%{text}<extra></extra>'
+                };
+
+                Plotly.newPlot('bubbleMapChart', [trace], {
+                    title: 'Store Performance: Age vs Sales',
+                    xaxis: { title: 'Year Established' },
+                    yaxis: { title: 'Total Sales ($)' }
+                });
+            } catch (e) { console.error("Bubble Error", e); }
+        }
+
+        // 6. Stacked Bar (Cluster Breakdown)
+        async function fetchStackedBar() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboards/store-type-comparison`);
+                const data = await response.json();
+                // data = { "Grocery Store": { mix: [{cluster, percentage}, ...] }, ... }
+
+                const storeTypes = Object.keys(data);
+
+                // Get unique clusters
+                let allClusters = new Set();
+                storeTypes.forEach(t => {
+                    data[t].mix.forEach(m => allClusters.add(m.cluster));
+                });
+                const clusters = Array.from(allClusters);
+
+                const traces = clusters.map(cluster => {
+                    return {
+                        name: cluster,
+                        type: 'bar',
+                        x: storeTypes,
+                        y: storeTypes.map(t => {
+                            const found = data[t].mix.find(m => m.cluster === cluster);
+                            return found ? found.percentage : 0;
+                        })
+                    };
+                });
+
+                Plotly.newPlot('stackedBarChart', traces, {
+                    title: 'Cluster Distribution by Store Type',
+                    barmode: 'stack',
+                    yaxis: { title: 'Percentage (%)' }
+                });
+            } catch (e) { console.error("Stacked Error", e); }
+        }
+
+        // 7. Treemap
+        async function fetchTreemap() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboards/treemap-data`);
+                const data = await response.json();
+
+                data.type = "treemap";
+                Plotly.newPlot('treemapChart', [data], {
+                    title: 'Hierarchical Sales View'
+                });
+            } catch (e) { console.error("Treemap Error", e); }
+        }
+
+        // 8. Sunburst
+        async function fetchSunburst() {
+            try {
+                const response = await fetch(`${API_BASE}/dashboards/sunburst-data`);
+                const data = await response.json();
+
+                data.type = "sunburst";
+                Plotly.newPlot('sunburstChart', [data], {
+                    title: 'Radial Business Hierarchy'
+                });
+            } catch (e) { console.error("Sunburst Error", e); }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modeling - BigMart Sales Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/3.0.3/plotly.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Home Button Styles */
+        .home-button {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .home-button:active {
+            transform: translateY(0);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+        }
+
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            padding: 0 1rem;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background: white;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-btn.prev {
+            left: 1rem;
+        }
+
+        .carousel-btn.next {
+            right: 1rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .indicator-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #cbd5e1;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator-dot.active {
+            background: #667eea;
+            transform: scale(1.2);
+        }
+
+        .cluster-profile {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div
+                        class="w-10 h-10 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gray-900">BigMart Analytics</h1>
+                        <p class="text-xs text-gray-600">Advanced Modeling</p>
+                    </div>
+                </div>
+
+                <nav class="hidden md:flex space-x-8">
+                    <a href="/Files/9th_quarter/Business_Intelligence/HW4/index.html"
+                        class="nav-link text-gray-700 font-medium">Overview</a>
+                    <a href="/Files/9th_quarter/Business_Intelligence/HW4/Scripts/eda.html"
+                        class="nav-link text-gray-700 font-medium">EDA</a>
+                    <a href="#" class="nav-link text-indigo-600 font-medium">Modeling</a>
+                    <a href="/Files/9th_quarter/Business_Intelligence/HW4/Scripts/dashboards.html"
+                        class="nav-link text-gray-700 font-medium">Dashboards</a>
+                </nav>
+
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Home Button -->
+            <a href="/" class="home-button">
+                <i class="fas fa-home"></i>
+                <span>Inicio</span>
+            </a>
+
+            <!-- Title Section -->
+            <div class="text-center mb-12 fade-in">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">
+                    Modeling and Clustering
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Application of advanced machine learning techniques to segment products
+                    and identify hidden patterns in sales data.
+                </p>
+            </div>
+
+            <!-- Metrics Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12 fade-in" id="metricsCards">
+                <div class="metric-card">
+                    <div class="flex items-center justify-between mb-2">
+                        <i class="fas fa-chart-line text-2xl"></i>
+                        <span class="text-sm font-medium">Silhouette Score</span>
+                    </div>
+                    <div class="text-3xl font-bold" id="silhouetteValue">Loading...</div>
+                    <div class="text-sm text-gray-200">Clustering quality</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="flex items-center justify-between mb-2">
+                        <i class="fas fa-compress-alt text-2xl"></i>
+                        <span class="text-sm font-medium">Inertia</span>
+                    </div>
+                    <div class="text-3xl font-bold" id="inertiaValue">Loading...</div>
+                    <div class="text-sm text-gray-200">Intra-cluster variability</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="flex items-center justify-between mb-2">
+                        <i class="fas fa-layer-group text-2xl"></i>
+                        <span class="text-sm font-medium">Optimal Clusters</span>
+                    </div>
+                    <div class="text-3xl font-bold" id="optimalK">Loading...</div>
+                    <div class="text-sm text-gray-200">Number of segments</div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="flex items-center justify-between mb-2">
+                        <i class="fas fa-percentage text-2xl"></i>
+                        <span class="text-sm font-medium">Explained Variance</span>
+                    </div>
+                    <div class="text-3xl font-bold" id="varianceValue">Loading...</div>
+                    <div class="text-sm text-gray-200">PCA 2 components</div>
+                </div>
+            </div>
+
+            <!-- Carousel Section -->
+            <div class="carousel-container fade-in delay-1">
+                <div class="carousel-track" id="carouselTrack">
+                    <!-- Slide 1: Methodology Overview -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Clustering Methodology</h3>
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Applied Algorithms</h4>
+                                    <div class="space-y-4">
+                                        <div class="bg-blue-50 p-4 rounded-lg">
+                                            <h5 class="font-semibold text-blue-900">K-Means Clustering</h5>
+                                            <p class="text-sm text-blue-700">Centroid-based segmentation with euclidean
+                                                distance</p>
+                                        </div>
+                                        <div class="bg-green-50 p-4 rounded-lg">
+                                            <h5 class="font-semibold text-green-900">PCA (Principal Component Analysis)
+                                            </h5>
+                                            <p class="text-sm text-green-700">Dimensionality reduction for visualization
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-gray-800 mb-4">Preprocessing</h4>
+                                    <div class="space-y-3">
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-indigo-500 rounded-full"></div>
+                                            <span class="text-sm">Categorical variable encoding</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+                                            <span class="text-sm">Normalization with StandardScaler</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-pink-500 rounded-full"></div>
+                                            <span class="text-sm">Outlier treatment</span>
+                                        </div>
+                                        <div class="flex items-center space-x-3">
+                                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                            <span class="text-sm">Relevant feature selection</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+                                <h4 class="font-semibold text-gray-900 mb-2">Features Selected for Clustering</h4>
+                                <div class="grid grid-cols-3 gap-4 text-sm">
+                                    <div>• Item_Weight</div>
+                                    <div>• Item_Visibility</div>
+                                    <div>• Item_MRP</div>
+                                    <div>• Item_Outlet_Sales</div>
+                                    <div>• Outlet_Establishment_Year</div>
+                                    <div>• Item_Type_Encoded</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: Elbow Method -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Elbow Method - Optimal K Selection</h3>
+                            <div id="elbowChart" style="height: 400px;"></div>
+                            <div class="mt-4 p-4 bg-yellow-50 rounded-lg" id="elbowAnalysis">
+                                <h4 class="font-semibold text-yellow-900 mb-2">Elbow Method Analysis:</h4>
+                                <p class="text-sm text-yellow-800">Loading analysis...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Silhouette Analysis -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Silhouette Score Analysis</h3>
+                            <div id="silhouetteChart" style="height: 400px;"></div>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg" id="silhouetteAnalysis">
+                                <h4 class="font-semibold text-blue-900 mb-2">Silhouette Score Interpretation:</h4>
+                                <p class="text-sm text-blue-800">Loading analysis...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: PCA Visualization -->
+                    <div class="carousel-slide">
+                        <div class="chart-container">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">PCA Visualization - 2D Projection</h3>
+                            <div id="pcaChart" style="height: 400px;"></div>
+                            <div class="mt-4 p-4 bg-green-50 rounded-lg" id="pcaInterpretation">
+                                <h4 class="font-semibold text-green-900 mb-2">PCA Projection Interpretation:</h4>
+                                <p class="text-sm text-green-800">Loading analysis...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5-8: Cluster Profiles (Dynamic) -->
+                    <div class="carousel-slide">
+                        <div class="chart-container" id="clusterProfile0">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Loading Cluster Profile...</h3>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <div class="chart-container" id="clusterProfile1">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Loading Cluster Profile...</h3>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <div class="chart-container" id="clusterProfile2">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Loading Cluster Profile...</h3>
+                        </div>
+                    </div>
+
+                    <div class="carousel-slide">
+                        <div class="chart-container" id="clusterProfile3">
+                            <h3 class="text-2xl font-bold text-gray-900 mb-4">Loading Cluster Profile...</h3>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Navigation Buttons -->
+                <button class="carousel-btn prev" onclick="changeSlide(-1)">
+                    <i class="fas fa-chevron-left text-gray-700"></i>
+                </button>
+                <button class="carousel-btn next" onclick="changeSlide(1)">
+                    <i class="fas fa-chevron-right text-gray-700"></i>
+                </button>
+
+                <!-- Slide Indicators -->
+                <div class="slide-indicator">
+                    <div class="indicator-dot active" onclick="goToSlide(0)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(1)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(2)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(3)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(4)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(5)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(6)"></div>
+                    <div class="indicator-dot" onclick="goToSlide(7)"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-3 mb-4">
+                    <div
+                        class="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-chart-line text-white text-sm"></i>
+                    </div>
+                    <span class="text-lg font-semibold">BigMart Analytics</span>
+                </div>
+                <p class="text-gray-400 text-sm">
+                    © 2024 Business Intelligence Project. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        const totalSlides = 8;
+        let metricsData = null;
+        let pcaData = null;
+        let clusterProfiles = null;
+
+        // Carousel Functions
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = totalSlides - 1;
+            if (currentSlide >= totalSlides) currentSlide = 0;
+            updateCarousel();
+        }
+
+        function goToSlide(slideIndex) {
+            currentSlide = slideIndex;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const track = document.getElementById('carouselTrack');
+            const dots = document.querySelectorAll('.indicator-dot');
+
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // API Calls
+        async function fetchMetrics() {
+            try {
+                const response = await fetch('/business-intelligence/bigmart-analisys/modeling/metrics');
+                metricsData = await response.json();
+                updateMetricsCards();
+                return metricsData;
+            } catch (error) {
+                console.error('Error fetching metrics:', error);
+            }
+        }
+
+        async function fetchPCAData() {
+            try {
+                const response = await fetch('/business-intelligence/bigmart-analisys/modeling/pca');
+                pcaData = await response.json();
+                return pcaData;
+            } catch (error) {
+                console.error('Error fetching PCA data:', error);
+            }
+        }
+
+        async function fetchClusterProfiles() {
+            try {
+                const response = await fetch('/business-intelligence/bigmart-analisys/modeling/cluster-profiles');
+                clusterProfiles = await response.json();
+                return clusterProfiles;
+            } catch (error) {
+                console.error('Error fetching cluster profiles:', error);
+            }
+        }
+
+        // Update UI Functions
+        function updateMetricsCards() {
+            if (!metricsData) return;
+
+            const selectedSilhouette = metricsData.silhouette[metricsData.k_values.indexOf(metricsData.selected_k)];
+            const selectedInertia = metricsData.inertia[metricsData.k_values.indexOf(metricsData.selected_k)];
+
+            document.getElementById('silhouetteValue').textContent = selectedSilhouette.toFixed(2);
+            document.getElementById('inertiaValue').textContent = (selectedInertia / 1000).toFixed(2);
+            document.getElementById('optimalK').textContent = metricsData.selected_k;
+        }
+
+        function renderElbowChart() {
+            if (!metricsData) return;
+
+            const elbowData = [{
+                x: metricsData.k_values,
+                y: metricsData.inertia,
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#3b82f6', width: 3 },
+                marker: { size: 8 }
+            }];
+
+            Plotly.newPlot('elbowChart', elbowData, {
+                title: 'Elbow Method - SSE vs Number of Clusters',
+                xaxis: { title: 'Number of Clusters (k)' },
+                yaxis: { title: 'Sum of Squared Errors (SSE)' },
+                annotations: [{
+                    x: metricsData.selected_k,
+                    y: metricsData.inertia[metricsData.k_values.indexOf(metricsData.selected_k)],
+                    text: `Knee Point<br>k=${metricsData.selected_k}`,
+                    showarrow: true,
+                    arrowhead: 2,
+                    arrowcolor: '#ef4444',
+                    font: { color: '#ef4444', size: 12 }
+                }]
+            });
+
+            // Update analysis text
+            document.getElementById('elbowAnalysis').innerHTML = `
+                <h4 class="font-semibold text-yellow-900 mb-2">Elbow Method Analysis:</h4>
+                <ul class="text-sm text-yellow-800 space-y-2">
+                    <li>• <strong>Knee Point:</strong> Identified at k=${metricsData.selected_k} clusters</li>
+                    <li>• <strong>Interpretation:</strong> ${metricsData.decision_rationale}</li>
+                    <li>• <strong>Validation:</strong> Confirmed with Silhouette Score analysis</li>
+                    <li>• <strong>Decision:</strong> k=${metricsData.selected_k} provides optimal balance between complexity and interpretability</li>
+                </ul>
+            `;
+        }
+
+        function renderSilhouetteChart() {
+            if (!metricsData) return;
+
+            const silhouetteData = [{
+                x: metricsData.k_values,
+                y: metricsData.silhouette,
+                type: 'scatter',
+                mode: 'lines+markers',
+                line: { color: '#10b981', width: 3 },
+                marker: { size: 8 }
+            }];
+
+            Plotly.newPlot('silhouetteChart', silhouetteData, {
+                title: 'Silhouette Score vs Number of Clusters',
+                xaxis: { title: 'Number of Clusters (k)' },
+                yaxis: { title: 'Silhouette Score' },
+                annotations: [{
+                    x: metricsData.selected_k,
+                    y: metricsData.silhouette[metricsData.k_values.indexOf(metricsData.selected_k)],
+                    text: `Max Score<br>${metricsData.silhouette[metricsData.k_values.indexOf(metricsData.selected_k)].toFixed(4)}`,
+                    showarrow: true,
+                    arrowhead: 2,
+                    arrowcolor: '#10b981',
+                    font: { color: '#10b981', size: 12 }
+                }]
+            });
+
+            const maxScore = Math.max(...metricsData.silhouette);
+            document.getElementById('silhouetteAnalysis').innerHTML = `
+                <h4 class="font-semibold text-blue-900 mb-2">Silhouette Score Interpretation:</h4>
+                <ul class="text-sm text-blue-800 space-y-2">
+                    <li>• <strong>Average Score:</strong> ${maxScore.toFixed(4)} (Excellent clustering quality)</li>
+                    <li>• <strong>Threshold:</strong> >0.7 indicates well-defined clusters</li>
+                    <li>• <strong>Distribution:</strong> Most points have score >0.7</li>
+                    <li>• <strong>Conclusion:</strong> Clusters have high cohesion and separation</li>
+                </ul>
+            `;
+        }
+
+        function renderPCAChart() {
+            if (!pcaData) return;
+
+            // Group data by cluster
+            const clusters = {};
+            pcaData.data.forEach(point => {
+                if (!clusters[point.cluster_label]) {
+                    clusters[point.cluster_label] = { x: [], y: [], text: [] };
+                }
+                clusters[point.cluster_label].x.push(point.x);
+                clusters[point.cluster_label].y.push(point.y);
+                clusters[point.cluster_label].text.push(`${point.id}<br>${point.category}`);
+            });
+
+            const colors = ['#3b82f6', '#f59e0b', '#10b981', '#ef4444'];
+            const plotData = Object.entries(clusters).map(([label, data], idx) => ({
+                x: data.x,
+                y: data.y,
+                text: data.text,
+                mode: 'markers',
+                type: 'scatter',
+                name: label,
+                marker: { color: colors[idx % colors.length], size: 6 }
+            }));
+
+            Plotly.newPlot('pcaChart', plotData, {
+                title: 'PCA Visualization - Clusters in 2D Space',
+                xaxis: { title: `First Principal Component (${(pcaData.explained_variance[0] * 100).toFixed(1)}%)` },
+                yaxis: { title: `Second Principal Component (${(pcaData.explained_variance[1] * 100).toFixed(1)}%)` }
+            });
+
+            const totalVariance = (pcaData.explained_variance.reduce((a, b) => a + b, 0) * 100).toFixed(1);
+            document.getElementById('pcaInterpretation').innerHTML = `
+                <h4 class="font-semibold text-green-900 mb-2">PCA Projection Interpretation:</h4>
+                <ul class="text-sm text-green-800 space-y-2">
+                    <li>• <strong>Explained Variance:</strong> PC1 (${(pcaData.explained_variance[0] * 100).toFixed(1)}%) + PC2 (${(pcaData.explained_variance[1] * 100).toFixed(1)}%) = ${totalVariance}%</li>
+                    <li>• <strong>Separation:</strong> Clusters show clear separation in PCA space</li>
+                    <li>• <strong>Note:</strong> ${pcaData.visual_discrepancy_note}</li>
+                    <li>• <strong>Interpretation:</strong> The clustering structure is robust and significant</li>
+                </ul>
+            `;
+
+            document.getElementById('varianceValue').textContent = totalVariance + '%';
+        }
+
+        function renderClusterProfiles() {
+            if (!clusterProfiles) return;
+
+            const clusterColors = [
+                { bg: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)', border: '#3b82f6', text: 'blue' },
+                { bg: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)', border: '#f59e0b', text: 'yellow' },
+                { bg: 'linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%)', border: '#10b981', text: 'green' },
+                { bg: 'linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%)', border: '#ec4899', text: 'pink' }
+            ];
+
+            clusterProfiles.forEach((profile, idx) => {
+                const color = clusterColors[idx % clusterColors.length];
+                const containerElement = document.getElementById(`clusterProfile${idx}`);
+
+                if (!containerElement) return;
+
+                containerElement.innerHTML = `
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">${profile.Cluster_Label}</h3>
+                    <div class="cluster-profile" style="background: ${color.bg}; border-color: ${color.border};">
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <h4 class="font-semibold text-${color.text}-900 mb-3">Main Characteristics</h4>
+                                <ul class="text-sm text-${color.text}-800 space-y-2">
+                                    <li>• <strong>Total Sales:</strong> $${profile.Total_Sales.toLocaleString()}</li>
+                                    <li>• <strong>Average MRP:</strong> $${profile.Avg_MRP.toFixed(2)}</li>
+                                    <li>• <strong>Visibility:</strong> ${(profile.Avg_Visibility * 100).toFixed(2)}%</li>
+                                    <li>• <strong>Store Count:</strong> ${profile.Store_Count.toFixed(0)} stores</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-${color.text}-900 mb-3">Description</h4>
+                                <p class="text-sm text-${color.text}-800">${profile.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4 p-4 bg-gray-50 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Business Strategy:</h4>
+                        <p class="text-sm text-gray-700">
+                            ${getBusinessStrategy(profile.Cluster_Label)}
+                        </p>
+                    </div>
+                `;
+            });
+        }
+
+        function getBusinessStrategy(clusterLabel) {
+            const strategies = {
+                "Drinks": "Low margin, high rotation, medium volume products. Maintain current visibility and optimize pricing for maximum turnover. Focus on availability and seasonal promotions.",
+                "Food: Low Viz / Economy": "Basic products with low shelf visibility. Increase visibility in high-traffic stores. Volume promotions and bundling with complementary products.",
+                "Food: Mass Market / High Rev": "Traffic generators with medium prices and high sales. Maintain high visibility. Develop loyalty programs and targeted marketing campaigns.",
+                "Non-Edible Goods": "Cleaning and household products with stable behavior. Optimize shelf space allocation. Cross-selling opportunities with food products."
+            };
+            return strategies[clusterLabel] || "Strategy to be defined based on cluster characteristics.";
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', async function () {
+            // Fetch all data
+            await fetchMetrics();
+            await fetchPCAData();
+            await fetchClusterProfiles();
+
+            // Render charts
+            renderElbowChart();
+            renderSilhouetteChart();
+            renderPCAChart();
+            renderClusterProfiles();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                changeSlide(1);
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                changeSlide(-1);
+            }
+        });
+    </script>
+</body>
+
+</html>

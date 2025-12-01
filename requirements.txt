@@ -8,3 +8,7 @@ xgboost
 
 kafka-python
 pymongo
+
+numpy
+matplotlib
+seaborn
