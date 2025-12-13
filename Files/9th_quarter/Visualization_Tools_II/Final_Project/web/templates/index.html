@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project U3</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M3 3v18h18'/><path d='M18 17V9'/><path d='M13 17v-6'/><path d='M8 17v-3'/></svg>">
+    
+    <link rel="stylesheet" href="../static/css/index.css">
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" as="style">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+</head>
+<body>
+    <div id="route-config"
+         data-home-url="/"
+         data-checkpoint1-url="/portfolio/unit2/checkpoint1"
+         data-checkpoint2-url="/portfolio/unit2/checkpoint2"
+         data-checkpoint3-url="/portfolio/unit2/checkpoint3"
+         style="display: none;">
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                
+                <div class="header-title-wrapper">
+                    <div class="header-icon">
+                        <i class="ti ti-chart-line"></i>
+                    </div>
+                    <h1>Unit 3: Data streaming visualization</h1>
+                </div>
+                
+                <div class="team-members">
+                    <span class="member-name">Sergio Barrera</span>
+                    <span class="member-name">Ariel Buenfil</span>
+                    <span class="member-name">Moisés Carrillo</span>
+                    <span class="member-name">Damaris Dzul</span>
+                    <span class="member-name">Paulina Chiquete</span>
+                    <span class="member-name">Diego Monroy</span>
+                    <span class="member-name">Alan Valbuena</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="checkpoints-container" id="checkpointsContainer">
+                
+                <div class="checkpoint-card">
+                    <div class="checkpoint-header">
+                        <div class="checkpoint-number">✓</div>
+
+                        <div class="checkpoint-status completed">
+                            <i class="ti ti-circle-check"></i>
+                            <span>Individual</span>
+                        </div>
+
+                        <div class="checkpoint-status completed">
+                            <i class="ti ti-circle-check"></i>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="checkpoint-content">
+                        <h3>(TASK 1) Data streaming visualization - ETL</h3>
+                        <p class="checkpoint-description">Public transportation minimal dashboard which aims to show which routes are the most used and the distribution of the usage based on the fare type.</p>
+                        
+                        <div class="checkpoint-topics">
+                            <div class="checkpoint-topics-list">
+                                <span class="topic-tag">Bar chart</span>
+                                <span class="topic-tag">Time series chart</span>
+                                <span class="topic-tag">1 KPI</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="checkpoint-footer">
+                        <a class="view-btn" href="{{ url_for ('dashboard')}}">
+                            <i class="ti ti-arrow-right"></i>
+                            <span>Go to dashboard</span>
+                        </a>
+                    </div>
+                </div>
+                </div>
+
+                <div class="checkpoint-card">
+                    <div class="checkpoint-header">
+                        <div class="checkpoint-number">✓</div>
+                        
+                        <div class="checkpoint-status completed">
+                            <i class="ti ti-circle-check"></i>
+                            <span>Individual</span>
+                        </div>
+
+                        <div class="checkpoint-status completed">
+                            <i class="ti ti-circle-check"></i>
+                            <span>Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="checkpoint-content">
+                        <h3>(TASK 2) Data streaming visualization - ELT</h3>
+                        <p class="checkpoint-description">Public transportation minimal dashboard which aims to show which routes are the most used and the distribution of the usage based on the fare type.</p>
+                        
+                        <div class="checkpoint-topics">
+                            <div class="checkpoint-topics-list">
+                                <span class="topic-tag">Bar chart</span>
+                                <span class="topic-tag">Time series chart</span>
+                                <span class="topic-tag">1 KPI</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="checkpoint-footer">
+                        <a class="view-btn" href="{{ url_for ('urban_dashboard')}}">
+                            <i class="ti ti-arrow-right"></i>
+                            <span>Go to dashboard</span>
+                        </a>
+                    </div>
+                </div>
+                </div>
+
+
+            </main>
+
+        <footer class="footer">
+            <p>Unit 3 project - <span id="current-year"></span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Update current year (Simple Vanilla JS is okay)
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearElement = document.getElementById('current-year');
+            if (yearElement) {
+                yearElement.textContent = new Date().getFullYear();
+            }
+        });
+
+        // Function to go back to home (Kept as a stub)
+        function goToHome() {
+            window.location.href = '/';
+        }
+    </script>
+</body>
+</html>
