@@ -19,112 +19,111 @@ services:
       - upy_net
       - proxy_net
 
-  web_visualization:
-    build:
-      context: ./Files/9th_quarter/visualization-tools/Web
-    container_name: web_visualization
-    # ports:
-    #   - "502:502"
-    expose:
-      - "502"
-    env_file:
-      - .env
-    depends_on:
-      - api_visualization
-    networks:
-      - upy_net
-      - proxy_net
+  # web_visualization:
+  #   build:
+  #     context: ./Files/9th_quarter/visualization-tools/Web
+  #   container_name: web_visualization
+  #   # ports:
+  #   #   - "502:502"
+  #   expose:
+  #     - "502"
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - api_visualization
+  #   networks:
+  #     - upy_net
+  #     - proxy_net
 
-  api_visualization:
-    build:
-      context: ./Files/9th_quarter/visualization-tools/API
-    container_name: api_visualization
-    # ports:
-      # - "503:503"
-    expose:
-      - "503"
-    env_file:
-      - .env
-    depends_on:
-      - mongo_visualization
-      - postgres_visualization
-    networks:
-      - upy_net
-      - proxy_net
+  # api_visualization:
+  #   build:
+  #     context: ./Files/9th_quarter/visualization-tools/API
+  #   container_name: api_visualization
+  #   # ports:
+  #     # - "503:503"
+  #   expose:
+  #     - "503"
+  #   env_file:
+  #     - .env
+  #   depends_on:
+  #     - mongo_visualization
+  #     - postgres_visualization
+  #   networks:
+  #     - upy_net
+  #     - proxy_net
 
 
 
 
 
   # =============== Servicios Privados ===============
-  zookeeper_visualization:
-    image: wurstmeister/zookeeper:latest
-    container_name: zookeeper_visualization
-    hostname: zookeeper_visualization
-    expose:
-      - "2181"
-    ulimits:
-      nofile:
-        soft: 65536
-        hard: 65536
-    networks:
-      - upy_net
+  # zookeeper_visualization:
+  #   image: wurstmeister/zookeeper:latest
+  #   container_name: zookeeper_visualization
+  #   hostname: zookeeper_visualization
+  #   expose:
+  #     - "2181"
+  #   ulimits:
+  #     nofile:
+  #       soft: 65536
+  #       hard: 65536
+  #   networks:
+  #     - upy_net
 
-  kafka_visualization:
-    image: wurstmeister/kafka:latest
-    container_name: kafka_visualization
-    hostname: kafka_visualization
-    restart: always
-    expose:
-      - "9092"
-    environment:
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka_visualization:9092
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper_visualization:2181
-      KAFKA_CREATE_TOPICS: "clicks:1:1"
-    depends_on:
-      - zookeeper_visualization
-    networks:
-      - upy_net
+  # kafka_visualization:
+  #   image: wurstmeister/kafka:latest
+  #   container_name: kafka_visualization
+  #   hostname: kafka_visualization
+  #   restart: always
+  #   expose:
+  #     - "9092"
+  #   environment:
+  #     KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+  #     KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka_visualization:9092
+  #     KAFKA_ZOOKEEPER_CONNECT: zookeeper_visualization:2181
+  #     KAFKA_CREATE_TOPICS: "clicks:1:1"
+  #   depends_on:
+  #     - zookeeper_visualization
+  #   networks:
+  #     - upy_net
 
-  mongo_visualization:
-    image: mongo:6.0
-    container_name: mongo_visualization
-    expose:
-      - "27017"
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
-      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
-      - MONGO_INITDB_DATABASE=${MONGO_DB}
-    volumes:
-      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-      - mongo_data:/data/db
-    networks:
-      - upy_net
+  # mongo_visualization:
+  #   image: mongo:6.0
+  #   container_name: mongo_visualization
+  #   expose:
+  #     - "27017"
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=${MONGO_ROOT_USER}
+  #     - MONGO_INITDB_ROOT_PASSWORD=${MONGO_ROOT_PASSWORD}
+  #     - MONGO_INITDB_DATABASE=${MONGO_DB}
+  #   volumes:
+  #     - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  #     - mongo_data:/data/db
+  #   networks:
+  #     - upy_net
 
-  postgres_visualization:
-    image: postgres:15
-    container_name: postgres_visualization
-    expose:
-      - "5432"
-    environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - upy_net
+  # postgres_visualization:
+  #   image: postgres:15
+  #   container_name: postgres_visualization
+  #   expose:
+  #     - "5432"
+  #   environment:
+  #     - POSTGRES_DB=${POSTGRES_DB}
+  #     - POSTGRES_USER=${POSTGRES_USER}
+  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - upy_net
 
 networks:
   upy_net:
     driver: bridge
-  # Comentado para pruebas localhost
   proxy_net:
     external: true
 
-volumes:
-  mongo_data:
-    driver: local
-  postgres_data:
-    driver: local
+# volumes:
+  # mongo_data:
+  #   driver: local
+  # postgres_data:
+  #   driver: local

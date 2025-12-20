@@ -22,11 +22,11 @@ def index():
             "Smart Factory Data Pipeline Challenge",
             "Business Model"
         ],
-        "Visualization Tools II":[
-            "Personalized Web",
-            "Kafka Clicker",
-            "Kafka Dashboard",
-        ],
+        # "Visualization Tools II":[
+        #     "Personalized Web",
+        #     "Kafka Clicker",
+        #     "Kafka Dashboard",
+        # ],
         "Business Intelligence":[
             "Credit Risk",
             "BigMart Analisys"
